@@ -53,7 +53,7 @@ const ModuleDetail = () => {
   }, [id, part, location.pathname]);
 
   // Get simulator for this module/topic
-  const simulator = (moduleId === 1 || moduleId === 2) && topicId 
+  const simulator = (moduleId === 1 || moduleId === 2 || moduleId === 3) && topicId 
     ? getSimulatorByTopic(moduleId, topicId) || getSimulatorByModuleId(moduleId)
     : getSimulatorByModuleId(moduleId);
 
@@ -74,7 +74,7 @@ const ModuleDetail = () => {
   const getModule1Sections = () => {
     return {
       hero: {
-        title: "Computer Fundamentals",
+        title: "INTRODUCTION TO COMPUTERS",
         subtitle: "Understand how the IPO (Input → Process → Output) cycle, core characteristics, and everyday devices define a computer.",
         summary:
           "A computer is an electronic machine that accepts input, processes it using instructions, and produces meaningful output. Knowing the IPO cycle, the key characteristics (speed, accuracy, storage, diligence, automation, reliability), and real-world examples builds a solid foundation before diving into types of computers."
@@ -1202,14 +1202,1188 @@ const ModuleDetail = () => {
     }
   }, [moduleId, topicId, partNumber, navigate, location.pathname]);
 
-  // Get sections based on module ID - only Modules 1 and 2 are supported
-  const sections = moduleId === 1 ? getModule1Sections() : moduleId === 2 ? getModule2Sections() : null;
+  // Module 3 specific content sections (Topic-based structure)
+  const getModule3Sections = () => {
+    return {
+      bootProcess: {
+        title: "Boot Process",
+        intro: "The boot process is the sequence of steps your computer follows when you press the power button. Understanding this process helps you troubleshoot startup issues and appreciate how your computer initializes.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-boot-hero.jpg",
+            alt: "Computer booting up with startup sequence visualization",
+            brief: "Create a visual showing a computer booting: power button press, BIOS/UEFI screen, OS loading screen. Show the progression from off to ready. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m3-boot-overview.jpg",
+            alt: "Boot process flow diagram showing the three main steps",
+            brief: "Create a flow diagram showing: Power On → POST → Loading OS. Use arrows and clear progression. Clean, educational diagram style."
+          },
+          steps: {
+            fileName: "module-media/m3-boot-steps.jpg",
+            alt: "Visual representation of the three boot steps with icons",
+            brief: "Show three cards/sections: Step 1 (Power On with power button icon), Step 2 (POST with checkmark icon), Step 3 (Loading OS with loading icon). Use clear visual separation."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-boot-why-matters.jpg",
+            alt: "Computer ready to use after successful boot",
+            brief: "Show a computer ready to use after boot: desktop screen visible, apps ready. Show the end result of successful boot process. Clean, modern aesthetic."
+          }
+        },
+        steps: [
+          { 
+            name: "Power On", 
+            icon: "🔌", 
+            description: "When you press the power button, electricity flows to all components and the computer begins initializing." 
+          },
+          { 
+            name: "POST", 
+            icon: "✅", 
+            description: "Power-On Self-Test checks all hardware components to ensure everything is working correctly before loading the operating system." 
+          },
+          { 
+            name: "Loading OS", 
+            icon: "🚀", 
+            description: "The bootloader finds and loads the operating system from storage into RAM, then starts system services." 
+          }
+        ]
+      },
+      operatingSystems: {
+        title: "Operating Systems",
+        intro: "An operating system (OS) is the most important software on your computer. It manages hardware resources, provides a user interface, and allows applications to run.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-os-hero.jpg",
+            alt: "Different operating systems logos and interfaces",
+            brief: "Create a visual showing different OS logos: Windows, macOS, Linux, Android, iOS arranged in a modern layout. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m3-os-overview.jpg",
+            alt: "Operating system architecture diagram showing how OS manages hardware",
+            brief: "Create a diagram showing OS as a layer between hardware and applications. Show OS managing CPU, RAM, storage, and providing interface. Clean, educational style."
+          },
+          desktopComparison: {
+            fileName: "module-media/m3-os-desktop-comparison.jpg",
+            alt: "Windows, macOS, and Linux desktop interfaces comparison",
+            brief: "Show side-by-side comparison of Windows, macOS, and Linux desktop interfaces. Include their logos and key visual differences. Clean, educational style."
+          },
+          windows: {
+            fileName: "module-media/m3-os-windows.jpg",
+            alt: "Windows operating system interface and features",
+            brief: "Show Windows OS interface with Start menu, taskbar, and desktop. Include Windows logo. Modern, clean aesthetic."
+          },
+          macos: {
+            fileName: "module-media/m3-os-macos.jpg",
+            alt: "macOS operating system interface and features",
+            brief: "Show macOS interface with Dock, menu bar, and desktop. Include Apple logo. Modern, clean aesthetic."
+          },
+          linux: {
+            fileName: "module-media/m3-os-linux.jpg",
+            alt: "Linux operating system interface and features",
+            brief: "Show Linux desktop environment (like Ubuntu/GNOME) with its interface. Include Linux/Tux logo. Modern, clean aesthetic."
+          },
+          mobileComparison: {
+            fileName: "module-media/m3-os-mobile-comparison.jpg",
+            alt: "Android and iOS mobile interfaces comparison",
+            brief: "Show side-by-side comparison of Android and iOS interfaces on phones. Include their logos. Clean, educational style."
+          },
+          android: {
+            fileName: "module-media/m3-os-android.jpg",
+            alt: "Android operating system interface and features",
+            brief: "Show Android interface with home screen, app drawer, and key features. Include Android logo. Modern, clean aesthetic."
+          },
+          ios: {
+            fileName: "module-media/m3-os-ios.jpg",
+            alt: "iOS operating system interface and features",
+            brief: "Show iOS interface with home screen, apps, and key features. Include Apple logo. Modern, clean aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-os-why-matters.jpg",
+            alt: "Computer with different operating systems running smoothly",
+            brief: "Show a computer running smoothly with OS managing everything. Show the importance of OS in daily computing. Clean, modern aesthetic."
+          }
+        },
+        desktopOS: [
+          {
+            name: "Windows",
+            logo: "🪟",
+            description: "Most popular desktop OS, used on PCs worldwide. Known for compatibility and wide software support.",
+            features: ["User-friendly interface", "Wide software compatibility", "Regular updates", "Gaming support"]
+          },
+          {
+            name: "macOS",
+            logo: "🍎",
+            description: "Apple's operating system for Mac computers. Known for sleek design and seamless integration with Apple devices.",
+            features: ["Sleek design", "Apple ecosystem integration", "Security focused", "Creative tools"]
+          },
+          {
+            name: "Linux",
+            logo: "🐧",
+            description: "Open-source operating system. Free, customizable, and used by developers and servers worldwide.",
+            features: ["Free and open-source", "Highly customizable", "Developer-friendly", "Server applications"]
+          }
+        ],
+        mobileOS: [
+          {
+            name: "Android",
+            logo: "🤖",
+            description: "Google's mobile operating system. Most popular mobile OS, used on many smartphone brands.",
+            features: ["Open-source", "Customizable", "Wide device support", "Google services integration"]
+          },
+          {
+            name: "iOS",
+            logo: "📱",
+            description: "Apple's mobile operating system for iPhone and iPad. Known for security, simplicity, and app quality.",
+            features: ["Secure and private", "Simple interface", "High-quality apps", "Apple ecosystem"]
+          }
+        ]
+      },
+      fileSystem: {
+        title: "File System",
+        intro: "A file system organizes and stores files on your computer. It uses folders (directories) to group related files together, making it easier to find and manage your data.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-filesystem-hero.jpg",
+            alt: "File system structure showing folders and files",
+            brief: "Create a visual showing a file system tree structure with folders and files. Show the hierarchical organization. Clean, modern aesthetic."
+          },
+          folders: {
+            fileName: "module-media/m3-filesystem-folders.jpg",
+            alt: "Folders and directories in a file system",
+            brief: "Show a visual of folders/directories with icons. Show how they organize files. Clean, educational style."
+          },
+          paths: {
+            fileName: "module-media/m3-filesystem-paths.jpg",
+            alt: "File paths showing directory structure",
+            brief: "Show file paths like C:/Users/Documents/File.txt. Show how paths work. Clean, educational diagram."
+          },
+          hidden: {
+            fileName: "module-media/m3-filesystem-hidden.jpg",
+            alt: "Hidden files in a file system",
+            brief: "Show hidden files (with dot prefix or hidden attribute). Show how to view them. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-filesystem-in-action.jpg",
+            alt: "File system in action",
+            brief: "Show a file system being used: files being organized, folders being created, files being accessed. Show the file system working. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-filesystem-why-matters.jpg",
+            alt: "Well-organized file system",
+            brief: "Show a well-organized file system with properly named folders and files. Show the importance of organization. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            title: "Folders & Directories",
+            description: "Folders (also called directories) are containers that hold files and other folders. They help organize your data into logical groups.",
+            icon: "📁"
+          },
+          {
+            title: "File Paths",
+            description: "A file path shows the exact location of a file in the file system. It includes all folders from the root to the file.",
+            icon: "📍"
+          },
+          {
+            title: "Hidden Files",
+            description: "Hidden files are files that are not normally visible. They often contain system settings and configuration data.",
+            icon: "👁️"
+          }
+        ]
+      },
+      fileExtensions: {
+        title: "File Extensions",
+        intro: "File extensions are the letters after the dot in a filename (like .txt, .jpg, .mp4). They tell your computer what type of file it is and which program should open it.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-extensions-hero.jpg",
+            alt: "Different file extensions and their icons",
+            brief: "Create a visual showing different file types with their extensions: .txt, .jpg, .mp4, .exe, etc. Show icons for each type. Clean, modern layout."
+          },
+          text: {
+            fileName: "module-media/m3-extensions-text.jpg",
+            alt: "Text file extensions",
+            brief: "Show text file extensions: .txt, .doc, .pdf. Show examples. Clean, educational style."
+          },
+          image: {
+            fileName: "module-media/m3-extensions-image.jpg",
+            alt: "Image file extensions",
+            brief: "Show image file extensions: .jpg, .png, .gif. Show examples. Clean, educational style."
+          },
+          video: {
+            fileName: "module-media/m3-extensions-video.jpg",
+            alt: "Video file extensions",
+            brief: "Show video file extensions: .mp4, .avi, .mov. Show examples. Clean, educational style."
+          },
+          executable: {
+            fileName: "module-media/m3-extensions-executable.jpg",
+            alt: "Executable file extensions",
+            brief: "Show executable file extensions: .exe, .app, .sh. Show examples. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-extensions-in-action.jpg",
+            alt: "File extensions in action",
+            brief: "Show file extensions being used: different file types being opened with correct programs. Show how extensions work. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-extensions-why-matters.jpg",
+            alt: "File extension importance",
+            brief: "Show how file extensions help identify file types. Show the importance of correct extensions. Clean, modern aesthetic."
+          }
+        },
+        types: [
+          {
+            category: "Text Files",
+            extensions: [".txt", ".doc", ".pdf"],
+            description: "Documents and text files",
+            icon: "📄"
+          },
+          {
+            category: "Image Files",
+            extensions: [".jpg", ".png", ".gif"],
+            description: "Photos and images",
+            icon: "🖼️"
+          },
+          {
+            category: "Video Files",
+            extensions: [".mp4", ".avi", ".mov"],
+            description: "Video recordings",
+            icon: "🎬"
+          },
+          {
+            category: "Executable Files",
+            extensions: [".exe", ".app", ".sh"],
+            description: "Programs and applications",
+            icon: "⚙️"
+          }
+        ]
+      },
+      fileManagement: {
+        title: "File Management",
+        intro: "File management is how you organize, move, copy, and delete files on your computer. Good file management helps you find your files quickly and keeps your computer organized.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-management-hero.jpg",
+            alt: "File management operations",
+            brief: "Create a visual showing file management operations: create, copy, move, delete. Show icons and actions. Clean, modern aesthetic."
+          },
+          create: {
+            fileName: "module-media/m3-management-create.jpg",
+            alt: "Creating files and folders",
+            brief: "Show how to create new files and folders. Show the process. Clean, educational style."
+          },
+          copyMove: {
+            fileName: "module-media/m3-management-copy-move.jpg",
+            alt: "Copying and moving files",
+            brief: "Show copy and move operations. Show the difference. Clean, educational diagram."
+          },
+          delete: {
+            fileName: "module-media/m3-management-delete.jpg",
+            alt: "Deleting and restoring files",
+            brief: "Show delete operation and restore from recycle bin/trash. Show the process. Clean, educational style."
+          },
+          organize: {
+            fileName: "module-media/m3-management-organize.jpg",
+            alt: "Organizing files into folders",
+            brief: "Show how to organize files into folders. Show good organization practices. Clean, modern aesthetic."
+          },
+          inAction: {
+            fileName: "module-media/m3-management-in-action.jpg",
+            alt: "File management in action",
+            brief: "Show file management operations: creating folders, copying files, organizing documents. Show file management working. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-management-why-matters.jpg",
+            alt: "Well-organized file system",
+            brief: "Show a well-organized computer with properly managed files. Show the benefits. Clean, modern aesthetic."
+          }
+        },
+        operations: [
+          {
+            title: "Create, Copy, Move",
+            description: "You can create new files and folders, copy them to make duplicates, or move them to different locations.",
+            icon: "📋"
+          },
+          {
+            title: "Delete & Restore",
+            description: "Deleted files go to the Recycle Bin (Windows) or Trash (Mac). You can restore them if needed.",
+            icon: "🗑️"
+          },
+          {
+            title: "Organizing Files",
+            description: "Group related files into folders with clear names. This makes it easier to find what you need.",
+            icon: "📂"
+          }
+        ]
+      },
+      systemSpecifications: {
+        title: "System Specifications",
+        intro: "System specifications (specs) tell you what hardware and software your computer has. They help you understand your computer's capabilities and whether it can run certain programs.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-specs-hero.jpg",
+            alt: "Computer system specifications",
+            brief: "Create a visual showing system specifications: CPU, RAM, Storage, GPU, OS. Show a clean spec sheet layout. Modern, tech aesthetic."
+          },
+          cpuRamStorage: {
+            fileName: "module-media/m3-specs-cpu-ram-storage.jpg",
+            alt: "CPU, RAM, and Storage specifications",
+            brief: "Show CPU, RAM, and Storage specs with icons and labels. Show how to read these specs. Clean, educational style."
+          },
+          gpu: {
+            fileName: "module-media/m3-specs-gpu.jpg",
+            alt: "GPU specifications",
+            brief: "Show GPU specifications with details. Show integrated vs dedicated. Clean, educational style."
+          },
+          osVersion: {
+            fileName: "module-media/m3-specs-os.jpg",
+            alt: "Operating system version",
+            brief: "Show OS version information. Show how to find OS version. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-specs-in-action.jpg",
+            alt: "System specifications in action",
+            brief: "Show system specs being used: checking specs, comparing systems, understanding performance. Show specs in use. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-specs-why-matters.jpg",
+            alt: "Understanding system specifications",
+            brief: "Show the importance of knowing your system specs. Show how specs affect performance. Clean, modern aesthetic."
+          }
+        },
+        components: [
+          {
+            title: "CPU, RAM, Storage",
+            description: "These are the core components that determine your computer's speed and storage capacity.",
+            icon: "💻"
+          },
+          {
+            title: "GPU",
+            description: "The graphics processing unit handles visual tasks like gaming, video editing, and 3D rendering.",
+            icon: "🎮"
+          },
+          {
+            title: "OS Version",
+            description: "The operating system version tells you which software features and updates are available.",
+            icon: "🖥️"
+          }
+        ]
+      },
+      mobileComputer: {
+        title: "Mobile = A Computer",
+        intro: "Your smartphone or tablet is actually a computer! It has the same basic components as a desktop computer, just in a smaller, portable form.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-mobile-hero.jpg",
+            alt: "Mobile device as a computer",
+            brief: "Create a visual showing a smartphone/tablet with computer components labeled. Show it's a computer. Modern, tech aesthetic."
+          },
+          architecture: {
+            fileName: "module-media/m3-mobile-architecture.jpg",
+            alt: "Mobile device architecture",
+            brief: "Show mobile device architecture diagram. Show CPU, RAM, storage, sensors. Clean, educational diagram."
+          },
+          cpuGpu: {
+            fileName: "module-media/m3-mobile-cpu-gpu.jpg",
+            alt: "Mobile CPU and GPU",
+            brief: "Show mobile CPU and GPU. Show how they're different from desktop. Clean, educational style."
+          },
+          sensors: {
+            fileName: "module-media/m3-mobile-sensors.jpg",
+            alt: "Sensors in mobile devices",
+            brief: "Show sensors in mobile devices: accelerometer, gyroscope, etc. Show how they work. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-mobile-in-action.jpg",
+            alt: "Mobile device in action",
+            brief: "Show mobile device working: apps running, CPU/GPU processing, sensors detecting. Show mobile as computer. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-mobile-why-matters.jpg",
+            alt: "Understanding mobile as computer",
+            brief: "Show the importance of understanding mobile devices as computers. Show their capabilities. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            title: "Mobile Architecture",
+            description: "Mobile devices have the same basic architecture as computers: CPU, RAM, storage, and an operating system.",
+            icon: "📱"
+          },
+          {
+            title: "Mobile CPU/GPU",
+            description: "Mobile processors are smaller and more power-efficient than desktop CPUs, but they work the same way.",
+            icon: "⚡"
+          },
+          {
+            title: "Sensors",
+            description: "Mobile devices have special sensors like accelerometers and gyroscopes that desktop computers don't have.",
+            icon: "📡"
+          }
+        ]
+      },
+      sensorsDevices: {
+        title: "Sensors in Devices",
+        intro: "Sensors are special components that detect changes in the environment. They help your device understand its position, movement, and surroundings.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-sensors-hero.jpg",
+            alt: "Sensors in devices",
+            brief: "Create a visual showing different sensors in devices: accelerometer, gyroscope, proximity, fingerprint. Modern, tech aesthetic."
+          },
+          accelerometer: {
+            fileName: "module-media/m3-sensors-accelerometer.jpg",
+            alt: "Accelerometer sensor",
+            brief: "Show accelerometer sensor. Show how it detects motion. Clean, educational style."
+          },
+          gyroscope: {
+            fileName: "module-media/m3-sensors-gyroscope.jpg",
+            alt: "Gyroscope sensor",
+            brief: "Show gyroscope sensor. Show how it detects rotation. Clean, educational style."
+          },
+          proximity: {
+            fileName: "module-media/m3-sensors-proximity.jpg",
+            alt: "Proximity sensor",
+            brief: "Show proximity sensor. Show how it detects nearby objects. Clean, educational style."
+          },
+          fingerprint: {
+            fileName: "module-media/m3-sensors-fingerprint.jpg",
+            alt: "Fingerprint sensor",
+            brief: "Show fingerprint sensor. Show how it works for security. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-sensors-in-action.jpg",
+            alt: "Sensors in action",
+            brief: "Show sensors working: accelerometer detecting motion, gyroscope detecting rotation, proximity sensor detecting objects. Show sensors in use. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-sensors-why-matters.jpg",
+            alt: "Understanding sensors",
+            brief: "Show the importance of sensors in modern devices. Show how they enhance user experience. Clean, modern aesthetic."
+          }
+        },
+        sensors: [
+          {
+            name: "Accelerometer",
+            description: "Detects motion and orientation. Used for screen rotation and step counting.",
+            icon: "📱"
+          },
+          {
+            name: "Gyroscope",
+            description: "Detects rotation and tilt. Used for gaming and augmented reality.",
+            icon: "🔄"
+          },
+          {
+            name: "Proximity",
+            description: "Detects nearby objects. Used to turn off the screen during calls.",
+            icon: "👁️"
+          },
+          {
+            name: "Fingerprint",
+            description: "Scans fingerprints for security. Used for unlocking devices and payments.",
+            icon: "👆"
+          }
+        ]
+      },
+      whatIsProgram: {
+        title: "What is a Program?",
+        intro: "A program is a set of instructions written in code that tells a computer what to do. Programs are created by developers and can be anything from a simple calculator to complex video games or operating systems.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-program-hero.jpg",
+            alt: "Code and program visualization",
+            brief: "Create a visual showing code being written, compiled into software, and executed. Show the transformation from code to program. Use a tech aesthetic with soft gradients."
+          },
+          code: {
+            fileName: "module-media/m3-program-code.jpg",
+            alt: "Programming code",
+            brief: "Show programming code on a screen. Show syntax, variables, functions. Clean, educational style."
+          },
+          software: {
+            fileName: "module-media/m3-program-software.jpg",
+            alt: "Software compilation",
+            brief: "Show code being compiled into software. Show the process. Clean, educational diagram."
+          },
+          execution: {
+            fileName: "module-media/m3-program-execution.jpg",
+            alt: "Program execution",
+            brief: "Show a program running/executing. Show the output or interface. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-program-why-matters.jpg",
+            alt: "Programs in use",
+            brief: "Show various programs being used: apps, games, software. Show the importance of programs. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Code",
+            description: "Code is the written instructions that developers create using programming languages like Python, JavaScript, or C++.",
+            icon: "💻"
+          },
+          {
+            name: "Software",
+            description: "Software is the compiled, executable version of code that can run on a computer. It's what you install and use.",
+            icon: "📦"
+          },
+          {
+            name: "Execution",
+            description: "Execution is when the program runs and performs its tasks. The CPU reads and executes the program's instructions.",
+            icon: "▶️"
+          }
+        ]
+      },
+      whatIsData: {
+        title: "What is Data?",
+        intro: "Data is information stored in a computer. It can be text, numbers, images, videos, or any other type of information. Computers process data using binary code (0s and 1s) that the CPU can understand.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-data-hero.jpg",
+            alt: "Data visualization",
+            brief: "Create a visual showing different types of data: text, numbers, images, files. Show data being stored and processed. Use a tech aesthetic with soft gradients."
+          },
+          text: {
+            fileName: "module-media/m3-data-text.jpg",
+            alt: "Text data",
+            brief: "Show text data: documents, files, strings. Clean, educational style."
+          },
+          numbers: {
+            fileName: "module-media/m3-data-numbers.jpg",
+            alt: "Numeric data",
+            brief: "Show numeric data: calculations, spreadsheets, databases. Clean, educational style."
+          },
+          binary: {
+            fileName: "module-media/m3-data-binary.jpg",
+            alt: "Binary data representation",
+            brief: "Show binary representation: 0s and 1s, how machines read data. Clean, educational diagram."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-data-why-matters.jpg",
+            alt: "Data in use",
+            brief: "Show data being used: files being accessed, information being processed. Show the importance of data. Clean, modern aesthetic."
+          }
+        },
+        types: [
+          {
+            name: "Text Data",
+            description: "Text data includes letters, words, sentences, and documents. Examples: documents, emails, web pages.",
+            icon: "📝"
+          },
+          {
+            name: "Numeric Data",
+            description: "Numeric data includes numbers used for calculations, measurements, and statistics. Examples: prices, scores, measurements.",
+            icon: "🔢"
+          },
+          {
+            name: "Binary Data",
+            description: "Binary data is how computers store and process all information using only 0s and 1s. Everything is converted to binary.",
+            icon: "⚙️"
+          }
+        ]
+      }
+    };
+  };
+
+  // Module 4 specific content sections
+  const getModule4Sections = () => {
+    return {
+      insideComputer: {
+        title: "Inside a Computer",
+        intro: "Inside a computer case, components work together. The motherboard connects everything, power connectors supply electricity, internal wiring carries data and power, and components are placed for airflow and accessibility.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-inside-hero.jpg",
+            alt: "Inside view of a computer showing motherboard, components, and wiring",
+            brief: "Create a visual showing the inside of a computer case: motherboard with components, power connectors, wiring, and component placement. Clean, educational style with good lighting."
+          },
+          overview: {
+            fileName: "module-media/m4-inside-overview.jpg",
+            alt: "Inside view of a computer showing motherboard, components, and wiring",
+            brief: "Show the inside of a computer case: motherboard with components, power connectors, wiring, and component placement. Clean, educational style."
+          },
+          components: {
+            fileName: "module-media/m4-inside-components.jpg",
+            alt: "Detailed view of motherboard layout, power connectors, and wiring",
+            brief: "Show a detailed view of motherboard with labeled components, power connectors, and internal wiring. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-inside-why-matters.jpg",
+            alt: "Well-organized computer internals showing proper component placement",
+            brief: "Show a well-organized computer interior with proper component placement, clean wiring, and good airflow. Clean, modern aesthetic."
+          }
+        },
+        components: [
+          {
+            name: "Motherboard Layout",
+            icon: "🔌",
+            description: "The motherboard is the main circuit board that connects all components. It has slots for CPU, RAM, GPU, and expansion cards."
+          },
+          {
+            name: "Power Connectors",
+            icon: "⚡",
+            description: "Power connectors supply electricity from the PSU to components. Different connectors power the CPU, GPU, motherboard, and storage drives."
+          },
+          {
+            name: "Internal Wiring",
+            icon: "🔗",
+            description: "Internal wiring includes data cables (SATA, PCIe) and power cables. These cables connect components and allow them to communicate."
+          },
+          {
+            name: "Component Placement",
+            icon: "📐",
+            description: "Components are placed strategically for airflow, cooling, and accessibility. Proper placement prevents overheating and makes upgrades easier."
+          }
+        ]
+      },
+      cpuArchitecture: {
+        title: "CPU Architecture",
+        intro: "CPU architecture refers to the internal design and structure of the processor. It includes cores, cache levels, clock speed, and how instructions are processed. Understanding CPU architecture helps you choose the right processor and optimize performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-cpu-hero.jpg",
+            alt: "CPU architecture visualization",
+            brief: "Create a visual showing CPU architecture: cores, cache levels, clock speed, and instruction cycle. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-cpu-overview.jpg",
+            alt: "CPU internal structure and architecture",
+            brief: "Show CPU internal structure with labeled components: cores, cache levels, clock speed indicators. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-cpu-architecture.jpg",
+            alt: "Detailed CPU architecture diagram showing all components",
+            brief: "Show a detailed CPU architecture diagram with cores, threads, L1/L2/L3 cache, clock speed, and instruction cycle. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-cpu-why-matters.jpg",
+            alt: "CPU performance comparison showing architecture impact",
+            brief: "Show CPU performance comparison: different architectures side by side showing speed differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Cores & Threads",
+            icon: "⚙️",
+            description: "Cores are processing units that execute instructions. Threads allow parallel processing, enabling the CPU to handle multiple tasks simultaneously."
+          },
+          {
+            name: "Cache Levels",
+            icon: "💾",
+            description: "Cache stores frequently used data in L1, L2, and L3 levels for faster access. Higher cache levels are larger but slower than lower levels."
+          },
+          {
+            name: "Clock Speed",
+            icon: "⏱️",
+            description: "Clock speed measures how many cycles per second the CPU performs. Higher clock speed means faster processing, measured in GHz."
+          },
+          {
+            name: "Instruction Cycle",
+            icon: "🔄",
+            description: "The instruction cycle is the sequence of steps the CPU follows to execute each instruction: fetch, decode, execute, and store."
+          }
+        ]
+      },
+      gpuArchitecture: {
+        title: "GPU Architecture",
+        intro: "GPU architecture refers to the internal design of the graphics processing unit. It includes specialized cores, VRAM, and how graphics are rendered. Understanding GPU architecture helps you choose the right graphics card for gaming, video editing, and visual processing.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-gpu-hero.jpg",
+            alt: "GPU architecture visualization",
+            brief: "Create a visual showing GPU architecture: CUDA/Tensor cores, VRAM, integrated vs dedicated. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-gpu-overview.jpg",
+            alt: "GPU internal structure and architecture",
+            brief: "Show GPU internal structure with labeled components: cores, VRAM, rendering pipeline. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-gpu-architecture.jpg",
+            alt: "Detailed GPU architecture showing cores, VRAM, and rendering",
+            brief: "Show a detailed GPU architecture diagram with CUDA/Tensor cores, VRAM, integrated vs dedicated comparison, and rendering pipeline. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-gpu-why-matters.jpg",
+            alt: "GPU performance comparison showing architecture impact",
+            brief: "Show GPU performance comparison: different architectures side by side showing graphics quality differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "CUDA/Tensor Cores",
+            icon: "🔥",
+            description: "CUDA and Tensor cores are specialized processing units for parallel calculations. They handle graphics rendering, AI processing, and complex computations simultaneously."
+          },
+          {
+            name: "VRAM",
+            icon: "💾",
+            description: "VRAM is dedicated memory for graphics data. Faster VRAM means smoother graphics, better frame rates, and support for higher resolutions and textures."
+          },
+          {
+            name: "Integrated vs Dedicated",
+            icon: "🎮",
+            description: "Integrated GPU is part of the CPU and shares system RAM. Dedicated GPU has its own VRAM and is more powerful, ideal for gaming and professional graphics work."
+          },
+          {
+            name: "GPU Rendering",
+            icon: "🎨",
+            description: "GPU rendering creates visual images, animations, and 3D graphics. The GPU processes millions of pixels simultaneously to display smooth, detailed graphics on your screen."
+          }
+        ]
+      },
+      ramArchitecture: {
+        title: "RAM Architecture",
+        intro: "RAM architecture refers to the design and specifications of memory modules. Understanding DDR generations, frequency, dual-channel memory, and latency helps you choose the right RAM for your system and optimize performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-ram-hero.jpg",
+            alt: "RAM architecture visualization showing DDR generations and specifications",
+            brief: "Create a visual showing RAM architecture: DDR generations comparison, frequency indicators, dual-channel setup, and latency timing. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-ram-overview.jpg",
+            alt: "RAM modules showing DDR generations and specifications",
+            brief: "Show RAM modules with labels for DDR generations (DDR3, DDR4, DDR5), frequency (MHz), and capacity. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-ram-architecture.jpg",
+            alt: "Detailed RAM architecture diagram showing dual-channel, frequency, and latency",
+            brief: "Show a detailed RAM architecture diagram with dual-channel memory setup, frequency comparison, latency timing (CL), and how data flows. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-ram-why-matters.jpg",
+            alt: "RAM performance comparison showing architecture impact",
+            brief: "Show RAM performance comparison: different DDR generations and frequencies side by side showing speed differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "DDR Generations",
+            icon: "📊",
+            description: "DDR (Double Data Rate) generations (DDR3, DDR4, DDR5) represent different memory technologies. Newer generations offer higher speeds, lower power consumption, and better performance."
+          },
+          {
+            name: "Frequency",
+            icon: "⚡",
+            description: "RAM frequency (measured in MHz) determines how fast data can be read and written. Higher frequency means faster data transfer and better system responsiveness."
+          },
+          {
+            name: "Dual-Channel Memory",
+            icon: "🔗",
+            description: "Dual-channel memory uses two RAM sticks simultaneously, doubling the data transfer rate. This improves performance in memory-intensive tasks and gaming."
+          },
+          {
+            name: "Latency and Timing",
+            icon: "⏱️",
+            description: "Latency (CL - CAS Latency) measures the delay between a command and data availability. Lower latency means faster response times and better performance."
+          }
+        ]
+      },
+      storageConnections: {
+        title: "Storage Connections",
+        intro: "Storage connections determine how storage devices communicate with the motherboard and CPU. Understanding SATA, NVMe, and PCIe interfaces helps you choose the right storage solution and maximize performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-storage-connections-hero.jpg",
+            alt: "Storage connection interfaces visualization",
+            brief: "Create a visual showing storage connections: SATA interface, NVMe interface, PCIe lanes, and how data moves between storage and CPU. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-storage-connections-overview.jpg",
+            alt: "SATA and NVMe interfaces comparison",
+            brief: "Show SATA and NVMe interfaces side by side with visible connectors, cables, and slots. Include labels for each interface type. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-storage-connections-architecture.jpg",
+            alt: "Detailed storage connection diagram showing data flow",
+            brief: "Show a detailed storage connection diagram with SATA, NVMe, PCIe lanes, and data flow paths from storage to CPU. Include speed indicators. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-storage-connections-why-matters.jpg",
+            alt: "Storage connection performance comparison",
+            brief: "Show storage connection performance comparison: SATA vs NVMe speeds side by side. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "SATA Interface",
+            icon: "🔌",
+            description: "SATA (Serial ATA) is a standard interface for connecting storage devices. SATA 3.0 offers speeds up to 6 Gbps, commonly used for HDDs and SATA SSDs."
+          },
+          {
+            name: "NVMe Interface",
+            icon: "⚡",
+            description: "NVMe (Non-Volatile Memory Express) is a high-speed interface designed for SSDs. It uses PCIe lanes directly, offering speeds up to 3,500+ MB/s, much faster than SATA."
+          },
+          {
+            name: "PCIe Lanes",
+            icon: "🛣️",
+            description: "PCIe (Peripheral Component Interconnect Express) lanes are data pathways. More lanes mean higher bandwidth. NVMe SSDs use PCIe lanes for direct CPU communication."
+          },
+          {
+            name: "How Data Moves",
+            icon: "🔄",
+            description: "Data flows from storage through the interface (SATA/NVMe) to the motherboard, then to the CPU via PCIe lanes. NVMe provides a direct path, reducing latency."
+          }
+        ]
+      },
+      coolingSystems: {
+        title: "Cooling Systems",
+        intro: "Cooling systems prevent components from overheating by dissipating heat. Understanding heat sinks, fans, thermal paste, and liquid cooling helps you maintain optimal temperatures and extend component lifespan.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-cooling-hero.jpg",
+            alt: "Computer cooling systems visualization",
+            brief: "Create a visual showing cooling systems: heat sinks, fans, thermal paste application, and liquid cooling setup. Show airflow direction. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-cooling-overview.jpg",
+            alt: "CPU cooler with heat sink and fan",
+            brief: "Show a CPU cooler with visible heat sink fins, fan, and thermal paste. Include labels for key components. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-cooling-architecture.jpg",
+            alt: "Cooling system diagram showing airflow and heat dissipation",
+            brief: "Show a cooling system diagram with airflow direction, heat dissipation paths, and temperature zones. Include fan placement and airflow arrows. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-cooling-why-matters.jpg",
+            alt: "Temperature comparison showing cooling system impact",
+            brief: "Show temperature comparison: system with good cooling vs poor cooling. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Heat Sink Operation",
+            icon: "❄️",
+            description: "Heat sinks are metal fins that absorb and dissipate heat from components. Larger surface area and better materials improve heat transfer and cooling efficiency."
+          },
+          {
+            name: "Fans and Airflow",
+            icon: "💨",
+            description: "Fans create airflow to move hot air away from components. Proper fan placement and direction ensure efficient cooling and prevent hot spots in the case."
+          },
+          {
+            name: "Thermal Paste",
+            icon: "🧪",
+            description: "Thermal paste fills microscopic gaps between the CPU/GPU and heat sink, improving heat transfer. Proper application ensures optimal thermal conductivity."
+          },
+          {
+            name: "Liquid Cooling Basics",
+            icon: "💧",
+            description: "Liquid cooling uses coolant to transfer heat more efficiently than air. It's ideal for high-performance systems and overclocking, providing better temperature control."
+          }
+        ]
+      },
+      psu: {
+        title: "Power Supply Unit (PSU)",
+        intro: "The Power Supply Unit (PSU) converts AC power from the wall outlet to DC power for computer components. Understanding watt ratings, efficiency certifications, cables, and power distribution helps you choose the right PSU for your system.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-psu-hero.jpg",
+            alt: "Power Supply Unit visualization",
+            brief: "Create a visual showing PSU: external view, watt rating labels, efficiency certification badges, and cable connections. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-psu-overview.jpg",
+            alt: "PSU with visible labels and connectors",
+            brief: "Show a PSU with visible labels, watt rating, efficiency certification (80 Plus), and cable connectors. Include labels for key parts. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-psu-architecture.jpg",
+            alt: "PSU power distribution diagram",
+            brief: "Show a PSU power distribution diagram with different voltage rails (12V, 5V, 3.3V), cable types (CPU, GPU, SATA), and power flow. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-psu-why-matters.jpg",
+            alt: "PSU efficiency comparison",
+            brief: "Show PSU efficiency comparison: different 80 Plus ratings (Bronze, Gold, Platinum) and their impact on power consumption. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Watt Ratings",
+            icon: "⚡",
+            description: "PSU watt rating indicates maximum power output. Choose a PSU with enough wattage for all components (CPU, GPU, drives) plus headroom for future upgrades."
+          },
+          {
+            name: "80 Plus Certification",
+            icon: "🏆",
+            description: "80 Plus certification (Bronze, Silver, Gold, Platinum, Titanium) indicates power efficiency. Higher ratings mean less wasted energy and lower electricity costs."
+          },
+          {
+            name: "PSU Cables",
+            icon: "🔌",
+            description: "PSU cables include CPU power (4+4 pin), GPU power (6+2 pin), SATA power, and Molex connectors. Modular PSUs allow you to use only needed cables."
+          },
+          {
+            name: "Power Distribution",
+            icon: "📊",
+            description: "PSU distributes power through different voltage rails (12V for CPU/GPU, 5V/3.3V for drives). Proper power distribution ensures stable system operation."
+          }
+        ]
+      },
+      biosUefi: {
+        title: "BIOS / UEFI",
+        intro: "BIOS (Basic Input/Output System) and UEFI (Unified Extensible Firmware Interface) are firmware that control your computer's startup process. Understanding boot order, security options, and BIOS updates helps you configure and maintain your system.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-bios-hero.jpg",
+            alt: "BIOS/UEFI interface visualization",
+            brief: "Create a visual showing BIOS/UEFI: interface screen, boot order settings, security options, and update process. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-bios-overview.jpg",
+            alt: "BIOS/UEFI interface screen",
+            brief: "Show BIOS/UEFI interface screen with visible menu options, boot order, and settings. Include labels for key sections. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-bios-architecture.jpg",
+            alt: "BIOS/UEFI boot process diagram",
+            brief: "Show a BIOS/UEFI boot process diagram: power on → BIOS/UEFI initialization → boot device selection → OS loading. Include arrows and progression. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-bios-why-matters.jpg",
+            alt: "BIOS/UEFI security and boot options",
+            brief: "Show BIOS/UEFI security features and boot options comparison. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "What BIOS Does",
+            icon: "🚀",
+            description: "BIOS/UEFI initializes hardware during startup, performs POST (Power-On Self-Test), and loads the operating system from the boot device. It's the first software that runs."
+          },
+          {
+            name: "Boot Order",
+            icon: "📀",
+            description: "Boot order determines which device the computer checks first for an operating system. Common order: USB, CD/DVD, hard drive. You can change this in BIOS/UEFI settings."
+          },
+          {
+            name: "Security Options",
+            icon: "🔒",
+            description: "BIOS/UEFI security options include password protection, secure boot (prevents unauthorized OS), and TPM (Trusted Platform Module) for encryption."
+          },
+          {
+            name: "BIOS Update",
+            icon: "🔄",
+            description: "BIOS updates fix bugs, add new features, and improve compatibility. Updates should be done carefully using manufacturer tools to avoid system damage."
+          }
+        ]
+      },
+      expansionCards: {
+        title: "Expansion Cards",
+        intro: "Expansion cards add functionality to your computer by connecting to PCIe slots on the motherboard. Understanding different card types helps you expand your system's capabilities for graphics, networking, and other features.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-expansion-hero.jpg",
+            alt: "Expansion cards visualization",
+            brief: "Create a visual showing expansion cards: PCIe slots on motherboard, different card types (GPU, Wi-Fi, capture cards). Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-expansion-overview.jpg",
+            alt: "Various expansion cards (GPU, Wi-Fi, capture)",
+            brief: "Show various expansion cards side by side: GPU card, Wi-Fi card, capture card. Include labels for each type. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-expansion-architecture.jpg",
+            alt: "PCIe slot and expansion card connection diagram",
+            brief: "Show a PCIe slot and expansion card connection diagram with data flow, PCIe lanes, and how cards communicate with CPU. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-expansion-why-matters.jpg",
+            alt: "Expansion card use cases",
+            brief: "Show expansion card use cases: gaming (GPU), networking (Wi-Fi), content creation (capture). Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "PCIe Cards",
+            icon: "🔌",
+            description: "PCIe (Peripheral Component Interconnect Express) cards connect to PCIe slots on the motherboard. Different slot sizes (x1, x4, x8, x16) provide different bandwidth."
+          },
+          {
+            name: "Wi-Fi Cards",
+            icon: "📡",
+            description: "Wi-Fi cards add wireless networking capability to desktop computers. They connect via PCIe and provide Wi-Fi and Bluetooth connectivity."
+          },
+          {
+            name: "GPU Cards",
+            icon: "🎮",
+            description: "Graphics cards (GPUs) are the most common expansion cards, providing dedicated graphics processing for gaming, video editing, and 3D rendering."
+          },
+          {
+            name: "Capture Cards",
+            icon: "📹",
+            description: "Capture cards record video from external sources (consoles, cameras) for streaming and content creation. They connect via PCIe for high-quality capture."
+          }
+        ]
+      },
+      peripheralDevices: {
+        title: "Peripheral Devices",
+        intro: "Peripheral devices are external components that connect to your computer to provide input, output, or additional functionality. Understanding wired and wireless peripherals, dongles, and drivers helps you set up and use devices effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-peripheral-hero.jpg",
+            alt: "Peripheral devices visualization",
+            brief: "Create a visual showing peripheral devices: keyboard, mouse, monitor, printer, speakers connected to a computer. Show both wired and wireless connections. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-peripheral-overview.jpg",
+            alt: "Various peripheral devices",
+            brief: "Show various peripheral devices: wired keyboard/mouse, wireless devices, USB dongles, and connections. Include labels. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-peripheral-architecture.jpg",
+            alt: "Peripheral device connection diagram",
+            brief: "Show a peripheral device connection diagram with USB ports, wireless connections, dongles, and how devices communicate with the computer. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-peripheral-why-matters.jpg",
+            alt: "Peripheral device setup and usage",
+            brief: "Show peripheral device setup scenarios: plug-and-play vs driver installation. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Wired Peripherals",
+            icon: "🔌",
+            description: "Wired peripherals connect via USB, HDMI, or other cables. They're reliable, don't need batteries, and provide consistent performance without interference."
+          },
+          {
+            name: "Wireless Peripherals",
+            icon: "📡",
+            description: "Wireless peripherals use Bluetooth or Wi-Fi for connectivity. They offer freedom of movement and reduce cable clutter, but may need batteries or charging."
+          },
+          {
+            name: "Dongles",
+            icon: "🔗",
+            description: "Dongles are small adapters that add connectivity (USB-C to USB-A, HDMI adapters) or enable wireless features (Bluetooth, Wi-Fi dongles for older systems)."
+          },
+          {
+            name: "Drivers for Peripherals",
+            icon: "💿",
+            description: "Some peripherals need drivers (software) to work properly. Windows usually installs drivers automatically, but advanced features may require manufacturer drivers."
+          }
+        ]
+      },
+      displayTechnology: {
+        title: "Display Technology",
+        intro: "Display technology determines how images appear on screens. Understanding LCD, LED, and OLED technologies, refresh rates, resolution, and color accuracy helps you choose the right monitor for your needs.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-display-hero.jpg",
+            alt: "Display technology visualization",
+            brief: "Create a visual showing display technologies: LCD, LED, OLED screens side by side with quality comparison. Show refresh rates and resolution indicators. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-display-overview.jpg",
+            alt: "Different display types comparison",
+            brief: "Show different display types side by side: LCD, LED, OLED with visible differences in image quality. Include labels. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-display-architecture.jpg",
+            alt: "Display technology diagram showing pixel structure",
+            brief: "Show a display technology diagram with pixel structure, backlighting (LCD/LED), self-illuminating pixels (OLED), and how images are formed. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-display-why-matters.jpg",
+            alt: "Display quality comparison",
+            brief: "Show display quality comparison: resolution, refresh rate, color accuracy differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "LCD vs LED vs OLED",
+            icon: "🖥️",
+            description: "LCD uses liquid crystals with backlight, LED uses LED backlighting (brighter, more efficient), OLED uses self-illuminating pixels (best contrast, true blacks)."
+          },
+          {
+            name: "Refresh Rate",
+            icon: "🔄",
+            description: "Refresh rate (Hz) is how many times per second the screen updates. Higher refresh rates (120Hz, 144Hz, 240Hz) provide smoother motion, ideal for gaming."
+          },
+          {
+            name: "Resolution",
+            icon: "📐",
+            description: "Resolution is the number of pixels (1920x1080, 2560x1440, 3840x2160). Higher resolution means sharper images but requires more GPU power."
+          },
+          {
+            name: "Color Accuracy",
+            icon: "🎨",
+            description: "Color accuracy measures how true colors appear on screen. Professional monitors have high color accuracy (sRGB, Adobe RGB) for photo/video editing."
+          }
+        ]
+      },
+      printersScanners: {
+        title: "Printers & Scanners",
+        intro: "Printers and scanners are output and input devices for physical documents. Understanding printer types (inkjet vs laser), DPI resolution, scanner operation, and common problems helps you choose and maintain these devices.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-printer-hero.jpg",
+            alt: "Printers and scanners visualization",
+            brief: "Create a visual showing printers and scanners: inkjet printer, laser printer, scanner, and their key features. Show DPI indicators and quality comparison. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-printer-overview.jpg",
+            alt: "Inkjet vs laser printer comparison",
+            brief: "Show inkjet and laser printers side by side with visible differences. Include labels for key features. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-printer-architecture.jpg",
+            alt: "Printer and scanner working diagram",
+            brief: "Show a printer and scanner working diagram: how inkjet/laser printers work, scanner operation, DPI resolution, and document flow. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-printer-why-matters.jpg",
+            alt: "Print quality and troubleshooting",
+            brief: "Show print quality comparison and common troubleshooting scenarios. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Inkjet vs Laser Printer",
+            icon: "🖨️",
+            description: "Inkjet printers spray liquid ink, good for photos and color printing. Laser printers use toner powder, faster and better for text documents and high-volume printing."
+          },
+          {
+            name: "DPI (Resolution)",
+            icon: "📊",
+            description: "DPI (Dots Per Inch) measures print resolution. Higher DPI (600, 1200, 2400) means sharper, more detailed prints. Photo printing needs 300+ DPI."
+          },
+          {
+            name: "Scanner Working",
+            icon: "📷",
+            description: "Scanners use sensors to capture images from physical documents. They convert documents to digital files (PDF, images) with adjustable DPI settings for quality."
+          },
+          {
+            name: "Common Problems",
+            icon: "🔧",
+            description: "Common issues include paper jams, low ink/toner, connectivity problems, and print quality issues. Regular maintenance and proper setup prevent most problems."
+          }
+        ]
+      }
+    };
+  };
+
+  // Get sections based on module ID - Modules 1, 2, 3, and 4 are supported
+  const sections = moduleId === 1 ? getModule1Sections() : moduleId === 2 ? getModule2Sections() : moduleId === 3 ? getModule3Sections() : moduleId === 4 ? getModule4Sections() : null;
 
   const module1Sections = moduleId === 1 && sections ? (sections as ReturnType<typeof getModule1Sections>) : null;
   const module2Sections = moduleId === 2 && sections ? (sections as ReturnType<typeof getModule2Sections>) : null;
+  const module3Sections = moduleId === 3 && sections ? (sections as ReturnType<typeof getModule3Sections>) : null;
+  const module4Sections = moduleId === 4 && sections ? (sections as ReturnType<typeof getModule4Sections>) : null;
 
   const resolveHeroContent = () => {
     if (moduleId === 1) {
+      if (topicId === "1") {
+        return {
+          title: "What is a Computer?",
+          subtitle:
+            module1Sections?.hero.subtitle ??
+            "Understand how the IPO (Input → Process → Output) cycle, core characteristics, and everyday devices define a computer."
+        };
+      }
       if (topicId === "2") {
         return {
           title: module1Sections?.types.title ?? "Types of Computers",
@@ -1272,13 +2446,157 @@ const ModuleDetail = () => {
       }
 
       return {
-        title: module1Sections?.hero.title ?? "Computer Fundamentals",
+        title: module1Sections?.hero.title ?? "INTRODUCTION TO COMPUTERS",
         subtitle:
           module1Sections?.hero.subtitle ??
           "Understand how the IPO (Input → Process → Output) cycle, core characteristics, and everyday devices define a computer."
       };
     }
 
+    if (moduleId === 3) {
+      if (topicId === "1") {
+        return {
+          title: "Boot Process",
+          subtitle: "Learn how your computer starts up from the moment you press the power button. Understand the three key steps: Power On, POST, and Loading OS."
+        };
+      }
+      if (topicId === "2") {
+        return {
+          title: "Operating Systems",
+          subtitle: "Learn about Windows, macOS, Linux, Android, and iOS. Understand how operating systems manage your computer and provide a platform for applications."
+        };
+      }
+      if (topicId === "3") {
+        return {
+          title: "File System",
+          subtitle: "Learn how files and folders are organized on your computer. Understand folders, file paths, and hidden files."
+        };
+      }
+      if (topicId === "4") {
+        return {
+          title: "File Extensions",
+          subtitle: "Learn what file extensions are and why they matter. Understand different file types like text, images, videos, and executables."
+        };
+      }
+      if (topicId === "5") {
+        return {
+          title: "File Management",
+          subtitle: "Learn how to create, copy, move, delete, and organize files. Master the basics of file management on your computer."
+        };
+      }
+      if (topicId === "6") {
+        return {
+          title: "System Specifications",
+          subtitle: "Learn about CPU, RAM, Storage, GPU, and OS version. Understand your computer's capabilities and specifications."
+        };
+      }
+      if (topicId === "7") {
+        return {
+          title: "Mobile = A Computer",
+          subtitle: "Discover how smartphones and tablets are actually computers. Learn about mobile architecture, CPU/GPU, and sensors."
+        };
+      }
+      if (topicId === "8") {
+        return {
+          title: "Sensors in Devices",
+          subtitle: "Learn about accelerometers, gyroscopes, proximity sensors, and fingerprint scanners. Understand how sensors work in devices."
+        };
+      }
+      if (topicId === "9") {
+        return {
+          title: "What is a Program?",
+          subtitle: "Learn what programs are, how code becomes software, and how programs execute. Understand the relationship between code, software, and execution."
+        };
+      }
+      if (topicId === "10") {
+        return {
+          title: "What is Data?",
+          subtitle: "Learn what data is, different data types, and how machines read and process data using binary code."
+        };
+      }
+      return {
+        title: "Operating Systems & Files",
+        subtitle: "Learn about operating systems, file management, mobile computing, and how computers organize and process data."
+      };
+    }
+    if (moduleId === 4) {
+      if (topicId === "1") {
+        return {
+          title: "Inside a Computer",
+          subtitle: "Discover what's inside a computer case. Learn about motherboard layout, power connectors, internal wiring, and how components are strategically placed for optimal performance."
+        };
+      }
+      if (topicId === "2") {
+        return {
+          title: "CPU Architecture",
+          subtitle: "Explore the internal design of processors. Learn about cores, threads, cache levels, clock speed, and how the instruction cycle processes commands."
+        };
+      }
+      if (topicId === "3") {
+        return {
+          title: "GPU Architecture",
+          subtitle: "Discover how graphics processing units work. Learn about CUDA/Tensor cores, VRAM, integrated vs dedicated GPUs, and how graphics are rendered."
+        };
+      }
+      if (topicId === "4") {
+        return {
+          title: "RAM Architecture",
+          subtitle: "Explore RAM architecture and specifications. Learn about DDR generations, frequency, dual-channel memory, and latency timing for optimal performance."
+        };
+      }
+      if (topicId === "5") {
+        return {
+          title: "Storage Connections",
+          subtitle: "Understand how storage devices connect to your system. Learn about SATA, NVMe interfaces, PCIe lanes, and how data flows between storage and CPU."
+        };
+      }
+      if (topicId === "6") {
+        return {
+          title: "Cooling Systems",
+          subtitle: "Discover how cooling systems keep your computer running smoothly. Learn about heat sinks, fans, thermal paste, and liquid cooling basics."
+        };
+      }
+      if (topicId === "7") {
+        return {
+          title: "Power Supply Unit (PSU)",
+          subtitle: "Learn about the power supply unit that powers your computer. Understand watt ratings, efficiency certifications, cables, and power distribution."
+        };
+      }
+      if (topicId === "8") {
+        return {
+          title: "BIOS / UEFI",
+          subtitle: "Explore BIOS and UEFI firmware that controls your computer's startup. Learn about boot order, security options, and BIOS updates."
+        };
+      }
+      if (topicId === "9") {
+        return {
+          title: "Expansion Cards",
+          subtitle: "Discover how expansion cards add functionality to your computer. Learn about PCIe cards, Wi-Fi cards, GPUs, and capture cards."
+        };
+      }
+      if (topicId === "10") {
+        return {
+          title: "Peripheral Devices",
+          subtitle: "Understand peripheral devices that connect to your computer. Learn about wired and wireless peripherals, dongles, and drivers."
+        };
+      }
+      if (topicId === "11") {
+        return {
+          title: "Display Technology",
+          subtitle: "Explore display technologies and monitor specifications. Learn about LCD, LED, OLED, refresh rates, resolution, and color accuracy."
+        };
+      }
+      if (topicId === "12") {
+        return {
+          title: "Printers & Scanners",
+          subtitle: "Learn about printers and scanners for physical documents. Understand inkjet vs laser printers, DPI resolution, scanner operation, and troubleshooting."
+        };
+      }
+      return {
+        title: "Computer Hardware (Deep Dive)",
+        subtitle: "Explore the internal components and architecture of computers in detail. Learn how hardware components work together to create a functional system."
+      };
+    }
     if (moduleId === 2) {
       if (topicId === "1") {
         return {
@@ -1694,6 +3012,162 @@ const ModuleDetail = () => {
                   <img 
                     src={getImageUrl("module-media/m2-firmware-hero.jpg")} 
                     alt="Firmware" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "1" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-boot-hero.jpg")} 
+                    alt="Boot Process" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "2" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-os-hero.jpg")} 
+                    alt="Operating Systems" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "3" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-filesystem-hero.jpg")} 
+                    alt="File System" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "4" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-extensions-hero.jpg")} 
+                    alt="File Extensions" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "5" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-management-hero.jpg")} 
+                    alt="File Management" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "6" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-specs-hero.jpg")} 
+                    alt="System Specifications" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "7" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-mobile-hero.jpg")} 
+                    alt="Mobile = A Computer" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "8" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-sensors-hero.jpg")} 
+                    alt="Sensors in Devices" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "9" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-program-hero.jpg")} 
+                    alt="What is a Program?" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 3 && topicId === "10" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m3-data-hero.jpg")} 
+                    alt="What is Data?"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 4 && topicId === "1" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m4-inside-hero.jpg")} 
+                    alt="Inside a Computer"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 4 && topicId === "2" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m4-cpu-hero.jpg")} 
+                    alt="CPU Architecture"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = moduleIntro;
+                    }}
+                  />
+                </div>
+              ) : moduleId === 4 && topicId === "3" ? (
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <img 
+                    src={getImageUrl("module-media/m4-gpu-hero.jpg")} 
+                    alt="GPU Architecture"
                     className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
@@ -3284,7 +4758,7 @@ const ModuleDetail = () => {
                 <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/1/topic/7")}>
                   ← Previous Topic
                 </Button>
-                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/2/part/1")}>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/2/topic/1")}>
                   Next Module: Internal Components →
                 </Button>
               </div>
@@ -5816,7 +7290,7 @@ const ModuleDetail = () => {
                 <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/2/topic/11")}>
                   ← Previous Topic
                 </Button>
-                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3")}>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/1")}>
                   Next Module: Operating Systems →
                 </Button>
               </div>
@@ -5824,6 +7298,3215 @@ const ModuleDetail = () => {
           </div>
         );
       })(module2Sections)}
+
+      {/* Module 3 Topic 1: Boot Process */}
+      {moduleId === 3 && module3Sections && topicId === "1" && (() => {
+        const {
+          overview: overviewImage,
+          steps: stepsImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.bootProcess.images;
+
+        return (
+          <div id="topic-boot-process" className="space-y-16">
+            {/* Section 1: What is Booting? - Text Left, Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Boot Fundamentals</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What is Booting?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Booting is the process your computer goes through when you press the power button. It initializes hardware, checks system components, and loads the operating system so you can use your computer.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Starts when you press the power button</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Initializes all hardware components</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Loads the operating system into memory</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Prepares your computer for use</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: The 3 Steps - Centered with 3 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Boot Sequence</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">The 3 Steps of Booting</h2>
+                  <p className="text-foreground/80">
+                    Every computer follows these three essential steps when starting up. Understanding each step helps you troubleshoot boot problems and appreciate how your system initializes.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module3Sections.bootProcess.steps.map((step, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{step.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">Step {index + 1}: {step.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(stepsImage.fileName)}
+                      alt={stepsImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${stepsImage.fileName}. ${stepsImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🚀</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Boot Process</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding the boot process helps you troubleshoot startup issues, recognize when hardware problems occur, and appreciate how your computer initializes. This knowledge is essential for diagnosing boot failures, understanding system health, and making informed decisions about computer maintenance.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/2/topic/12")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/2")}>
+                  Next Topic: Operating Systems →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 2: Operating Systems */}
+      {moduleId === 3 && module3Sections && topicId === "2" && (() => {
+        const {
+          overview: overviewImage,
+          desktopComparison: desktopComparisonImage,
+          windows: windowsImage,
+          macos: macosImage,
+          linux: linuxImage,
+          mobileComparison: mobileComparisonImage,
+          android: androidImage,
+          ios: iosImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.operatingSystems.images;
+
+        return (
+          <div id="topic-operating-systems" className="space-y-16">
+            {/* Section 1: What is an OS? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">OS Fundamentals</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What is an Operating System?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    An operating system (OS) is the most important software on your computer. It acts as an intermediary between you, your applications, and the computer's hardware.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Manages hardware resources (CPU, RAM, storage)</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Provides a user interface for interaction</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Allows applications to run and communicate</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Handles file management and security</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Desktop Operating Systems - Full-Width Banner */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[32px] border border-border/70">
+                <div className="relative w-full aspect-[16/6] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(desktopComparisonImage.fileName)}
+                    alt={desktopComparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${desktopComparisonImage.fileName}. ${desktopComparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+                <div className="p-8 space-y-3">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Desktop Platforms</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Desktop Operating Systems</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Windows, macOS, and Linux are the three main desktop operating systems. Each has unique features, design philosophies, and use cases.
+                  </p>
+                </div>
+              </Card>
+            </section>
+
+            {/* Section 3: Windows, macOS, Linux - 3-Column Grid Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Desktop OS Comparison</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Windows, macOS & Linux</h2>
+                  <p className="text-foreground/80">
+                    Each desktop operating system offers different advantages. Choose based on your needs, preferences, and use cases.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module3Sections.operatingSystems.desktopOS.map((os, index) => {
+                    const images = [windowsImage, macosImage, linuxImage];
+                    return (
+                      <Card key={index} className="p-6 border border-border/70 space-y-4">
+                        <div className="text-5xl mb-3 text-center">{os.logo}</div>
+                        <div className="relative w-full aspect-[4/3] bg-muted rounded-lg overflow-hidden mb-4">
+                          <img
+                            src={getImageUrl(images[index].fileName)}
+                            alt={images[index].alt}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = "none";
+                              const parent = (e.target as HTMLImageElement).parentElement;
+                              if (parent) {
+                                parent.innerHTML =
+                                  `<div class="p-4 text-center text-xs text-muted-foreground">
+                                    Add ${images[index].fileName}
+                                  </div>`;
+                              }
+                            }}
+                          />
+                        </div>
+                        <h3 className="text-xl font-semibold text-primary text-center">{os.name}</h3>
+                        <p className="text-sm text-muted-foreground text-center">{os.description}</p>
+                        <div className="space-y-2 pt-2">
+                          {os.features.map((feature, fIndex) => (
+                            <div key={fIndex} className="flex items-start gap-2">
+                              <span className="text-primary text-xs">✓</span>
+                              <p className="text-xs text-foreground/80">{feature}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: Mobile Operating Systems - Image Left + Text Right */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(mobileComparisonImage.fileName)}
+                      alt={mobileComparisonImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${mobileComparisonImage.fileName}. ${mobileComparisonImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile Platforms</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Mobile Operating Systems</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Android and iOS dominate the mobile operating system market. These OS are designed specifically for smartphones and tablets, with touch-optimized interfaces and mobile-specific features.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Touch-optimized user interfaces</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">App stores for software distribution</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Mobile-specific features (GPS, cameras, sensors)</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Battery and performance optimization</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 5: Android & iOS - 2-Column Split Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile OS Comparison</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Android & iOS</h2>
+                  <p className="text-foreground/80">
+                    The two dominant mobile operating systems, each with distinct philosophies and ecosystems.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {module3Sections.operatingSystems.mobileOS.map((os, index) => {
+                    const images = [androidImage, iosImage];
+                    return (
+                      <Card key={index} className="p-6 border border-border/70 space-y-4">
+                        <div className="text-5xl mb-3 text-center">{os.logo}</div>
+                        <div className="relative w-full aspect-[4/3] bg-muted rounded-lg overflow-hidden mb-4">
+                          <img
+                            src={getImageUrl(images[index].fileName)}
+                            alt={images[index].alt}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = "none";
+                              const parent = (e.target as HTMLImageElement).parentElement;
+                              if (parent) {
+                                parent.innerHTML =
+                                  `<div class="p-4 text-center text-xs text-muted-foreground">
+                                    Add ${images[index].fileName}
+                                  </div>`;
+                              }
+                            }}
+                          />
+                        </div>
+                        <h3 className="text-xl font-semibold text-primary text-center">{os.name}</h3>
+                        <p className="text-sm text-muted-foreground text-center">{os.description}</p>
+                        <div className="space-y-2 pt-2">
+                          {os.features.map((feature, fIndex) => (
+                            <div key={fIndex} className="flex items-start gap-2">
+                              <span className="text-primary text-xs">✓</span>
+                              <p className="text-xs text-foreground/80">{feature}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+
+            {/* Section 6: Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Operating Systems</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding operating systems helps you choose the right one for your needs and fix problems when they happen. It also helps you make better decisions about which software and devices to use.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc ml-5 text-left pt-4">
+                  <li>Choose the right OS based on your needs and preferences</li>
+                  <li>Troubleshoot system issues and understand error messages</li>
+                  <li>Make informed decisions about software compatibility</li>
+                  <li>Understand security features and how to protect your system</li>
+                  <li>Appreciate how different OS designs affect user experience</li>
+                </ul>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/1")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/3")}>
+                  Next Topic: File System →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 3: File System */}
+      {moduleId === 3 && module3Sections && topicId === "3" && (() => {
+        const {
+          folders: foldersImage,
+          paths: pathsImage,
+          hidden: hiddenImage,
+          inAction: inActionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.fileSystem.images;
+
+        return (
+          <div id="topic-file-system" className="space-y-16">
+            {/* Section 1: What is a File System? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Organization</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What is a File System?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    A file system is how your computer organizes and stores files. It uses folders (directories) to group related files together, making it easier to find and manage your data.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Organizes files into folders (directories)</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Uses file paths to locate files precisely</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Manages file storage and access permissions</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Can hide system files for protection</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(foldersImage.fileName)}
+                      alt={foldersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${foldersImage.fileName}. ${foldersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Folders, Paths & Hidden Files - Centered + Grid + Image */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File System Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Folders, Paths & Hidden Files</h2>
+                  <p className="text-foreground/80">
+                    The file system uses three main concepts to organize and locate files: folders (directories) for grouping, file paths for location, and hidden files for system protection.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module3Sections.fileSystem.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-4xl mb-3">{concept.icon}</div>
+                      <h3 className="text-lg font-semibold text-primary mb-1">{concept.title}</h3>
+                      <p className="text-xs text-muted-foreground">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(pathsImage.fileName)}
+                      alt={pathsImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${pathsImage.fileName}. ${pathsImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: Hidden Files - Image Left + Text Right with Cards */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
+                    <img
+                      src={getImageUrl(hiddenImage.fileName)}
+                      alt={hiddenImage.alt}
+                      className="w-full h-full object-contain rounded-[28px]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${hiddenImage.fileName}. ${hiddenImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Protection</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">Hidden Files</h2>
+                  </div>
+                  <div className="space-y-4">
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">System Configuration</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Hidden files often contain system settings and configuration data that control how your computer and programs work. These files are hidden to prevent accidental changes.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Protection from Users</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        By hiding important system files, the file system protects them from being accidentally deleted or modified, which could break your computer or programs.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Viewing Hidden Files</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        You can view hidden files by changing settings in your file browser, but be careful not to modify them unless you know what you're doing.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: File System in Action */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(inActionImage.fileName)}
+                    alt={inActionImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${inActionImage.fileName}. ${inActionImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">File System in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Every time you save a document, create a folder, or open a file, the file system is working behind the scenes, organizing your data and keeping everything in the right place for quick access.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6">
+                <div className="text-center space-y-2">
+                  <div className="text-4xl mb-4">📁</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Systems</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
+                  Understanding file systems helps you organize your files better, find what you need quickly, and keep your computer tidy. It also helps you understand where your files are stored, how to navigate folders, and why some files are hidden. This knowledge is essential for managing your computer effectively and troubleshooting file-related issues.
+                </p>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/2")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/4")}>
+                  Next Topic: File Extensions →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 4: File Extensions */}
+      {moduleId === 3 && module3Sections && topicId === "4" && (() => {
+        const {
+          text: textImage,
+          image: imageImage,
+          video: videoImage,
+          executable: executableImage,
+          inAction: inActionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.fileExtensions.images;
+
+        return (
+          <div id="topic-file-extensions" className="space-y-16">
+            {/* Section 1: What are File Extensions? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What are File Extensions?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    File extensions are the letters after the dot in a filename (like .txt, .jpg, .mp4). They tell your computer what type of file it is and which program should open it.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Identifies the file type</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Helps choose the right program</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Example: document.txt, photo.jpg</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(textImage.fileName)}
+                      alt={textImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${textImage.fileName}. ${textImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Why Extensions Matter - Centered + Grid + Image */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Identification</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Why Extensions Matter</h2>
+                  <p className="text-foreground/80">
+                    File extensions help your computer identify file types and choose the right program to open them. They make it easy to know what kind of file you're working with at a glance.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {module3Sections.fileExtensions.types.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-4xl mb-3">{type.icon}</div>
+                      <h3 className="text-lg font-semibold text-primary mb-1">{type.category}</h3>
+                      <p className="text-xs text-muted-foreground mb-2">{type.description}</p>
+                      <div className="space-y-1">
+                        {type.extensions.map((ext, eIndex) => (
+                          <div key={eIndex} className="text-xs text-foreground/80 font-mono">
+                            {ext}
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(imageImage.fileName)}
+                      alt={imageImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${imageImage.fileName}. ${imageImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: Text, Image, Video, Executable - Image Left + Text Right with Cards */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
+                    <img
+                      src={getImageUrl(videoImage.fileName)}
+                      alt={videoImage.alt}
+                      className="w-full h-full object-contain rounded-[28px]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${videoImage.fileName}. ${videoImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Type Categories</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">Text, Image, Video & Executable</h2>
+                  </div>
+                  <div className="space-y-4">
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Text Files</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Text files (.txt, .doc, .pdf) contain written content. They're opened by word processors, text editors, or PDF readers.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Image Files</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Image files (.jpg, .png, .gif) contain pictures and graphics. They're opened by image viewers, photo editors, or web browsers.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Video Files</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Video files (.mp4, .avi, .mov) contain moving pictures with sound. They're opened by video players or media software.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Executable Files</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Executable files (.exe, .app, .sh) are programs that run on your computer. They install or launch applications when opened.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: File Extensions in Action */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(inActionImage.fileName)}
+                    alt={inActionImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${inActionImage.fileName}. ${inActionImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">File Extensions in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Every time you double-click a file, your computer reads its extension and automatically opens it with the right program. This seamless process happens instantly, making your files easy to access and use.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6">
+                <div className="text-center space-y-2">
+                  <div className="text-4xl mb-4">📄</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Extensions</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
+                  Understanding file extensions helps you know what type of file you're working with and which program to use. It also helps you avoid opening the wrong file type, keeps your files organized, and makes it easier to share files with others. This knowledge is essential for managing your files effectively and troubleshooting file-related problems.
+                </p>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/3")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/5")}>
+                  Next Topic: File Management →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 5: File Management */}
+      {moduleId === 3 && module3Sections && topicId === "5" && (() => {
+        const {
+          create: createImage,
+          copyMove: copyMoveImage,
+          delete: deleteImage,
+          organize: organizeImage,
+          inAction: inActionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.fileManagement.images;
+
+        return (
+          <div id="topic-file-management" className="space-y-16">
+            {/* Section 1: What is File Management? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Operations</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What is File Management?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    File management is how you organize, move, copy, and delete files on your computer. Good file management helps you find your files quickly and keeps your computer organized.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Create, copy, and move files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Delete and restore files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Organize files into folders</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(createImage.fileName)}
+                      alt={createImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${createImage.fileName}. ${createImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Create, Copy, Move, Delete & Restore - Centered + Grid + Image */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Operations</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Create, Copy, Move, Delete & Restore</h2>
+                  <p className="text-foreground/80">
+                    These are the basic operations you use every day to manage your files. Understanding how each one works helps you organize your computer effectively.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {module3Sections.fileManagement.operations.map((operation, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-4xl mb-3">{operation.icon}</div>
+                      <h3 className="text-lg font-semibold text-primary mb-1">{operation.title}</h3>
+                      <p className="text-xs text-muted-foreground">{operation.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(copyMoveImage.fileName)}
+                      alt={copyMoveImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${copyMoveImage.fileName}. ${copyMoveImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: Organizing Files - Image Left + Text Right with Cards */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
+                    <img
+                      src={getImageUrl(organizeImage.fileName)}
+                      alt={organizeImage.alt}
+                      className="w-full h-full object-contain rounded-[28px]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${organizeImage.fileName}. ${organizeImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Organization</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">Organizing Files</h2>
+                  </div>
+                  <div className="space-y-4">
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Clear Folder Names</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Use descriptive names for your folders so you can quickly find what you need. For example, "School Work" or "Photos 2024" are better than "Folder1" or "Stuff".
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Group Related Files</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Put files that belong together in the same folder. Keep all your photos in a Photos folder, all documents in a Documents folder, and so on.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Keep Desktop Clean</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Don't put everything on your desktop. Use folders to organize files, and only keep shortcuts or frequently used items on the desktop for quick access.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: File Management in Action */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(inActionImage.fileName)}
+                    alt={inActionImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${inActionImage.fileName}. ${inActionImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">File Management in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Every time you create a new document, copy a file to backup, move files to organize them, or delete old files, you're using file management. Good file management keeps your computer organized and makes it easy to find what you need.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6">
+                <div className="text-center space-y-2">
+                  <div className="text-4xl mb-4">📂</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
+                  Good file management saves you time and keeps your computer organized. It helps you find files quickly, avoid losing important documents, and work more efficiently. Whether you're a student organizing school work, a professional managing projects, or just keeping personal files tidy, file management skills are essential for using your computer effectively.
+                </p>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/4")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/6")}>
+                  Next Topic: System Specifications →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 6: System Specifications */}
+      {moduleId === 3 && module3Sections && topicId === "6" && (() => {
+        const {
+          cpuRamStorage: cpuRamStorageImage,
+          gpu: gpuImage,
+          osVersion: osVersionImage,
+          inAction: inActionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.systemSpecifications.images;
+
+        return (
+          <div id="topic-system-specifications" className="space-y-16">
+            {/* Section 1: What are System Specs? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Computer Specs</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What are System Specifications?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    System specifications (specs) tell you what hardware and software your computer has. They help you understand your computer's capabilities and whether it can run certain programs.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">CPU speed and cores</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">RAM amount</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Storage capacity</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">GPU type and memory</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(cpuRamStorageImage.fileName)}
+                      alt={cpuRamStorageImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${cpuRamStorageImage.fileName}. ${cpuRamStorageImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: CPU, RAM, Storage, GPU, OS - Centered + Grid + Image */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">CPU, RAM, Storage, GPU & OS Version</h2>
+                  <p className="text-foreground/80">
+                    These are the main specifications that determine your computer's performance and capabilities. Understanding each one helps you know what your computer can do.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {module3Sections.systemSpecifications.components.map((component, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-4xl mb-3">{component.icon}</div>
+                      <h3 className="text-lg font-semibold text-primary mb-1">{component.title}</h3>
+                      <p className="text-xs text-muted-foreground">{component.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(cpuRamStorageImage.fileName)}
+                      alt={cpuRamStorageImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${cpuRamStorageImage.fileName}. ${cpuRamStorageImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: GPU & OS Version - Image Left + Text Right with Cards */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
+                    <img
+                      src={getImageUrl(gpuImage.fileName)}
+                      alt={gpuImage.alt}
+                      className="w-full h-full object-contain rounded-[28px]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${gpuImage.fileName}. ${gpuImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Graphics & Operating System</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">GPU & OS Version</h2>
+                  </div>
+                  <div className="space-y-4">
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">GPU (Graphics Processing Unit)</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        The GPU handles visual tasks like gaming, video editing, and 3D rendering. A better GPU means smoother graphics and faster video processing. It can be integrated (built into the CPU) or dedicated (separate card).
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">OS Version</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        The operating system version (like Windows 11, macOS Sonoma, or Android 14) tells you which features and updates are available. Newer versions often have better security and new features.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Checking Your Specs</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        You can check your system specifications in your computer's settings. This helps you know if your computer meets the requirements for software, games, or apps you want to use.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: System Specifications in Action */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(inActionImage.fileName)}
+                    alt={inActionImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${inActionImage.fileName}. ${inActionImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">System Specifications in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Every program you run, every game you play, every video you edit—your system specifications determine how well they perform. Understanding your specs helps you choose the right software and know when it's time to upgrade.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6">
+                <div className="text-center space-y-2">
+                  <div className="text-4xl mb-4">💻</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding System Specifications</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
+                  Knowing your system specifications helps you choose the right software, understand why some programs run slowly, and decide when it's time to upgrade your computer. Whether you're buying new software, troubleshooting performance issues, or planning an upgrade, understanding specs is essential for making informed decisions.
+                </p>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/5")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/7")}>
+                  Next Topic: Mobile = A Computer →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 7: Mobile = A Computer */}
+      {moduleId === 3 && module3Sections && topicId === "7" && (() => {
+        const {
+          architecture: architectureImage,
+          cpuGpu: cpuGpuImage,
+          sensors: sensorsImage,
+          inAction: inActionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.mobileComputer.images;
+
+        return (
+          <div id="topic-mobile-computer" className="space-y-16">
+            {/* Section 1: Mobile is a Computer - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile Computing</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Mobile = A Computer</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Your smartphone or tablet is actually a computer! It has the same basic components as a desktop computer, just in a smaller, portable form.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Has CPU, RAM, and storage</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Runs an operating system</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Can run apps and programs</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(architectureImage.fileName)}
+                      alt={architectureImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Mobile Architecture, CPU/GPU, Sensors - Centered + Grid + Image */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Mobile Architecture, CPU/GPU & Sensors</h2>
+                  <p className="text-foreground/80">
+                    Mobile devices have the same basic architecture as desktop computers, with mobile-specific components like touchscreens and sensors that make them portable and interactive.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {module3Sections.mobileComputer.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-4xl mb-3">{concept.icon}</div>
+                      <h3 className="text-lg font-semibold text-primary mb-1">{concept.title}</h3>
+                      <p className="text-xs text-muted-foreground">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(architectureImage.fileName)}
+                      alt={architectureImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: Mobile CPU/GPU & Sensors - Image Left + Text Right with Cards */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
+                    <img
+                      src={getImageUrl(cpuGpuImage.fileName)}
+                      alt={cpuGpuImage.alt}
+                      className="w-full h-full object-contain rounded-[28px]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${cpuGpuImage.fileName}. ${cpuGpuImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile Processing</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">Mobile CPU/GPU & Sensors</h2>
+                  </div>
+                  <div className="space-y-4">
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Mobile CPU/GPU</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Mobile processors are smaller and more power-efficient than desktop CPUs, but they work the same way. They process instructions, run apps, and handle graphics. Mobile GPUs are often integrated with the CPU to save space and power.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Sensors</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Mobile devices have special sensors like accelerometers, gyroscopes, and proximity sensors that desktop computers don't have. These sensors enable features like screen rotation, step counting, and automatic screen dimming.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Touch Interface</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Mobile devices use touchscreens instead of keyboards and mice. The touchscreen acts as both an input device (you touch it) and an output device (it displays information), making it an I/O device.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: Mobile Device in Action */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(inActionImage.fileName)}
+                    alt={inActionImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${inActionImage.fileName}. ${inActionImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">Mobile Device in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Every time you open an app, take a photo, play a game, or browse the web on your phone, you're using a computer. Your mobile device processes data, runs programs, and manages resources just like a desktop computer, but in a portable, touch-friendly form.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6">
+                <div className="text-center space-y-2">
+                  <div className="text-4xl mb-4">📱</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Mobile Devices</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
+                  Understanding that mobile devices are computers helps you see how powerful they are and why they can do so many things. It also helps you make better choices about which device to use for different tasks, understand why some apps work better on mobile than desktop, and appreciate the technology in your pocket.
+                </p>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/6")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/8")}>
+                  Next Topic: Sensors in Devices →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 8: Sensors in Devices */}
+      {moduleId === 3 && module3Sections && topicId === "8" && (() => {
+        const {
+          accelerometer: accelerometerImage,
+          gyroscope: gyroscopeImage,
+          proximity: proximityImage,
+          fingerprint: fingerprintImage,
+          inAction: inActionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.sensorsDevices.images;
+
+        return (
+          <div id="topic-sensors-devices" className="space-y-16">
+            {/* Section 1: What are Sensors? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Device Sensors</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What are Sensors?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Sensors are special components that detect changes in the environment. They help your device understand its position, movement, and surroundings.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Detect motion and orientation</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Sense nearby objects</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Enable security features</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(accelerometerImage.fileName)}
+                      alt={accelerometerImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${accelerometerImage.fileName}. ${accelerometerImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Accelerometer, Gyroscope, Proximity, Fingerprint - Centered + Grid + Image */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Common Sensors</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Accelerometer, Gyroscope, Proximity & Fingerprint</h2>
+                  <p className="text-foreground/80">
+                    Modern devices have multiple sensors that work together to provide a better user experience. Each sensor detects different types of information about your device and its environment.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {module3Sections.sensorsDevices.sensors.map((sensor, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-4xl mb-3">{sensor.icon}</div>
+                      <h3 className="text-lg font-semibold text-primary mb-1">{sensor.name}</h3>
+                      <p className="text-xs text-muted-foreground">{sensor.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(gyroscopeImage.fileName)}
+                      alt={gyroscopeImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${gyroscopeImage.fileName}. ${gyroscopeImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 3: How Sensors Work - Image Left + Text Right with Cards */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
+                    <img
+                      src={getImageUrl(proximityImage.fileName)}
+                      alt={proximityImage.alt}
+                      className="w-full h-full object-contain rounded-[28px]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${proximityImage.fileName}. ${proximityImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Sensor Functions</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">How Sensors Work</h2>
+                  </div>
+                  <div className="space-y-4">
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Motion Detection</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Accelerometers detect linear motion (like shaking or tilting), while gyroscopes detect rotation. Together, they enable screen rotation, step counting, and motion-controlled games.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Proximity Sensing</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Proximity sensors detect when objects are close to your device. They're used to turn off the screen during phone calls to prevent accidental touches and save battery.
+                      </p>
+                    </Card>
+                    <Card className="p-6 border border-border/70">
+                      <h3 className="text-xl font-semibold text-primary mb-2">Biometric Security</h3>
+                      <p className="text-foreground/80 leading-relaxed text-sm">
+                        Fingerprint sensors scan your fingerprint to unlock your device and authenticate payments. They use unique patterns in your fingerprint to verify your identity securely.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: Sensors in Action */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(inActionImage.fileName)}
+                    alt={inActionImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${inActionImage.fileName}. ${inActionImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">Sensors in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Every time you rotate your phone and the screen flips, unlock your device with your fingerprint, or make a call and the screen turns off automatically, sensors are working behind the scenes. They make your device smart, responsive, and secure.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6">
+                <div className="text-center space-y-2">
+                  <div className="text-4xl mb-4">📡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Sensors</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center max-w-2xl mx-auto">
+                  Understanding sensors helps you see how your device interacts with the world around it. It also helps you understand why certain features work the way they do, how to use them better, and why some apps require specific sensors to function. This knowledge is essential for getting the most out of your mobile device.
+                </p>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/7")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/9")}>
+                  Next Topic: What is a Program? →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 9: What is a Program? */}
+      {moduleId === 3 && module3Sections && topicId === "9" && (() => {
+        const {
+          code: codeImage,
+          software: softwareImage,
+          execution: executionImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.whatIsProgram.images;
+
+        return (
+          <div id="topic-what-is-program" className="space-y-16">
+            {/* Section 1: What is a Program? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Programming Basics</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What is a Program?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module3Sections.whatIsProgram.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Code is written instructions in a programming language</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Software is the compiled, executable version of code</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Execution is when the program runs and performs tasks</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(codeImage.fileName)}
+                      alt={codeImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${codeImage.fileName}. ${codeImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Code → Software & Program Execution - Centered with 3 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Program Lifecycle</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Code → Software & Program Execution</h2>
+                  <p className="text-foreground/80">
+                    Understanding how code becomes software and how programs execute helps you appreciate how applications work and how developers create the software you use every day.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module3Sections.whatIsProgram.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(softwareImage.fileName)}
+                      alt={softwareImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${softwareImage.fileName}. ${softwareImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💻</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Programs</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding what programs are helps you see how software works, why some programs need updates, and how developers create the applications you use. This knowledge is essential for troubleshooting software issues, understanding how computers work, and appreciating the technology around you.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/8")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/10")}>
+                  Next Topic: What is Data? →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 3 Topic 10: What is Data? */}
+      {moduleId === 3 && module3Sections && topicId === "10" && (() => {
+        const {
+          text: textImage,
+          numbers: numbersImage,
+          binary: binaryImage,
+          whyMatters: whyMattersImage
+        } = module3Sections.whatIsData.images;
+
+        return (
+          <div id="topic-what-is-data" className="space-y-16">
+            {/* Section 1: What is Data? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Data Fundamentals</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What is Data?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module3Sections.whatIsData.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Data is information stored in a computer</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Can be text, numbers, images, videos, or files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Computers process data using binary code (0s and 1s)</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(textImage.fileName)}
+                      alt={textImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${textImage.fileName}. ${textImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Data Types & How Machines Read Data - Centered with 3 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Data Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Data Types & How Machines Read Data</h2>
+                  <p className="text-foreground/80">
+                    Data comes in different types, but computers convert everything to binary (0s and 1s) to process it. Understanding data types helps you see how information is stored and used.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module3Sections.whatIsData.types.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{type.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(binaryImage.fileName)}
+                      alt={binaryImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${binaryImage.fileName}. ${binaryImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📊</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Data</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding what data is helps you see how information is stored, processed, and used by computers. This knowledge is essential for managing files, understanding how programs work with data, and appreciating how computers handle all the information around you.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/3/topic/9")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" disabled>
+                  End of Module 3
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 1: Inside a Computer */}
+      {moduleId === 4 && module4Sections && topicId === "1" && (() => {
+        const {
+          overview: overviewImage,
+          components: componentsImage,
+          whyMatters: whyMattersImage
+        } = module4Sections.insideComputer.images;
+
+        return (
+          <div id="topic-inside-computer" className="space-y-16">
+            {/* Section 1: What is Inside a Computer? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Computer Anatomy</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Inside a Computer</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module4Sections.insideComputer.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Motherboard connects all components</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Power connectors supply electricity to parts</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Internal wiring carries data and power signals</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Component placement affects cooling and accessibility</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Key Components - Centered with 4 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Internal Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Motherboard Layout, Power Connectors, Internal Wiring & Component Placement</h2>
+                  <p className="text-foreground/80">
+                    Understanding how components are arranged and connected helps you see how a computer works and how to upgrade or troubleshoot.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.insideComputer.components.map((component, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{component.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{component.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{component.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(componentsImage.fileName)}
+                      alt={componentsImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${componentsImage.fileName}. ${componentsImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🖥️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Computer Internals</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding what's inside a computer helps you upgrade components, troubleshoot problems, and appreciate how all parts work together. This knowledge is essential for building, maintaining, and fixing computers.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/2")}>
+                  Next Topic: CPU Architecture →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 2: CPU Architecture */}
+      {moduleId === 4 && module4Sections && topicId === "2" && (() => {
+        const {
+          overview: overviewImage,
+          architecture: architectureImage,
+          whyMatters: whyMattersImage
+        } = module4Sections.cpuArchitecture.images;
+
+        return (
+          <div id="topic-cpu-architecture" className="space-y-16">
+            {/* Section 1: What is CPU Architecture? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">CPU Fundamentals</p>
+                  <h2 className="text-3xl font-semibold text-foreground">CPU Architecture</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module4Sections.cpuArchitecture.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Cores and threads handle tasks</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Cache levels store frequently used data</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Clock speed determines processing speed</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Instruction cycle executes commands</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Key CPU Architecture Concepts - Centered with 4 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">CPU Architecture Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Cores & Threads, Cache Levels, Clock Speed & Instruction Cycle</h2>
+                  <p className="text-foreground/80">
+                    Understanding CPU architecture helps you choose the right processor and optimize performance for your needs.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.cpuArchitecture.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(architectureImage.fileName)}
+                      alt={architectureImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚙️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding CPU Architecture</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding CPU architecture helps you choose the right processor, optimize performance, and troubleshoot issues. This knowledge is essential for building computers, upgrading systems, and getting the best performance for your tasks.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/1")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/3")}>
+                  Next Topic: GPU Architecture →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 3: GPU Architecture */}
+      {moduleId === 4 && module4Sections && topicId === "3" && (() => {
+        const {
+          overview: overviewImage,
+          architecture: architectureImage,
+          whyMatters: whyMattersImage
+        } = module4Sections.gpuArchitecture.images;
+
+        return (
+          <div id="topic-gpu-architecture" className="space-y-16">
+            {/* Section 1: What is GPU Architecture? - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">GPU Fundamentals</p>
+                  <h2 className="text-3xl font-semibold text-foreground">GPU Architecture</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module4Sections.gpuArchitecture.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">CUDA/Tensor cores for parallel processing</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">VRAM stores graphics data</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Integrated vs Dedicated GPUs</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">GPU rendering creates visuals</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Key GPU Architecture Concepts - Centered with 4 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">GPU Architecture Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">CUDA/Tensor Cores, VRAM, Integrated vs Dedicated & GPU Rendering</h2>
+                  <p className="text-foreground/80">
+                    Understanding GPU architecture helps you choose the right graphics card for gaming, video editing, and visual processing.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.gpuArchitecture.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(architectureImage.fileName)}
+                      alt={architectureImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🎮</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding GPU Architecture</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding GPU architecture helps you choose the right graphics card, optimize gaming and video editing performance, and troubleshoot graphics issues. This knowledge is essential for building gaming PCs, workstations, and getting the best visual experience.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/2")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/4")}>
+                  Next Topic: RAM Architecture →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 4: RAM Architecture */}
+      {moduleId === 4 && module4Sections && topicId === "4" && (() => {
+        const {
+          overview: overviewImage,
+          architecture: architectureImage,
+          whyMatters: whyMattersImage
+        } = module4Sections.ramArchitecture.images;
+
+        return (
+          <div id="topic-ram-architecture" className="space-y-16">
+            {/* Section 1: RAM Architecture Overview - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Memory Architecture</p>
+                  <h2 className="text-3xl font-semibold text-foreground">RAM Architecture</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module4Sections.ramArchitecture.intro}
+                  </p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Key RAM Architecture Concepts - Centered with 4 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">RAM Specifications</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">DDR Generations, Frequency, Dual-Channel & Latency</h2>
+                  <p className="text-foreground/80">
+                    Understanding RAM architecture helps you choose the right memory for your system and optimize performance.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.ramArchitecture.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(architectureImage.fileName)}
+                      alt={architectureImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding RAM Architecture</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding RAM architecture helps you choose the right memory modules, optimize system performance, and ensure compatibility with your motherboard. This knowledge is essential for building and upgrading computers.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/3")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/5")}>
+                  Next Topic: Storage Connections →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 5: Storage Connections */}
+      {moduleId === 4 && module4Sections && topicId === "5" && (() => {
+        const {
+          overview: overviewImage,
+          architecture: architectureImage,
+          whyMatters: whyMattersImage
+        } = module4Sections.storageConnections.images;
+
+        return (
+          <div id="topic-storage-connections" className="space-y-16">
+            {/* Section 1: Storage Connections Overview - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Storage Interfaces</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Storage Connections</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module4Sections.storageConnections.intro}
+                  </p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Key Storage Connection Concepts - Centered with 4 Cards */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Connection Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">SATA, NVMe, PCIe Lanes & Data Flow</h2>
+                  <p className="text-foreground/80">
+                    Understanding storage connections helps you choose the right interface and maximize performance.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.storageConnections.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(architectureImage.fileName)}
+                      alt={architectureImage.alt}
+                      className="w-full h-full object-contain p-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Storage Connections</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding storage connections helps you choose the right storage solution, maximize data transfer speeds, and ensure compatibility with your motherboard. This knowledge is essential for building fast and efficient systems.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/4")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/6")}>
+                  Next Topic: Cooling Systems →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 6: Cooling Systems */}
+      {moduleId === 4 && module4Sections && topicId === "6" && (() => {
+        const {
+          overview: overviewImage,
+          architecture: architectureImage,
+          whyMatters: whyMattersImage
+        } = module4Sections.coolingSystems.images;
+
+        return (
+          <div id="topic-cooling-systems" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Thermal Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Cooling Systems</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.coolingSystems.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Cooling Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Heat Sinks, Fans, Thermal Paste & Liquid Cooling</h2>
+                  <p className="text-foreground/80">Understanding cooling systems helps you maintain optimal temperatures and extend component lifespan.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.coolingSystems.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">❄️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Cooling Systems</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding cooling systems helps you prevent overheating, maintain optimal performance, and extend the lifespan of your components. This knowledge is essential for building and maintaining reliable computers.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/5")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/7")}>Next Topic: Power Supply Unit (PSU) →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 7: Power Supply Unit (PSU) */}
+      {moduleId === 4 && module4Sections && topicId === "7" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module4Sections.psu.images;
+        return (
+          <div id="topic-psu" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Power Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Power Supply Unit (PSU)</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.psu.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">PSU Specifications</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Watt Ratings, Efficiency, Cables & Power Distribution</h2>
+                  <p className="text-foreground/80">Understanding PSU specifications helps you choose the right power supply for your system.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.psu.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding PSU</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding PSU specifications helps you choose the right power supply, ensure stable system operation, and optimize energy efficiency. This knowledge is essential for building reliable and efficient computers.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/6")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/8")}>Next Topic: BIOS / UEFI →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 8: BIOS / UEFI */}
+      {moduleId === 4 && module4Sections && topicId === "8" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module4Sections.biosUefi.images;
+        return (
+          <div id="topic-bios-uefi" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Firmware</p>
+                  <h2 className="text-3xl font-semibold text-foreground">BIOS / UEFI</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.biosUefi.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">BIOS/UEFI Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Boot Order, Security Options & BIOS Updates</h2>
+                  <p className="text-foreground/80">Understanding BIOS/UEFI helps you configure and maintain your system.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.biosUefi.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🚀</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding BIOS/UEFI</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding BIOS/UEFI helps you configure boot settings, enhance security, and maintain your system. This knowledge is essential for troubleshooting and optimizing your computer.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/7")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/9")}>Next Topic: Expansion Cards →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 9: Expansion Cards */}
+      {moduleId === 4 && module4Sections && topicId === "9" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module4Sections.expansionCards.images;
+        return (
+          <div id="topic-expansion-cards" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Expansion</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Expansion Cards</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.expansionCards.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Card Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">PCIe Cards, Wi-Fi Cards, GPUs & Capture Cards</h2>
+                  <p className="text-foreground/80">Understanding expansion cards helps you expand your system's capabilities.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.expansionCards.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔌</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Expansion Cards</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding expansion cards helps you add functionality to your computer, upgrade graphics, add networking, and enhance capabilities. This knowledge is essential for customizing and upgrading your system.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/8")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/10")}>Next Topic: Peripheral Devices →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 10: Peripheral Devices */}
+      {moduleId === 4 && module4Sections && topicId === "10" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module4Sections.peripheralDevices.images;
+        return (
+          <div id="topic-peripheral-devices" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">External Devices</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Peripheral Devices</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.peripheralDevices.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Device Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Wired, Wireless, Dongles & Drivers</h2>
+                  <p className="text-foreground/80">Understanding peripheral devices helps you set up and use external components effectively.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.peripheralDevices.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🖱️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Peripheral Devices</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding peripheral devices helps you connect and use external components, choose the right devices for your needs, and troubleshoot connection issues. This knowledge is essential for a complete computing setup.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/9")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/11")}>Next Topic: Display Technology →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 11: Display Technology */}
+      {moduleId === 4 && module4Sections && topicId === "11" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module4Sections.displayTechnology.images;
+        return (
+          <div id="topic-display-technology" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Screen Technology</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Display Technology</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.displayTechnology.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Display Specifications</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">LCD vs LED vs OLED, Refresh Rate, Resolution & Color Accuracy</h2>
+                  <p className="text-foreground/80">Understanding display technology helps you choose the right monitor for your needs.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.displayTechnology.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🖥️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Display Technology</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding display technology helps you choose the right monitor, optimize visual quality, and match display capabilities to your needs. This knowledge is essential for gaming, content creation, and professional work.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/10")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/12")}>Next Topic: Printers & Scanners →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 4 Topic 12: Printers & Scanners */}
+      {moduleId === 4 && module4Sections && topicId === "12" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module4Sections.printersScanners.images;
+        return (
+          <div id="topic-printers-scanners" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Document Devices</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Printers & Scanners</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module4Sections.printersScanners.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Printer & Scanner Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Inkjet vs Laser, DPI, Scanner Operation & Troubleshooting</h2>
+                  <p className="text-foreground/80">Understanding printers and scanners helps you choose and maintain these devices.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module4Sections.printersScanners.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🖨️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Printers & Scanners</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding printers and scanners helps you choose the right devices, maintain print quality, and troubleshoot common problems. This knowledge is essential for document management and professional printing needs.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/11")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
 
       {/* End of Module Content */}
     </div>

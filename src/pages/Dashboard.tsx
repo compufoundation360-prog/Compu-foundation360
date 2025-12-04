@@ -118,15 +118,15 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => navigate("/settings")}
-                className="flex items-center gap-2"
-              >
-                <SettingsIcon className="h-4 w-4" />
-                <span className="hidden sm:inline">Settings</span>
-              </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate("/settings")}
+              className="flex items-center gap-2"
+            >
+              <SettingsIcon className="h-4 w-4" />
+              <span className="hidden sm:inline">Settings</span>
+            </Button>
             </div>
           </div>
         </div>
@@ -139,8 +139,8 @@ const Dashboard = () => {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-2">
-                  Welcome back, Learner! 👋
-                </h2>
+                Welcome back, Learner! 👋
+              </h2>
                 <p className="text-muted-foreground">
                   Continue your learning journey
                 </p>
@@ -259,10 +259,10 @@ const Dashboard = () => {
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-green-500" />
                 <span className="text-xs text-muted-foreground">Study Hours</span>
-              </div>
-            </div>
+          </div>
+        </div>
           </Card>
-        </section>
+      </section>
 
         {/* SECTION 4 & 5: Recommendations & Simulator Shortcuts */}
         <section className="grid lg:grid-cols-2 gap-6">
@@ -319,7 +319,7 @@ const Dashboard = () => {
                           style={{ width: `${strength.score}%` }}
                         />
                       </div>
-                    </div>
+                </div>
                   ))}
                 </div>
               </div>
@@ -366,10 +366,10 @@ const Dashboard = () => {
               <div className="text-center py-8 text-muted-foreground">
                 <Gamepad2 className="h-12 w-12 mx-auto mb-2 opacity-50" />
                 <p className="text-sm">No simulators available yet</p>
-              </div>
+          </div>
             )}
-          </Card>
-        </section>
+        </Card>
+      </section>
 
         {/* SECTION 6: Recently Used */}
         <section>
@@ -410,10 +410,10 @@ const Dashboard = () => {
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                 </button>
-              ))}
-            </div>
+          ))}
+        </div>
           </Card>
-        </section>
+      </section>
       </div>
     </div>
   );

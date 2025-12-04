@@ -10,7 +10,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="flex flex-col">
+      <SidebarInset className="flex flex-col" style={{ overscrollBehavior: 'contain' }}>
         {children}
       </SidebarInset>
     </SidebarProvider>
