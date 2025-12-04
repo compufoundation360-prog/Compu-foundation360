@@ -750,29 +750,31 @@ export function AppSidebar() {
                               </SidebarMenuButton>
                             </CollapsibleTrigger>
                             <CollapsibleContent className="pl-4 pt-1 space-y-1 overflow-hidden">
-                              {topics.map((topic, index) => {
-                                // Extract topic number from topic.id (e.g., "m1-t1" -> 1, "m2-t1" -> 1)
-                                const topicNumber = index + 1;
-                                const topicPath = `${module.path}/topic/${topicNumber}`;
-                                const isTopicActive = location.pathname === topicPath;
-                      return (
-                                  <SidebarMenuItem key={topic.id}>
-                              <SidebarMenuButton
-                                      onClick={() => navigate(topicPath)}
-                                      isActive={isTopicActive}
-                                className={cn(
-                                        "w-full px-3 py-2 gap-2 rounded-md text-left transition-all duration-200",
-                                        "hover:bg-sidebar-accent/60 hover:translate-x-1",
-                                        isTopicActive && "bg-primary/10 text-primary shadow-sm"
-                                      )}
-                                    >
-                                      <div className="flex flex-col">
-                                        <span className="text-xs font-semibold">{topic.title}</span>
-                                      </div>
+                              <SidebarMenu>
+                                {topics.map((topic, index) => {
+                                  // Extract topic number from topic.id (e.g., "m1-t1" -> 1, "m2-t1" -> 1)
+                                  const topicNumber = index + 1;
+                                  const topicPath = `${module.path}/topic/${topicNumber}`;
+                                  const isTopicActive = location.pathname === topicPath;
+                                  return (
+                                    <SidebarMenuItem key={topic.id}>
+                                <SidebarMenuButton
+                                        onClick={() => navigate(topicPath)}
+                                        isActive={isTopicActive}
+                                  className={cn(
+                                          "w-full px-3 py-2 gap-2 rounded-md text-left transition-all duration-200",
+                                          "hover:bg-sidebar-accent/60 hover:translate-x-1",
+                                          isTopicActive && "bg-primary/10 text-primary shadow-sm"
+                                        )}
+                                      >
+                                        <div className="flex flex-col">
+                                          <span className="text-xs font-semibold">{topic.title}</span>
+                                        </div>
                                 </SidebarMenuButton>
                               </SidebarMenuItem>
-                                );
-                              })}
+                                  );
+                                })}
+                              </SidebarMenu>
                             </CollapsibleContent>
                           </SidebarMenuItem>
                         </Collapsible>

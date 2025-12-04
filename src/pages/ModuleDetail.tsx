@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+﻿import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArrowLeft, Cog } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -2366,13 +2366,1362 @@ const ModuleDetail = () => {
     };
   };
 
-  // Get sections based on module ID - Modules 1, 2, 3, and 4 are supported
-  const sections = moduleId === 1 ? getModule1Sections() : moduleId === 2 ? getModule2Sections() : moduleId === 3 ? getModule3Sections() : moduleId === 4 ? getModule4Sections() : null;
+  // Module 5 specific content sections
+  const getModule5Sections = () => {
+    return {
+      storageConcepts: {
+        title: "Storage Concepts",
+        intro: "Understanding different storage types and their characteristics helps you make informed decisions about data management. Storage can be volatile (temporary) or non-volatile (permanent), each serving different purposes in your computer system.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-storage-concepts-hero.jpg",
+            alt: "Storage hierarchy visualization showing RAM, Cache, SSD, and HDD",
+            brief: "Create a visual hierarchy showing different storage types: RAM at top (fastest, volatile), cache, SSD (fast, non-volatile), HDD (slower, non-volatile). Show speed and capacity differences. Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m5-storage-concepts-overview.jpg",
+            alt: "Storage hierarchy diagram showing RAM → Cache → SSD → HDD",
+            brief: "Show a storage hierarchy diagram: vertical or horizontal flow showing RAM (fastest, smallest) → Cache → SSD → HDD (slowest, largest). Include speed indicators and capacity labels. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m5-storage-concepts-comparison.jpg",
+            alt: "Storage speed vs capacity comparison chart",
+            brief: "Create a comparison chart showing storage speed vs capacity: RAM (fast, small), Cache (very fast, tiny), SSD (fast, medium), HDD (slow, large). Use visual indicators. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-storage-concepts-why-matters.jpg",
+            alt: "Real-world storage decision scenario",
+            brief: "Show a real-world storage decision scenario: different use cases (gaming, work, backup) with recommended storage types. Clean, modern aesthetic."
+          }
+        },
+        storageTypes: [
+          {
+            name: "Volatile",
+            icon: "⚡",
+            description: "Temporary storage that clears when power is off. Fast access for active data. Examples: RAM, Cache."
+          },
+          {
+            name: "Non-Volatile",
+            icon: "💾",
+            description: "Permanent storage that keeps data when power is off. Persistent storage for files. Examples: HDD, SSD."
+          },
+          {
+            name: "Hybrid",
+            icon: "🔄",
+            description: "Combines both volatile and non-volatile storage for optimal performance. Uses fast cache with permanent storage."
+          }
+        ]
+      },
+      hddDeepDive: {
+        title: "HDD - Hard Disk Drive",
+        intro: "Hard Disk Drives use spinning magnetic platters to store data. They offer large capacity at affordable prices, making them ideal for bulk storage, backups, and archives. Understanding HDD technology helps you make informed storage decisions.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-hdd-hero.jpg",
+            alt: "3.5\" HDD external view with labels, SATA ports, and power connector",
+            brief: "Create a visual of a 3.5\" HDD: show the external view with labels, SATA ports, and power connector. Include capacity indicators. Use a clean tech aesthetic with soft lighting."
+          },
+          overview: {
+            fileName: "module-media/m5-hdd-overview.jpg",
+            alt: "HDD external view showing 3.5\" drive with labels and ports",
+            brief: "Show a 3.5\" HDD from the outside: visible labels, SATA data port, power connector. Include subtle labels for key parts. Background: clean tech aesthetic."
+          },
+          internal: {
+            fileName: "module-media/m5-hdd-internal.jpg",
+            alt: "HDD cross-section diagram showing platters, read/write heads, actuator arm, spindle, and motor",
+            brief: "Create a cross-section diagram of HDD internals: show platters (magnetic disks), read/write heads, actuator arm, spindle (rotation axis), and motor. Include labels and annotations. Educational diagram style."
+          },
+          useCases: {
+            fileName: "module-media/m5-hdd-use-cases.jpg",
+            alt: "HDD use cases showing desktop computers, servers, external backup drives, NAS, and gaming consoles",
+            brief: "Show HDDs in different applications: desktop computer, server rack, external backup drive, NAS device, gaming console. Arrange them in a flowing layout. Background: tech gradient."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-hdd-why-matters.jpg",
+            alt: "HDD vs SSD comparison for different use cases",
+            brief: "Show HDD vs SSD comparison for different use cases: when to use HDD (bulk storage, backups) vs SSD (OS, apps). Clean, modern aesthetic."
+          }
+        },
+        components: [
+          {
+            name: "Platters",
+            icon: "📀",
+            description: "Magnetic disks that store data. Multiple platters increase capacity. Data is written and read from both sides of each platter."
+          },
+          {
+            name: "Read/Write Heads",
+            icon: "🎯",
+            description: "Tiny electromagnets that read and write data on platters. They float just nanometers above the spinning platters without touching them."
+          },
+          {
+            name: "Actuator Arm",
+            icon: "⚙️",
+            description: "Mechanical arm that moves the read/write heads across the platters. Allows heads to access different tracks and sectors on the disk."
+          },
+          {
+            name: "Spindle",
+            icon: "🔄",
+            description: "Central axis that rotates the platters at high speed (5400-7200 RPM). Faster rotation means faster data access but more power consumption."
+          }
+        ],
+        advantages: [
+          "Large Capacity - Up to 20TB+ available",
+          "Affordable - Cost per GB is very low",
+          "Proven Technology - Reliable for decades",
+          "Good for Archives - Long-term storage solution"
+        ],
+        disadvantages: [
+          "Slower than SSD - Mechanical parts limit speed",
+          "Moving Parts - More wear and potential failure",
+          "More Fragile - Sensitive to movement and shocks",
+          "Higher Power Usage - Motor requires more energy",
+          "Noise and Vibration - Spinning platters create sound",
+          "Slower Boot Times - Takes longer to start up",
+          "Not Ideal for Laptops - Movement can damage drives"
+        ],
+        useCases: [
+          "Desktop Computers - Primary storage for many desktops",
+          "Servers & Data Centers - Bulk storage for servers",
+          "External Backup Drives - Portable backup solutions",
+          "Network Attached Storage (NAS) - Shared storage for networks",
+          "Gaming Consoles - Storage for games and media"
+        ]
+      },
+      ssdDeepDive: {
+        title: "SSD - Solid State Drive",
+        intro: "Solid State Drives (SSD) use flash memory chips instead of spinning disks. They're faster, quieter, and more reliable than HDDs, making them ideal for operating systems, applications, and frequently accessed data. Understanding SSD technology helps you optimize system performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-ssd-hero.jpg",
+            alt: "SSD overview showing 2.5\" SATA SSD and M.2 NVMe SSD",
+            brief: "Create a visual showing both SSD types: 2.5\" SATA SSD and M.2 NVMe SSD side by side. Show the compact form factors and connection types. Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m5-ssd-overview.jpg",
+            alt: "SSD external view showing 2.5\" SATA SSD and M.2 NVMe SSD",
+            brief: "Show both SSD types from external view: 2.5\" SATA SSD with visible SATA connector, and M.2 NVMe SSD showing the compact form factor. Include labels. Background: clean tech aesthetic."
+          },
+          technology: {
+            fileName: "module-media/m5-ssd-technology.jpg",
+            alt: "SSD internal structure showing NAND flash memory cells",
+            brief: "Show SSD internal structure: NAND flash memory cells, controller chip, and how data is stored electronically. Include labels. Educational diagram style."
+          },
+          speedComparison: {
+            fileName: "module-media/m5-ssd-speed-comparison.jpg",
+            alt: "Speed comparison chart showing SSD vs HDD performance",
+            brief: "Create a speed comparison chart: bar chart showing SSD vs HDD speeds for boot time, file read, and access time. Include visual indicators. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-ssd-why-matters.jpg",
+            alt: "SSD performance benefits visualization",
+            brief: "Show SSD performance benefits: fast boot times, quick file access, smooth application loading. Clean, modern aesthetic."
+          }
+        },
+        advantages: [
+          {
+            name: "Fast",
+            icon: "⚡",
+            description: "Boot in 10-15 sec, 500+ MB/s read speed. Much faster than HDD for all operations."
+          },
+          {
+            name: "Quiet",
+            icon: "🔇",
+            description: "No moving parts = silent operation. Perfect for quiet work environments."
+          },
+          {
+            name: "Durable",
+            icon: "💪",
+            description: "Shock resistant, long lifespan. Ideal for laptops and portable devices."
+          },
+          {
+            name: "Energy Efficient",
+            icon: "🔋",
+            description: "Lower power consumption than HDD. Extends battery life in laptops."
+          }
+        ],
+        speedDetails: [
+          "Boot Time: 10-15 sec (SSD) vs 30-60 sec (HDD)",
+          "File Read: 500+ MB/s (SSD) vs 100-150 MB/s (HDD)",
+          "No mechanical delay - Instant access",
+          "Perfect for operating systems and frequently used apps"
+        ]
+      },
+      nvmeTechnology: {
+        title: "NVMe Technology",
+        intro: "NVMe (Non-Volatile Memory Express) is a high-speed interface designed specifically for SSDs. It uses PCIe lanes directly, bypassing the older SATA interface, offering speeds up to 3,500+ MB/s. Understanding NVMe helps you choose the fastest storage solution.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-nvme-hero.jpg",
+            alt: "NVMe SSD diagram showing M.2 form factor and PCIe connection",
+            brief: "Create an NVMe SSD diagram: show M.2 form factor, PCIe connection, and how it bypasses SATA. Include labels for key parts. Modern tech diagram style."
+          },
+          overview: {
+            fileName: "module-media/m5-nvme-overview.jpg",
+            alt: "M.2 NVMe SSD with visible PCIe connection",
+            brief: "Show M.2 NVMe SSD with visible PCIe connection slot on motherboard. Include labels showing PCIe lanes. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m5-nvme-architecture.jpg",
+            alt: "NVMe architecture diagram showing direct PCIe connection",
+            brief: "Show NVMe architecture diagram: direct PCIe connection to CPU, bypassing SATA controller. Include data flow arrows. Educational diagram style."
+          },
+          speedComparison: {
+            fileName: "module-media/m5-nvme-speed-comparison.jpg",
+            alt: "Speed comparison: SATA SSD vs NVMe SSD",
+            brief: "Create speed comparison: SATA SSD (~550 MB/s) vs NVMe SSD (3,000+ MB/s). Show dramatic speed difference. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-nvme-why-matters.jpg",
+            alt: "NVMe use cases for gaming and professional work",
+            brief: "Show NVMe use cases: gaming (fast loading), video editing (quick file access), professional work. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "PCIe Connection",
+            icon: "🔌",
+            description: "NVMe uses PCIe lanes directly, providing much higher bandwidth than SATA. PCIe 3.0 offers ~1GB/s per lane, PCIe 4.0 offers ~2GB/s per lane."
+          },
+          {
+            name: "M.2 Form Factor",
+            icon: "📏",
+            description: "M.2 is a compact form factor (like a stick of gum) that fits directly on the motherboard. No cables needed, saves space."
+          },
+          {
+            name: "Speed Advantage",
+            icon: "⚡",
+            description: "NVMe SSDs are 5-6x faster than SATA SSDs. Perfect for gaming, video editing, and professional applications that need fast data access."
+          },
+          {
+            name: "Low Latency",
+            icon: "🎯",
+            description: "Direct PCIe connection reduces latency significantly. Files open instantly, applications launch faster, system feels more responsive."
+          }
+        ],
+        speedDetails: {
+          sata: "SATA SSD: ~550 MB/s",
+          nvme: "NVMe SSD: 3,000+ MB/s (PCIe 3.0) or 7,000+ MB/s (PCIe 4.0)"
+        }
+      },
+      storageFileSystems: {
+        title: "Storage File Systems",
+        intro: "File systems organize how data is stored and retrieved on storage devices. Different file systems (NTFS, FAT32, exFAT, ext4) have different features, compatibility, and limitations. Understanding file systems helps you format drives correctly and manage data effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-filesystems-hero.jpg",
+            alt: "File systems comparison visualization",
+            brief: "Create a visual showing different file systems: NTFS, FAT32, exFAT, ext4 with their logos/icons. Show compatibility indicators. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-filesystems-overview.jpg",
+            alt: "File system structure diagram",
+            brief: "Show a file system structure diagram: how files are organized in directories, file allocation table, and data clusters. Educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m5-filesystems-comparison.jpg",
+            alt: "File systems feature comparison table",
+            brief: "Create a comparison table showing NTFS, FAT32, exFAT features: max file size, compatibility, use cases. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-filesystems-why-matters.jpg",
+            alt: "File system selection for different devices",
+            brief: "Show file system selection scenarios: Windows (NTFS), USB drives (exFAT), Linux (ext4). Clean, modern aesthetic."
+          }
+        },
+        fileSystems: [
+          {
+            name: "NTFS",
+            icon: "🪟",
+            description: "Windows file system. Supports large files (16TB+), file permissions, encryption. Best for Windows internal drives.",
+            features: "Large files, permissions, encryption, journaling"
+          },
+          {
+            name: "FAT32",
+            icon: "💿",
+            description: "Older file system. Universal compatibility but 4GB file size limit. Good for small USB drives and older devices.",
+            features: "Universal compatibility, 4GB file limit, simple structure"
+          },
+          {
+            name: "exFAT",
+            icon: "🔗",
+            description: "Extended FAT. Works on Windows, Mac, and Linux. No 4GB limit. Perfect for external drives and USB sticks.",
+            features: "Cross-platform, large files, no 4GB limit"
+          },
+          {
+            name: "ext4",
+            icon: "🐧",
+            description: "Linux file system. Journaling, large file support, excellent performance. Standard for Linux systems.",
+            features: "Journaling, large files, Linux standard, high performance"
+          }
+        ]
+      },
+      diskPartitioning: {
+        title: "Disk Partitioning",
+        intro: "Disk partitioning divides a physical storage device into separate logical sections. Each partition acts like an independent drive, allowing you to organize data, install multiple operating systems, or separate system files from user data. Understanding partitioning helps you manage storage effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-partitioning-hero.jpg",
+            alt: "Disk partitioning visualization showing multiple partitions",
+            brief: "Create a visual showing disk partitioning: single physical drive divided into multiple partitions (C:, D:, E:). Show partition sizes and labels. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-partitioning-overview.jpg",
+            alt: "Partition layout diagram",
+            brief: "Show a partition layout diagram: primary partitions, extended partitions, logical drives. Include labels. Educational diagram style."
+          },
+          process: {
+            fileName: "module-media/m5-partitioning-process.jpg",
+            alt: "Partitioning process steps",
+            brief: "Show partitioning process: before (single partition) → during (creating partitions) → after (multiple partitions). Include step indicators. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-partitioning-why-matters.jpg",
+            alt: "Partitioning use cases",
+            brief: "Show partitioning use cases: dual boot (Windows + Linux), data organization, system backup. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Primary Partitions",
+            icon: "📦",
+            description: "Main partitions that can boot operating systems. MBR supports up to 4 primary partitions. GPT supports unlimited partitions."
+          },
+          {
+            name: "Extended Partitions",
+            icon: "📂",
+            description: "Special partition type that can contain multiple logical drives. Used in MBR to overcome the 4-partition limit."
+          },
+          {
+            name: "Logical Drives",
+            icon: "💿",
+            description: "Drives created within extended partitions. Appear as separate drives (D:, E:) but are on the same physical disk."
+          },
+          {
+            name: "Partition Table",
+            icon: "📋",
+            description: "MBR (Master Boot Record) or GPT (GUID Partition Table) that stores partition information. GPT is newer and supports larger drives."
+          }
+        ],
+        benefits: [
+          "Organize Data - Separate system files from personal data",
+          "Multiple OS - Install Windows and Linux on the same drive",
+          "Backup Safety - Protect data if one partition fails",
+          "Performance - Isolate frequently accessed files"
+        ]
+      },
+      diskManagementTools: {
+        title: "Disk Management Tools",
+        intro: "Disk management tools help you create, resize, format, and manage partitions on your storage devices. Windows Disk Management, DiskPart, and third-party tools provide different levels of control. Understanding these tools helps you manage storage effectively and safely.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-disk-tools-hero.jpg",
+            alt: "Disk management tools interface visualization",
+            brief: "Create a visual showing disk management tools: Windows Disk Management interface, partition visualization. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-disk-tools-overview.jpg",
+            alt: "Windows Disk Management interface",
+            brief: "Show Windows Disk Management interface: disk list, partition visualization, available actions. Include labels. Clean, educational style."
+          },
+          tools: {
+            fileName: "module-media/m5-disk-tools-tools.jpg",
+            alt: "Different disk management tools comparison",
+            brief: "Show different disk management tools: Windows Disk Management, DiskPart command line, third-party tools. Include tool names. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-disk-tools-why-matters.jpg",
+            alt: "Disk management use cases",
+            brief: "Show disk management use cases: resizing partitions, creating new partitions, formatting drives. Clean, modern aesthetic."
+          }
+        },
+        tools: [
+          {
+            name: "Windows Disk Management",
+            icon: "🪟",
+            description: "Built-in Windows tool with graphical interface. Easy to use for basic partition operations like creating, deleting, and formatting partitions."
+          },
+          {
+            name: "DiskPart",
+            icon: "💻",
+            description: "Command-line tool for advanced disk management. More powerful than GUI but requires technical knowledge. Can script operations."
+          },
+          {
+            name: "Third-Party Tools",
+            icon: "🔧",
+            description: "Tools like GParted, EaseUS, MiniTool offer advanced features like partition recovery, disk cloning, and better visualization."
+          },
+          {
+            name: "Format Options",
+            icon: "📝",
+            description: "Quick format (fast, doesn't check for errors) vs Full format (slow, checks entire disk). Choose based on your needs."
+          }
+        ],
+        operations: [
+          "Create Partition - Divide unallocated space into new partitions",
+          "Delete Partition - Remove partitions (data will be lost)",
+          "Format Partition - Prepare partition for use with a file system",
+          "Resize Partition - Shrink or extend existing partitions",
+          "Change Drive Letter - Assign or change drive letters (C:, D:, etc.)"
+        ]
+      },
+      raidConcepts: {
+        title: "RAID Concepts",
+        intro: "RAID (Redundant Array of Independent Disks) combines multiple physical drives into one logical unit. Different RAID levels offer different benefits: performance, redundancy, or both. Understanding RAID helps you build reliable and fast storage systems.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-raid-hero.jpg",
+            alt: "RAID array visualization showing multiple drives",
+            brief: "Create a visual showing RAID array: multiple drives (HDD/SSD) connected together, showing data distribution. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-raid-overview.jpg",
+            alt: "RAID levels comparison diagram",
+            brief: "Show RAID levels comparison: RAID 0, RAID 1, RAID 5, RAID 10 with visual representation of data distribution. Include labels. Educational diagram style."
+          },
+          levels: {
+            fileName: "module-media/m5-raid-levels.jpg",
+            alt: "Different RAID levels explained",
+            brief: "Show different RAID levels side by side: RAID 0 (striping), RAID 1 (mirroring), RAID 5 (parity). Include data flow diagrams. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-raid-why-matters.jpg",
+            alt: "RAID use cases for servers and workstations",
+            brief: "Show RAID use cases: servers (redundancy), workstations (performance), data centers (both). Clean, modern aesthetic."
+          }
+        },
+        raidLevels: [
+          {
+            name: "RAID 0",
+            icon: "⚡",
+            description: "Striping - Data split across drives for maximum speed. No redundancy. Fastest but no protection if one drive fails.",
+            useCase: "Performance-focused, non-critical data"
+          },
+          {
+            name: "RAID 1",
+            icon: "🪞",
+            description: "Mirroring - Data duplicated on two drives. Excellent redundancy. If one drive fails, data is safe on the other.",
+            useCase: "Critical data, maximum redundancy"
+          },
+          {
+            name: "RAID 5",
+            icon: "🔐",
+            description: "Striping with parity - Data and parity information distributed across 3+ drives. Good balance of speed and redundancy.",
+            useCase: "Servers, balanced performance and protection"
+          },
+          {
+            name: "RAID 10",
+            icon: "🚀",
+            description: "Combination of RAID 1 and RAID 0. Best of both: high speed and redundancy. Requires 4+ drives.",
+            useCase: "High-performance servers, critical applications"
+          }
+        ],
+        benefits: [
+          "Performance - RAID 0 and RAID 5 improve read/write speeds",
+          "Redundancy - RAID 1, 5, and 10 protect against drive failure",
+          "Capacity - Combine multiple drives into larger storage",
+          "Reliability - Continue operating even if a drive fails (RAID 1, 5, 10)"
+        ]
+      },
+      cloudStorage: {
+        title: "Cloud Storage",
+        intro: "Cloud storage stores your data on remote servers accessed over the internet. Services like Google Drive, OneDrive, and Dropbox offer convenient access from any device, automatic backups, and file sharing. Understanding cloud storage helps you manage data across devices and collaborate effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-cloud-hero.jpg",
+            alt: "Cloud storage visualization showing data in the cloud",
+            brief: "Create a visual showing cloud storage: data files floating in cloud, connected to multiple devices (laptop, phone, tablet). Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m5-cloud-overview.jpg",
+            alt: "Cloud storage services comparison",
+            brief: "Show popular cloud storage services: Google Drive, OneDrive, Dropbox, iCloud with their logos. Include storage amounts. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m5-cloud-architecture.jpg",
+            alt: "Cloud storage architecture diagram",
+            brief: "Show cloud storage architecture: user devices → internet → cloud servers → data centers. Include sync arrows. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-cloud-why-matters.jpg",
+            alt: "Cloud storage benefits and use cases",
+            brief: "Show cloud storage benefits: access anywhere, automatic backup, file sharing, collaboration. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Access Anywhere",
+            icon: "🌐",
+            description: "Access your files from any device with internet connection. Files sync automatically across all your devices."
+          },
+          {
+            name: "Automatic Backup",
+            icon: "💾",
+            description: "Files are automatically backed up to the cloud. If your device fails, your data is safe in the cloud."
+          },
+          {
+            name: "File Sharing",
+            icon: "🔗",
+            description: "Easily share files and folders with others via links. Control permissions (view, edit, download)."
+          },
+          {
+            name: "Collaboration",
+            icon: "👥",
+            description: "Multiple people can work on the same files simultaneously. Changes sync in real-time."
+          }
+        ],
+        services: [
+          {
+            name: "Google Drive",
+            icon: "📁",
+            description: "15GB free, integrates with Google Workspace. Great for collaboration and document editing."
+          },
+          {
+            name: "OneDrive",
+            icon: "☁️",
+            description: "5GB free, integrates with Microsoft 365. Seamless with Windows and Office apps."
+          },
+          {
+            name: "Dropbox",
+            icon: "📦",
+            description: "2GB free, simple interface. Good for file syncing and sharing."
+          },
+          {
+            name: "iCloud",
+            icon: "🍎",
+            description: "5GB free, integrates with Apple devices. Automatic backup for photos and documents."
+          }
+        ],
+        considerations: [
+          "Internet Required - Need internet connection to access files",
+          "Privacy - Data stored on third-party servers",
+          "Storage Limits - Free tiers have limited space",
+          "Sync Speed - Depends on internet connection speed"
+        ]
+      }
+    };
+  };
+
+  const getModule6Sections = () => {
+    return {
+      typesOfSoftware: {
+        title: "Types of Software",
+        intro: "Software tells your computer what to do. There are three main types: system software runs your computer, application software helps you do tasks, and utility software keeps everything working well.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-types-software-hero.jpg",
+            alt: "Software categories visualization showing System, Application, and Utility software",
+            brief: "Create a visual showing different software categories: System Software (OS, drivers), Application Software (word processors, browsers), Utility Software (antivirus, cleaners). Use modern gradient background with software icons. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m6-types-software-overview.jpg",
+            alt: "Software categories diagram showing System → Application → Utility software hierarchy",
+            brief: "Show a software categories diagram: hierarchical or flow diagram showing System Software (base layer), Application Software (middle layer), Utility Software (support layer). Include icons and labels. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m6-types-software-comparison.jpg",
+            alt: "System vs Application vs Utility software comparison chart",
+            brief: "Create a comparison chart showing System Software vs Application Software vs Utility Software: characteristics, examples, use cases. Use visual indicators and icons. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-types-software-why-matters.jpg",
+            alt: "Real-world software usage scenario showing different software types in daily work",
+            brief: "Show a real-world scenario: person using different software types (OS, word processor, antivirus) in daily work. Clean, modern aesthetic with clear visual separation of software types."
+          }
+        },
+        softwareTypes: [
+          {
+            name: "System Software",
+            icon: "⚙️",
+            description: "Controls your computer's hardware and makes everything work. Examples: Windows, macOS, Linux, and device drivers."
+          },
+          {
+            name: "Application Software",
+            icon: "💻",
+            description: "Programs you use to do things like write documents, browse the web, or play games. Examples: Word, Chrome, games, and media players."
+          },
+          {
+            name: "Utility Software",
+            icon: "🔧",
+            description: "Tools that keep your computer safe and running smoothly. Examples: Antivirus, disk cleanup, and backup programs."
+          }
+        ]
+      },
+      osResponsibilities: {
+        title: "OS Responsibilities",
+        intro: "The operating system manages your computer's resources and makes everything work together. It handles memory, files, programs, and hardware so you can use your computer easily.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-os-responsibilities-hero.jpg",
+            alt: "Operating system managing computer resources",
+            brief: "Create a visual showing OS as manager: OS in center coordinating memory, files, programs, and hardware. Use modern tech aesthetic with icons showing different responsibilities."
+          },
+          overview: {
+            fileName: "module-media/m6-os-responsibilities-overview.jpg",
+            alt: "OS responsibilities diagram showing memory, files, programs, hardware management",
+            brief: "Show OS responsibilities diagram: OS managing memory allocation, file organization, program execution, hardware communication. Include labels and icons. Clean educational style."
+          },
+          comparison: {
+            fileName: "module-media/m6-os-responsibilities-comparison.jpg",
+            alt: "OS responsibilities comparison showing different management tasks",
+            brief: "Create a comparison showing different OS responsibilities: memory management, file system, process management, hardware drivers. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-os-responsibilities-why-matters.jpg",
+            alt: "Real-world OS management scenario",
+            brief: "Show real-world scenario: OS managing multiple programs, files, and hardware simultaneously. Clean, modern aesthetic."
+          }
+        },
+        responsibilities: [
+          {
+            name: "Memory Management",
+            icon: "🧠",
+            description: "Controls how programs use RAM. Makes sure each program gets enough memory to run smoothly."
+          },
+          {
+            name: "File Management",
+            icon: "📁",
+            description: "Organizes and stores your files. Keeps track of where everything is saved on your storage."
+          },
+          {
+            name: "Program Management",
+            icon: "⚙️",
+            description: "Starts and stops programs. Makes sure programs run correctly and don't crash your computer."
+          },
+          {
+            name: "Hardware Control",
+            icon: "🔌",
+            description: "Talks to hardware like keyboard, mouse, printer. Makes sure devices work with your computer."
+          }
+        ]
+      },
+      windowsOS: {
+        title: "Windows OS Overview",
+        intro: "Windows is the most popular operating system for personal computers. It's easy to use and works with many programs and devices.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-windows-hero.jpg",
+            alt: "Windows operating system interface",
+            brief: "Create a visual showing Windows OS: Start menu, desktop, taskbar, windows. Use modern Windows 11 aesthetic with clean interface."
+          },
+          overview: {
+            fileName: "module-media/m6-windows-overview.jpg",
+            alt: "Windows OS features and interface elements",
+            brief: "Show Windows OS overview: desktop, Start menu, File Explorer, Settings. Include labels for key features. Clean interface style."
+          },
+          comparison: {
+            fileName: "module-media/m6-windows-comparison.jpg",
+            alt: "Windows versions comparison",
+            brief: "Create a comparison showing different Windows versions: Windows 10, Windows 11, key features. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-windows-why-matters.jpg",
+            alt: "Windows OS in daily use",
+            brief: "Show Windows OS in daily use: person using Windows for work, gaming, browsing. Clean, modern aesthetic."
+          }
+        },
+        features: [
+          {
+            name: "User-Friendly",
+            icon: "👤",
+            description: "Easy to learn and use. Great for beginners and everyday tasks."
+          },
+          {
+            name: "Software Support",
+            icon: "💻",
+            description: "Works with thousands of programs. Most software is made for Windows."
+          },
+          {
+            name: "Gaming",
+            icon: "🎮",
+            description: "Best for gaming. Most games are designed for Windows computers."
+          },
+          {
+            name: "Hardware Support",
+            icon: "🖥️",
+            description: "Works with many devices. Printers, scanners, and other hardware usually support Windows."
+          }
+        ]
+      },
+      linuxOS: {
+        title: "Linux OS Overview",
+        intro: "Linux is a free and open-source operating system. It's powerful, secure, and used by developers, servers, and tech enthusiasts.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-linux-hero.jpg",
+            alt: "Linux operating system interface",
+            brief: "Create a visual showing Linux OS: terminal, desktop environments, open-source concept. Use modern Linux aesthetic with clean design."
+          },
+          overview: {
+            fileName: "module-media/m6-linux-overview.jpg",
+            alt: "Linux distributions and features",
+            brief: "Show Linux overview: different distributions (Ubuntu, Fedora, etc.), terminal, package manager. Include labels. Clean educational style."
+          },
+          comparison: {
+            fileName: "module-media/m6-linux-comparison.jpg",
+            alt: "Linux distributions comparison",
+            brief: "Create a comparison showing popular Linux distributions: Ubuntu, Fedora, Debian, key differences. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-linux-why-matters.jpg",
+            alt: "Linux OS in development and server use",
+            brief: "Show Linux in use: developer coding, server management, tech work. Clean, professional aesthetic."
+          }
+        },
+        features: [
+          {
+            name: "Free & Open",
+            icon: "🆓",
+            description: "Completely free to use. You can modify and share it however you want."
+          },
+          {
+            name: "Secure",
+            icon: "🔒",
+            description: "Very secure and stable. Fewer viruses and crashes than other systems."
+          },
+          {
+            name: "Powerful",
+            icon: "⚡",
+            description: "Great for programming and servers. Developers love using Linux."
+          },
+          {
+            name: "Customizable",
+            icon: "🎨",
+            description: "You can change almost everything. Make it look and work how you want."
+          }
+        ]
+      },
+      macOS: {
+        title: "macOS Overview",
+        intro: "macOS is Apple's operating system for Mac computers. It's known for being beautiful, smooth, and easy to use.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-macos-hero.jpg",
+            alt: "macOS operating system interface",
+            brief: "Create a visual showing macOS: Dock, menu bar, Finder, clean interface. Use modern macOS aesthetic with beautiful design."
+          },
+          overview: {
+            fileName: "module-media/m6-macos-overview.jpg",
+            alt: "macOS features and interface",
+            brief: "Show macOS overview: Dock, Spotlight, Mission Control, Finder. Include labels for key features. Clean Apple design style."
+          },
+          comparison: {
+            fileName: "module-media/m6-macos-comparison.jpg",
+            alt: "macOS versions comparison",
+            brief: "Create a comparison showing macOS versions: key features, design evolution. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-macos-why-matters.jpg",
+            alt: "macOS in creative and professional use",
+            brief: "Show macOS in use: creative work, design, professional tasks. Clean, elegant aesthetic."
+          }
+        },
+        features: [
+          {
+            name: "Beautiful Design",
+            icon: "✨",
+            description: "Clean and elegant interface. Everything looks polished and professional."
+          },
+          {
+            name: "Smooth Performance",
+            icon: "🚀",
+            description: "Runs very smoothly. Macs are optimized to work perfectly with macOS."
+          },
+          {
+            name: "Creative Tools",
+            icon: "🎨",
+            description: "Great for design, video editing, and creative work. Many professionals use Macs."
+          },
+          {
+            name: "Apple Ecosystem",
+            icon: "🍎",
+            description: "Works seamlessly with iPhone and iPad. Easy to share files and continue work."
+          }
+        ]
+      },
+      mobileOS: {
+        title: "Mobile OS",
+        intro: "Mobile operating systems run on smartphones and tablets. They're designed for touch screens and portable devices.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-mobile-os-hero.jpg",
+            alt: "Mobile operating systems on smartphones",
+            brief: "Create a visual showing mobile OS: Android and iOS interfaces, touch interactions. Use modern mobile aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m6-mobile-os-overview.jpg",
+            alt: "Mobile OS features and apps",
+            brief: "Show mobile OS overview: app icons, notifications, settings, touch gestures. Include labels. Clean mobile interface style."
+          },
+          comparison: {
+            fileName: "module-media/m6-mobile-os-comparison.jpg",
+            alt: "Android vs iOS comparison",
+            brief: "Create a comparison showing Android vs iOS: key differences, features, customization. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-mobile-os-why-matters.jpg",
+            alt: "Mobile OS in daily use",
+            brief: "Show mobile OS in daily use: person using smartphone for apps, calls, browsing. Clean, modern aesthetic."
+          }
+        },
+        features: [
+          {
+            name: "Touch Interface",
+            icon: "👆",
+            description: "Designed for touch screens. Swipe, tap, and pinch to interact with your device."
+          },
+          {
+            name: "Apps",
+            icon: "📱",
+            description: "Millions of apps available. Games, social media, productivity tools, and more."
+          },
+          {
+            name: "Portable",
+            icon: "📲",
+            description: "Works anywhere. Use your phone or tablet on the go, anytime, anywhere."
+          },
+          {
+            name: "Notifications",
+            icon: "🔔",
+            description: "Get alerts and updates. Stay connected with messages, emails, and app notifications."
+          }
+        ]
+      },
+      drivers: {
+        title: "Drivers",
+        intro: "Drivers are special programs that help your computer talk to hardware devices. They make sure your printer, keyboard, and other devices work correctly.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-drivers-hero.jpg",
+            alt: "Device drivers connecting hardware to OS",
+            brief: "Create a visual showing drivers as bridge: hardware devices connected to OS through drivers. Use modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m6-drivers-overview.jpg",
+            alt: "Device drivers for different hardware",
+            brief: "Show drivers overview: printer driver, graphics driver, network driver examples. Include labels. Clean educational style."
+          },
+          comparison: {
+            fileName: "module-media/m6-drivers-comparison.jpg",
+            alt: "Driver types and installation methods",
+            brief: "Create a comparison showing driver types: built-in, manufacturer, automatic updates. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-drivers-why-matters.jpg",
+            alt: "Drivers enabling hardware functionality",
+            brief: "Show drivers in action: printer working, graphics card functioning, devices connected. Clean, modern aesthetic."
+          }
+        },
+        driverTypes: [
+          {
+            name: "Built-in Drivers",
+            icon: "💾",
+            description: "Come with Windows. Automatically installed for common devices like keyboards and mice."
+          },
+          {
+            name: "Manufacturer Drivers",
+            icon: "📦",
+            description: "Download from device maker's website. Needed for printers, graphics cards, and special hardware."
+          },
+          {
+            name: "Automatic Updates",
+            icon: "🔄",
+            description: "Windows can find and install drivers automatically. Keeps your devices working with latest updates."
+          },
+          {
+            name: "Driver Manager",
+            icon: "⚙️",
+            description: "Device Manager shows all drivers. You can update, disable, or troubleshoot drivers here."
+          }
+        ]
+      },
+      softwareInstallation: {
+        title: "Software Installation & Uninstallation",
+        intro: "Installing software adds programs to your computer. Uninstalling removes them. It's important to do this correctly to keep your computer running well.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-installation-hero.jpg",
+            alt: "Software installation process",
+            brief: "Create a visual showing installation process: download, install wizard, program added. Use modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m6-installation-overview.jpg",
+            alt: "Installation and uninstallation steps",
+            brief: "Show installation overview: installation wizard steps, uninstall process. Include labels. Clean educational style."
+          },
+          comparison: {
+            fileName: "module-media/m6-installation-comparison.jpg",
+            alt: "Installation methods comparison",
+            brief: "Create a comparison showing installation methods: installer, app store, portable apps. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-installation-why-matters.jpg",
+            alt: "Software installation in practice",
+            brief: "Show installation in practice: person installing software, managing programs. Clean, modern aesthetic."
+          }
+        },
+        steps: [
+          {
+            name: "Download",
+            icon: "⬇️",
+            description: "Get the installer file from website or app store. Make sure it's from a trusted source."
+          },
+          {
+            name: "Run Installer",
+            icon: "▶️",
+            description: "Double-click the installer file. Follow the setup wizard to install the program."
+          },
+          {
+            name: "Choose Location",
+            icon: "📂",
+            description: "Pick where to install. Usually default location is fine, but you can choose custom folder."
+          },
+          {
+            name: "Uninstall",
+            icon: "🗑️",
+            description: "Remove programs from Settings or Control Panel. This frees up space and keeps computer clean."
+          }
+        ]
+      },
+      updatesPatches: {
+        title: "Updates & Patches",
+        intro: "Updates fix problems and add new features to your software. Patches are small fixes for security issues. Keeping everything updated keeps your computer safe and working well.",
+        images: {
+          hero: {
+            fileName: "module-media/m6-updates-hero.jpg",
+            alt: "Software updates and patches",
+            brief: "Create a visual showing updates: update notifications, download progress, installation. Use modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m6-updates-overview.jpg",
+            alt: "Update types and process",
+            brief: "Show updates overview: Windows updates, app updates, security patches. Include labels. Clean educational style."
+          },
+          comparison: {
+            fileName: "module-media/m6-updates-comparison.jpg",
+            alt: "Update types comparison",
+            brief: "Create a comparison showing update types: security updates, feature updates, bug fixes. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m6-updates-why-matters.jpg",
+            alt: "Updates keeping system secure",
+            brief: "Show updates importance: security protection, new features, bug fixes. Clean, modern aesthetic."
+          }
+        },
+        updateTypes: [
+          {
+            name: "Security Updates",
+            icon: "🔒",
+            description: "Fix security problems. Very important to install these to protect your computer from hackers."
+          },
+          {
+            name: "Feature Updates",
+            icon: "✨",
+            description: "Add new features and improvements. Makes your software better and more useful."
+          },
+          {
+            name: "Bug Fixes",
+            icon: "🐛",
+            description: "Fix problems and crashes. Makes programs work more smoothly and reliably."
+          },
+          {
+            name: "Automatic Updates",
+            icon: "🔄",
+            description: "Windows can update automatically. Set it up once and it keeps everything current."
+          }
+        ]
+      }
+    };
+  };
+
+  const getModule7Sections = () => {
+    return {
+      fileOrganization: {
+        title: "File Organization",
+        intro: "Organizing files helps you find what you need quickly. Folders group related files together, making your computer neat and easy to use.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-file-organization-hero.jpg",
+            alt: "File organization visualization showing folders and files",
+            brief: "Create a visual showing organized file structure: folders, subfolders, files. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-file-organization-overview.jpg",
+            alt: "File organization diagram showing folder hierarchy",
+            brief: "Show a file organization diagram: hierarchical folder structure with labels. Include icons and clear organization. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m7-file-organization-comparison.jpg",
+            alt: "Organized vs messy file organization comparison",
+            brief: "Create a comparison showing organized vs messy file structure. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-file-organization-why-matters.jpg",
+            alt: "Real-world file organization scenario",
+            brief: "Show a real-world scenario: person finding files easily in organized folders. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Folders",
+            icon: "📁",
+            description: "Containers that hold files and other folders. Help organize your documents."
+          },
+          {
+            name: "Files",
+            icon: "📄",
+            description: "Individual documents, pictures, or programs. Each file has a name and type."
+          },
+          {
+            name: "Paths",
+            icon: "🗂️",
+            description: "The location of a file. Shows which folders it's inside."
+          },
+          {
+            name: "Naming",
+            icon: "📋",
+            description: "Good file names help you find things. Use clear, descriptive names."
+          }
+        ]
+      },
+      fileOperations: {
+        title: "File Operations",
+        intro: "File operations are actions you can do with files. You can create, copy, move, rename, and delete files to manage your documents.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-file-operations-hero.jpg",
+            alt: "File operations visualization showing create, copy, move, delete",
+            brief: "Create a visual showing file operations: create, copy, move, delete, rename. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-file-operations-overview.jpg",
+            alt: "File operations diagram showing different actions",
+            brief: "Show a file operations diagram: visual representation of create, copy, move, delete operations. Include labels. Clean educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-file-operations-why-matters.jpg",
+            alt: "Real-world file operations scenario",
+            brief: "Show a real-world scenario: person performing file operations on computer. Clean, modern aesthetic."
+          }
+        },
+        operations: [
+          {
+            name: "Create",
+            icon: "➕",
+            description: "Make new files or folders. Start with a blank document or folder."
+          },
+          {
+            name: "Copy",
+            icon: "📋",
+            description: "Duplicate a file. Creates an exact copy in another location."
+          },
+          {
+            name: "Move",
+            icon: "➡️",
+            description: "Change a file's location. Moves it from one folder to another."
+          },
+          {
+            name: "Rename",
+            icon: "✏️",
+            description: "Change a file's name. Helps organize and identify files better."
+          },
+          {
+            name: "Delete",
+            icon: "🗑️",
+            description: "Remove a file. Sends it to Recycle Bin where it can be recovered."
+          }
+        ]
+      },
+      fileTypes: {
+        title: "File Types",
+        intro: "Different files have different types. Each type has an extension that tells you what kind of file it is, like .txt for text or .jpg for pictures.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-file-types-hero.jpg",
+            alt: "File types visualization showing different file extensions",
+            brief: "Create a visual showing different file types: documents, images, videos, audio. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-file-types-overview.jpg",
+            alt: "File types diagram showing categories",
+            brief: "Show a file types diagram: categories of files (documents, images, videos, audio) with examples. Include icons. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m7-file-types-comparison.jpg",
+            alt: "File type extensions comparison",
+            brief: "Create a comparison showing common file extensions and their uses. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-file-types-why-matters.jpg",
+            alt: "Real-world file types usage",
+            brief: "Show a real-world scenario: different file types being used. Clean, modern aesthetic."
+          }
+        },
+        fileCategories: [
+          {
+            name: "Documents",
+            icon: "📄",
+            description: "Text files like .txt, .doc, .pdf. Used for writing and reading."
+          },
+          {
+            name: "Images",
+            icon: "🖼️",
+            description: "Picture files like .jpg, .png, .gif. Used for photos and graphics."
+          },
+          {
+            name: "Videos",
+            icon: "🎬",
+            description: "Video files like .mp4, .avi, .mov. Used for movies and clips."
+          },
+          {
+            name: "Audio",
+            icon: "🎵",
+            description: "Sound files like .mp3, .wav, .flac. Used for music and sounds."
+          }
+        ]
+      },
+      compression: {
+        title: "Compression",
+        intro: "Compression makes files smaller. It reduces file size so they take up less space and are easier to share or store.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-compression-hero.jpg",
+            alt: "File compression visualization showing size reduction",
+            brief: "Create a visual showing file compression: large file becoming smaller. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-compression-overview.jpg",
+            alt: "Compression diagram showing process",
+            brief: "Show a compression diagram: before and after compression with size reduction. Include labels. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m7-compression-comparison.jpg",
+            alt: "Compressed vs uncompressed files comparison",
+            brief: "Create a comparison showing compressed vs uncompressed files. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-compression-why-matters.jpg",
+            alt: "Real-world compression usage",
+            brief: "Show a real-world scenario: files being compressed for sharing. Clean, modern aesthetic."
+          }
+        },
+        compressionTypes: [
+          {
+            name: "ZIP Files",
+            icon: "📦",
+            description: "Common compression format. Groups multiple files into one smaller file."
+          },
+          {
+            name: "RAR Files",
+            icon: "🗜️",
+            description: "Another compression format. Often used for large files."
+          },
+          {
+            name: "Benefits",
+            icon: "💾",
+            description: "Saves storage space. Makes files faster to download and share."
+          },
+          {
+            name: "Extraction",
+            icon: "📂",
+            description: "Unzip files to use them. Restores files to original size."
+          }
+        ]
+      },
+      backupBasics: {
+        title: "Backup Basics",
+        intro: "Backups are copies of your important files. They protect your data if something goes wrong with your computer.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-backup-basics-hero.jpg",
+            alt: "Backup visualization showing file copies",
+            brief: "Create a visual showing backup process: files being copied to backup location. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-backup-basics-overview.jpg",
+            alt: "Backup diagram showing backup locations",
+            brief: "Show a backup diagram: original files and backup copies in different locations. Include labels. Clean educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-backup-basics-why-matters.jpg",
+            alt: "Real-world backup scenario",
+            brief: "Show a real-world scenario: person backing up important files. Clean, modern aesthetic."
+          }
+        },
+        backupMethods: [
+          {
+            name: "External Drive",
+            icon: "💿",
+            description: "Copy files to USB drive or external hard drive. Keep it safe and separate."
+          },
+          {
+            name: "Cloud Backup",
+            icon: "☁️",
+            description: "Save files online. Access them from anywhere, anytime."
+          },
+          {
+            name: "Automatic Backup",
+            icon: "🔄",
+            description: "Set up automatic backups. Your computer backs up files regularly."
+          },
+          {
+            name: "Restore",
+            icon: "↩️",
+            description: "Get files back from backup. Restores lost or damaged files."
+          }
+        ]
+      },
+      fileSecurity: {
+        title: "File Security",
+        intro: "File security protects your files from unauthorized access. It keeps your personal information safe and private.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-file-security-hero.jpg",
+            alt: "File security visualization showing protection",
+            brief: "Create a visual showing file security: locked files, passwords, encryption. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-file-security-overview.jpg",
+            alt: "File security diagram showing protection methods",
+            brief: "Show a file security diagram: different security methods (passwords, encryption, permissions). Include labels. Clean educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-file-security-why-matters.jpg",
+            alt: "Real-world file security scenario",
+            brief: "Show a real-world scenario: person securing important files. Clean, modern aesthetic."
+          }
+        },
+        securityMethods: [
+          {
+            name: "Passwords",
+            icon: "🔒",
+            description: "Protect files with passwords. Only people who know the password can access them."
+          },
+          {
+            name: "Encryption",
+            icon: "🔐",
+            description: "Scramble file contents. Makes files unreadable without the key."
+          },
+          {
+            name: "Permissions",
+            icon: "👤",
+            description: "Control who can access files. Set read, write, or no access."
+          },
+          {
+            name: "Antivirus",
+            icon: "🛡️",
+            description: "Protect files from viruses. Scans and removes harmful software."
+          }
+        ]
+      },
+      searchingFiles: {
+        title: "Searching Files",
+        intro: "Searching helps you find files quickly. You can search by name, type, or content to locate what you need.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-searching-files-hero.jpg",
+            alt: "File search visualization showing search process",
+            brief: "Create a visual showing file search: search bar, results, file icons. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-searching-files-overview.jpg",
+            alt: "File search diagram showing search methods",
+            brief: "Show a file search diagram: different search methods (name, type, content). Include labels. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m7-searching-files-comparison.jpg",
+            alt: "Search methods comparison",
+            brief: "Create a comparison showing different search methods. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-searching-files-why-matters.jpg",
+            alt: "Real-world file search scenario",
+            brief: "Show a real-world scenario: person searching for files on computer. Clean, modern aesthetic."
+          }
+        },
+        searchMethods: [
+          {
+            name: "Name Search",
+            icon: "🔍",
+            description: "Search by file name. Type part of the name to find files."
+          },
+          {
+            name: "Type Search",
+            icon: "📑",
+            description: "Search by file type. Find all .jpg files or all .pdf files."
+          },
+          {
+            name: "Content Search",
+            icon: "📝",
+            description: "Search inside files. Finds files containing specific words."
+          },
+          {
+            name: "Date Search",
+            icon: "📅",
+            description: "Search by date. Find files created or modified on specific dates."
+          }
+        ]
+      },
+      recycleBinRestore: {
+        title: "Recycle Bin & Restore",
+        intro: "Recycle Bin holds deleted files. You can restore files from Recycle Bin if you delete them by mistake.",
+        images: {
+          hero: {
+            fileName: "module-media/m7-recycle-bin-hero.jpg",
+            alt: "Recycle Bin visualization showing deleted files",
+            brief: "Create a visual showing Recycle Bin: deleted files, restore option. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m7-recycle-bin-overview.jpg",
+            alt: "Recycle Bin diagram showing restore process",
+            brief: "Show a Recycle Bin diagram: deleted files and restore process. Include labels. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m7-recycle-bin-comparison.jpg",
+            alt: "Recycle Bin vs permanent delete comparison",
+            brief: "Create a comparison showing Recycle Bin vs permanent delete. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m7-recycle-bin-why-matters.jpg",
+            alt: "Real-world Recycle Bin usage",
+            brief: "Show a real-world scenario: person restoring files from Recycle Bin. Clean, modern aesthetic."
+          }
+        },
+        recycleBinConcepts: [
+          {
+            name: "Delete",
+            icon: "🗑️",
+            description: "Move files to Recycle Bin. Files aren't permanently gone yet."
+          },
+          {
+            name: "Restore",
+            icon: "↩️",
+            description: "Get files back from Recycle Bin. Returns them to original location."
+          },
+          {
+            name: "Empty Bin",
+            icon: "🧹",
+            description: "Permanently delete files. Clears Recycle Bin and frees space."
+          },
+          {
+            name: "Recovery",
+            icon: "💾",
+            description: "Get back deleted files. Works if Recycle Bin hasn't been emptied."
+          }
+        ]
+      }
+    };
+  };
+
+  // Get sections based on module ID - Modules 1, 2, 3, 4, 5, 6, and 7 are supported
+  const sections = moduleId === 1 ? getModule1Sections() : moduleId === 2 ? getModule2Sections() : moduleId === 3 ? getModule3Sections() : moduleId === 4 ? getModule4Sections() : moduleId === 5 ? getModule5Sections() : moduleId === 6 ? getModule6Sections() : moduleId === 7 ? getModule7Sections() : null;
 
   const module1Sections = moduleId === 1 && sections ? (sections as ReturnType<typeof getModule1Sections>) : null;
   const module2Sections = moduleId === 2 && sections ? (sections as ReturnType<typeof getModule2Sections>) : null;
   const module3Sections = moduleId === 3 && sections ? (sections as ReturnType<typeof getModule3Sections>) : null;
   const module4Sections = moduleId === 4 && sections ? (sections as ReturnType<typeof getModule4Sections>) : null;
+  const module5Sections = moduleId === 5 && sections ? (sections as ReturnType<typeof getModule5Sections>) : null;
+  const module6Sections = moduleId === 6 && sections ? (sections as ReturnType<typeof getModule6Sections>) : null;
+  const module7Sections = moduleId === 7 && sections ? (sections as ReturnType<typeof getModule7Sections>) : null;
 
   const resolveHeroContent = () => {
     if (moduleId === 1) {
@@ -2595,6 +3944,180 @@ const ModuleDetail = () => {
       return {
         title: "Computer Hardware (Deep Dive)",
         subtitle: "Explore the internal components and architecture of computers in detail. Learn how hardware components work together to create a functional system."
+      };
+    }
+    if (moduleId === 5) {
+      if (topicId === "1") {
+        return {
+          title: "Storage Concepts",
+          subtitle: "Understand different storage types and their characteristics. Learn about volatile vs non-volatile storage, speed vs capacity trade-offs, and how to choose the right storage solution."
+        };
+      }
+      if (topicId === "2") {
+        return {
+          title: "HDD - Hard Disk Drive",
+          subtitle: "Deep dive into how hard disk drives work. Learn about platters, read/write heads, actuator arms, and when to use HDDs for your storage needs."
+        };
+      }
+      if (topicId === "3") {
+        return {
+          title: "SSD - Solid State Drive",
+          subtitle: "Explore solid state drive technology. Learn about flash memory, NAND cells, controllers, and why SSDs are faster and more reliable than HDDs."
+        };
+      }
+      if (topicId === "4") {
+        return {
+          title: "NVMe Technology",
+          subtitle: "Discover NVMe (Non-Volatile Memory Express) technology. Learn about PCIe connections, M.2 form factor, and how NVMe delivers blazing-fast storage speeds."
+        };
+      }
+      if (topicId === "5") {
+        return {
+          title: "Storage File Systems",
+          subtitle: "Understand how file systems organize data on storage devices. Learn about NTFS, FAT32, exFAT, ext4, and when to use each file system."
+        };
+      }
+      if (topicId === "6") {
+        return {
+          title: "Disk Partitioning",
+          subtitle: "Learn how to divide storage devices into partitions. Understand primary partitions, extended partitions, logical drives, and how to organize your storage."
+        };
+      }
+      if (topicId === "7") {
+        return {
+          title: "Disk Management Tools",
+          subtitle: "Master disk management tools for creating, resizing, and formatting partitions. Learn about Windows Disk Management, DiskPart, and third-party tools."
+        };
+      }
+      if (topicId === "8") {
+        return {
+          title: "RAID Concepts",
+          subtitle: "Explore RAID (Redundant Array of Independent Disks) technology. Learn about RAID levels, striping, mirroring, and how to build reliable storage arrays."
+        };
+      }
+      if (topicId === "9") {
+        return {
+          title: "Cloud Storage",
+          subtitle: "Discover cloud storage services and how they work. Learn about accessing files anywhere, automatic backups, file sharing, and collaboration features."
+        };
+      }
+      return {
+        title: "Storage Systems",
+        subtitle: "Explore storage technologies and data management. Learn about different storage types, file systems, and how to manage your data effectively."
+      };
+    }
+    if (moduleId === 6) {
+      if (topicId === "1") {
+        return {
+          title: "Types of Software",
+          subtitle: "Understand different categories of software. Learn about system software, application software, and utility software, and how each type serves different purposes in your computer."
+        };
+      }
+      if (topicId === "2") {
+        return {
+          title: "OS Responsibilities",
+          subtitle: "Learn what the operating system does. Understand how it manages memory, files, programs, and hardware to make your computer work."
+        };
+      }
+      if (topicId === "3") {
+        return {
+          title: "Windows OS Overview",
+          subtitle: "Explore Windows operating system. Learn about its features, interface, and why it's the most popular OS for personal computers."
+        };
+      }
+      if (topicId === "4") {
+        return {
+          title: "Linux OS Overview",
+          subtitle: "Discover Linux operating system. Learn about its free and open-source nature, security, and why developers love using it."
+        };
+      }
+      if (topicId === "5") {
+        return {
+          title: "macOS Overview",
+          subtitle: "Explore macOS operating system. Learn about its beautiful design, smooth performance, and why it's popular for creative work."
+        };
+      }
+      if (topicId === "6") {
+        return {
+          title: "Mobile OS",
+          subtitle: "Understand mobile operating systems. Learn about Android and iOS, how they work on smartphones and tablets."
+        };
+      }
+      if (topicId === "7") {
+        return {
+          title: "Drivers",
+          subtitle: "Learn about device drivers. Understand how they help your computer communicate with hardware like printers, keyboards, and graphics cards."
+        };
+      }
+      if (topicId === "8") {
+        return {
+          title: "Software Installation & Uninstallation",
+          subtitle: "Master installing and removing software. Learn the proper steps to add programs to your computer and remove them safely."
+        };
+      }
+      if (topicId === "9") {
+        return {
+          title: "Updates & Patches",
+          subtitle: "Understand software updates and patches. Learn why keeping your system updated is important for security and performance."
+        };
+      }
+      return {
+        title: "Software & Operating Systems",
+        subtitle: "Explore software types, operating systems, and how software makes your computer functional. Learn about different OS options and software installation."
+      };
+    }
+    if (moduleId === 7) {
+      if (topicId === "1") {
+        return {
+          title: "File Organization",
+          subtitle: "Learn how to organize files and folders. Understand folder structures, file paths, and naming conventions to keep your computer neat and easy to use."
+        };
+      }
+      if (topicId === "2") {
+        return {
+          title: "File Operations",
+          subtitle: "Master file operations. Learn how to create, copy, move, rename, and delete files to manage your documents effectively."
+        };
+      }
+      if (topicId === "3") {
+        return {
+          title: "File Types",
+          subtitle: "Understand different file types and extensions. Learn about documents, images, videos, audio files, and how to identify them."
+        };
+      }
+      if (topicId === "4") {
+        return {
+          title: "Compression",
+          subtitle: "Learn about file compression. Understand how compression reduces file size, saves storage space, and makes files easier to share."
+        };
+      }
+      if (topicId === "5") {
+        return {
+          title: "Backup Basics",
+          subtitle: "Master backup basics. Learn how to protect your important files by creating copies in external drives or cloud storage."
+        };
+      }
+      if (topicId === "6") {
+        return {
+          title: "File Security",
+          subtitle: "Understand file security. Learn about passwords, encryption, permissions, and antivirus protection to keep your files safe."
+        };
+      }
+      if (topicId === "7") {
+        return {
+          title: "Searching Files",
+          subtitle: "Learn how to search for files. Master searching by name, type, content, or date to quickly find what you need."
+        };
+      }
+      if (topicId === "8") {
+        return {
+          title: "Recycle Bin & Restore",
+          subtitle: "Understand Recycle Bin and file restoration. Learn how to recover deleted files and permanently remove unwanted files."
+        };
+      }
+      return {
+        title: "File Systems & Data Management",
+        subtitle: "Explore file organization, operations, types, compression, backups, security, and file management. Learn how to effectively manage your files and data."
       };
     }
     if (moduleId === 2) {
@@ -10501,6 +12024,3380 @@ const ModuleDetail = () => {
             <section className="container mx-auto px-4 pb-14">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
                 <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/11")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 1: Storage Concepts */}
+      {moduleId === 5 && module5Sections && topicId === "1" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module5Sections.storageConcepts.images;
+
+        return (
+          <div id="topic-storage-concepts" className="space-y-16">
+            {/* Section 1: Storage Basics - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Storage Basics</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Storage Concepts</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module5Sections.storageConcepts.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Volatile vs Non-Volatile storage</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Speed vs Capacity trade-offs</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Primary vs Secondary storage</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Storage Types - Centered Title + 3 Cards Grid */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Storage Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Volatile, Non-Volatile & Hybrid</h2>
+                  <p className="text-foreground/80">
+                    Understanding different storage types helps you choose the right solution for your needs.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module5Sections.storageConcepts.storageTypes.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{type.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Section 3: Full-Width Comparison Image */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Storage Concepts</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding storage concepts helps you choose the right storage solution for your needs, optimize system performance, and make informed decisions about data management. This knowledge is essential for building efficient and cost-effective computer systems.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>First Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/2")}>
+                  Next Topic: HDD Deep Dive →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 2: HDD Deep Dive */}
+      {moduleId === 5 && module5Sections && topicId === "2" && (() => {
+        const {
+          overview: overviewImage,
+          internal: internalImage,
+          useCases: useCasesImage,
+          whyMatters: whyMattersImage
+        } = module5Sections.hddDeepDive.images;
+
+        return (
+          <div id="topic-hdd-deep-dive" className="space-y-16">
+            {/* Section 1: HDD Overview - Image Left + Text Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Hard Disk Drive</p>
+                  <h2 className="text-3xl font-semibold text-foreground">HDD Deep Dive</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module5Sections.hddDeepDive.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Large capacity storage</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Affordable and reliable</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Ideal for bulk storage</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 2: HDD Internal Components - Centered Title + 4 Cards Grid */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">HDD Internal Components</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Understanding the Mechanical Parts</h2>
+                  <p className="text-foreground/80">
+                    HDDs use mechanical components to read and write data on spinning magnetic platters.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module5Sections.hddDeepDive.components.map((component, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{component.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{component.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{component.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Section 3: Full-Width Internal Diagram */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(internalImage.fileName)}
+                    alt={internalImage.alt}
+                    className="w-full h-full object-contain p-4"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${internalImage.fileName}. ${internalImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            {/* Section 4: Advantages & Disadvantages - Side by Side */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-6">
+                <Card className="p-6 border border-border/70">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">✅</span>
+                    <h3 className="text-2xl font-semibold text-foreground">Advantages</h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {module5Sections.hddDeepDive.advantages.map((advantage, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm text-foreground/80">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{advantage}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+                <Card className="p-6 border border-border/70">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">❌</span>
+                    <h3 className="text-2xl font-semibold text-foreground">Disadvantages</h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {module5Sections.hddDeepDive.disadvantages.map((disadvantage, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm text-foreground/80">
+                        <span className="text-destructive mt-1">•</span>
+                        <span>{disadvantage}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 5: Full-Width Use Cases Banner */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(useCasesImage.fileName)}
+                    alt={useCasesImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${useCasesImage.fileName}. ${useCasesImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+              <div className="mt-6 space-y-2">
+                <h3 className="text-xl font-semibold text-foreground mb-3">Common Use Cases:</h3>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {module5Sections.hddDeepDive.useCases.map((useCase, index) => (
+                    <div key={index} className="flex items-start gap-2 text-sm text-foreground/80">
+                      <span className="text-primary mt-1">•</span>
+                      <span>{useCase}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💾</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding HDDs</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding HDDs helps you make informed storage decisions, choose the right storage solution for your needs, and optimize cost-effectiveness. This knowledge is essential for building and managing computer systems with appropriate storage capacity.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/1")}>
+                  ← Previous Topic
+                </Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/3")}>
+                  Next Topic: SSD Deep Dive →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 3: SSD Deep Dive */}
+      {moduleId === 5 && module5Sections && topicId === "3" && (() => {
+        const { overview: overviewImage, technology: technologyImage, speedComparison: speedComparisonImage, whyMatters: whyMattersImage } = module5Sections.ssdDeepDive.images;
+        return (
+          <div id="topic-ssd-deep-dive" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Solid State Drive</p>
+                  <h2 className="text-3xl font-semibold text-foreground">SSD Deep Dive</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module5Sections.ssdDeepDive.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">SSD Advantages</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Fast, Quiet, Durable & Energy Efficient</h2>
+                  <p className="text-foreground/80">SSDs offer significant advantages over traditional HDDs.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module5Sections.ssdDeepDive.advantages.map((advantage, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{advantage.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{advantage.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{advantage.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(technologyImage.fileName)} alt={technologyImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${technologyImage.fileName}. ${technologyImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-6">
+                <Card className="p-6 border border-border/70">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Speed Details</h3>
+                  <ul className="space-y-2">
+                    {module5Sections.ssdDeepDive.speedDetails.map((detail, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm text-foreground/80">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+                <Card className="p-0 overflow-hidden border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(speedComparisonImage.fileName)} alt={speedComparisonImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${speedComparisonImage.fileName}. ${speedComparisonImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚡</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding SSDs</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding SSDs helps you choose the right storage for performance, optimize system speed, and make informed decisions about storage upgrades. This knowledge is essential for building fast and responsive computer systems.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/2")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/4")}>Next Topic: NVMe Technology →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 4: NVMe Technology */}
+      {moduleId === 5 && module5Sections && topicId === "4" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, speedComparison: speedComparisonImage, whyMatters: whyMattersImage } = module5Sections.nvmeTechnology.images;
+        return (
+          <div id="topic-nvme-technology" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Next-Gen Storage</p>
+                  <h2 className="text-3xl font-semibold text-foreground">NVMe Technology</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module5Sections.nvmeTechnology.intro}</p>
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">NVMe Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">PCIe Connection, M.2 Form Factor, Speed & Low Latency</h2>
+                  <p className="text-foreground/80">NVMe delivers the fastest storage speeds available.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module5Sections.nvmeTechnology.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-6">
+                <Card className="p-6 border border-border/70">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Speed Comparison</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                      <span className="text-sm font-medium">{module5Sections.nvmeTechnology.speedDetails.sata}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-primary/10 rounded-lg border border-primary/20">
+                      <span className="text-sm font-semibold text-primary">{module5Sections.nvmeTechnology.speedDetails.nvme}</span>
+                    </div>
+                  </div>
+                </Card>
+                <Card className="p-0 overflow-hidden border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(speedComparisonImage.fileName)} alt={speedComparisonImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${speedComparisonImage.fileName}. ${speedComparisonImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🚀</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding NVMe</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding NVMe helps you choose the fastest storage solution, optimize system performance for gaming and professional work, and make informed decisions about storage upgrades. This knowledge is essential for building high-performance computer systems.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/3")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/5")}>Next Topic: Storage File Systems →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 5: Storage File Systems */}
+      {moduleId === 5 && module5Sections && topicId === "5" && (() => {
+        const { overview: overviewImage, comparison: comparisonImage, whyMatters: whyMattersImage } = module5Sections.storageFileSystems.images;
+        return (
+          <div id="topic-storage-file-systems" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="text-center max-w-3xl mx-auto space-y-5">
+                <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Organization</p>
+                <h2 className="text-3xl font-semibold text-foreground">Storage File Systems</h2>
+                <p className="text-foreground/80 leading-relaxed text-lg">
+                  {module5Sections.storageFileSystems.intro}
+                </p>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File System Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">NTFS, FAT32, exFAT & ext4</h2>
+                  <p className="text-foreground/80">Each file system has different features and use cases.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {module5Sections.storageFileSystems.fileSystems.map((fs, index) => (
+                    <Card key={index} className="p-6 border border-border/70">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-4xl">{fs.icon}</span>
+                        <h3 className="text-2xl font-semibold text-primary">{fs.name}</h3>
+                      </div>
+                      <p className="text-sm text-foreground/80 mb-3 leading-relaxed">{fs.description}</p>
+                      <div className="p-3 bg-muted rounded-lg">
+                        <p className="text-xs font-semibold text-foreground mb-1">Features:</p>
+                        <p className="text-xs text-foreground/70">{fs.features}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(comparisonImage.fileName)} alt={comparisonImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${comparisonImage.fileName}. ${comparisonImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📁</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Systems</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding file systems helps you format drives correctly, ensure compatibility across devices, and choose the right file system for your needs. This knowledge is essential for managing storage effectively.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/4")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/6")}>Next Topic: Disk Partitioning →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 6: Disk Partitioning */}
+      {moduleId === 5 && module5Sections && topicId === "6" && (() => {
+        const { overview: overviewImage, process: processImage, whyMatters: whyMattersImage } = module5Sections.diskPartitioning.images;
+        return (
+          <div id="topic-disk-partitioning" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Storage Organization</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Disk Partitioning</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module5Sections.diskPartitioning.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Partition Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Primary, Extended & Logical Drives</h2>
+                  <p className="text-foreground/80">Understanding partition types helps you organize storage effectively.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module5Sections.diskPartitioning.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(processImage.fileName)} alt={processImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${processImage.fileName}. ${processImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-6 border border-border/70">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Benefits of Partitioning</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {module5Sections.diskPartitioning.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
+                      <span className="text-primary text-xl">✓</span>
+                      <span className="text-sm text-foreground/80">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📊</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Partitioning</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding disk partitioning helps you organize storage, install multiple operating systems, protect data, and optimize system performance. This knowledge is essential for effective storage management.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/5")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/7")}>Next Topic: Disk Management Tools →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 7: Disk Management Tools */}
+      {moduleId === 5 && module5Sections && topicId === "7" && (() => {
+        const { overview: overviewImage, tools: toolsImage, whyMatters: whyMattersImage } = module5Sections.diskManagementTools.images;
+        return (
+          <div id="topic-disk-management-tools" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="text-center max-w-3xl mx-auto space-y-5">
+                <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Storage Management</p>
+                <h2 className="text-3xl font-semibold text-foreground">Disk Management Tools</h2>
+                <p className="text-foreground/80 leading-relaxed text-lg">
+                  {module5Sections.diskManagementTools.intro}
+                </p>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Available Tools</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Windows Disk Management, DiskPart & Third-Party Tools</h2>
+                  <p className="text-foreground/80">Different tools for different levels of disk management.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {module5Sections.diskManagementTools.tools.map((tool, index) => (
+                    <Card key={index} className="p-6 border border-border/70">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-4xl">{tool.icon}</span>
+                        <h3 className="text-xl font-semibold text-primary">{tool.name}</h3>
+                      </div>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{tool.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(toolsImage.fileName)} alt={toolsImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${toolsImage.fileName}. ${toolsImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-6 border border-border/70">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Common Operations</h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {module5Sections.diskManagementTools.operations.map((operation, index) => (
+                    <div key={index} className="flex items-start gap-2 p-3 bg-muted rounded-lg">
+                      <span className="text-primary mt-1">•</span>
+                      <span className="text-sm text-foreground/80">{operation}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔧</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Disk Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding disk management tools helps you create and manage partitions safely, format drives correctly, and maintain your storage effectively. This knowledge is essential for storage management and system maintenance.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/6")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/8")}>Next Topic: RAID Concepts →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 8: RAID Concepts */}
+      {moduleId === 5 && module5Sections && topicId === "8" && (() => {
+        const { overview: overviewImage, levels: levelsImage, whyMatters: whyMattersImage } = module5Sections.raidConcepts.images;
+        return (
+          <div id="topic-raid-concepts" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Storage Arrays</p>
+                  <h2 className="text-3xl font-semibold text-foreground">RAID Concepts</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module5Sections.raidConcepts.intro}</p>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">RAID Levels</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">RAID 0, RAID 1, RAID 5 & RAID 10</h2>
+                  <p className="text-foreground/80">Different RAID levels offer different benefits.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {module5Sections.raidConcepts.raidLevels.map((level, index) => (
+                    <Card key={index} className="p-6 border border-border/70">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-4xl">{level.icon}</span>
+                        <h3 className="text-xl font-semibold text-primary">{level.name}</h3>
+                      </div>
+                      <p className="text-sm text-foreground/80 mb-3 leading-relaxed">{level.description}</p>
+                      <div className="p-3 bg-muted rounded-lg">
+                        <p className="text-xs font-semibold text-foreground">Use Case:</p>
+                        <p className="text-xs text-foreground/70">{level.useCase}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img src={getImageUrl(levelsImage.fileName)} alt={levelsImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${levelsImage.fileName}. ${levelsImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-6 border border-border/70">
+                <h3 className="text-xl font-semibold text-foreground mb-4">RAID Benefits</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {module5Sections.raidConcepts.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
+                      <span className="text-primary text-xl">✓</span>
+                      <span className="text-sm text-foreground/80">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔐</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding RAID</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding RAID helps you build reliable storage systems, protect critical data, and optimize performance for servers and workstations. This knowledge is essential for professional storage solutions.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/7")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/9")}>Next Topic: Cloud Storage →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 5 Topic 9: Cloud Storage */}
+      {moduleId === 5 && module5Sections && topicId === "9" && (() => {
+        const { overview: overviewImage, architecture: architectureImage, whyMatters: whyMattersImage } = module5Sections.cloudStorage.images;
+        return (
+          <div id="topic-cloud-storage" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img src={getImageUrl(overviewImage.fileName)} alt={overviewImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${overviewImage.fileName}. ${overviewImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Remote Storage</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Cloud Storage</h2>
+                  <p className="text-foreground/80 leading-relaxed">{module5Sections.cloudStorage.intro}</p>
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Cloud Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Access Anywhere, Automatic Backup, File Sharing & Collaboration</h2>
+                  <p className="text-foreground/80">Cloud storage offers convenience and flexibility.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module5Sections.cloudStorage.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img src={getImageUrl(architectureImage.fileName)} alt={architectureImage.alt} className="w-full h-full object-contain p-4" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${architectureImage.fileName}. ${architectureImage.brief}</div>`; } }} />
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Popular Services</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Google Drive, OneDrive, Dropbox & iCloud</h2>
+                  <p className="text-foreground/80">Different cloud storage services for different needs.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {module5Sections.cloudStorage.services.map((service, index) => (
+                    <Card key={index} className="p-6 border border-border/70">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-4xl">{service.icon}</span>
+                        <h3 className="text-xl font-semibold text-primary">{service.name}</h3>
+                      </div>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{service.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-6 border border-border/70">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Important Considerations</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {module5Sections.cloudStorage.considerations.map((consideration, index) => (
+                    <div key={index} className="flex items-start gap-2 p-3 bg-muted rounded-lg">
+                      <span className="text-primary mt-1">•</span>
+                      <span className="text-sm text-foreground/80">{consideration}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">☁️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Cloud Storage</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">Understanding cloud storage helps you access files anywhere, protect data with automatic backups, collaborate effectively, and choose the right service for your needs. This knowledge is essential for modern data management and collaboration.</p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img src={getImageUrl(whyMattersImage.fileName)} alt={whyMattersImage.alt} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const parent = (e.target as HTMLImageElement).parentElement; if (parent) { parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}</div>`; } }} />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/5/topic/8")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 1: Types of Software */}
+      {moduleId === 6 && module6Sections && topicId === "1" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.typesOfSoftware.images;
+
+        return (
+          <div id="topic-types-of-software" className="space-y-16">
+            {/* Section 1: Types of Software Overview - Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Software Basics</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Types of Software</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.typesOfSoftware.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">System software runs your computer</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Application software helps you do tasks</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Utility software keeps everything working well</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Software Types - Centered Title + 3 Cards Grid */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Software Categories</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">System, Application & Utility Software</h2>
+                  <p className="text-foreground/80">
+                    Understanding different software categories helps you choose the right tools for your needs.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {module6Sections.typesOfSoftware.softwareTypes.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{type.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(comparisonImage.fileName)}
+                      alt={comparisonImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Why It Matters - Centered Card with Icon */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💻</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Software Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Knowing the different types helps you pick the right programs for your needs. It also makes it easier to fix problems and understand how your computer works.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Navigation */}
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>First Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/2")}>
+                  Next Topic: OS Responsibilities →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 2: OS Responsibilities - Image Left + Text Right */}
+      {moduleId === 6 && module6Sections && topicId === "2" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.osResponsibilities.images;
+
+        return (
+          <div id="topic-os-responsibilities" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Operating System</p>
+                  <h2 className="text-3xl font-semibold text-foreground">OS Responsibilities</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.osResponsibilities.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Manages memory and resources</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Organizes files and folders</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Controls hardware devices</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">OS Functions</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">What the OS Does</h2>
+                  <p className="text-foreground/80">
+                    The operating system handles many important tasks to keep your computer running smoothly.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.osResponsibilities.responsibilities.map((resp, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{resp.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{resp.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{resp.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(comparisonImage.fileName)}
+                      alt={comparisonImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚙️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding OS</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding what the OS does helps you troubleshoot problems, manage your computer better, and know why certain things happen. This knowledge helps you use your computer more effectively.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/1")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/3")}>
+                  Next Topic: Windows OS Overview →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 3: Windows OS Overview */}
+      {moduleId === 6 && module6Sections && topicId === "3" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.windowsOS.images;
+
+        return (
+          <div id="topic-windows-os-overview" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Windows Operating System</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Windows OS Overview</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.windowsOS.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Most popular desktop OS</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Great for gaming and work</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Works with many programs</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Windows Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Why Choose Windows</h2>
+                  <p className="text-foreground/80">
+                    Windows offers many advantages that make it popular for personal computers.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.windowsOS.features.map((feature, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{feature.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{feature.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">Windows in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Windows powers millions of computers worldwide, from home desktops to gaming rigs to office workstations. Its familiar interface and wide software support make it the go-to choice for most users.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🪟</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Windows</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding Windows helps you use your computer better, find programs easily, and troubleshoot problems. This knowledge is essential for getting the most out of your Windows computer.
+                </p>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/2")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/4")}>
+                  Next Topic: Linux OS Overview →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 4: Linux OS Overview - Image Left + Text Right */}
+      {moduleId === 6 && module6Sections && topicId === "4" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.linuxOS.images;
+
+        return (
+          <div id="topic-linux-os-overview" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Linux Operating System</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Linux OS Overview</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.linuxOS.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Free and open-source</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Very secure and stable</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Great for developers</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Linux Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Why Choose Linux</h2>
+                  <p className="text-foreground/80">
+                    Linux offers unique advantages that make it popular for developers and tech enthusiasts.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.linuxOS.features.map((feature, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{feature.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{feature.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🐧</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Linux</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding Linux helps you see why developers and servers use it, learn about open-source software, and explore powerful computing options. This knowledge opens up new possibilities for your tech journey.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/3")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/5")}>
+                  Next Topic: macOS Overview →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 5: macOS Overview - Cards Grid with Image Inside */}
+      {moduleId === 6 && module6Sections && topicId === "5" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.macOS.images;
+
+        return (
+          <div id="topic-macos-overview" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">macOS Operating System</p>
+                  <h2 className="text-3xl font-semibold text-foreground">macOS Overview</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.macOS.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Beautiful and elegant design</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Smooth and fast performance</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Great for creative work</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">macOS Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Why Choose macOS</h2>
+                  <p className="text-foreground/80">
+                    macOS offers unique advantages that make it popular for creative professionals.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.macOS.features.map((feature, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{feature.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{feature.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(comparisonImage.fileName)}
+                      alt={comparisonImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🍎</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding macOS</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding macOS helps you use Mac computers effectively, appreciate its design, and see why it's popular for creative work. This knowledge helps you make informed decisions about which computer to use.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/4")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/6")}>
+                  Next Topic: Mobile OS →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 6: Mobile OS - Image Left + Text Right with Cards */}
+      {moduleId === 6 && module6Sections && topicId === "6" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.mobileOS.images;
+
+        return (
+          <div id="topic-mobile-os" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile Operating Systems</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Mobile OS</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.mobileOS.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Designed for touch screens</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Millions of apps available</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Works on phones and tablets</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile OS Features</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">What Makes Mobile OS Special</h2>
+                  </div>
+                  <div className="space-y-4">
+                    {module6Sections.mobileOS.features.map((feature, index) => (
+                      <Card key={index} className="p-6 border border-border/70">
+                        <div className="flex items-start gap-4">
+                          <div className="text-4xl">{feature.icon}</div>
+                          <div>
+                            <h3 className="text-xl font-semibold text-primary mb-2">{feature.name}</h3>
+                            <p className="text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(comparisonImage.fileName)}
+                      alt={comparisonImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📱</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Mobile OS</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding mobile OS helps you use your smartphone better, choose the right apps, and understand how phones work. This knowledge is essential in our mobile-first world.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/5")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/7")}>
+                  Next Topic: Drivers →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 7: Drivers - Text Left + Image Right, Cards Grid, Separate Section 3 */}
+      {moduleId === 6 && module6Sections && topicId === "7" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.drivers.images;
+
+        return (
+          <div id="topic-drivers" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Device Drivers</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Drivers</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.drivers.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Connect hardware to OS</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Make devices work correctly</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Needed for printers and graphics cards</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Driver Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">How Drivers Work</h2>
+                  <p className="text-foreground/80">
+                    Different types of drivers help different hardware devices work with your computer.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.drivers.driverTypes.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{type.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔌</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Drivers</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding drivers helps you fix device problems, install new hardware, and keep your computer working with all your devices. This knowledge is essential for troubleshooting hardware issues.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/6")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/8")}>
+                  Next Topic: Software Installation & Uninstallation →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 8: Software Installation & Uninstallation - Image Left + Text Right, Full-width Overlay */}
+      {moduleId === 6 && module6Sections && topicId === "8" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.softwareInstallation.images;
+
+        return (
+          <div id="topic-software-installation-uninstallation" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Software Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Software Installation & Uninstallation</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.softwareInstallation.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Download installer file</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Follow setup wizard</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Remove programs properly</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Installation Steps</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">How to Install and Remove Software</h2>
+                  <p className="text-foreground/80">
+                    Follow these steps to properly install and uninstall programs on your computer.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.softwareInstallation.steps.map((step, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{step.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{step.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">Installation Process</h3>
+                      <p className="text-lg text-white/90">
+                        Installing software adds programs to your computer, while uninstalling removes them safely. Following the proper steps ensures your computer stays organized and runs smoothly.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💿</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Installation</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding installation and uninstallation helps you add programs safely, remove them properly, and keep your computer clean and organized. This knowledge prevents problems and keeps your system running smoothly.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/7")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/9")}>
+                  Next Topic: Updates & Patches →
+                </Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 6 Topic 9: Updates & Patches - Text Left + Image Right, Cards Grid with Image Inside */}
+      {moduleId === 6 && module6Sections && topicId === "9" && (() => {
+        const {
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module6Sections.updatesPatches.images;
+
+        return (
+          <div id="topic-updates-patches" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Software Updates</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Updates & Patches</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module6Sections.updatesPatches.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Fix security problems</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Add new features</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Keep computer safe</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Update Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Why Updates Matter</h2>
+                  <p className="text-foreground/80">
+                    Different types of updates keep your software secure and working well.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module6Sections.updatesPatches.updateTypes.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{type.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(comparisonImage.fileName)}
+                      alt={comparisonImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔄</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Updates</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding updates helps you keep your computer safe from hackers, get new features, and fix problems. This knowledge is essential for maintaining a secure and well-functioning computer.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/6/topic/8")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/1")}>Next Module: File Systems & Data Management →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 1: File Organization - Text Left + Image Right, Cards Grid, Separate Section 3 */}
+      {moduleId === 7 && module7Sections && topicId === "1" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.fileOrganization.images;
+
+        return (
+          <div id="topic-file-organization" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">File Organization</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.fileOrganization.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Folders group related files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Good names help you find files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Organized files save time</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Organization Concepts</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Understanding File Organization</h2>
+                  <p className="text-foreground/80">
+                    Learn the key concepts that help you organize files effectively.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module7Sections.fileOrganization.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📁</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Organization</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding file organization helps you find files quickly, keep your computer neat, and work more efficiently. This knowledge is essential for managing your digital files effectively.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/2")}>Next Topic: File Operations →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 2: File Operations - Image Left + Text Right, Cards Grid with Image Inside */}
+      {moduleId === 7 && module7Sections && topicId === "2" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.fileOperations.images;
+
+        return (
+          <div id="topic-file-operations" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">File Operations</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.fileOperations.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Create new files and folders</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Copy and move files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Rename and delete files</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Common Operations</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">File Operations You Can Do</h2>
+                  <p className="text-foreground/80">
+                    Learn the basic file operations that help you manage your documents.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                  {module7Sections.fileOperations.operations.map((operation, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{operation.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{operation.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{operation.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📋</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Operations</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding file operations helps you manage your documents effectively, organize your files, and work more efficiently. This knowledge is essential for everyday computer use.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/1")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/3")}>Next Topic: File Types →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 3: File Types - Text Left + Image Right, Cards Grid, Full-width Overlay */}
+      {moduleId === 7 && module7Sections && topicId === "3" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.fileTypes.images;
+
+        return (
+          <div id="topic-file-types" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">File Types</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.fileTypes.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Extensions show file type</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Different types for different uses</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Know which program opens each type</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Categories</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Common File Types</h2>
+                  <p className="text-foreground/80">
+                    Different file types serve different purposes. Learn about the main categories.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module7Sections.fileTypes.fileCategories.map((category, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{category.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{category.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{category.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">File Types in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Understanding file types helps you choose the right program to open files, share files correctly, and organize your documents. Each file type has its purpose and best use case.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📑</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding file types helps you open files with the right program, share files correctly, and organize your documents effectively. This knowledge is essential for working with digital files.
+                </p>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/2")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/4")}>Next Topic: Compression →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 4: Compression - Image Left + Text Right, Cards Grid, Separate Section 3 */}
+      {moduleId === 7 && module7Sections && topicId === "4" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.compression.images;
+
+        return (
+          <div id="topic-compression" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Compression</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.compression.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Makes files smaller</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Saves storage space</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Easier to share files</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Compression Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">How Compression Works</h2>
+                  <p className="text-foreground/80">
+                    Learn about different compression formats and their benefits.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module7Sections.compression.compressionTypes.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{type.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🗜️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Compression</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding compression helps you save storage space, share files faster, and manage your files more efficiently. This knowledge is essential for working with large files and limited storage.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/3")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/5")}>Next Topic: Backup Basics →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 5: Backup Basics - Text Left + Image Right, Cards Grid with Image Inside */}
+      {moduleId === 7 && module7Sections && topicId === "5" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.backupBasics.images;
+
+        return (
+          <div id="topic-backup-basics" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Protection</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Backup Basics</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.backupBasics.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Protect important files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Recover lost data</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Keep files safe</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Backup Methods</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">How to Backup Files</h2>
+                  <p className="text-foreground/80">
+                    Learn different ways to backup your important files.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module7Sections.backupBasics.backupMethods.map((method, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{method.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{method.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{method.description}</p>
+                    </Card>
+                  ))}
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💾</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Backups</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding backups helps you protect your important files, recover from accidents, and keep your data safe. This knowledge is essential for preventing data loss.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/4")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/6")}>Next Topic: File Security →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 6: File Security - Image Left + Text Right, Image Left + Text Right with Cards */}
+      {moduleId === 7 && module7Sections && topicId === "6" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.fileSecurity.images;
+
+        return (
+          <div id="topic-file-security" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Protection</p>
+                  <h2 className="text-3xl font-semibold text-foreground">File Security</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.fileSecurity.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Protect files with passwords</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Use encryption for safety</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Control file access</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Security Methods</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-4">How to Secure Files</h2>
+                  </div>
+                  <div className="space-y-4">
+                    {module7Sections.fileSecurity.securityMethods.map((method, index) => (
+                      <Card key={index} className="p-6 border border-border/70">
+                        <div className="flex items-start gap-4">
+                          <div className="text-4xl">{method.icon}</div>
+                          <div>
+                            <h3 className="text-xl font-semibold text-primary mb-2">{method.name}</h3>
+                            <p className="text-sm text-foreground/80 leading-relaxed">{method.description}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(overviewImage.fileName)}
+                      alt={overviewImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${overviewImage.fileName}. ${overviewImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔒</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Security</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding file security helps you protect your personal information, keep files private, and prevent unauthorized access. This knowledge is essential for keeping your data safe.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/5")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/7")}>Next Topic: Searching Files →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 7: Searching Files - Text Left + Image Right, Cards Grid, Separate Section 3 */}
+      {moduleId === 7 && module7Sections && topicId === "7" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.searchingFiles.images;
+
+        return (
+          <div id="topic-searching-files" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Searching Files</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.searchingFiles.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Search by name or type</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Find files quickly</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Search inside files</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Search Methods</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">How to Search Files</h2>
+                  <p className="text-foreground/80">
+                    Learn different ways to find files on your computer.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module7Sections.searchingFiles.searchMethods.map((method, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{method.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{method.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{method.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔍</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding File Search</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding file search helps you find files quickly, save time, and work more efficiently. This knowledge is essential for managing large numbers of files.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/6")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/8")}>Next Topic: Recycle Bin & Restore →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 7 Topic 8: Recycle Bin & Restore - Image Left + Text Right, Cards Grid, Full-width Overlay */}
+      {moduleId === 7 && module7Sections && topicId === "8" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          comparison: comparisonImage,
+          whyMatters: whyMattersImage
+        } = module7Sections.recycleBinRestore.images;
+
+        return (
+          <div id="topic-recycle-bin-restore" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Recovery</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Recycle Bin & Restore</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.recycleBinRestore.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Deleted files go to Recycle Bin</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Restore files if deleted by mistake</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Empty bin to permanently delete</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recycle Bin Concepts</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">How Recycle Bin Works</h2>
+                  <p className="text-foreground/80">
+                    Learn about deleting, restoring, and managing files in Recycle Bin.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module7Sections.recycleBinRestore.recycleBinConcepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(comparisonImage.fileName)}
+                    alt={comparisonImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${comparisonImage.fileName}. ${comparisonImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">Recycle Bin in Action</h3>
+                      <p className="text-lg text-white/90">
+                        Recycle Bin gives you a safety net when deleting files. You can restore files if you delete them by mistake, but remember to empty the bin regularly to free up space.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🗑️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Recycle Bin</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Understanding Recycle Bin helps you recover deleted files, manage storage space, and delete files safely. This knowledge is essential for file management and data recovery.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/7/topic/7")}>← Previous Topic</Button>
                 <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
               </div>
             </section>
