@@ -1,0 +1,2829 @@
+﻿  const getModule1Sections = () => {
+    return {
+      hero: {
+        title: "INTRODUCTION TO COMPUTERS",
+        subtitle: "Understand how the IPO (Input â†’ Process â†’ Output) cycle, core characteristics, and everyday devices define a computer.",
+        summary:
+          "A computer is an electronic machine that accepts input, processes it using instructions, and produces meaningful output. Knowing the IPO cycle, the key characteristics (speed, accuracy, storage, diligence, automation, reliability), and real-world examples builds a solid foundation before diving into types of computers."
+      },
+      ipo: {
+        title: "IPO (Input â†’ Process â†’ Output) Cycle",
+        description:
+          "Every computer follows the IPO cycle: it receives data through input devices, processes the instructions, and shows output through screens, speakers, or printers.",
+        steps: [
+          {
+            id: "input",
+            label: "Input (I)",
+            detail: "Devices capture raw data. Examples: keyboard, mouse, microphone, touchscreen."
+          },
+          {
+            id: "process",
+            label: "Process (P)",
+            detail: "The CPU (Central Processing Unit) and memory follow instructions to convert data into information."
+          },
+          {
+            id: "output",
+            label: "Output (O)",
+            detail: "Results are shown through monitors, speakers, printers, or haptic feedback."
+          }
+        ],
+        visualAsset: {
+          fileName: "module-media/m1-ipo.jpg",
+          alt: "Input devices on the left, CPU and gears in the middle, and monitor plus speakers on the right connected with glowing arrows representing the IPO (Input â†’ Process â†’ Output) cycle.",
+          brief:
+            "Illustrate the IPO cycle as a horizontal scene: on the left show realistic input devices (keyboard, mouse, microphone, touchscreen hand). In the center place a glowing CPU chip with animated arrows and floating code to represent processing. On the right depict a sleek monitor and speakers emitting light as the output. Connect the three zones with curved neon arrows labeled Input, Process, Output. Background: dark charcoal with subtle grid, highlight colors cyan and purple for a tech feel."
+          },
+        simulation: {
+          title: "Interactive IPO Playground",
+          description: "Type anything, send it through the virtual CPU, and watch it appear on the output screen to feel how data flows.",
+          inputLabel: "Type an input",
+          placeholder: "e.g., Hello Compu-Foundation",
+          buttonLabel: "Process Input",
+          helper: "Enter text to simulate the Input stage. The middle block shows processing, and the monitor on the right is your output.",
+          outputLabel: "Output Monitor",
+          idleScreen: "Awaiting input..."
+        }
+      },
+      characteristics: {
+        title: "Key Characteristics of a Computer",
+        intro:
+          "Computers are valued because they are fast, accurate, reliable, store huge data, and work without fatigue. These traits make them essential for study, work, and entertainment.",
+        traits: [
+          { id: "speed", icon: "âš¡", title: "Speed", description: "Performs millions of operations per second.", example: "Example: Searching an entire contact list instantly." },
+          { id: "accuracy", icon: "ðŸŽ¯", title: "Accuracy", description: "Gives correct results when instructions are correct.", example: "Example: Calculating bank interest without manual mistakes." },
+          { id: "storage", icon: "ðŸ’¾", title: "Storage", description: "Stores photos, videos, and documents for years.", example: "Example: Keeping thousands of images on a phone or laptop." },
+          { id: "diligence", icon: "ðŸ’ª", title: "Diligence", description: "Works continuously without getting tired.", example: "Example: Servers running websites 24/7." },
+          { id: "automation", icon: "ðŸ¤–", title: "Automation", description: "Follows programmed steps automatically.", example: "Example: Spreadsheet formulas updating totals automatically." },
+          { id: "versatility", icon: "ðŸ”„", title: "Versatility", description: "Handles multiple types of tasks.", example: "Example: Same device can stream video, edit documents, and play games." },
+          { id: "reliability", icon: "âœ…", title: "Reliability", description: "Consistent performance over long periods.", example: "Example: ATMs dispensing money accurately day and night." }
+          ]
+      },
+      examples: {
+        title: "Real-world Computer Examples",
+        intro: "From the outline: phones, ATMs, televisions, and embedded systems behave like computers because they all follow the IPO cycle.",
+        cards: [
+          {
+            id: "smartphone",
+            title: "Smartphone",
+            description: "Touchscreen and sensors capture input, the mobile CPU/GPU processes apps, and the display + speakers provide output."
+          },
+          {
+            id: "atm",
+            title: "ATM",
+            description: "Keypad/card reader input your request, the bank server processes the transaction, and cash or receipt is the output."
+          },
+          {
+            id: "smart-tv",
+            title: "Smart TV",
+            description: "Remote or voice input selects content, the built-in processor streams video, and the screen/speakers output the show."
+          },
+          {
+            id: "embedded",
+            title: "Embedded Systems",
+            description: "Appliances like washing machines or ACs use microcontrollers to process sensor input and control motors or displays."
+          }
+        ]
+      },
+      knowledgeCheck: {
+        title: "Quick Knowledge Check",
+        question: "Tap each scenario to reveal which IPO (Input â†’ Process â†’ Output) stage it highlights.",
+        tip: "Aim to explain the stage in your own words once it is revealed.",
+        items: [
+          {
+            id: "voice",
+            device: "Voice assistant listening to a command",
+            stageOrder: "1 / Input â†’ Process â†’ Output",
+            stage: "Input (I)",
+            explanation: "Microphone captures your voice for the system to interpret."
+          },
+          {
+            id: "photo",
+            device: "Phone camera applying portrait mode",
+            stageOrder: "2 / Input â†’ Process â†’ Output",
+            stage: "Process (P)",
+            explanation: "The processor analyses the image and blurs the background before showing the result."
+          },
+          {
+            id: "printer",
+            device: "Printer producing a document",
+            stageOrder: "3 / Input â†’ Process â†’ Output",
+            stage: "Output (O)",
+            explanation: "After the PC processes the document, the printer outputs the final pages."
+          }
+        ]
+      },
+      types: {
+        title: "Types of Computers",
+        intro:
+          "Different computers exist for different jobs. From giant supercomputers to the tiny chips inside household machines, each type follows the same IPO flow but at different scales.",
+        categories: [
+          { name: "Supercomputers", description: "Massive machines used for weather predictions, space research, and simulations." },
+          { name: "Servers", description: "Powerful systems that host websites, apps, or files for many users simultaneously." },
+          { name: "Desktops", description: "Workhorses for homes, schools, and officesâ€”easy to upgrade and repair." },
+          { name: "Laptops & Tablets", description: "Portable computers for study, work, and entertainment on the go." },
+          { name: "Smartphones", description: "Pocket-sized computers with touch input, sensors, and wireless connectivity." },
+          { name: "Embedded Systems", description: "Microcontrollers inside ATMs, washing machines, ACs, smart TVs, and vehicles." }
+        ],
+        images: {
+          hero: {
+            fileName: "module-media/types-combined.jpg",
+            alt: "Collage showing supercomputer racks, a desktop tower, an open laptop, tablet, smartphone, and tiny embedded chip arranged from largest to smallest.",
+            brief:
+              "Design a wide collage that lines up six devices from left to right: towering supercomputer racks, a powerful server tower, a desktop PC with monitor, a slim laptop, a tablet, and a smartphone plus a tiny microchip. Use soft gradient background with faint grid. Add thin neon arrows above them indicating the IPO flow from large-scale to pocket-sized machines."
+          },
+          everyday: {
+            fileName: "module-media/components-combined.jpg",
+            alt: "Modern desk with desktop monitor + tower on one side and an open laptop with notes on the other.",
+            brief:
+              "Create a cozy study desk scene: on the left place a desktop tower and monitor showing a simple dashboard; on the right an open laptop with sticky notes and headphones nearby. Keep lighting warm, include a chair, plant, and books to show a daily learning environment."
+          },
+          portable: {
+            fileName: "module-media/input-output-flow.jpg",
+            alt: "Panoramic banner where a student holds a tablet while smartphones float with app icons and motion trails.",
+            brief:
+              "Illustrate a panoramic mobile banner. Center a learner holding a tablet with stylus; surround them with floating smartphones that display maps, chat bubbles, and video icons. Add motion streaks and Wi-Fi symbols to emphasise mobility and always-on connectivity."
+          },
+          closing: {
+            fileName: "module-media/data-processing.jpg",
+            alt: "Isometric network diagram connecting a server rack, laptop, smartphone, smart appliances, and a car with glowing lines.",
+            brief:
+              "Draw an isometric circular network: at the top a server rack, then clockwise a desktop, laptop, smartphone, smart fridge, washing machine, and an electric car. Connect each with glowing lines leading to a central CPU chip labelled IPO. Background should be deep navy with subtle dotted grid."
+          }
+        }
+      },
+      hardwareBasics: {
+        title: "Hardware Basics",
+        intro: "Hardware refers to the physical parts of a computer. It is divided into external hardware (devices you touch) and internal hardware (components inside the cabinet).",
+        externalExamples: [
+          { name: "Keyboard", icon: "âŒ¨ï¸" },
+          { name: "Mouse", icon: "ðŸ–±ï¸" },
+          { name: "Monitor", icon: "ðŸ–¥ï¸" },
+          { name: "Printer", icon: "ðŸ–¨ï¸" },
+          { name: "Scanner", icon: "ðŸ“·" }
+        ],
+        internalExamples: ["CPU", "Motherboard", "RAM", "Power supply", "Storage drives"],
+        images: {
+          hero: {
+            fileName: "module-media/m1-hardware-hero.jpg",
+            alt: "Split view showing external devices on left and internal components on right",
+            brief: "Create a split-screen visual: left side shows external devices (keyboard, mouse, monitor) in a clean workspace; right side shows internal components (CPU chip, motherboard, RAM sticks) with a tech aesthetic. Use a subtle divider line in the middle. Background: soft gradient from light to dark."
+          },
+          external: {
+            fileName: "module-media/m1-hardware-external.jpg",
+            alt: "Desk setup showing keyboard, mouse, monitor, printer, and scanner",
+            brief: "Photograph or illustrate a modern desk workspace with all external hardware visible: keyboard and mouse on desk, monitor displaying content, printer on the side, and scanner nearby. Keep lighting warm and professional."
+          },
+          internal: {
+            fileName: "module-media/m1-hardware-internal.jpg",
+            alt: "Open computer case showing CPU, motherboard, RAM, power supply, and storage drives",
+            brief: "Show an open computer case with clearly visible internal components: CPU with heatsink, motherboard with slots, RAM sticks inserted, power supply unit, and storage drives (HDD/SSD). Add subtle labels or highlights. Background: dark tech aesthetic."
+          },
+          comparison: {
+            fileName: "module-media/m1-hardware-comparison.jpg",
+            alt: "Visual comparison diagram showing external devices connecting to internal components",
+            brief: "Design a comparison diagram: top half shows external devices (keyboard, mouse, monitor) with arrows pointing down; bottom half shows internal components (CPU, motherboard, RAM) with arrows pointing up. Connect them with flowing lines or cables. Use a clean, educational diagram style."
+          },
+          closing: {
+            fileName: "module-media/m1-hardware-connection.jpg",
+            alt: "Simple diagram showing how external devices connect to internal components via ports and cables",
+            brief: "Create a simple connection diagram: show external devices on the left (keyboard, mouse, monitor) connecting via cables/ports to internal components on the right (motherboard, CPU). Use arrows and clean lines. Style: minimalist tech diagram with soft colors."
+          }
+        }
+      },
+      softwareBasics: {
+        title: "Software Basics",
+        intro: "Software is the set of instructions that tells hardware what to do. Without software, hardware cannot function.",
+        categories: [
+          { title: "System Software", description: "Operating systems (Windows, macOS, Linux) that manage the whole computer." },
+          { title: "Application Software", description: "Apps like browsers, games, and office tools that help users accomplish tasks." },
+          { title: "Firmware", description: "Built-in code (BIOS/UEFI) stored on chips to start the computer." },
+          { title: "Drivers", description: "Small programs that help the OS communicate with hardware devices." }
+        ],
+        appExamples: [
+          { name: "Browser", icon: "ðŸŒ", examples: "Chrome, Firefox" },
+          { name: "Office", icon: "ðŸ“„", examples: "Word, Excel" },
+          { name: "Games", icon: "ðŸŽ®", examples: "Various games" },
+          { name: "Creative", icon: "ðŸŽ¨", examples: "Photoshop" }
+        ],
+        images: {
+          hero: {
+            fileName: "module-media/m1-software-hero.jpg",
+            alt: "Split view showing software layers connecting to hardware components",
+            brief: "Create a split-screen visual: left side shows software layers (apps, OS, firmware) with icons; right side shows hardware components (CPU, RAM, motherboard). Connect them with arrows showing 'Software tells hardware what to do'. Background: clean tech aesthetic with subtle gradients."
+          },
+          system: {
+            fileName: "module-media/m1-software-system.jpg",
+            alt: "Split view showing Windows, macOS, and Linux operating systems",
+            brief: "Create a split-screen visual showing three operating systems side by side: Windows desktop on left, macOS interface in center, Linux desktop on right. Each should show their distinctive UI elements. Background: clean tech aesthetic with subtle gradients."
+          },
+          apps: {
+            fileName: "module-media/m1-software-apps.jpg",
+            alt: "Wide banner with floating app icons for browsers, office tools, games, and creative software",
+            brief: "Design a wide banner with floating app icons: browser icons (Chrome, Firefox), office icons (Word, Excel), game icons, and creative tool icons (Photoshop, etc.). Arrange them in a flowing, dynamic layout. Background: soft gradient with tech elements."
+          },
+          firmware: {
+            fileName: "module-media/m1-software-firmware.jpg",
+            alt: "Computer booting sequence showing BIOS/UEFI screen transitioning to OS loading",
+            brief: "Illustrate a computer boot sequence: show BIOS/UEFI screen (black background with white text) transitioning to OS loading screen. Include subtle arrows or progression indicators. Style: technical but clean."
+          },
+          layers: {
+            fileName: "module-media/m1-software-layers.jpg",
+            alt: "Layered diagram showing Application Software, System Software, Firmware & Drivers, and Hardware stacked",
+            brief: "Create a layered stack diagram: top layer labeled 'Application Software' (colorful apps), second layer 'System Software (OS)' (OS interface), third layer 'Firmware & Drivers' (chip/code symbols), bottom layer 'Hardware' (computer components). Use clear visual separation between layers."
+          },
+          closing: {
+            fileName: "module-media/m1-software-connection.jpg",
+            alt: "Simple diagram showing hardware and software connecting to create a working computer",
+            brief: "Design a simple connection diagram: left side shows hardware components (CPU, RAM, etc.), right side shows software icons (OS, apps), with arrows connecting them to a central 'Working Computer' icon in the middle. Use clean lines and soft colors."
+          }
+        }
+      },
+      hardwareVsSoftware: {
+        title: "Hardware vs Software",
+        intro: "Hardware and software rely on each other. Hardware provides the body, software provides the brain.",
+        comparisons: [
+          { label: "Definition", hardware: "Physical components (CPU, RAM, monitor)", software: "Programs and instructions" },
+          { label: "Visibility", hardware: "Visible and touchable", software: "Invisible, stored as code" },
+          { label: "Dependency", hardware: "Needs software to perform tasks", software: "Needs hardware to run" },
+          { label: "Examples", hardware: "Keyboard, motherboard", software: "Windows, Chrome, MS Word" }
+        ],
+        mapping: [
+          { action: "Typing with keyboard", hardware: "Keyboard", software: "Word processor" },
+          { action: "Printing a file", hardware: "Printer", software: "Printer driver + document app" },
+          { action: "Watching a video", hardware: "Monitor & speakers", software: "Media player" }
+        ],
+        images: {
+          comparison: {
+            fileName: "module-media/m1-hw-sw-comparison.jpg",
+            alt: "Split visual showing hardware components on left and software icons on right with connecting arrows",
+            brief: "Create a split-screen visual: left side shows hardware components (CPU chip, RAM stick, keyboard, monitor) in a tech aesthetic; right side shows software icons (OS logo, app icons, code symbols) with flowing arrows connecting them. Background: soft gradient with tech elements."
+          },
+          mapping: {
+            fileName: "module-media/m1-hw-sw-mapping.jpg",
+            alt: "Visual flow diagram showing actions like typing, printing, and watching video with hardware and software connections",
+            brief: "Design a flow diagram showing three actions: 1) Typing â†’ Keyboard (hardware) â†’ Word processor (software), 2) Printing â†’ Printer (hardware) â†’ Driver + App (software), 3) Watching video â†’ Monitor/Speakers (hardware) â†’ Media player (software). Use arrows and clean lines. Style: educational diagram."
+          },
+          closing: {
+            fileName: "module-media/m1-hw-sw-connection.jpg",
+            alt: "Circular diagram showing hardware and software working together with arrows indicating mutual dependency",
+            brief: "Create a circular diagram: center shows a computer icon, surrounded by hardware components (CPU, RAM, keyboard) on one side and software icons (OS, apps) on the other, with bidirectional arrows showing mutual dependency. Background: clean tech aesthetic."
+          }
+        }
+      },
+      inputDevices: {
+        title: "Input Devices",
+        intro: "Input devices send data to the computer. Each device is suited for a different type of data.",
+        devices: [
+          { name: "Keyboard", icon: "âŒ¨ï¸", description: "Alphabet, numbers, shortcuts" },
+          { name: "Mouse / Touchpad", icon: "ðŸ–±ï¸", description: "Pointer control, clicks, drag & drop" },
+          { name: "Microphone", icon: "ðŸŽ¤", description: "Captures voice and audio" },
+          { name: "Scanner", icon: "ðŸ“·", description: "Turns paper documents into digital files" },
+          { name: "Webcam", icon: "ðŸ“¹", description: "Captures live video" },
+          { name: "Touchscreen", icon: "ðŸ‘†", description: "Direct touch input used in phones, kiosks, and tablets" }
+        ],
+        images: {
+          common: {
+            fileName: "module-media/m1-input-common.jpg",
+            alt: "Desk setup showing keyboard, mouse, microphone, scanner, webcam, and touchscreen devices",
+            brief: "Photograph or illustrate a modern desk workspace with all common input devices visible: keyboard and mouse on desk, microphone nearby, scanner on the side, webcam on monitor, and a tablet with touchscreen. Keep lighting warm and professional."
+          },
+          flow: {
+            fileName: "module-media/m1-input-flow.jpg",
+            alt: "Flow diagram showing input devices connecting to CPU and then to output",
+            brief: "Create a flow diagram: left side shows input devices (keyboard, mouse, microphone) with arrows pointing to a central CPU icon, then arrows pointing to output devices (monitor, speakers) on the right. Use clean lines and tech aesthetic."
+          },
+          specialized: {
+            fileName: "module-media/m1-input-specialized.jpg",
+            alt: "Various specialized input devices like game controllers, drawing tablets, and barcode scanners",
+            brief: "Design a banner showing specialized input devices: game controllers, drawing tablets with stylus, barcode scanners, MIDI keyboards, and other niche devices. Arrange them in a flowing layout. Background: tech gradient."
+          },
+          closing: {
+            fileName: "module-media/m1-input-connection.jpg",
+            alt: "Simple diagram showing different input methods connecting to a central computer",
+            brief: "Create a simple connection diagram: show various input methods (keyboard, mouse, touch, voice) arranged around a central computer icon, with lines connecting them. Use clean, minimalist style with soft colors."
+          }
+        }
+      },
+      outputDevices: {
+        title: "Output Devices",
+        intro: "Output devices display or produce information from the computer. They convert digital data into forms you can see, hear, or touch.",
+        devices: [
+          { name: "Monitor", icon: "ðŸ–¥ï¸", description: "Displays visual information on screen" },
+          { name: "Speakers", icon: "ðŸ”Š", description: "Produces sound and audio output" },
+          { name: "Printer", icon: "ðŸ–¨ï¸", description: "Creates physical copies on paper" },
+          { name: "Projector", icon: "ðŸ“½ï¸", description: "Projects images onto large surfaces" }
+        ],
+        images: {
+          common: {
+            fileName: "module-media/m1-output-common.jpg",
+            alt: "Common output devices: monitor, speakers, printer, and projector",
+            brief: "Visual showing monitor, speakers, printer, and projector arranged on a desk or workspace. Keep lighting warm and professional."
+          },
+          flow: {
+            fileName: "module-media/m1-output-flow.jpg",
+            alt: "Diagram showing how data flows from computer to output devices",
+            brief: "Flow diagram from CPU to monitor, speakers, and printer. Show arrows indicating data flow from computer to each output device. Use clean lines and tech aesthetic."
+          },
+          specialized: {
+            fileName: "module-media/m1-output-specialized.jpg",
+            alt: "Specialized output devices like 3D printers, braille displays, and large format printers",
+            brief: "Design a banner showing specialized output devices: 3D printers, braille displays, large format printers, and other niche devices. Arrange them in a flowing layout. Background: tech gradient."
+          },
+          closing: {
+            fileName: "module-media/m1-output-closing.jpg",
+            alt: "Person using multiple output devices together",
+            brief: "User interacting with monitor, speakers, and printer simultaneously. Show a person at a workstation using all three devices. Keep it realistic and relatable."
+          }
+        }
+      },
+      ioDevices: {
+        title: "I/O (Input + Output) Devices",
+        intro: "Some devices can both send data to the computer and receive data from it. These dual-purpose devices combine input and output capabilities in one.",
+        devices: [
+          { name: "Touchscreen", icon: "ðŸ‘†", description: "Touches are input, visuals are output" },
+          { name: "Headset with Mic", icon: "ðŸŽ§", description: "Ear cups play sound, microphone captures voice" },
+          { name: "USB Devices", icon: "ðŸ’¾", description: "Transfer files in both directions" },
+          { name: "Bluetooth Devices", icon: "ðŸ“¶", description: "Wireless two-way communication" }
+        ],
+        images: {
+          common: {
+            fileName: "module-media/m1-io-common.jpg",
+            alt: "I/O devices: touchscreen, headset with microphone, USB devices, and Bluetooth devices",
+            brief: "Visual showing touchscreen device, headset with microphone, USB flash drive, and Bluetooth devices. Arrange them to show both input and output capabilities. Keep lighting warm and professional."
+          },
+          flow: {
+            fileName: "module-media/m1-io-flow.jpg",
+            alt: "Diagram showing bidirectional data flow in I/O devices",
+            brief: "Flow diagram showing bidirectional arrows: data going from device to computer (input) and from computer to device (output). Show touchscreen, headset, and USB/Bluetooth with dual arrows. Use clean lines and tech aesthetic."
+          },
+          examples: {
+            fileName: "module-media/m1-io-examples.jpg",
+            alt: "Real-world examples of I/O devices in use",
+            brief: "Show real-world examples: person using touchscreen tablet, someone with gaming headset, transferring files via USB, and connecting Bluetooth devices. Keep it realistic and relatable."
+          },
+          closing: {
+            fileName: "module-media/m1-io-closing.jpg",
+            alt: "Diagram showing how I/O devices complete the computer interaction cycle",
+            brief: "Create a diagram showing the complete cycle: input â†’ process â†’ output, with I/O devices highlighted as devices that can do both. Show how they complete the interaction loop. Use clean, minimalist style."
+          }
+        }
+      },
+      navigation: {
+        nextLabel: "Next Topic: Types of Computers",
+        nextHash: "#topic-types-of-computers"
+      }
+    };
+  };
+
+  // Module 2 specific content sections (Topic-based structure)
+  const getModule2Sections = () => {
+    return {
+      cpuBasics: {
+        title: "CPU Basics",
+        intro: "The Central Processing Unit (CPU) is the brain of your computer. It executes instructions, processes data, and coordinates all system operations.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-cpu-hero.jpg",
+            alt: "CPU as the brain of the computer, connecting to other components",
+            brief: "Create a visual showing CPU as the central brain: CPU chip in center with glowing connections to RAM, storage, motherboard, and other components. Use a tech aesthetic with soft gradients. Show the CPU as the command center."
+          },
+          overview: {
+            fileName: "module-media/m2-cpu-overview.jpg",
+            alt: "Modern CPU chip top view with labels showing key parts",
+            brief: "Show a modern CPU chip (Intel/AMD style) from top view with visible pins/socket. Include subtle labels: 'CPU Core', 'Cache', 'Socket'. Background: clean tech aesthetic with soft lighting."
+          },
+          coresComparison: {
+            fileName: "module-media/m2-cpu-cores-comparison.jpg",
+            alt: "Visual comparison diagram showing Single Core vs Dual Core vs Quad Core",
+            brief: "Create a visual comparison: left shows single core (1 worker), middle shows dual core (2 workers), right shows quad core (4 workers). Use simple icons or silhouettes. Show how more cores = more parallel processing. Clean, educational style."
+          },
+          aluCu: {
+            fileName: "module-media/m2-cpu-alu-cu.jpg",
+            alt: "CPU internal architecture diagram showing ALU and CU with data paths",
+            brief: "Create a simplified CPU architecture diagram: show ALU (Arithmetic Logic Unit) on left with math symbols (+, -, Ã—, Ã·) and logic gates, CU (Control Unit) on right with instruction flow arrows. Connect them with data paths. Use clean lines and educational style."
+          },
+          inAction: {
+            fileName: "module-media/m2-cpu-in-action.jpg",
+            alt: "CPU processing visualization with data streams flowing",
+            brief: "Show a stylized visualization of CPU processing: data streams flowing into a CPU icon, processing happening (animated-style arrows), results flowing out. Use modern tech aesthetic with gradient colors. Show speed and efficiency."
+          }
+        },
+        coreExamples: [
+          { name: "Single Core", icon: "ðŸ”µ", description: "One processing unit, handles one task at a time" },
+          { name: "Multi-Core", icon: "ðŸ”µðŸ”µ", description: "Multiple cores work together, handling many tasks simultaneously" },
+          { name: "Threads", icon: "âš¡", description: "Each core can process multiple threads, like having multiple workers in one factory" },
+          { name: "Performance", icon: "ðŸš€", description: "More cores and threads = faster multitasking and better performance" }
+        ]
+      },
+      ramBasics: {
+        title: "RAM Basics",
+        intro: "Random Access Memory (RAM) is your computer's temporary workspace. It stores data that the CPU needs right now, making your computer fast and responsive.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-ram-hero.jpg",
+            alt: "RAM as temporary workspace, connecting CPU and storage",
+            brief: "Create a visual showing RAM as the temporary workspace: RAM sticks in center with data flowing from storage (slow) to RAM (fast) to CPU. Show the concept of active data storage. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-ram-overview.jpg",
+            alt: "RAM stick (DDR4/DDR5) with labels showing key parts and specifications",
+            brief: "Show a modern RAM stick (DDR4 or DDR5) from side view with visible chips, connectors, and labels. Include subtle labels: 'Memory Chips', 'Connector', 'Capacity'. Background: clean tech aesthetic with soft lighting."
+          },
+          speedComparison: {
+            fileName: "module-media/m2-ram-speed-comparison.jpg",
+            alt: "Visual comparison showing Low RAM vs High RAM performance",
+            brief: "Create a visual comparison: left shows low RAM (4GB) with slow performance indicators, right shows high RAM (16GB) with fast performance indicators. Show apps running smoothly vs lagging. Clean, educational style."
+          },
+          usagePatterns: {
+            fileName: "module-media/m2-ram-usage-patterns.jpg",
+            alt: "Diagram showing RAM being filled with apps, system processes, cached data, and temporary files",
+            brief: "Create a diagram showing RAM usage: show RAM bar/chart being filled with different colored sections representing active programs, system processes, cached data, and temporary files. Use clear visual separation. Style: educational diagram."
+          },
+          inAction: {
+            fileName: "module-media/m2-ram-in-action.jpg",
+            alt: "Visualization of data flowing in/out of RAM with CPU accessing it",
+            brief: "Show a stylized visualization of RAM processing: data streams flowing into RAM from storage, CPU accessing RAM quickly, results flowing out. Use modern tech aesthetic with gradient colors. Show speed and efficiency."
+          }
+        },
+        speedExamples: [
+          { name: "Speed", icon: "âš¡", description: "Faster RAM = faster data access for CPU" },
+          { name: "Capacity", icon: "ðŸ“¦", description: "More RAM = more apps running simultaneously" },
+          { name: "Multitasking", icon: "ðŸ”„", description: "More RAM = smoother multitasking experience" },
+          { name: "Swapping", icon: "ðŸ’¾", description: "Less RAM = slower (uses hard drive swap)" }
+        ]
+      },
+      romBasics: {
+        title: "ROM Basics",
+        intro: "Read-Only Memory (ROM) stores permanent instructions that your computer needs to start up. Unlike RAM, ROM keeps its data even when the power is off.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-rom-hero.jpg",
+            alt: "ROM chip showing permanent storage and boot instructions",
+            brief: "Create a visual showing ROM as permanent storage: ROM chip in center with boot instructions flowing from it, connecting to computer startup process. Show the concept of non-volatile memory. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-rom-overview.jpg",
+            alt: "ROM chip (BIOS/UEFI) with labels showing key parts and boot instructions",
+            brief: "Show a ROM chip (BIOS/UEFI chip) with visible components and labels. Include subtle labels: 'Boot Instructions', 'Firmware', 'Non-Volatile'. Background: clean tech aesthetic with soft lighting."
+          },
+          bootProcess: {
+            fileName: "module-media/m2-rom-boot-process.jpg",
+            alt: "Boot process diagram showing Power On â†’ ROM â†’ BIOS/UEFI â†’ OS Loading",
+            brief: "Create a boot process diagram: show sequence from power button press â†’ ROM chip â†’ BIOS/UEFI screen â†’ OS loading. Use arrows and progression indicators. Clean, educational diagram style."
+          },
+          nonVolatile: {
+            fileName: "module-media/m2-rom-non-volatile.jpg",
+            alt: "Comparison diagram showing ROM vs RAM characteristics",
+            brief: "Create a comparison diagram: left shows ROM (permanent, non-volatile, boot instructions) with 'Keeps data when off' indicator, right shows RAM (temporary, volatile, active data) with 'Clears when off' indicator. Use clear visual separation. Style: educational diagram."
+          },
+          inAction: {
+            fileName: "module-media/m2-rom-in-action.jpg",
+            alt: "Computer boot sequence visualization showing ROM's role",
+            brief: "Show a stylized visualization of computer boot sequence: power button â†’ ROM providing instructions â†’ BIOS/UEFI screen appearing â†’ OS loading. Use modern tech aesthetic with gradient colors. Show the startup process."
+          }
+        },
+        purposeExamples: [
+          { name: "Boot Instructions", icon: "ðŸš€", description: "First code computer reads when starting" },
+          { name: "Permanent Storage", icon: "ðŸ’¿", description: "Data never changes, always available" },
+          { name: "Non-Volatile", icon: "ðŸ”’", description: "Keeps data when power is turned off" },
+          { name: "System Setup", icon: "âš™ï¸", description: "BIOS/UEFI settings and configuration" }
+        ]
+      },
+      storageConcepts: {
+        title: "Storage Concepts",
+        intro: "Understanding the difference between volatile and non-volatile storage helps you make informed decisions about data management and device selection.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-storage-hero.jpg",
+            alt: "Storage hierarchy showing RAM, cache, SSD, and HDD",
+            brief: "Create a visual hierarchy showing different storage types: RAM at top (fastest, volatile), cache, SSD (fast, non-volatile), HDD (slower, non-volatile). Show speed and capacity differences. Use a modern tech aesthetic with gradients."
+          },
+          hierarchy: {
+            fileName: "module-media/m2-storage-hierarchy.jpg",
+            alt: "Storage hierarchy diagram showing RAM â†’ Cache â†’ SSD â†’ HDD",
+            brief: "Create a storage hierarchy diagram: vertical or horizontal flow showing RAM (fastest, smallest) â†’ Cache â†’ SSD â†’ HDD (slowest, largest). Include speed indicators and capacity labels. Clean educational diagram style."
+          },
+          workflow: {
+            fileName: "module-media/m2-storage-workflow.jpg",
+            alt: "Data flow diagram showing CPU â†’ RAM â†’ Storage â†’ Files",
+            brief: "Create a data flow diagram: show how data moves from CPU â†’ RAM (active processing) â†’ Storage (saved files). Include arrows and labels. Show the complete data lifecycle. Modern tech diagram style."
+          },
+          decision: {
+            fileName: "module-media/m2-storage-decision.jpg",
+            alt: "Storage decision tree diagram for choosing storage types",
+            brief: "Create a decision tree diagram: show when to use different storage types based on needs (speed, capacity, cost). Include decision points and recommendations. Clean, educational flowchart style."
+          }
+        },
+        storageTypes: [
+          { name: "Volatile", icon: "âš¡", description: "Temporary, fast, clears on power off", examples: "RAM, Cache" },
+          { name: "Non-Volatile", icon: "ðŸ’¾", description: "Permanent, persistent, keeps data", examples: "HDD, SSD" },
+          { name: "Hybrid", icon: "ðŸ”„", description: "Combines both for optimal performance", examples: "Hybrid drives" }
+        ],
+        storagePurposes: [
+          "Operating System Storage - Fast, reliable storage for system files and boot process",
+          "Application Storage - Where your programs and apps are installed",
+          "File & Document Storage - Your photos, videos, documents, and personal files",
+          "Backup & Archive Storage - Long-term storage for backups and rarely accessed data",
+          "Temporary & Cache Storage - Fast access for active processes and temporary data"
+        ]
+      },
+      hddBasics: {
+        title: "HDD - Hard Disk Drive",
+        intro: "Hard Disk Drives use spinning magnetic platters to store data. They offer large capacity at affordable prices, making them ideal for bulk storage.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-hdd-hero.jpg",
+            alt: "HDD showing external view with labels and ports",
+            brief: "Create a visual of a 3.5\" HDD: show the external view with labels, SATA ports, and power connector. Include capacity indicators. Use a clean tech aesthetic with soft lighting."
+          },
+          external: {
+            fileName: "module-media/m2-hdd-external.jpg",
+            alt: "HDD external view showing 3.5\" drive with labels and ports",
+            brief: "Show a 3.5\" HDD from the outside: visible labels, SATA data port, power connector. Include subtle labels for key parts. Background: clean tech aesthetic."
+          },
+          internal: {
+            fileName: "module-media/m2-hdd-internal.jpg",
+            alt: "HDD cross-section diagram showing platters, read/write heads, actuator arm, spindle, and motor",
+            brief: "Create a cross-section diagram of HDD internals: show platters (magnetic disks), read/write heads, actuator arm, spindle (rotation axis), and motor. Include labels and annotations. Educational diagram style."
+          },
+          useCases: {
+            fileName: "module-media/m2-hdd-use-cases.jpg",
+            alt: "HDD use cases showing desktop computers, servers, external backup drives, NAS, and gaming consoles",
+            brief: "Show HDDs in different applications: desktop computer, server rack, external backup drive, NAS device, gaming console. Arrange them in a flowing layout. Background: tech gradient."
+          }
+        },
+        advantages: [
+          "Large Capacity - Up to 20TB+ available",
+          "Affordable - Cost per GB is very low",
+          "Proven Technology - Reliable for decades",
+          "Good for Archives - Long-term storage solution"
+        ],
+        disadvantages: [
+          "Slower than SSD - Mechanical parts limit speed",
+          "Moving Parts - More wear and potential failure",
+          "More Fragile - Sensitive to movement and shocks",
+          "Higher Power Usage - Motor requires more energy",
+          "Noise and Vibration - Spinning platters create sound",
+          "Slower Boot Times - Takes longer to start up",
+          "Not Ideal for Laptops - Movement can damage drives"
+        ],
+        useCases: [
+          "Desktop Computers - Primary storage for many desktops",
+          "Servers & Data Centers - Bulk storage for servers",
+          "External Backup Drives - Portable backup solutions",
+          "Network Attached Storage (NAS) - Shared storage for networks",
+          "Gaming Consoles - Storage for games and media"
+        ]
+      },
+      ssdBasics: {
+        title: "SSD & NVMe",
+        intro: "Solid State Drives (SSD) use flash memory chips instead of spinning disks. They're faster, quieter, and more reliable than HDDs, making them ideal for modern computing.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-ssd-hero.jpg",
+            alt: "SSD overview showing 2.5\" SATA SSD and M.2 NVMe SSD",
+            brief: "Create a visual showing both SSD types: 2.5\" SATA SSD and M.2 NVMe SSD side by side. Show the compact form factors and connection types. Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-ssd-overview.jpg",
+            alt: "SSD external view showing 2.5\" SATA SSD and M.2 NVMe SSD",
+            brief: "Show both SSD types from external view: 2.5\" SATA SSD with visible SATA connector, and M.2 NVMe SSD showing the compact form factor. Include labels. Background: clean tech aesthetic."
+          },
+          speedComparison: {
+            fileName: "module-media/m2-ssd-speed-comparison.jpg",
+            alt: "Speed comparison chart showing SSD vs HDD performance",
+            brief: "Create a speed comparison chart: bar chart showing SSD vs HDD speeds for boot time, file read, and access time. Include visual indicators. Clean, educational diagram style."
+          },
+          nvme: {
+            fileName: "module-media/m2-ssd-nvme.jpg",
+            alt: "NVMe SSD diagram showing M.2 form factor and PCIe connection",
+            brief: "Create an NVMe SSD diagram: show M.2 form factor, PCIe connection, and how it bypasses SATA. Include labels for key parts. Modern tech diagram style."
+          },
+          longevity: {
+            fileName: "module-media/m2-ssd-longevity.jpg",
+            alt: "SSD wear leveling diagram showing data distribution",
+            brief: "Create a wear leveling diagram: show how data is distributed across memory cells to extend lifespan. Include visual representation of wear leveling process. Educational diagram style."
+          },
+          decision: {
+            fileName: "module-media/m2-ssd-decision.jpg",
+            alt: "Decision diagram showing when to use SSD vs HDD",
+            brief: "Create a decision diagram: show when to use SSD vs HDD based on needs (speed, capacity, cost). Include decision points and recommendations. Clean flowchart style."
+          }
+        },
+        advantages: [
+          { name: "Fast", icon: "âš¡", description: "Boot in 10-15 sec, 500+ MB/s read speed" },
+          { name: "Quiet", icon: "ðŸ”‡", description: "No moving parts = silent operation" },
+          { name: "Durable", icon: "ðŸ’ª", description: "Shock resistant, long lifespan" },
+          { name: "Value", icon: "ðŸ’°", description: "Price per GB dropping, great value" }
+        ],
+        speedDetails: [
+          "Boot Time: 10-15 sec (SSD) vs 30-60 sec (HDD)",
+          "File Read: 500+ MB/s (SSD) vs 100-150 MB/s (HDD)",
+          "No mechanical delay - Instant access",
+          "Perfect for operating systems and frequently used apps"
+        ],
+        nvmeDetails: {
+          sata: "SATA SSD: ~550 MB/s",
+          nvme: "NVMe SSD: 3,000+ MB/s"
+        }
+      },
+      motherboardBasics: {
+        title: "Motherboard",
+        intro: "The motherboard is the foundation that connects all components together. It provides power, data pathways, and communication between CPU, RAM, storage, and other hardware.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-motherboard-hero.jpg",
+            alt: "Motherboard overview showing all key components and connections",
+            brief: "Create a visual showing motherboard as the foundation: motherboard in center with all components (CPU, RAM, GPU, SSD) connected. Show the central role. Use a tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-motherboard-overview.jpg",
+            alt: "Motherboard annotated with key components labeled",
+            brief: "Show a motherboard with visible components and labels: CPU socket, RAM slots, PCIe slots, power connectors, SATA ports, I/O ports. Include clear annotations. Background: clean tech aesthetic."
+          },
+          cpuSocket: {
+            fileName: "module-media/m2-motherboard-cpu-socket.jpg",
+            alt: "CPU socket close-up showing LGA/AM4/PGA style with pins and lock mechanism",
+            brief: "Show CPU socket close-up: visible pins, lock mechanism, socket type labels (LGA/AM4/PGA). Include annotations for key parts. Educational diagram style."
+          },
+          ramPower: {
+            fileName: "module-media/m2-motherboard-ram-power.jpg",
+            alt: "RAM slots and power connectors close-up",
+            brief: "Show RAM slots and power connectors: visible RAM slots with clips, 24-pin main power connector, 8-pin CPU power connector. Include labels. Clean tech diagram style."
+          },
+          ports: {
+            fileName: "module-media/m2-motherboard-ports.jpg",
+            alt: "Motherboard ports overview showing USB, HDMI, Ethernet, Audio, WiFi antenna",
+            brief: "Show motherboard I/O ports: USB ports, HDMI/DisplayPort, Ethernet port, audio jacks, WiFi antenna connectors. Include labels for each port type. Clean layout."
+          }
+        },
+        keyComponents: [
+          { name: "CPU Socket", icon: "ðŸ”Œ", description: "Where CPU connects" },
+          { name: "RAM Slots", icon: "ðŸ’¾", description: "Memory module slots" },
+          { name: "Power Connectors", icon: "âš¡", description: "24-pin & 8-pin power" },
+          { name: "Ports", icon: "ðŸ”Œ", description: "USB, HDMI, Ethernet" }
+        ],
+        cpuSocketDetails: [
+          "Different sockets for different CPU brands",
+          "Must match CPU type",
+          "Secured with lever mechanism"
+        ],
+        ramPowerDetails: {
+          ram: [
+            "Usually 2-4 slots",
+            "DDR4/DDR5 compatible",
+            "Dual channel support"
+          ],
+          power: [
+            "24-pin main power connector",
+            "8-pin CPU power connector",
+            "SATA power for drives"
+          ]
+        }
+      },
+      portsBasics: {
+        title: "Ports & Connectors",
+        intro: "Ports are connection points that allow devices to communicate with your computer. Understanding different port types helps you connect devices correctly and troubleshoot connection issues.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-ports-hero.jpg",
+            alt: "Ports overview showing various connection ports on motherboard and device",
+            brief: "Create a visual showing ports as connection points: motherboard/device with various ports (USB, HDMI, Ethernet, Audio) visible and labeled. Show the concept of device connectivity. Use a tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-ports-overview.jpg",
+            alt: "Ports overview showing USB, HDMI, Ethernet, and Audio ports on motherboard/device",
+            brief: "Show various ports on a motherboard or device: USB ports, HDMI port, Ethernet port, audio jacks. Include clear labels for each port type. Background: clean tech aesthetic."
+          },
+          usbTypes: {
+            fileName: "module-media/m2-ports-usb-types.jpg",
+            alt: "USB types comparison showing USB-A, USB-B, USB-C, and Micro-USB side by side",
+            brief: "Create a comparison image: show USB-A (rectangular), USB-C (reversible), Micro-USB (small), and USB-B (square) side by side with labels. Include size and use case indicators. Clean educational style."
+          },
+          hdmiEthernet: {
+            fileName: "module-media/m2-ports-hdmi-ethernet.jpg",
+            alt: "HDMI and Ethernet ports close-up showing connectors",
+            brief: "Show HDMI port and Ethernet port close-up: visible connectors, labels for each port type. Include connection examples. Clean tech diagram style."
+          },
+          audio: {
+            fileName: "module-media/m2-ports-audio.jpg",
+            alt: "Audio ports overview showing 3.5mm jacks, USB audio, and optical audio",
+            brief: "Show audio ports: 3.5mm headphone/microphone jacks, USB audio port, optical audio port. Include labels and use cases. Clean layout."
+          },
+          selection: {
+            fileName: "module-media/m2-ports-selection.jpg",
+            alt: "Port selection guide showing which port to use for different devices",
+            brief: "Create a selection guide diagram: show which port to use for different devices (monitor â†’ HDMI, internet â†’ Ethernet, etc.). Include decision flow. Educational flowchart style."
+          }
+        },
+        portTypes: [
+          { name: "USB", icon: "ðŸ”Œ", description: "Universal connection" },
+          { name: "HDMI", icon: "ðŸ–¥ï¸", description: "Video output" },
+          { name: "Ethernet", icon: "ðŸŒ", description: "Network connection" },
+          { name: "Audio", icon: "ðŸŽ§", description: "Sound input/output" }
+        ],
+        usbTypes: [
+          { name: "USB-A", description: "Traditional rectangular connector", use: "Most common, used for keyboards, mice, flash drives" },
+          { name: "USB-C", description: "Reversible modern connector", use: "Latest standard, used for phones, laptops, fast charging" },
+          { name: "Micro-USB", description: "Small mobile connector", use: "Older phones, small devices" },
+          { name: "USB-B", description: "Square connector", use: "Printers, scanners, some external drives" }
+        ],
+        hdmiDetails: [
+          "Transmits video and audio",
+          "Used for monitors, TVs, projectors",
+          "Supports 4K and higher resolutions",
+          "Single cable for both video and sound"
+        ],
+        ethernetDetails: [
+          "Wired network connection",
+          "Faster and more stable than WiFi",
+          "RJ-45 connector",
+          "Used for internet access and local networks"
+        ]
+      },
+      gpuBasics: {
+        title: "GPU Basics",
+        intro: "Graphics Processing Unit (GPU) handles visual rendering, gaming graphics, video editing, and complex calculations. It's specialized for parallel processing of graphics data.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-gpu-hero.jpg",
+            alt: "GPU overview showing graphics card with fans, connectors, and ports",
+            brief: "Create a visual showing GPU as graphics powerhouse: GPU card in center with fans visible, PCIe connector, display ports. Show the concept of visual processing. Use a tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-gpu-overview.jpg",
+            alt: "GPU card showing fans, connectors, ports, and key components",
+            brief: "Show a GPU card from external view: visible fans, PCIe connector, display ports (HDMI, DisplayPort), power connectors. Include labels for key parts. Background: clean tech aesthetic."
+          },
+          comparison: {
+            fileName: "module-media/m2-gpu-comparison.jpg",
+            alt: "Comparison showing integrated GPU in CPU vs dedicated GPU card",
+            brief: "Create a comparison diagram: left shows integrated GPU (CPU with graphics built-in), right shows dedicated GPU (separate card with own RAM). Include labels and differences. Educational diagram style."
+          },
+          architecture: {
+            fileName: "module-media/m2-gpu-architecture.jpg",
+            alt: "GPU architecture diagram showing CUDA cores, memory bus, and VRAM",
+            brief: "Create a GPU architecture diagram: show CUDA cores/stream processors, memory bus, VRAM, and how they work together. Include labels and flow. Modern tech diagram style."
+          }
+        },
+        integratedDetails: [
+          "Built into CPU",
+          "Shares system RAM",
+          "Good for basic tasks",
+          "Lower power consumption",
+          "Sufficient for office work and web browsing"
+        ],
+        dedicatedDetails: [
+          "Separate card",
+          "Own dedicated memory (VRAM)",
+          "Better for gaming and video editing",
+          "Higher performance",
+          "Required for 3D rendering and AI/ML"
+        ],
+        architectureDetails: [
+          "Thousands of cores optimized for parallel processing",
+          "Dedicated VRAM - high-speed memory",
+          "Specialized for graphics rendering",
+          "Can process multiple tasks simultaneously"
+        ],
+        applications: [
+          { name: "Gaming", icon: "ðŸŽ®", description: "High FPS, smooth graphics" },
+          { name: "Video Editing", icon: "ðŸŽ¬", description: "Rendering, effects processing" },
+          { name: "Design", icon: "ðŸ–¼ï¸", description: "3D modeling, CAD, graphics" },
+          { name: "AI/ML", icon: "ðŸ§ª", description: "Machine learning training" },
+          { name: "Mining", icon: "ðŸ’»", description: "Cryptocurrency mining" },
+          { name: "Data Science", icon: "ðŸ“Š", description: "Analytics, processing" }
+        ]
+      },
+      aluBasics: {
+        title: "ALU - Arithmetic Logic Unit",
+        intro: "The Arithmetic Logic Unit (ALU) is the part of the CPU that performs all mathematical calculations and logical decisions. It's the computational heart of the processor.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-alu-hero.jpg",
+            alt: "ALU overview showing arithmetic and logic operations",
+            brief: "Create a visual showing ALU as computational heart: ALU in center with arithmetic operations (add, subtract, multiply, divide) and logic operations (AND, OR, NOT) flowing from it. Use a tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-alu-overview.jpg",
+            alt: "ALU diagram showing arithmetic and logic sections",
+            brief: "Show ALU diagram: visible arithmetic section and logic section, with labels for key parts. Include visual separation between arithmetic and logic functions. Background: clean tech aesthetic."
+          },
+          arithmetic: {
+            fileName: "module-media/m2-alu-arithmetic.jpg",
+            alt: "Arithmetic operations diagram showing addition, subtraction, multiplication, division",
+            brief: "Create an arithmetic operations diagram: show addition, subtraction, multiplication, and division operations with visual examples. Include operation symbols and examples. Clean educational style."
+          },
+          logic: {
+            fileName: "module-media/m2-alu-logic.jpg",
+            alt: "Logic operations diagram showing AND, OR, NOT, and comparison operations",
+            brief: "Create a logic operations diagram: show AND, OR, NOT gates and comparison operations (equal, not equal, greater than, less than). Include truth tables or examples. Educational diagram style."
+          },
+          inAction: {
+            fileName: "module-media/m2-alu-in-action.jpg",
+            alt: "ALU processing flow diagram showing how ALU processes data",
+            brief: "Create an ALU processing flow diagram: show how data flows through ALU, arithmetic operations, logic operations, and results. Include flow arrows and labels. Modern tech diagram style."
+          },
+          role: {
+            fileName: "module-media/m2-alu-role.jpg",
+            alt: "ALU role diagram showing ALU in CPU context",
+            brief: "Create an ALU role diagram: show ALU's position within CPU, how it connects to other CPU components (CU, registers). Include context of ALU's role. Clean tech diagram style."
+          }
+        },
+        arithmeticOperations: [
+          { name: "Add", icon: "âž•", description: "Combines numbers" },
+          { name: "Subtract", icon: "âž–", description: "Finds difference" },
+          { name: "Multiply", icon: "âœ–ï¸", description: "Repeats addition" },
+          { name: "Divide", icon: "âž—", description: "Splits into parts" }
+        ],
+        logicOperations: [
+          "AND - Both conditions must be true",
+          "OR - Either condition can be true",
+          "NOT - Inverts the condition",
+          "Compare - Checks if values are equal or not"
+        ]
+      },
+      cuBasics: {
+        title: "CU - Control Unit",
+        intro: "The Control Unit (CU) directs all parts of the computer on what to do. It ensures instructions are followed in the correct order and coordinates all CPU operations.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-cu-hero.jpg",
+            alt: "Control Unit overview showing coordination of CPU operations",
+            brief: "Create a visual showing CU as director: Control Unit in center coordinating CPU operations, with instructions flowing to ALU, registers, and other components. Use a tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-cu-overview.jpg",
+            alt: "Control Unit diagram showing coordination of CPU operations",
+            brief: "Show Control Unit diagram: visible coordination of CPU components, instruction flow, control signals. Include labels for key functions. Background: clean tech aesthetic."
+          },
+          controlFlow: {
+            fileName: "module-media/m2-cu-control-flow.jpg",
+            alt: "Control flow diagram showing Fetch â†’ Decode â†’ Execute â†’ Store sequence",
+            brief: "Create a control flow diagram: show instruction cycle sequence (Fetch â†’ Decode â†’ Execute â†’ Store) with arrows and control signals. Include labels for each step. Educational diagram style."
+          },
+          instructionCycle: {
+            fileName: "module-media/m2-cu-instruction-cycle.jpg",
+            alt: "Instruction cycle diagram showing detailed steps of CPU instruction processing",
+            brief: "Create an instruction cycle diagram: show detailed steps of instruction processing with cycle flow, timing, and control signals. Include visual representation of each cycle stage. Modern tech diagram style."
+          }
+        },
+        controlFlowSteps: [
+          "Fetches instructions from memory",
+          "Decodes what operation to perform",
+          "Executes the operation",
+          "Stores results back to memory"
+        ],
+        instructionCycleSteps: [
+          "1. Fetch Instruction - Gets instruction from memory",
+          "2. Decode Instruction - Understands what to do",
+          "3. Execute Operation - Performs the task",
+          "4. Store Result - Saves the result"
+        ],
+        coordinationFunctions: [
+          { name: "Fetch", icon: "ðŸŽ¯", description: "Gets instruction" },
+          { name: "Decode", icon: "ðŸ”", description: "Understands what to do" },
+          { name: "Execute", icon: "âš™ï¸", description: "Performs the task" },
+          { name: "Store", icon: "ðŸ’¾", description: "Saves result" },
+          { name: "Coordinate", icon: "ðŸ”„", description: "Manages all parts" },
+          { name: "Timing", icon: "â±ï¸", description: "Controls timing" }
+        ]
+      },
+      firmwareBasics: {
+        title: "Firmware",
+        intro: "Firmware is low-level software stored in hardware that controls how devices function. It acts as the bridge between hardware and software, providing essential instructions for device operation.",
+        images: {
+          hero: {
+            fileName: "module-media/m2-firmware-hero.jpg",
+            alt: "Firmware overview showing BIOS/UEFI, router firmware, and device firmware",
+            brief: "Create a visual showing firmware as bridge: firmware layer between hardware and software, with BIOS/UEFI, router firmware, and device firmware visible. Use a tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m2-firmware-overview.jpg",
+            alt: "Firmware overview showing BIOS/UEFI chip, router firmware, and device firmware",
+            brief: "Show firmware overview: BIOS/UEFI chip, router firmware interface, device firmware examples. Include labels for each type. Background: clean tech aesthetic."
+          },
+          biosUefi: {
+            fileName: "module-media/m2-firmware-bios-uefi.jpg",
+            alt: "BIOS/UEFI interface screen showing system configuration",
+            brief: "Show BIOS/UEFI interface: setup screen with visible configuration options, boot settings, hardware settings. Include labels for key sections. Clean tech interface style."
+          },
+          routerDevice: {
+            fileName: "module-media/m2-firmware-router-device.jpg",
+            alt: "Router firmware and device firmware examples",
+            brief: "Show router firmware UI and device firmware examples: router configuration interface, device firmware update screens. Include labels. Clean layout."
+          },
+          layers: {
+            fileName: "module-media/m2-firmware-layers.jpg",
+            alt: "Firmware layers diagram showing firmware between hardware and OS",
+            brief: "Create a firmware layers diagram: show hardware â†’ firmware â†’ operating system â†’ applications stack. Include labels and arrows showing interaction. Educational diagram style."
+          },
+          update: {
+            fileName: "module-media/m2-firmware-update.jpg",
+            alt: "Firmware update diagram showing when and how to update firmware",
+            brief: "Create a firmware update diagram: show when to update firmware, update process flow, and safety considerations. Include decision points. Clean flowchart style."
+          }
+        },
+        firmwareTypes: [
+          { name: "BIOS/UEFI", icon: "ðŸ’»", description: "Computer startup" },
+          { name: "Router", icon: "ðŸ“¡", description: "Network settings" },
+          { name: "Device", icon: "ðŸ”Œ", description: "Hardware control" }
+        ],
+        biosUefiDetails: [
+          "Initializes hardware on boot",
+          "Provides system configuration",
+          "Loads the operating system"
+        ],
+        routerFirmwareDetails: [
+          "Controls router settings and functionality",
+          "Manages network configuration",
+          "Handles security and updates"
+        ],
+        deviceFirmwareDetails: [
+          "Embedded in devices",
+          "Controls basic functions",
+          "Enables hardware-software communication"
+        ]
+      },
+      // Keep old section1 for backward compatibility with Part 1
+      section1: {
+        title: "CPU â€“ Central Processing Unit",
+        text: "The CPU controls all activities in the computer and processes every instruction. It has three main parts: ALU, CU, and Registers.",
+        video: {
+          title: "How CPU Works",
+          description: "Understanding ALU, CU, Registers, and Clock Speed",
+          embedUrl: null // Video will be added later
+        },
+        cpuImage: "cpu-diagram.jpg",
+        parts: [
+          {
+            title: "ALU â€“ Arithmetic Logic Unit",
+            description: "The ALU performs all mathematical operations like addition and subtraction. It also performs logical decisions like comparing numbers.",
+            points: [
+              "Handles all calculations and mathematical operations",
+              "Makes logical comparisons and decisions"
+            ]
+          },
+          {
+            title: "CU â€“ Control Unit",
+            description: "The Control Unit directs all parts of the computer on what to do. It ensures instructions are followed in the correct order.",
+            points: [
+              "Coordinates all computer operations",
+              "Manages instruction execution sequence"
+            ]
+          },
+          {
+            title: "Registers",
+            description: "Registers are very small and very fast memory locations inside the CPU. They temporarily store data needed for current tasks.",
+            points: [
+              "Fastest type of memory in the computer",
+              "Stores data being actively processed"
+            ]
+          },
+          {
+            title: "Clock Speed",
+            description: "Clock speed tells how fast the CPU can execute instructions, measured in GHz (Gigahertz). A higher clock speed means the computer works faster.",
+            points: [
+              "Measured in GHz (billions of cycles per second)",
+              "Determines overall system performance"
+            ]
+          }
+        ]
+      },
+      section2: {
+        title: "Memory Types",
+        text: "Memory hierarchy from fastest to slowest: Registers, Cache, Primary Memory (RAM and ROM).",
+        memoryTypes: [
+          {
+            id: "registers",
+            label: "Registers (Fastest Memory)",
+            description: "Registers hold data the CPU is currently working on. They are faster than RAM and cache but very small in size.",
+            icon: "âš¡"
+          },
+          {
+            id: "cache",
+            label: "Cache Memory",
+            description: "Cache is small, high-speed memory inside or near the CPU. It stores frequently used data so the CPU can access it quickly.",
+            icon: "ðŸ’¨"
+          },
+          {
+            id: "primary",
+            label: "Primary Memory (RAM & ROM)",
+            description: "RAM stores data temporarily when the computer is on, while ROM stores permanent startup instructions.",
+            icon: "ðŸ’¾"
+          }
+        ],
+        memoryImage: "memory-hierarchy.jpg"
+      },
+      section3: {
+        title: "Secondary Storage Devices",
+        text: "Secondary storage keeps data safe even when the computer is turned off.",
+        devices: [
+          "Hard Disk Drives (HDD)",
+          "Solid State Drives (SSD)",
+          "CDs, DVDs, Blu-ray discs",
+          "Pen drives",
+          "Memory cards"
+        ],
+        storageImage: "storage-devices.jpg"
+      },
+      section4: {
+        title: "Input Devices",
+        text: "Input devices allow users to enter data into the computer.",
+        devices: [
+          "Keyboard",
+          "Mouse",
+          "Scanner",
+          "Microphone",
+          "Webcam",
+          "Joystick"
+        ],
+        inputImage: "input-devices.jpg"
+      },
+      section5: {
+        title: "Output Devices",
+        text: "Output devices show the results after the computer processes information.",
+        devices: [
+          "Monitors",
+          "Printers",
+          "Speakers",
+          "Headphones",
+          "Projectors"
+        ],
+        outputImage: "output-devices.jpg"
+      },
+      section6: {
+        title: "Peripheral Devices",
+        text: "Peripheral devices are additional tools connected to the computer to increase its functions.",
+        devices: [
+          {
+            name: "USB accessories",
+            description: "USB accessories like flash drives, keyboards, and mice connect easily to expand computer functionality."
+          },
+          {
+            name: "External hard drives",
+            description: "External hard drives offer portable storage for backing up important files and expanding storage capacity."
+          },
+          {
+            name: "Bluetooth devices",
+            description: "Bluetooth devices enable wireless connections for headphones, speakers, keyboards, and mice without cables."
+          }
+        ]
+      },
+      section7: {
+        title: "Ports and Connectors",
+        text: "Ports allow devices to connect to the computer using cables.",
+        ports: [
+          "USB (Type A, B, C)",
+          "HDMI",
+          "VGA",
+          "Ethernet",
+          "Audio ports"
+        ],
+        portsImage: "ports-connectors.jpg"
+      },
+      section8: {
+        title: "CPU vs GPU",
+        text: "Understanding the differences between CPU and GPU and their use cases.",
+        video: {
+          title: "CPU vs GPU Comparison",
+          description: "Learn the differences and use cases",
+          embedUrl: null // Video will be added later
+        },
+        cpu: {
+          title: "CPU â€“ Central Processing Unit",
+          description: "A CPU is designed to run general tasks like apps, browsing, and system operations. It works with a few powerful cores that complete tasks one after another."
+        },
+        gpu: {
+          title: "GPU â€“ Graphics Processing Unit",
+          description: "A GPU is designed to handle many small tasks at the same time. It is best for graphics, gaming, video editing, and Artificial Intelligence (AI) processing."
+        },
+        comparisonImage: "cpu-vs-gpu.jpg"
+      },
+      section9: {
+        title: "Input and Output",
+        text: "Input devices send information into the computer for processing. Output devices show the final result after the computer finishes the task.",
+        video: {
+          title: "How Input and Output Work Together",
+          description: "Complete flow from input to output",
+          embedUrl: null // Video will be added later
+        },
+        flowImage: "input-output-flow.jpg"
+      }
+    };
+  };
+
+  // Get image URL helper - works with Vite's asset handling
+  const getImageUrl = (imageName: string) => {
+    if (!imageName) return "";
+    if (imageName.startsWith("module-media/")) {
+      return `/src/assets/${imageName}`;
+    }
+    return `/src/assets/module-media/${imageName}`;
+  };
+
+  // Redirect Module 2 to Topic 1 if no topic specified (topic-based navigation)
+  useEffect(() => {
+    if (moduleId === 2 && !topicId && !partNumber && location.pathname === `/module/2`) {
+      navigate("/module/2/topic/1", { replace: true });
+    }
+  }, [moduleId, topicId, partNumber, navigate, location.pathname]);
+
+  // Module 3 specific content sections (Topic-based structure)
+  const getModule3Sections = () => {
+    return {
+      bootProcess: {
+        title: "Boot Process",
+        intro: "The boot process is the sequence of steps your computer follows when you press the power button. Understanding this process helps you troubleshoot startup issues and appreciate how your computer initializes.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-boot-hero.jpg",
+            alt: "Computer booting up with startup sequence visualization",
+            brief: "Create a visual showing a computer booting: power button press, BIOS/UEFI screen, OS loading screen. Show the progression from off to ready. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m3-boot-overview.jpg",
+            alt: "Boot process flow diagram showing the three main steps",
+            brief: "Create a flow diagram showing: Power On â†’ POST â†’ Loading OS. Use arrows and clear progression. Clean, educational diagram style."
+          },
+          steps: {
+            fileName: "module-media/m3-boot-steps.jpg",
+            alt: "Visual representation of the three boot steps with icons",
+            brief: "Show three cards/sections: Step 1 (Power On with power button icon), Step 2 (POST with checkmark icon), Step 3 (Loading OS with loading icon). Use clear visual separation."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-boot-why-matters.jpg",
+            alt: "Computer ready to use after successful boot",
+            brief: "Show a computer ready to use after boot: desktop screen visible, apps ready. Show the end result of successful boot process. Clean, modern aesthetic."
+          }
+        },
+        steps: [
+          { 
+            name: "Power On", 
+            icon: "ðŸ”Œ", 
+            description: "When you press the power button, electricity flows to all components and the computer begins initializing." 
+          },
+          { 
+            name: "POST", 
+            icon: "âœ…", 
+            description: "Power-On Self-Test checks all hardware components to ensure everything is working correctly before loading the operating system." 
+          },
+          { 
+            name: "Loading OS", 
+            icon: "ðŸš€", 
+            description: "The bootloader finds and loads the operating system from storage into RAM, then starts system services." 
+          }
+        ]
+      },
+      operatingSystems: {
+        title: "Operating Systems",
+        intro: "An operating system (OS) is the most important software on your computer. It manages hardware resources, provides a user interface, and allows applications to run.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-os-hero.jpg",
+            alt: "Different operating systems logos and interfaces",
+            brief: "Create a visual showing different OS logos: Windows, macOS, Linux, Android, iOS arranged in a modern layout. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m3-os-overview.jpg",
+            alt: "Operating system architecture diagram showing how OS manages hardware",
+            brief: "Create a diagram showing OS as a layer between hardware and applications. Show OS managing CPU, RAM, storage, and providing interface. Clean, educational style."
+          },
+          desktopComparison: {
+            fileName: "module-media/m3-os-desktop-comparison.jpg",
+            alt: "Windows, macOS, and Linux desktop interfaces comparison",
+            brief: "Show side-by-side comparison of Windows, macOS, and Linux desktop interfaces. Include their logos and key visual differences. Clean, educational style."
+          },
+          windows: {
+            fileName: "module-media/m3-os-windows.jpg",
+            alt: "Windows operating system interface and features",
+            brief: "Show Windows OS interface with Start menu, taskbar, and desktop. Include Windows logo. Modern, clean aesthetic."
+          },
+          macos: {
+            fileName: "module-media/m3-os-macos.jpg",
+            alt: "macOS operating system interface and features",
+            brief: "Show macOS interface with Dock, menu bar, and desktop. Include Apple logo. Modern, clean aesthetic."
+          },
+          linux: {
+            fileName: "module-media/m3-os-linux.jpg",
+            alt: "Linux operating system interface and features",
+            brief: "Show Linux desktop environment (like Ubuntu/GNOME) with its interface. Include Linux/Tux logo. Modern, clean aesthetic."
+          },
+          mobileComparison: {
+            fileName: "module-media/m3-os-mobile-comparison.jpg",
+            alt: "Android and iOS mobile interfaces comparison",
+            brief: "Show side-by-side comparison of Android and iOS interfaces on phones. Include their logos. Clean, educational style."
+          },
+          android: {
+            fileName: "module-media/m3-os-android.jpg",
+            alt: "Android operating system interface and features",
+            brief: "Show Android interface with home screen, app drawer, and key features. Include Android logo. Modern, clean aesthetic."
+          },
+          ios: {
+            fileName: "module-media/m3-os-ios.jpg",
+            alt: "iOS operating system interface and features",
+            brief: "Show iOS interface with home screen, apps, and key features. Include Apple logo. Modern, clean aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-os-why-matters.jpg",
+            alt: "Computer with different operating systems running smoothly",
+            brief: "Show a computer running smoothly with OS managing everything. Show the importance of OS in daily computing. Clean, modern aesthetic."
+          }
+        },
+        desktopOS: [
+          {
+            name: "Windows",
+            logo: "ðŸªŸ",
+            description: "Most popular desktop OS, used on PCs worldwide. Known for compatibility and wide software support.",
+            features: ["User-friendly interface", "Wide software compatibility", "Regular updates", "Gaming support"]
+          },
+          {
+            name: "macOS",
+            logo: "ðŸŽ",
+            description: "Apple's operating system for Mac computers. Known for sleek design and seamless integration with Apple devices.",
+            features: ["Sleek design", "Apple ecosystem integration", "Security focused", "Creative tools"]
+          },
+          {
+            name: "Linux",
+            logo: "ðŸ§",
+            description: "Open-source operating system. Free, customizable, and used by developers and servers worldwide.",
+            features: ["Free and open-source", "Highly customizable", "Developer-friendly", "Server applications"]
+          }
+        ],
+        mobileOS: [
+          {
+            name: "Android",
+            logo: "ðŸ¤–",
+            description: "Google's mobile operating system. Most popular mobile OS, used on many smartphone brands.",
+            features: ["Open-source", "Customizable", "Wide device support", "Google services integration"]
+          },
+          {
+            name: "iOS",
+            logo: "ðŸ“±",
+            description: "Apple's mobile operating system for iPhone and iPad. Known for security, simplicity, and app quality.",
+            features: ["Secure and private", "Simple interface", "High-quality apps", "Apple ecosystem"]
+          }
+        ]
+      },
+      fileSystem: {
+        title: "File System",
+        intro: "A file system organizes and stores files on your computer. It uses folders (directories) to group related files together, making it easier to find and manage your data.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-filesystem-hero.jpg",
+            alt: "File system structure showing folders and files",
+            brief: "Create a visual showing a file system tree structure with folders and files. Show the hierarchical organization. Clean, modern aesthetic."
+          },
+          folders: {
+            fileName: "module-media/m3-filesystem-folders.jpg",
+            alt: "Folders and directories in a file system",
+            brief: "Show a visual of folders/directories with icons. Show how they organize files. Clean, educational style."
+          },
+          paths: {
+            fileName: "module-media/m3-filesystem-paths.jpg",
+            alt: "File paths showing directory structure",
+            brief: "Show file paths like C:/Users/Documents/File.txt. Show how paths work. Clean, educational diagram."
+          },
+          hidden: {
+            fileName: "module-media/m3-filesystem-hidden.jpg",
+            alt: "Hidden files in a file system",
+            brief: "Show hidden files (with dot prefix or hidden attribute). Show how to view them. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-filesystem-in-action.jpg",
+            alt: "File system in action",
+            brief: "Show a file system being used: files being organized, folders being created, files being accessed. Show the file system working. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-filesystem-why-matters.jpg",
+            alt: "Well-organized file system",
+            brief: "Show a well-organized file system with properly named folders and files. Show the importance of organization. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            title: "Folders & Directories",
+            description: "Folders (also called directories) are containers that hold files and other folders. They help organize your data into logical groups.",
+            icon: "ðŸ“"
+          },
+          {
+            title: "File Paths",
+            description: "A file path shows the exact location of a file in the file system. It includes all folders from the root to the file.",
+            icon: "ðŸ“"
+          },
+          {
+            title: "Hidden Files",
+            description: "Hidden files are files that are not normally visible. They often contain system settings and configuration data.",
+            icon: "ðŸ‘ï¸"
+          }
+        ]
+      },
+      fileExtensions: {
+        title: "File Extensions",
+        intro: "File extensions are the letters after the dot in a filename (like .txt, .jpg, .mp4). They tell your computer what type of file it is and which program should open it.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-extensions-hero.jpg",
+            alt: "Different file extensions and their icons",
+            brief: "Create a visual showing different file types with their extensions: .txt, .jpg, .mp4, .exe, etc. Show icons for each type. Clean, modern layout."
+          },
+          text: {
+            fileName: "module-media/m3-extensions-text.jpg",
+            alt: "Text file extensions",
+            brief: "Show text file extensions: .txt, .doc, .pdf. Show examples. Clean, educational style."
+          },
+          image: {
+            fileName: "module-media/m3-extensions-image.jpg",
+            alt: "Image file extensions",
+            brief: "Show image file extensions: .jpg, .png, .gif. Show examples. Clean, educational style."
+          },
+          video: {
+            fileName: "module-media/m3-extensions-video.jpg",
+            alt: "Video file extensions",
+            brief: "Show video file extensions: .mp4, .avi, .mov. Show examples. Clean, educational style."
+          },
+          executable: {
+            fileName: "module-media/m3-extensions-executable.jpg",
+            alt: "Executable file extensions",
+            brief: "Show executable file extensions: .exe, .app, .sh. Show examples. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-extensions-in-action.jpg",
+            alt: "File extensions in action",
+            brief: "Show file extensions being used: different file types being opened with correct programs. Show how extensions work. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-extensions-why-matters.jpg",
+            alt: "File extension importance",
+            brief: "Show how file extensions help identify file types. Show the importance of correct extensions. Clean, modern aesthetic."
+          }
+        },
+        types: [
+          {
+            category: "Text Files",
+            extensions: [".txt", ".doc", ".pdf"],
+            description: "Documents and text files",
+            icon: "ðŸ“„"
+          },
+          {
+            category: "Image Files",
+            extensions: [".jpg", ".png", ".gif"],
+            description: "Photos and images",
+            icon: "ðŸ–¼ï¸"
+          },
+          {
+            category: "Video Files",
+            extensions: [".mp4", ".avi", ".mov"],
+            description: "Video recordings",
+            icon: "ðŸŽ¬"
+          },
+          {
+            category: "Executable Files",
+            extensions: [".exe", ".app", ".sh"],
+            description: "Programs and applications",
+            icon: "âš™ï¸"
+          }
+        ]
+      },
+      fileManagement: {
+        title: "File Management",
+        intro: "File management is how you organize, move, copy, and delete files on your computer. Good file management helps you find your files quickly and keeps your computer organized.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-management-hero.jpg",
+            alt: "File management operations",
+            brief: "Create a visual showing file management operations: create, copy, move, delete. Show icons and actions. Clean, modern aesthetic."
+          },
+          create: {
+            fileName: "module-media/m3-management-create.jpg",
+            alt: "Creating files and folders",
+            brief: "Show how to create new files and folders. Show the process. Clean, educational style."
+          },
+          copyMove: {
+            fileName: "module-media/m3-management-copy-move.jpg",
+            alt: "Copying and moving files",
+            brief: "Show copy and move operations. Show the difference. Clean, educational diagram."
+          },
+          delete: {
+            fileName: "module-media/m3-management-delete.jpg",
+            alt: "Deleting and restoring files",
+            brief: "Show delete operation and restore from recycle bin/trash. Show the process. Clean, educational style."
+          },
+          organize: {
+            fileName: "module-media/m3-management-organize.jpg",
+            alt: "Organizing files into folders",
+            brief: "Show how to organize files into folders. Show good organization practices. Clean, modern aesthetic."
+          },
+          inAction: {
+            fileName: "module-media/m3-management-in-action.jpg",
+            alt: "File management in action",
+            brief: "Show file management operations: creating folders, copying files, organizing documents. Show file management working. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-management-why-matters.jpg",
+            alt: "Well-organized file system",
+            brief: "Show a well-organized computer with properly managed files. Show the benefits. Clean, modern aesthetic."
+          }
+        },
+        operations: [
+          {
+            title: "Create, Copy, Move",
+            description: "You can create new files and folders, copy them to make duplicates, or move them to different locations.",
+            icon: "ðŸ“‹"
+          },
+          {
+            title: "Delete & Restore",
+            description: "Deleted files go to the Recycle Bin (Windows) or Trash (Mac). You can restore them if needed.",
+            icon: "ðŸ—‘ï¸"
+          },
+          {
+            title: "Organizing Files",
+            description: "Group related files into folders with clear names. This makes it easier to find what you need.",
+            icon: "ðŸ“‚"
+          }
+        ]
+      },
+      systemSpecifications: {
+        title: "System Specifications",
+        intro: "System specifications (specs) tell you what hardware and software your computer has. They help you understand your computer's capabilities and whether it can run certain programs.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-specs-hero.jpg",
+            alt: "Computer system specifications",
+            brief: "Create a visual showing system specifications: CPU, RAM, Storage, GPU, OS. Show a clean spec sheet layout. Modern, tech aesthetic."
+          },
+          cpuRamStorage: {
+            fileName: "module-media/m3-specs-cpu-ram-storage.jpg",
+            alt: "CPU, RAM, and Storage specifications",
+            brief: "Show CPU, RAM, and Storage specs with icons and labels. Show how to read these specs. Clean, educational style."
+          },
+          gpu: {
+            fileName: "module-media/m3-specs-gpu.jpg",
+            alt: "GPU specifications",
+            brief: "Show GPU specifications with details. Show integrated vs dedicated. Clean, educational style."
+          },
+          osVersion: {
+            fileName: "module-media/m3-specs-os.jpg",
+            alt: "Operating system version",
+            brief: "Show OS version information. Show how to find OS version. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-specs-in-action.jpg",
+            alt: "System specifications in action",
+            brief: "Show system specs being used: checking specs, comparing systems, understanding performance. Show specs in use. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-specs-why-matters.jpg",
+            alt: "Understanding system specifications",
+            brief: "Show the importance of knowing your system specs. Show how specs affect performance. Clean, modern aesthetic."
+          }
+        },
+        components: [
+          {
+            title: "CPU, RAM, Storage",
+            description: "These are the core components that determine your computer's speed and storage capacity.",
+            icon: "ðŸ’»"
+          },
+          {
+            title: "GPU",
+            description: "The graphics processing unit handles visual tasks like gaming, video editing, and 3D rendering.",
+            icon: "ðŸŽ®"
+          },
+          {
+            title: "OS Version",
+            description: "The operating system version tells you which software features and updates are available.",
+            icon: "ðŸ–¥ï¸"
+          }
+        ]
+      },
+      mobileComputer: {
+        title: "Mobile = A Computer",
+        intro: "Your smartphone or tablet is actually a computer! It has the same basic components as a desktop computer, just in a smaller, portable form.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-mobile-hero.jpg",
+            alt: "Mobile device as a computer",
+            brief: "Create a visual showing a smartphone/tablet with computer components labeled. Show it's a computer. Modern, tech aesthetic."
+          },
+          architecture: {
+            fileName: "module-media/m3-mobile-architecture.jpg",
+            alt: "Mobile device architecture",
+            brief: "Show mobile device architecture diagram. Show CPU, RAM, storage, sensors. Clean, educational diagram."
+          },
+          cpuGpu: {
+            fileName: "module-media/m3-mobile-cpu-gpu.jpg",
+            alt: "Mobile CPU and GPU",
+            brief: "Show mobile CPU and GPU. Show how they're different from desktop. Clean, educational style."
+          },
+          sensors: {
+            fileName: "module-media/m3-mobile-sensors.jpg",
+            alt: "Sensors in mobile devices",
+            brief: "Show sensors in mobile devices: accelerometer, gyroscope, etc. Show how they work. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-mobile-in-action.jpg",
+            alt: "Mobile device in action",
+            brief: "Show mobile device working: apps running, CPU/GPU processing, sensors detecting. Show mobile as computer. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-mobile-why-matters.jpg",
+            alt: "Understanding mobile as computer",
+            brief: "Show the importance of understanding mobile devices as computers. Show their capabilities. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            title: "Mobile Architecture",
+            description: "Mobile devices have the same basic architecture as computers: CPU, RAM, storage, and an operating system.",
+            icon: "ðŸ“±"
+          },
+          {
+            title: "Mobile CPU/GPU",
+            description: "Mobile processors are smaller and more power-efficient than desktop CPUs, but they work the same way.",
+            icon: "âš¡"
+          },
+          {
+            title: "Sensors",
+            description: "Mobile devices have special sensors like accelerometers and gyroscopes that desktop computers don't have.",
+            icon: "ðŸ“¡"
+          }
+        ]
+      },
+      sensorsDevices: {
+        title: "Sensors in Devices",
+        intro: "Sensors are special components that detect changes in the environment. They help your device understand its position, movement, and surroundings.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-sensors-hero.jpg",
+            alt: "Sensors in devices",
+            brief: "Create a visual showing different sensors in devices: accelerometer, gyroscope, proximity, fingerprint. Modern, tech aesthetic."
+          },
+          accelerometer: {
+            fileName: "module-media/m3-sensors-accelerometer.jpg",
+            alt: "Accelerometer sensor",
+            brief: "Show accelerometer sensor. Show how it detects motion. Clean, educational style."
+          },
+          gyroscope: {
+            fileName: "module-media/m3-sensors-gyroscope.jpg",
+            alt: "Gyroscope sensor",
+            brief: "Show gyroscope sensor. Show how it detects rotation. Clean, educational style."
+          },
+          proximity: {
+            fileName: "module-media/m3-sensors-proximity.jpg",
+            alt: "Proximity sensor",
+            brief: "Show proximity sensor. Show how it detects nearby objects. Clean, educational style."
+          },
+          fingerprint: {
+            fileName: "module-media/m3-sensors-fingerprint.jpg",
+            alt: "Fingerprint sensor",
+            brief: "Show fingerprint sensor. Show how it works for security. Clean, educational style."
+          },
+          inAction: {
+            fileName: "module-media/m3-sensors-in-action.jpg",
+            alt: "Sensors in action",
+            brief: "Show sensors working: accelerometer detecting motion, gyroscope detecting rotation, proximity sensor detecting objects. Show sensors in use. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-sensors-why-matters.jpg",
+            alt: "Understanding sensors",
+            brief: "Show the importance of sensors in modern devices. Show how they enhance user experience. Clean, modern aesthetic."
+          }
+        },
+        sensors: [
+          {
+            name: "Accelerometer",
+            description: "Detects motion and orientation. Used for screen rotation and step counting.",
+            icon: "ðŸ“±"
+          },
+          {
+            name: "Gyroscope",
+            description: "Detects rotation and tilt. Used for gaming and augmented reality.",
+            icon: "ðŸ”„"
+          },
+          {
+            name: "Proximity",
+            description: "Detects nearby objects. Used to turn off the screen during calls.",
+            icon: "ðŸ‘ï¸"
+          },
+          {
+            name: "Fingerprint",
+            description: "Scans fingerprints for security. Used for unlocking devices and payments.",
+            icon: "ðŸ‘†"
+          }
+        ]
+      },
+      whatIsProgram: {
+        title: "What is a Program?",
+        intro: "A program is a set of instructions written in code that tells a computer what to do. Programs are created by developers and can be anything from a simple calculator to complex video games or operating systems.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-program-hero.jpg",
+            alt: "Code and program visualization",
+            brief: "Create a visual showing code being written, compiled into software, and executed. Show the transformation from code to program. Use a tech aesthetic with soft gradients."
+          },
+          code: {
+            fileName: "module-media/m3-program-code.jpg",
+            alt: "Programming code",
+            brief: "Show programming code on a screen. Show syntax, variables, functions. Clean, educational style."
+          },
+          software: {
+            fileName: "module-media/m3-program-software.jpg",
+            alt: "Software compilation",
+            brief: "Show code being compiled into software. Show the process. Clean, educational diagram."
+          },
+          execution: {
+            fileName: "module-media/m3-program-execution.jpg",
+            alt: "Program execution",
+            brief: "Show a program running/executing. Show the output or interface. Clean, modern aesthetic."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-program-why-matters.jpg",
+            alt: "Programs in use",
+            brief: "Show various programs being used: apps, games, software. Show the importance of programs. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Code",
+            description: "Code is the written instructions that developers create using programming languages like Python, JavaScript, or C++.",
+            icon: "ðŸ’»"
+          },
+          {
+            name: "Software",
+            description: "Software is the compiled, executable version of code that can run on a computer. It's what you install and use.",
+            icon: "ðŸ“¦"
+          },
+          {
+            name: "Execution",
+            description: "Execution is when the program runs and performs its tasks. The CPU reads and executes the program's instructions.",
+            icon: "â–¶ï¸"
+          }
+        ]
+      },
+      whatIsData: {
+        title: "What is Data?",
+        intro: "Data is information stored in a computer. It can be text, numbers, images, videos, or any other type of information. Computers process data using binary code (0s and 1s) that the CPU can understand.",
+        images: {
+          hero: {
+            fileName: "module-media/m3-data-hero.jpg",
+            alt: "Data visualization",
+            brief: "Create a visual showing different types of data: text, numbers, images, files. Show data being stored and processed. Use a tech aesthetic with soft gradients."
+          },
+          text: {
+            fileName: "module-media/m3-data-text.jpg",
+            alt: "Text data",
+            brief: "Show text data: documents, files, strings. Clean, educational style."
+          },
+          numbers: {
+            fileName: "module-media/m3-data-numbers.jpg",
+            alt: "Numeric data",
+            brief: "Show numeric data: calculations, spreadsheets, databases. Clean, educational style."
+          },
+          binary: {
+            fileName: "module-media/m3-data-binary.jpg",
+            alt: "Binary data representation",
+            brief: "Show binary representation: 0s and 1s, how machines read data. Clean, educational diagram."
+          },
+          whyMatters: {
+            fileName: "module-media/m3-data-why-matters.jpg",
+            alt: "Data in use",
+            brief: "Show data being used: files being accessed, information being processed. Show the importance of data. Clean, modern aesthetic."
+          }
+        },
+        types: [
+          {
+            name: "Text Data",
+            description: "Text data includes letters, words, sentences, and documents. Examples: documents, emails, web pages.",
+            icon: "ðŸ“"
+          },
+          {
+            name: "Numeric Data",
+            description: "Numeric data includes numbers used for calculations, measurements, and statistics. Examples: prices, scores, measurements.",
+            icon: "ðŸ”¢"
+          },
+          {
+            name: "Binary Data",
+            description: "Binary data is how computers store and process all information using only 0s and 1s. Everything is converted to binary.",
+            icon: "âš™ï¸"
+          }
+        ]
+      }
+    };
+  };
+
+  // Module 4 specific content sections
+  const getModule4Sections = () => {
+    return {
+      insideComputer: {
+        title: "Inside a Computer",
+        intro: "Inside a computer case, components work together. The motherboard connects everything, power connectors supply electricity, internal wiring carries data and power, and components are placed for airflow and accessibility.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-inside-hero.jpg",
+            alt: "Inside view of a computer showing motherboard, components, and wiring",
+            brief: "Create a visual showing the inside of a computer case: motherboard with components, power connectors, wiring, and component placement. Clean, educational style with good lighting."
+          },
+          overview: {
+            fileName: "module-media/m4-inside-overview.jpg",
+            alt: "Inside view of a computer showing motherboard, components, and wiring",
+            brief: "Show the inside of a computer case: motherboard with components, power connectors, wiring, and component placement. Clean, educational style."
+          },
+          components: {
+            fileName: "module-media/m4-inside-components.jpg",
+            alt: "Detailed view of motherboard layout, power connectors, and wiring",
+            brief: "Show a detailed view of motherboard with labeled components, power connectors, and internal wiring. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-inside-why-matters.jpg",
+            alt: "Well-organized computer internals showing proper component placement",
+            brief: "Show a well-organized computer interior with proper component placement, clean wiring, and good airflow. Clean, modern aesthetic."
+          }
+        },
+        components: [
+          {
+            name: "Motherboard Layout",
+            icon: "ðŸ”Œ",
+            description: "The motherboard is the main circuit board that connects all components. It has slots for CPU, RAM, GPU, and expansion cards."
+          },
+          {
+            name: "Power Connectors",
+            icon: "âš¡",
+            description: "Power connectors supply electricity from the PSU to components. Different connectors power the CPU, GPU, motherboard, and storage drives."
+          },
+          {
+            name: "Internal Wiring",
+            icon: "ðŸ”—",
+            description: "Internal wiring includes data cables (SATA, PCIe) and power cables. These cables connect components and allow them to communicate."
+          },
+          {
+            name: "Component Placement",
+            icon: "ðŸ“",
+            description: "Components are placed strategically for airflow, cooling, and accessibility. Proper placement prevents overheating and makes upgrades easier."
+          }
+        ]
+      },
+      cpuArchitecture: {
+        title: "CPU Architecture",
+        intro: "CPU architecture refers to the internal design and structure of the processor. It includes cores, cache levels, clock speed, and how instructions are processed. Understanding CPU architecture helps you choose the right processor and optimize performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-cpu-hero.jpg",
+            alt: "CPU architecture visualization",
+            brief: "Create a visual showing CPU architecture: cores, cache levels, clock speed, and instruction cycle. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-cpu-overview.jpg",
+            alt: "CPU internal structure and architecture",
+            brief: "Show CPU internal structure with labeled components: cores, cache levels, clock speed indicators. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-cpu-architecture.jpg",
+            alt: "Detailed CPU architecture diagram showing all components",
+            brief: "Show a detailed CPU architecture diagram with cores, threads, L1/L2/L3 cache, clock speed, and instruction cycle. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-cpu-why-matters.jpg",
+            alt: "CPU performance comparison showing architecture impact",
+            brief: "Show CPU performance comparison: different architectures side by side showing speed differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Cores & Threads",
+            icon: "âš™ï¸",
+            description: "Cores are processing units that execute instructions. Threads allow parallel processing, enabling the CPU to handle multiple tasks simultaneously."
+          },
+          {
+            name: "Cache Levels",
+            icon: "ðŸ’¾",
+            description: "Cache stores frequently used data in L1, L2, and L3 levels for faster access. Higher cache levels are larger but slower than lower levels."
+          },
+          {
+            name: "Clock Speed",
+            icon: "â±ï¸",
+            description: "Clock speed measures how many cycles per second the CPU performs. Higher clock speed means faster processing, measured in GHz."
+          },
+          {
+            name: "Instruction Cycle",
+            icon: "ðŸ”„",
+            description: "The instruction cycle is the sequence of steps the CPU follows to execute each instruction: fetch, decode, execute, and store."
+          }
+        ]
+      },
+      gpuArchitecture: {
+        title: "GPU Architecture",
+        intro: "GPU architecture refers to the internal design of the graphics processing unit. It includes specialized cores, VRAM, and how graphics are rendered. Understanding GPU architecture helps you choose the right graphics card for gaming, video editing, and visual processing.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-gpu-hero.jpg",
+            alt: "GPU architecture visualization",
+            brief: "Create a visual showing GPU architecture: CUDA/Tensor cores, VRAM, integrated vs dedicated. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-gpu-overview.jpg",
+            alt: "GPU internal structure and architecture",
+            brief: "Show GPU internal structure with labeled components: cores, VRAM, rendering pipeline. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-gpu-architecture.jpg",
+            alt: "Detailed GPU architecture showing cores, VRAM, and rendering",
+            brief: "Show a detailed GPU architecture diagram with CUDA/Tensor cores, VRAM, integrated vs dedicated comparison, and rendering pipeline. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-gpu-why-matters.jpg",
+            alt: "GPU performance comparison showing architecture impact",
+            brief: "Show GPU performance comparison: different architectures side by side showing graphics quality differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "CUDA/Tensor Cores",
+            icon: "ðŸ”¥",
+            description: "CUDA and Tensor cores are specialized processing units for parallel calculations. They handle graphics rendering, AI processing, and complex computations simultaneously."
+          },
+          {
+            name: "VRAM",
+            icon: "ðŸ’¾",
+            description: "VRAM is dedicated memory for graphics data. Faster VRAM means smoother graphics, better frame rates, and support for higher resolutions and textures."
+          },
+          {
+            name: "Integrated vs Dedicated",
+            icon: "ðŸŽ®",
+            description: "Integrated GPU is part of the CPU and shares system RAM. Dedicated GPU has its own VRAM and is more powerful, ideal for gaming and professional graphics work."
+          },
+          {
+            name: "GPU Rendering",
+            icon: "ðŸŽ¨",
+            description: "GPU rendering creates visual images, animations, and 3D graphics. The GPU processes millions of pixels simultaneously to display smooth, detailed graphics on your screen."
+          }
+        ]
+      },
+      ramArchitecture: {
+        title: "RAM Architecture",
+        intro: "RAM architecture refers to the design and specifications of memory modules. Understanding DDR generations, frequency, dual-channel memory, and latency helps you choose the right RAM for your system and optimize performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-ram-hero.jpg",
+            alt: "RAM architecture visualization showing DDR generations and specifications",
+            brief: "Create a visual showing RAM architecture: DDR generations comparison, frequency indicators, dual-channel setup, and latency timing. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-ram-overview.jpg",
+            alt: "RAM modules showing DDR generations and specifications",
+            brief: "Show RAM modules with labels for DDR generations (DDR3, DDR4, DDR5), frequency (MHz), and capacity. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-ram-architecture.jpg",
+            alt: "Detailed RAM architecture diagram showing dual-channel, frequency, and latency",
+            brief: "Show a detailed RAM architecture diagram with dual-channel memory setup, frequency comparison, latency timing (CL), and how data flows. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-ram-why-matters.jpg",
+            alt: "RAM performance comparison showing architecture impact",
+            brief: "Show RAM performance comparison: different DDR generations and frequencies side by side showing speed differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "DDR Generations",
+            icon: "ðŸ“Š",
+            description: "DDR (Double Data Rate) generations (DDR3, DDR4, DDR5) represent different memory technologies. Newer generations offer higher speeds, lower power consumption, and better performance."
+          },
+          {
+            name: "Frequency",
+            icon: "âš¡",
+            description: "RAM frequency (measured in MHz) determines how fast data can be read and written. Higher frequency means faster data transfer and better system responsiveness."
+          },
+          {
+            name: "Dual-Channel Memory",
+            icon: "ðŸ”—",
+            description: "Dual-channel memory uses two RAM sticks simultaneously, doubling the data transfer rate. This improves performance in memory-intensive tasks and gaming."
+          },
+          {
+            name: "Latency and Timing",
+            icon: "â±ï¸",
+            description: "Latency (CL - CAS Latency) measures the delay between a command and data availability. Lower latency means faster response times and better performance."
+          }
+        ]
+      },
+      storageConnections: {
+        title: "Storage Connections",
+        intro: "Storage connections determine how storage devices communicate with the motherboard and CPU. Understanding SATA, NVMe, and PCIe interfaces helps you choose the right storage solution and maximize performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-storage-connections-hero.jpg",
+            alt: "Storage connection interfaces visualization",
+            brief: "Create a visual showing storage connections: SATA interface, NVMe interface, PCIe lanes, and how data moves between storage and CPU. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-storage-connections-overview.jpg",
+            alt: "SATA and NVMe interfaces comparison",
+            brief: "Show SATA and NVMe interfaces side by side with visible connectors, cables, and slots. Include labels for each interface type. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-storage-connections-architecture.jpg",
+            alt: "Detailed storage connection diagram showing data flow",
+            brief: "Show a detailed storage connection diagram with SATA, NVMe, PCIe lanes, and data flow paths from storage to CPU. Include speed indicators. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-storage-connections-why-matters.jpg",
+            alt: "Storage connection performance comparison",
+            brief: "Show storage connection performance comparison: SATA vs NVMe speeds side by side. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "SATA Interface",
+            icon: "ðŸ”Œ",
+            description: "SATA (Serial ATA) is a standard interface for connecting storage devices. SATA 3.0 offers speeds up to 6 Gbps, commonly used for HDDs and SATA SSDs."
+          },
+          {
+            name: "NVMe Interface",
+            icon: "âš¡",
+            description: "NVMe (Non-Volatile Memory Express) is a high-speed interface designed for SSDs. It uses PCIe lanes directly, offering speeds up to 3,500+ MB/s, much faster than SATA."
+          },
+          {
+            name: "PCIe Lanes",
+            icon: "ðŸ›£ï¸",
+            description: "PCIe (Peripheral Component Interconnect Express) lanes are data pathways. More lanes mean higher bandwidth. NVMe SSDs use PCIe lanes for direct CPU communication."
+          },
+          {
+            name: "How Data Moves",
+            icon: "ðŸ”„",
+            description: "Data flows from storage through the interface (SATA/NVMe) to the motherboard, then to the CPU via PCIe lanes. NVMe provides a direct path, reducing latency."
+          }
+        ]
+      },
+      coolingSystems: {
+        title: "Cooling Systems",
+        intro: "Cooling systems prevent components from overheating by dissipating heat. Understanding heat sinks, fans, thermal paste, and liquid cooling helps you maintain optimal temperatures and extend component lifespan.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-cooling-hero.jpg",
+            alt: "Computer cooling systems visualization",
+            brief: "Create a visual showing cooling systems: heat sinks, fans, thermal paste application, and liquid cooling setup. Show airflow direction. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-cooling-overview.jpg",
+            alt: "CPU cooler with heat sink and fan",
+            brief: "Show a CPU cooler with visible heat sink fins, fan, and thermal paste. Include labels for key components. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-cooling-architecture.jpg",
+            alt: "Cooling system diagram showing airflow and heat dissipation",
+            brief: "Show a cooling system diagram with airflow direction, heat dissipation paths, and temperature zones. Include fan placement and airflow arrows. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-cooling-why-matters.jpg",
+            alt: "Temperature comparison showing cooling system impact",
+            brief: "Show temperature comparison: system with good cooling vs poor cooling. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Heat Sink Operation",
+            icon: "â„ï¸",
+            description: "Heat sinks are metal fins that absorb and dissipate heat from components. Larger surface area and better materials improve heat transfer and cooling efficiency."
+          },
+          {
+            name: "Fans and Airflow",
+            icon: "ðŸ’¨",
+            description: "Fans create airflow to move hot air away from components. Proper fan placement and direction ensure efficient cooling and prevent hot spots in the case."
+          },
+          {
+            name: "Thermal Paste",
+            icon: "ðŸ§ª",
+            description: "Thermal paste fills microscopic gaps between the CPU/GPU and heat sink, improving heat transfer. Proper application ensures optimal thermal conductivity."
+          },
+          {
+            name: "Liquid Cooling Basics",
+            icon: "ðŸ’§",
+            description: "Liquid cooling uses coolant to transfer heat more efficiently than air. It's ideal for high-performance systems and overclocking, providing better temperature control."
+          }
+        ]
+      },
+      psu: {
+        title: "Power Supply Unit (PSU)",
+        intro: "The Power Supply Unit (PSU) converts AC power from the wall outlet to DC power for computer components. Understanding watt ratings, efficiency certifications, cables, and power distribution helps you choose the right PSU for your system.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-psu-hero.jpg",
+            alt: "Power Supply Unit visualization",
+            brief: "Create a visual showing PSU: external view, watt rating labels, efficiency certification badges, and cable connections. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-psu-overview.jpg",
+            alt: "PSU with visible labels and connectors",
+            brief: "Show a PSU with visible labels, watt rating, efficiency certification (80 Plus), and cable connectors. Include labels for key parts. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-psu-architecture.jpg",
+            alt: "PSU power distribution diagram",
+            brief: "Show a PSU power distribution diagram with different voltage rails (12V, 5V, 3.3V), cable types (CPU, GPU, SATA), and power flow. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-psu-why-matters.jpg",
+            alt: "PSU efficiency comparison",
+            brief: "Show PSU efficiency comparison: different 80 Plus ratings (Bronze, Gold, Platinum) and their impact on power consumption. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Watt Ratings",
+            icon: "âš¡",
+            description: "PSU watt rating indicates maximum power output. Choose a PSU with enough wattage for all components (CPU, GPU, drives) plus headroom for future upgrades."
+          },
+          {
+            name: "80 Plus Certification",
+            icon: "ðŸ†",
+            description: "80 Plus certification (Bronze, Silver, Gold, Platinum, Titanium) indicates power efficiency. Higher ratings mean less wasted energy and lower electricity costs."
+          },
+          {
+            name: "PSU Cables",
+            icon: "ðŸ”Œ",
+            description: "PSU cables include CPU power (4+4 pin), GPU power (6+2 pin), SATA power, and Molex connectors. Modular PSUs allow you to use only needed cables."
+          },
+          {
+            name: "Power Distribution",
+            icon: "ðŸ“Š",
+            description: "PSU distributes power through different voltage rails (12V for CPU/GPU, 5V/3.3V for drives). Proper power distribution ensures stable system operation."
+          }
+        ]
+      },
+      biosUefi: {
+        title: "BIOS / UEFI",
+        intro: "BIOS (Basic Input/Output System) and UEFI (Unified Extensible Firmware Interface) are firmware that control your computer's startup process. Understanding boot order, security options, and BIOS updates helps you configure and maintain your system.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-bios-hero.jpg",
+            alt: "BIOS/UEFI interface visualization",
+            brief: "Create a visual showing BIOS/UEFI: interface screen, boot order settings, security options, and update process. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-bios-overview.jpg",
+            alt: "BIOS/UEFI interface screen",
+            brief: "Show BIOS/UEFI interface screen with visible menu options, boot order, and settings. Include labels for key sections. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-bios-architecture.jpg",
+            alt: "BIOS/UEFI boot process diagram",
+            brief: "Show a BIOS/UEFI boot process diagram: power on â†’ BIOS/UEFI initialization â†’ boot device selection â†’ OS loading. Include arrows and progression. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-bios-why-matters.jpg",
+            alt: "BIOS/UEFI security and boot options",
+            brief: "Show BIOS/UEFI security features and boot options comparison. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "What BIOS Does",
+            icon: "ðŸš€",
+            description: "BIOS/UEFI initializes hardware during startup, performs POST (Power-On Self-Test), and loads the operating system from the boot device. It's the first software that runs."
+          },
+          {
+            name: "Boot Order",
+            icon: "ðŸ“€",
+            description: "Boot order determines which device the computer checks first for an operating system. Common order: USB, CD/DVD, hard drive. You can change this in BIOS/UEFI settings."
+          },
+          {
+            name: "Security Options",
+            icon: "ðŸ”’",
+            description: "BIOS/UEFI security options include password protection, secure boot (prevents unauthorized OS), and TPM (Trusted Platform Module) for encryption."
+          },
+          {
+            name: "BIOS Update",
+            icon: "ðŸ”„",
+            description: "BIOS updates fix bugs, add new features, and improve compatibility. Updates should be done carefully using manufacturer tools to avoid system damage."
+          }
+        ]
+      },
+      expansionCards: {
+        title: "Expansion Cards",
+        intro: "Expansion cards add functionality to your computer by connecting to PCIe slots on the motherboard. Understanding different card types helps you expand your system's capabilities for graphics, networking, and other features.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-expansion-hero.jpg",
+            alt: "Expansion cards visualization",
+            brief: "Create a visual showing expansion cards: PCIe slots on motherboard, different card types (GPU, Wi-Fi, capture cards). Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-expansion-overview.jpg",
+            alt: "Various expansion cards (GPU, Wi-Fi, capture)",
+            brief: "Show various expansion cards side by side: GPU card, Wi-Fi card, capture card. Include labels for each type. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-expansion-architecture.jpg",
+            alt: "PCIe slot and expansion card connection diagram",
+            brief: "Show a PCIe slot and expansion card connection diagram with data flow, PCIe lanes, and how cards communicate with CPU. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-expansion-why-matters.jpg",
+            alt: "Expansion card use cases",
+            brief: "Show expansion card use cases: gaming (GPU), networking (Wi-Fi), content creation (capture). Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "PCIe Cards",
+            icon: "ðŸ”Œ",
+            description: "PCIe (Peripheral Component Interconnect Express) cards connect to PCIe slots on the motherboard. Different slot sizes (x1, x4, x8, x16) provide different bandwidth."
+          },
+          {
+            name: "Wi-Fi Cards",
+            icon: "ðŸ“¡",
+            description: "Wi-Fi cards add wireless networking capability to desktop computers. They connect via PCIe and provide Wi-Fi and Bluetooth connectivity."
+          },
+          {
+            name: "GPU Cards",
+            icon: "ðŸŽ®",
+            description: "Graphics cards (GPUs) are the most common expansion cards, providing dedicated graphics processing for gaming, video editing, and 3D rendering."
+          },
+          {
+            name: "Capture Cards",
+            icon: "ðŸ“¹",
+            description: "Capture cards record video from external sources (consoles, cameras) for streaming and content creation. They connect via PCIe for high-quality capture."
+          }
+        ]
+      },
+      peripheralDevices: {
+        title: "Peripheral Devices",
+        intro: "Peripheral devices are external components that connect to your computer to provide input, output, or additional functionality. Understanding wired and wireless peripherals, dongles, and drivers helps you set up and use devices effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-peripheral-hero.jpg",
+            alt: "Peripheral devices visualization",
+            brief: "Create a visual showing peripheral devices: keyboard, mouse, monitor, printer, speakers connected to a computer. Show both wired and wireless connections. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-peripheral-overview.jpg",
+            alt: "Various peripheral devices",
+            brief: "Show various peripheral devices: wired keyboard/mouse, wireless devices, USB dongles, and connections. Include labels. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-peripheral-architecture.jpg",
+            alt: "Peripheral device connection diagram",
+            brief: "Show a peripheral device connection diagram with USB ports, wireless connections, dongles, and how devices communicate with the computer. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-peripheral-why-matters.jpg",
+            alt: "Peripheral device setup and usage",
+            brief: "Show peripheral device setup scenarios: plug-and-play vs driver installation. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Wired Peripherals",
+            icon: "ðŸ”Œ",
+            description: "Wired peripherals connect via USB, HDMI, or other cables. They're reliable, don't need batteries, and provide consistent performance without interference."
+          },
+          {
+            name: "Wireless Peripherals",
+            icon: "ðŸ“¡",
+            description: "Wireless peripherals use Bluetooth or Wi-Fi for connectivity. They offer freedom of movement and reduce cable clutter, but may need batteries or charging."
+          },
+          {
+            name: "Dongles",
+            icon: "ðŸ”—",
+            description: "Dongles are small adapters that add connectivity (USB-C to USB-A, HDMI adapters) or enable wireless features (Bluetooth, Wi-Fi dongles for older systems)."
+          },
+          {
+            name: "Drivers for Peripherals",
+            icon: "ðŸ’¿",
+            description: "Some peripherals need drivers (software) to work properly. Windows usually installs drivers automatically, but advanced features may require manufacturer drivers."
+          }
+        ]
+      },
+      displayTechnology: {
+        title: "Display Technology",
+        intro: "Display technology determines how images appear on screens. Understanding LCD, LED, and OLED technologies, refresh rates, resolution, and color accuracy helps you choose the right monitor for your needs.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-display-hero.jpg",
+            alt: "Display technology visualization",
+            brief: "Create a visual showing display technologies: LCD, LED, OLED screens side by side with quality comparison. Show refresh rates and resolution indicators. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-display-overview.jpg",
+            alt: "Different display types comparison",
+            brief: "Show different display types side by side: LCD, LED, OLED with visible differences in image quality. Include labels. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-display-architecture.jpg",
+            alt: "Display technology diagram showing pixel structure",
+            brief: "Show a display technology diagram with pixel structure, backlighting (LCD/LED), self-illuminating pixels (OLED), and how images are formed. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-display-why-matters.jpg",
+            alt: "Display quality comparison",
+            brief: "Show display quality comparison: resolution, refresh rate, color accuracy differences. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "LCD vs LED vs OLED",
+            icon: "ðŸ–¥ï¸",
+            description: "LCD uses liquid crystals with backlight, LED uses LED backlighting (brighter, more efficient), OLED uses self-illuminating pixels (best contrast, true blacks)."
+          },
+          {
+            name: "Refresh Rate",
+            icon: "ðŸ”„",
+            description: "Refresh rate (Hz) is how many times per second the screen updates. Higher refresh rates (120Hz, 144Hz, 240Hz) provide smoother motion, ideal for gaming."
+          },
+          {
+            name: "Resolution",
+            icon: "ðŸ“",
+            description: "Resolution is the number of pixels (1920x1080, 2560x1440, 3840x2160). Higher resolution means sharper images but requires more GPU power."
+          },
+          {
+            name: "Color Accuracy",
+            icon: "ðŸŽ¨",
+            description: "Color accuracy measures how true colors appear on screen. Professional monitors have high color accuracy (sRGB, Adobe RGB) for photo/video editing."
+          }
+        ]
+      },
+      printersScanners: {
+        title: "Printers & Scanners",
+        intro: "Printers and scanners are output and input devices for physical documents. Understanding printer types (inkjet vs laser), DPI resolution, scanner operation, and common problems helps you choose and maintain these devices.",
+        images: {
+          hero: {
+            fileName: "module-media/m4-printer-hero.jpg",
+            alt: "Printers and scanners visualization",
+            brief: "Create a visual showing printers and scanners: inkjet printer, laser printer, scanner, and their key features. Show DPI indicators and quality comparison. Use a tech aesthetic with soft gradients."
+          },
+          overview: {
+            fileName: "module-media/m4-printer-overview.jpg",
+            alt: "Inkjet vs laser printer comparison",
+            brief: "Show inkjet and laser printers side by side with visible differences. Include labels for key features. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m4-printer-architecture.jpg",
+            alt: "Printer and scanner working diagram",
+            brief: "Show a printer and scanner working diagram: how inkjet/laser printers work, scanner operation, DPI resolution, and document flow. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m4-printer-why-matters.jpg",
+            alt: "Print quality and troubleshooting",
+            brief: "Show print quality comparison and common troubleshooting scenarios. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Inkjet vs Laser Printer",
+            icon: "ðŸ–¨ï¸",
+            description: "Inkjet printers spray liquid ink, good for photos and color printing. Laser printers use toner powder, faster and better for text documents and high-volume printing."
+          },
+          {
+            name: "DPI (Resolution)",
+            icon: "ðŸ“Š",
+            description: "DPI (Dots Per Inch) measures print resolution. Higher DPI (600, 1200, 2400) means sharper, more detailed prints. Photo printing needs 300+ DPI."
+          },
+          {
+            name: "Scanner Working",
+            icon: "ðŸ“·",
+            description: "Scanners use sensors to capture images from physical documents. They convert documents to digital files (PDF, images) with adjustable DPI settings for quality."
+          },
+          {
+            name: "Common Problems",
+            icon: "ðŸ”§",
+            description: "Common issues include paper jams, low ink/toner, connectivity problems, and print quality issues. Regular maintenance and proper setup prevent most problems."
+          }
+        ]
+      }
+    };
+  };
+
+  // Module 5 specific content sections
+  const getModule5Sections = () => {
+    return {
+      storageConcepts: {
+        title: "Storage Concepts",
+        intro: "Understanding different storage types and their characteristics helps you make informed decisions about data management. Storage can be volatile (temporary) or non-volatile (permanent), each serving different purposes in your computer system.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-storage-concepts-hero.jpg",
+            alt: "Storage hierarchy visualization showing RAM, Cache, SSD, and HDD",
+            brief: "Create a visual hierarchy showing different storage types: RAM at top (fastest, volatile), cache, SSD (fast, non-volatile), HDD (slower, non-volatile). Show speed and capacity differences. Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m5-storage-concepts-overview.jpg",
+            alt: "Storage hierarchy diagram showing RAM â†’ Cache â†’ SSD â†’ HDD",
+            brief: "Show a storage hierarchy diagram: vertical or horizontal flow showing RAM (fastest, smallest) â†’ Cache â†’ SSD â†’ HDD (slowest, largest). Include speed indicators and capacity labels. Clean educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m5-storage-concepts-comparison.jpg",
+            alt: "Storage speed vs capacity comparison chart",
+            brief: "Create a comparison chart showing storage speed vs capacity: RAM (fast, small), Cache (very fast, tiny), SSD (fast, medium), HDD (slow, large). Use visual indicators. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-storage-concepts-why-matters.jpg",
+            alt: "Real-world storage decision scenario",
+            brief: "Show a real-world storage decision scenario: different use cases (gaming, work, backup) with recommended storage types. Clean, modern aesthetic."
+          }
+        },
+        storageTypes: [
+          {
+            name: "Volatile",
+            icon: "âš¡",
+            description: "Temporary storage that clears when power is off. Fast access for active data. Examples: RAM, Cache."
+          },
+          {
+            name: "Non-Volatile",
+            icon: "ðŸ’¾",
+            description: "Permanent storage that keeps data when power is off. Persistent storage for files. Examples: HDD, SSD."
+          },
+          {
+            name: "Hybrid",
+            icon: "ðŸ”„",
+            description: "Combines both volatile and non-volatile storage for optimal performance. Uses fast cache with permanent storage."
+          }
+        ]
+      },
+      hddDeepDive: {
+        title: "HDD - Hard Disk Drive",
+        intro: "Hard Disk Drives use spinning magnetic platters to store data. They offer large capacity at affordable prices, making them ideal for bulk storage, backups, and archives. Understanding HDD technology helps you make informed storage decisions.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-hdd-hero.jpg",
+            alt: "3.5\" HDD external view with labels, SATA ports, and power connector",
+            brief: "Create a visual of a 3.5\" HDD: show the external view with labels, SATA ports, and power connector. Include capacity indicators. Use a clean tech aesthetic with soft lighting."
+          },
+          overview: {
+            fileName: "module-media/m5-hdd-overview.jpg",
+            alt: "HDD external view showing 3.5\" drive with labels and ports",
+            brief: "Show a 3.5\" HDD from the outside: visible labels, SATA data port, power connector. Include subtle labels for key parts. Background: clean tech aesthetic."
+          },
+          internal: {
+            fileName: "module-media/m5-hdd-internal.jpg",
+            alt: "HDD cross-section diagram showing platters, read/write heads, actuator arm, spindle, and motor",
+            brief: "Create a cross-section diagram of HDD internals: show platters (magnetic disks), read/write heads, actuator arm, spindle (rotation axis), and motor. Include labels and annotations. Educational diagram style."
+          },
+          useCases: {
+            fileName: "module-media/m5-hdd-use-cases.jpg",
+            alt: "HDD use cases showing desktop computers, servers, external backup drives, NAS, and gaming consoles",
+            brief: "Show HDDs in different applications: desktop computer, server rack, external backup drive, NAS device, gaming console. Arrange them in a flowing layout. Background: tech gradient."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-hdd-why-matters.jpg",
+            alt: "HDD vs SSD comparison for different use cases",
+            brief: "Show HDD vs SSD comparison for different use cases: when to use HDD (bulk storage, backups) vs SSD (OS, apps). Clean, modern aesthetic."
+          }
+        },
+        components: [
+          {
+            name: "Platters",
+            icon: "ðŸ“€",
+            description: "Magnetic disks that store data. Multiple platters increase capacity. Data is written and read from both sides of each platter."
+          },
+          {
+            name: "Read/Write Heads",
+            icon: "ðŸŽ¯",
+            description: "Tiny electromagnets that read and write data on platters. They float just nanometers above the spinning platters without touching them."
+          },
+          {
+            name: "Actuator Arm",
+            icon: "âš™ï¸",
+            description: "Mechanical arm that moves the read/write heads across the platters. Allows heads to access different tracks and sectors on the disk."
+          },
+          {
+            name: "Spindle",
+            icon: "ðŸ”„",
+            description: "Central axis that rotates the platters at high speed (5400-7200 RPM). Faster rotation means faster data access but more power consumption."
+          }
+        ],
+        advantages: [
+          "Large Capacity - Up to 20TB+ available",
+          "Affordable - Cost per GB is very low",
+          "Proven Technology - Reliable for decades",
+          "Good for Archives - Long-term storage solution"
+        ],
+        disadvantages: [
+          "Slower than SSD - Mechanical parts limit speed",
+          "Moving Parts - More wear and potential failure",
+          "More Fragile - Sensitive to movement and shocks",
+          "Higher Power Usage - Motor requires more energy",
+          "Noise and Vibration - Spinning platters create sound",
+          "Slower Boot Times - Takes longer to start up",
+          "Not Ideal for Laptops - Movement can damage drives"
+        ],
+        useCases: [
+          "Desktop Computers - Primary storage for many desktops",
+          "Servers & Data Centers - Bulk storage for servers",
+          "External Backup Drives - Portable backup solutions",
+          "Network Attached Storage (NAS) - Shared storage for networks",
+          "Gaming Consoles - Storage for games and media"
+        ]
+      },
+      ssdDeepDive: {
+        title: "SSD - Solid State Drive",
+        intro: "Solid State Drives (SSD) use flash memory chips instead of spinning disks. They're faster, quieter, and more reliable than HDDs, making them ideal for operating systems, applications, and frequently accessed data. Understanding SSD technology helps you optimize system performance.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-ssd-hero.jpg",
+            alt: "SSD overview showing 2.5\" SATA SSD and M.2 NVMe SSD",
+            brief: "Create a visual showing both SSD types: 2.5\" SATA SSD and M.2 NVMe SSD side by side. Show the compact form factors and connection types. Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m5-ssd-overview.jpg",
+            alt: "SSD external view showing 2.5\" SATA SSD and M.2 NVMe SSD",
+            brief: "Show both SSD types from external view: 2.5\" SATA SSD with visible SATA connector, and M.2 NVMe SSD showing the compact form factor. Include labels. Background: clean tech aesthetic."
+          },
+          technology: {
+            fileName: "module-media/m5-ssd-technology.jpg",
+            alt: "SSD internal structure showing NAND flash memory cells",
+            brief: "Show SSD internal structure: NAND flash memory cells, controller chip, and how data is stored electronically. Include labels. Educational diagram style."
+          },
+          speedComparison: {
+            fileName: "module-media/m5-ssd-speed-comparison.jpg",
+            alt: "Speed comparison chart showing SSD vs HDD performance",
+            brief: "Create a speed comparison chart: bar chart showing SSD vs HDD speeds for boot time, file read, and access time. Include visual indicators. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-ssd-why-matters.jpg",
+            alt: "SSD performance benefits visualization",
+            brief: "Show SSD performance benefits: fast boot times, quick file access, smooth application loading. Clean, modern aesthetic."
+          }
+        },
+        advantages: [
+          {
+            name: "Fast",
+            icon: "âš¡",
+            description: "Boot in 10-15 sec, 500+ MB/s read speed. Much faster than HDD for all operations."
+          },
+          {
+            name: "Quiet",
+            icon: "ðŸ”‡",
+            description: "No moving parts = silent operation. Perfect for quiet work environments."
+          },
+          {
+            name: "Durable",
+            icon: "ðŸ’ª",
+            description: "Shock resistant, long lifespan. Ideal for laptops and portable devices."
+          },
+          {
+            name: "Energy Efficient",
+            icon: "ðŸ”‹",
+            description: "Lower power consumption than HDD. Extends battery life in laptops."
+          }
+        ],
+        speedDetails: [
+          "Boot Time: 10-15 sec (SSD) vs 30-60 sec (HDD)",
+          "File Read: 500+ MB/s (SSD) vs 100-150 MB/s (HDD)",
+          "No mechanical delay - Instant access",
+          "Perfect for operating systems and frequently used apps"
+        ]
+      },
+      nvmeTechnology: {
+        title: "NVMe Technology",
+        intro: "NVMe (Non-Volatile Memory Express) is a high-speed interface designed specifically for SSDs. It uses PCIe lanes directly, bypassing the older SATA interface, offering speeds up to 3,500+ MB/s. Understanding NVMe helps you choose the fastest storage solution.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-nvme-hero.jpg",
+            alt: "NVMe SSD diagram showing M.2 form factor and PCIe connection",
+            brief: "Create an NVMe SSD diagram: show M.2 form factor, PCIe connection, and how it bypasses SATA. Include labels for key parts. Modern tech diagram style."
+          },
+          overview: {
+            fileName: "module-media/m5-nvme-overview.jpg",
+            alt: "M.2 NVMe SSD with visible PCIe connection",
+            brief: "Show M.2 NVMe SSD with visible PCIe connection slot on motherboard. Include labels showing PCIe lanes. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m5-nvme-architecture.jpg",
+            alt: "NVMe architecture diagram showing direct PCIe connection",
+            brief: "Show NVMe architecture diagram: direct PCIe connection to CPU, bypassing SATA controller. Include data flow arrows. Educational diagram style."
+          },
+          speedComparison: {
+            fileName: "module-media/m5-nvme-speed-comparison.jpg",
+            alt: "Speed comparison: SATA SSD vs NVMe SSD",
+            brief: "Create speed comparison: SATA SSD (~550 MB/s) vs NVMe SSD (3,000+ MB/s). Show dramatic speed difference. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-nvme-why-matters.jpg",
+            alt: "NVMe use cases for gaming and professional work",
+            brief: "Show NVMe use cases: gaming (fast loading), video editing (quick file access), professional work. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "PCIe Connection",
+            icon: "ðŸ”Œ",
+            description: "NVMe uses PCIe lanes directly, providing much higher bandwidth than SATA. PCIe 3.0 offers ~1GB/s per lane, PCIe 4.0 offers ~2GB/s per lane."
+          },
+          {
+            name: "M.2 Form Factor",
+            icon: "ðŸ“",
+            description: "M.2 is a compact form factor (like a stick of gum) that fits directly on the motherboard. No cables needed, saves space."
+          },
+          {
+            name: "Speed Advantage",
+            icon: "âš¡",
+            description: "NVMe SSDs are 5-6x faster than SATA SSDs. Perfect for gaming, video editing, and professional applications that need fast data access."
+          },
+          {
+            name: "Low Latency",
+            icon: "ðŸŽ¯",
+            description: "Direct PCIe connection reduces latency significantly. Files open instantly, applications launch faster, system feels more responsive."
+          }
+        ],
+        speedDetails: {
+          sata: "SATA SSD: ~550 MB/s",
+          nvme: "NVMe SSD: 3,000+ MB/s (PCIe 3.0) or 7,000+ MB/s (PCIe 4.0)"
+        }
+      },
+      storageFileSystems: {
+        title: "Storage File Systems",
+        intro: "File systems organize how data is stored and retrieved on storage devices. Different file systems (NTFS, FAT32, exFAT, ext4) have different features, compatibility, and limitations. Understanding file systems helps you format drives correctly and manage data effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-filesystems-hero.jpg",
+            alt: "File systems comparison visualization",
+            brief: "Create a visual showing different file systems: NTFS, FAT32, exFAT, ext4 with their logos/icons. Show compatibility indicators. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-filesystems-overview.jpg",
+            alt: "File system structure diagram",
+            brief: "Show a file system structure diagram: how files are organized in directories, file allocation table, and data clusters. Educational diagram style."
+          },
+          comparison: {
+            fileName: "module-media/m5-filesystems-comparison.jpg",
+            alt: "File systems feature comparison table",
+            brief: "Create a comparison table showing NTFS, FAT32, exFAT features: max file size, compatibility, use cases. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-filesystems-why-matters.jpg",
+            alt: "File system selection for different devices",
+            brief: "Show file system selection scenarios: Windows (NTFS), USB drives (exFAT), Linux (ext4). Clean, modern aesthetic."
+          }
+        },
+        fileSystems: [
+          {
+            name: "NTFS",
+            icon: "ðŸªŸ",
+            description: "Windows file system. Supports large files (16TB+), file permissions, encryption. Best for Windows internal drives.",
+            features: "Large files, permissions, encryption, journaling"
+          },
+          {
+            name: "FAT32",
+            icon: "ðŸ’¿",
+            description: "Older file system. Universal compatibility but 4GB file size limit. Good for small USB drives and older devices.",
+            features: "Universal compatibility, 4GB file limit, simple structure"
+          },
+          {
+            name: "exFAT",
+            icon: "ðŸ”—",
+            description: "Extended FAT. Works on Windows, Mac, and Linux. No 4GB limit. Perfect for external drives and USB sticks.",
+            features: "Cross-platform, large files, no 4GB limit"
+          },
+          {
+            name: "ext4",
+            icon: "ðŸ§",
+            description: "Linux file system. Journaling, large file support, excellent performance. Standard for Linux systems.",
+            features: "Journaling, large files, Linux standard, high performance"
+          }
+        ]
+      },
+      diskPartitioning: {
+        title: "Disk Partitioning",
+        intro: "Disk partitioning divides a physical storage device into separate logical sections. Each partition acts like an independent drive, allowing you to organize data, install multiple operating systems, or separate system files from user data. Understanding partitioning helps you manage storage effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-partitioning-hero.jpg",
+            alt: "Disk partitioning visualization showing multiple partitions",
+            brief: "Create a visual showing disk partitioning: single physical drive divided into multiple partitions (C:, D:, E:). Show partition sizes and labels. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-partitioning-overview.jpg",
+            alt: "Partition layout diagram",
+            brief: "Show a partition layout diagram: primary partitions, extended partitions, logical drives. Include labels. Educational diagram style."
+          },
+          process: {
+            fileName: "module-media/m5-partitioning-process.jpg",
+            alt: "Partitioning process steps",
+            brief: "Show partitioning process: before (single partition) â†’ during (creating partitions) â†’ after (multiple partitions). Include step indicators. Clean, educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-partitioning-why-matters.jpg",
+            alt: "Partitioning use cases",
+            brief: "Show partitioning use cases: dual boot (Windows + Linux), data organization, system backup. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Primary Partitions",
+            icon: "ðŸ“¦",
+            description: "Main partitions that can boot operating systems. MBR supports up to 4 primary partitions. GPT supports unlimited partitions."
+          },
+          {
+            name: "Extended Partitions",
+            icon: "ðŸ“‚",
+            description: "Special partition type that can contain multiple logical drives. Used in MBR to overcome the 4-partition limit."
+          },
+          {
+            name: "Logical Drives",
+            icon: "ðŸ’¿",
+            description: "Drives created within extended partitions. Appear as separate drives (D:, E:) but are on the same physical disk."
+          },
+          {
+            name: "Partition Table",
+            icon: "ðŸ“‹",
+            description: "MBR (Master Boot Record) or GPT (GUID Partition Table) that stores partition information. GPT is newer and supports larger drives."
+          }
+        ],
+        benefits: [
+          "Organize Data - Separate system files from personal data",
+          "Multiple OS - Install Windows and Linux on the same drive",
+          "Backup Safety - Protect data if one partition fails",
+          "Performance - Isolate frequently accessed files"
+        ]
+      },
+      diskManagementTools: {
+        title: "Disk Management Tools",
+        intro: "Disk management tools help you create, resize, format, and manage partitions on your storage devices. Windows Disk Management, DiskPart, and third-party tools provide different levels of control. Understanding these tools helps you manage storage effectively and safely.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-disk-tools-hero.jpg",
+            alt: "Disk management tools interface visualization",
+            brief: "Create a visual showing disk management tools: Windows Disk Management interface, partition visualization. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-disk-tools-overview.jpg",
+            alt: "Windows Disk Management interface",
+            brief: "Show Windows Disk Management interface: disk list, partition visualization, available actions. Include labels. Clean, educational style."
+          },
+          tools: {
+            fileName: "module-media/m5-disk-tools-tools.jpg",
+            alt: "Different disk management tools comparison",
+            brief: "Show different disk management tools: Windows Disk Management, DiskPart command line, third-party tools. Include tool names. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-disk-tools-why-matters.jpg",
+            alt: "Disk management use cases",
+            brief: "Show disk management use cases: resizing partitions, creating new partitions, formatting drives. Clean, modern aesthetic."
+          }
+        },
+        tools: [
+          {
+            name: "Windows Disk Management",
+            icon: "ðŸªŸ",
+            description: "Built-in Windows tool with graphical interface. Easy to use for basic partition operations like creating, deleting, and formatting partitions."
+          },
+          {
+            name: "DiskPart",
+            icon: "ðŸ’»",
+            description: "Command-line tool for advanced disk management. More powerful than GUI but requires technical knowledge. Can script operations."
+          },
+          {
+            name: "Third-Party Tools",
+            icon: "ðŸ”§",
+            description: "Tools like GParted, EaseUS, MiniTool offer advanced features like partition recovery, disk cloning, and better visualization."
+          },
+          {
+            name: "Format Options",
+            icon: "ðŸ“",
+            description: "Quick format (fast, doesn't check for errors) vs Full format (slow, checks entire disk). Choose based on your needs."
+          }
+        ],
+        operations: [
+          "Create Partition - Divide unallocated space into new partitions",
+          "Delete Partition - Remove partitions (data will be lost)",
+          "Format Partition - Prepare partition for use with a file system",
+          "Resize Partition - Shrink or extend existing partitions",
+          "Change Drive Letter - Assign or change drive letters (C:, D:, etc.)"
+        ]
+      },
+      raidConcepts: {
+        title: "RAID Concepts",
+        intro: "RAID (Redundant Array of Independent Disks) combines multiple physical drives into one logical unit. Different RAID levels offer different benefits: performance, redundancy, or both. Understanding RAID helps you build reliable and fast storage systems.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-raid-hero.jpg",
+            alt: "RAID array visualization showing multiple drives",
+            brief: "Create a visual showing RAID array: multiple drives (HDD/SSD) connected together, showing data distribution. Use a modern tech aesthetic."
+          },
+          overview: {
+            fileName: "module-media/m5-raid-overview.jpg",
+            alt: "RAID levels comparison diagram",
+            brief: "Show RAID levels comparison: RAID 0, RAID 1, RAID 5, RAID 10 with visual representation of data distribution. Include labels. Educational diagram style."
+          },
+          levels: {
+            fileName: "module-media/m5-raid-levels.jpg",
+            alt: "Different RAID levels explained",
+            brief: "Show different RAID levels side by side: RAID 0 (striping), RAID 1 (mirroring), RAID 5 (parity). Include data flow diagrams. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-raid-why-matters.jpg",
+            alt: "RAID use cases for servers and workstations",
+            brief: "Show RAID use cases: servers (redundancy), workstations (performance), data centers (both). Clean, modern aesthetic."
+          }
+        },
+        raidLevels: [
+          {
+            name: "RAID 0",
+            icon: "âš¡",
+            description: "Striping - Data split across drives for maximum speed. No redundancy. Fastest but no protection if one drive fails.",
+            useCase: "Performance-focused, non-critical data"
+          },
+          {
+            name: "RAID 1",
+            icon: "ðŸªž",
+            description: "Mirroring - Data duplicated on two drives. Excellent redundancy. If one drive fails, data is safe on the other.",
+            useCase: "Critical data, maximum redundancy"
+          },
+          {
+            name: "RAID 5",
+            icon: "ðŸ”",
+            description: "Striping with parity - Data and parity information distributed across 3+ drives. Good balance of speed and redundancy.",
+            useCase: "Servers, balanced performance and protection"
+          },
+          {
+            name: "RAID 10",
+            icon: "ðŸš€",
+            description: "Combination of RAID 1 and RAID 0. Best of both: high speed and redundancy. Requires 4+ drives.",
+            useCase: "High-performance servers, critical applications"
+          }
+        ],
+        benefits: [
+          "Performance - RAID 0 and RAID 5 improve read/write speeds",
+          "Redundancy - RAID 1, 5, and 10 protect against drive failure",
+          "Capacity - Combine multiple drives into larger storage",
+          "Reliability - Continue operating even if a drive fails (RAID 1, 5, 10)"
+        ]
+      },
+      cloudStorage: {
+        title: "Cloud Storage",
+        intro: "Cloud storage stores your data on remote servers accessed over the internet. Services like Google Drive, OneDrive, and Dropbox offer convenient access from any device, automatic backups, and file sharing. Understanding cloud storage helps you manage data across devices and collaborate effectively.",
+        images: {
+          hero: {
+            fileName: "module-media/m5-cloud-hero.jpg",
+            alt: "Cloud storage visualization showing data in the cloud",
+            brief: "Create a visual showing cloud storage: data files floating in cloud, connected to multiple devices (laptop, phone, tablet). Use a modern tech aesthetic with gradients."
+          },
+          overview: {
+            fileName: "module-media/m5-cloud-overview.jpg",
+            alt: "Cloud storage services comparison",
+            brief: "Show popular cloud storage services: Google Drive, OneDrive, Dropbox, iCloud with their logos. Include storage amounts. Clean, educational style."
+          },
+          architecture: {
+            fileName: "module-media/m5-cloud-architecture.jpg",
+            alt: "Cloud storage architecture diagram",
+            brief: "Show cloud storage architecture: user devices â†’ internet â†’ cloud servers â†’ data centers. Include sync arrows. Educational diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m5-cloud-why-matters.jpg",
+            alt: "Cloud storage benefits and use cases",
+            brief: "Show cloud storage benefits: access anywhere, automatic backup, file sharing, collaboration. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Access Anywhere",
+            icon: "ðŸŒ",
+            description: "Access your files from any device with internet connection. Files sync automatically across all your devices."
+          },
+          {
+            name: "Automatic Backup",
+            icon: "ðŸ’¾",
+            description: "Files are automatically backed up to the cloud. If your device fails, your data is safe in the cloud."
+          },
+          {
+            name: "File Sharing",
+            icon: "ðŸ”—",
+            description: "Easily share files and folders with others via links. Control permissions (view, edit, download)."
+          },
+          {
+            name: "Collaboration",
+            icon: "ðŸ‘¥",
+            description: "Multiple people can work on the same files simultaneously. Changes sync in real-time."
+          }
+        ],
+        services: [
+          {
+            name: "Google Drive",
+            icon: "ðŸ“",
+            description: "15GB free, integrates with Google Workspace. Great for collaboration and document editing."
+          },
+          {
+            name: "OneDrive",
+            icon: "â˜ï¸",
+            description: "5GB free, integrates with Microsoft 365. Seamless with Windows and Office apps."
+          },
+          {
+            name: "Dropbox",
+            icon: "ðŸ“¦",
+            description: "2GB free, simple interface. Good for file syncing and sharing."
+          },
+          {
+            name: "iCloud",
+            icon: "ðŸŽ",
+            description: "5GB free, integrates with Apple devices. Automatic backup for photos and documents."
+          }
+        ],
+        considerations: [
+          "Internet Required - Need internet connection to access files",
+          "Privacy - Data stored on third-party servers",
+          "Storage Limits - Free tiers have limited space",
+          "Sync Speed - Depends on internet connection speed"
+        ]
+      }
+    };
+  };

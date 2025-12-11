@@ -1,20 +1,33 @@
-﻿import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArrowLeft, Cog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { Switch } from "@/components/ui/switch";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeToggle } from "../components/ThemeToggle";
 import { SimulatorPreview } from "@/components/SimulatorPreview";
 import { getSimulatorByModuleId, getSimulatorByTopic } from "@/data/simulators";
 import { ContentRenderer } from "@/components/ContentRenderer";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { useTheme } from "@/context/ThemeContext";
+import { PhishingTopic } from "@/components/topics/m10/PhishingTopic";
+import { SafeBrowsingTopic } from "@/components/topics/m10/SafeBrowsingTopic";
+import { FirewallTopic } from "@/components/topics/m10/FirewallTopic";
+import { AntivirusTopic } from "@/components/topics/m10/AntivirusTopic";
+import { SecureWiFiTopic } from "@/components/topics/m10/SecureWiFiTopic";
+import { BackupTopic } from "@/components/topics/m10/BackupTopic";
+import { ScamsTopic } from "@/components/topics/m10/ScamsTopic";
+import { CyberHygieneTopic } from "@/components/topics/m10/CyberHygieneTopic";
+import { TopicNavigation } from "@/components/TopicNavigation";
 import moduleSoftware from "@/assets/module-software.png";
 import moduleIntro from "@/assets/module-media/m1-hero.jpeg";
 import moduleTypesHero from "@/assets/module-media/types-combined.jpg";
 import moduleSoftwareHero from "@/assets/module-media/m1-software-hero.jpg";
 
+// HMR Update Trigger
 const ModuleDetail = () => {
   const { id, part, topicId } = useParams();
   const navigate = useNavigate();
@@ -25,12 +38,25 @@ const ModuleDetail = () => {
   const [ipoOutput, setIpoOutput] = useState("");
   const [isProcessingIpo, setIsProcessingIpo] = useState(false);
   const [revealedMatches, setRevealedMatches] = useState<string[]>([]);
+  const [isHotspotOn, setIsHotspotOn] = useState(false);
+  const [ciaSelection, setCiaSelection] = useState<string | null>(null);
+  const [foundRisks, setFoundRisks] = useState<string[]>([]);
+  const [passwordInput, setPasswordInput] = useState("");
+  // Module 10 Topic 3 State
+  const [otpValue, setOtpValue] = useState("");
+  const [showPhone, setShowPhone] = useState(false);
+  const [loginStatus, setLoginStatus] = useState<"idle" | "verify" | "success">("idle");
+  const [mfaToggle, setMfaToggle] = useState(false);
+  // Module 10 Topic 4 State
+  const [activeTrigger, setActiveTrigger] = useState<string | null>(null);
+  const [isUrlHovered, setIsUrlHovered] = useState(false);
+  const [phishSelection, setPhishSelection] = useState<"A" | "B" | null>(null);
   const moduleId = parseInt(id || "1");
   const partNumber = part ? parseInt(part) : null;
-  
+
   // Apply Module 1 light theme colors
   const isModule1Light = moduleId === 1 && theme === 'light';
-  
+
   // Helper function to get Module 1 light theme classes
   const getModule1Class = (baseClass: string, module1Class?: string) => {
     if (isModule1Light && module1Class) {
@@ -53,7 +79,7 @@ const ModuleDetail = () => {
   }, [id, part, location.pathname]);
 
   // Get simulator for this module/topic
-  const simulator = (moduleId === 1 || moduleId === 2 || moduleId === 3) && topicId 
+  const simulator = (moduleId === 1 || moduleId === 2 || moduleId === 3) && topicId
     ? getSimulatorByTopic(moduleId, topicId) || getSimulatorByModuleId(moduleId)
     : getSimulatorByModuleId(moduleId);
 
@@ -70,7 +96,454 @@ const ModuleDetail = () => {
     }, 1200);
   };
 
-  // Module 1 specific content sections
+  // Module 9 specific content sections
+  const getModule9Sections = () => {
+    return {
+      networking: {
+        intro: "A computer network is a group of two or more computers connected together to share information and resources.",
+        images: {
+          hero: {
+            fileName: "module-media/m9-network-hero.jpg",
+            alt: "Global network of connected devices",
+            brief: "Visual showing a globe with glowing lines connecting computers, servers, and satellites. Represents global connectivity."
+          },
+          diagram: {
+            fileName: "module-media/m9-network-diagram.jpg",
+            alt: "Simple LAN vs WAN diagram",
+            brief: "Diagram showing a Local Area Network (Home/Office) connected to the Wide Area Network (Internet) via a Router."
+          },
+          benefits: {
+            fileName: "module-media/m9-benefits-combined.jpg",
+            alt: "Networking Benefits Visualization",
+            brief: "Combined illustration of file sharing, printing, communication, and storage symbols connecting users."
+          }
+        },
+        benefits: [
+          { icon: "📤", name: "File Sharing", description: "Share documents and media between computers without using USB drives." },
+          { icon: "🖨️", name: "Resource Sharing", description: "Usage of a single printer or scanner by multiple computers on the network." },
+          { icon: "💬", name: "Communication", description: "Instant messaging and email communication across the network." },
+          { icon: "💾", name: "Central Storage", description: "Saving files on a central server for backup and easy access." }
+        ],
+        types: [
+          { name: "LAN", full: "Local Area Network", description: "Connects devices in a small area like a home, office, or school.", icon: "🏠" },
+          { name: "WAN", full: "Wide Area Network", description: "Spans a large geographic area. The Internet is the biggest WAN.", icon: "🌍" },
+          { name: "PAN", full: "Personal Area Network", description: "Connects devices around a single person, like Bluetooth headphones to a phone.", icon: "🎧" },
+          { name: "MAN", full: "Metropolitan Area Network", description: "Connects a city or a large campus.", icon: "🏙️" }
+        ],
+        architecture: {
+          title: "Network Architecture",
+          intro: "How computers are organized in a network.",
+          clientServer: {
+            title: "Client-Server",
+            description: "A powerful central computer (Server) provides services to less powerful computers (Clients). Used in businesses and websites.",
+            fileName: "module-media/m9-client-server.jpg",
+            brief: "Diagram showing one big Server computer connected to many small Client computers. Arrows flow from Server to Clients."
+          },
+          p2p: {
+            title: "Peer-to-Peer (P2P)",
+            description: "All computers have equal status and share resources directly with each other. Common in home networks.",
+            fileName: "module-media/m9-p2p.jpg",
+            brief: "Diagram showing computers connected in a circle or mesh, talking directly to each other without a central server."
+          }
+        },
+        whyMatters: {
+          title: "Why Networking Matters",
+          text: "Without networks, we would be isolated. Networking allows the internet to exist, enables work-from-home, streaming movies, and connecting with friends globally."
+        }
+      },
+      devices: {
+        intro: "Network devices act as the building blocks of any network. They help route data to the correct destination.",
+        images: {
+          hero: {
+            fileName: "module-media/m9-devices-hero.jpg",
+            alt: "Collection of network devices",
+            brief: "A studio shot of modern network hardware: A sleek router with antennas, a network switch with blinking lights, and Ethernet cables."
+          },
+          comparison: {
+            fileName: "module-media/m9-hub-vs-switch.jpg",
+            alt: "Hub vs Switch traffic flow",
+            brief: "Visual comparison: 'Hub' sends data to everyone (messy traffic), 'Switch' sends data only to the target (organized traffic)."
+          }
+        },
+        list: [
+          { icon: "🚦", name: "Router", role: "The Traffic Cop", description: "Connects different networks together (like your home network to the Internet) and directs traffic." },
+          { icon: "⚡", name: "Switch", role: "The Smart Connector", description: "Connects devices within a single network. It knows exactly which device needs the data." },
+          { icon: "🔌", name: "Modem", role: "The Translator", description: "Converts signals from your ISP (Internet Service Provider) into digital signals your router understands." },
+          { icon: "🖇️", name: "Network Cable", role: "The Highway", description: "Physical cables (like Ethernet/RJ45) that carry data between devices at high speeds." }
+        ],
+        nic: {
+          title: "Network Interface Card (NIC)",
+          description: "The hardware component inside your computer that allows it to connect to a network. No NIC = No Internet.",
+          fileName: "module-media/m9-nic.jpg",
+          brief: "Photo of a green circuit board card with an Ethernet port, meant to be plugged into a motherboard."
+        },
+        wap: {
+          title: "Wireless Access Point (WAP)",
+          description: "A device that creates a wireless local area network (WLAN), usually in an office or large building. In homes, this is often built into the router.",
+          fileName: "module-media/m9-wap.jpg",
+          brief: "Photo of a ceiling-mounted white disk-shaped device (WAP) emitting Wi-Fi waves."
+        }
+      },
+      ipAddressing: {
+        intro: "Every device connected to a network needs a unique address to send and receive data. This is called an IP (Internet Protocol) Address.",
+        images: {
+          hero: {
+            fileName: "module-media/m9-ip-hero.jpg",
+            alt: "IP Addressing Concept",
+            brief: "Visual showing digital numbers (192.168.x.x) floating over connected devices in a 3D network space."
+          },
+          analogy: {
+            fileName: "module-media/m9-ip-analogy.jpg",
+            alt: "IP Address Analogy",
+            brief: "Split visual: Left side shows a House with a unique postal address. Right side shows a Computer with a unique IP address."
+          }
+        },
+        publicVsPrivate: {
+          title: "Public vs Private IP",
+          description: "Your 'Private' IP is used inside your home (like a room number). Your 'Public' IP is used on the internet (like your street address).",
+          fileName: "module-media/m9-public-private.jpg",
+          brief: "Diagram showing a Router acting as a wall. Inside: Private IPs (192.168...). Outside: Public IP (8.8.8.8...)."
+        },
+        types: [
+          { name: "IPv4", full: "Internet Protocol version 4", description: "The old standard. Uses 4 numbers (e.g., 192.168.1.1). We are running out of these addresses.", icon: "🔢" },
+          { name: "IPv6", full: "Internet Protocol version 6", description: "The new standard. Uses letters and numbers. Provides an infinite number of addresses.", icon: "🚀" }
+        ],
+        whyMatters: {
+          title: "The Backbone of Communication",
+          text: "Without unique IP addresses, the internet would be chaos. Data would never find its destination. IP addressing enables everything from sending an email to streaming a 4K movie to your specific device."
+        }
+      },
+      macAddress: {
+        intro: "Every network interface has a permanent, unique physical ID called a Media Access Control (MAC) address. It's like a fingerprint burned into the hardware.",
+        images: {
+          hero: {
+            fileName: "module-media/m9-mac-hero.jpg",
+            alt: "MAC Address Microchip",
+            brief: "Close-up of a chip with a glowing MAC address."
+          },
+          analogy: {
+            fileName: "module-media/m9-mac-analogy.jpg",
+            alt: "VIN vs License Plate",
+            brief: "Split view: License Plate (IP) vs VIN (MAC)."
+          }
+        },
+        anatomy: {
+          title: "Anatomy of a MAC Address",
+          oui: "Manufacturer ID (OUI)",
+          uaa: "Device Serial Number"
+        },
+        comparison: {
+          title: "IP Address vs MAC Address",
+          items: [
+            { label: "Type", ip: "Logical / Software", mac: "Physical / Hardware" },
+            { label: "Changeability", ip: "Changes (Dynamic)", mac: "Permanent (Static)" },
+            { label: "Analogy", ip: "Mailing Address / License Plate", mac: "Fingerprint / VIN Number" }
+          ]
+        }
+      },
+      wifi: {
+        intro: "Wi-Fi technology allows devices to connect to a network using radio waves, eliminating the need for physical cables. It turns data into invisible signals.",
+        images: {
+          hero: {
+            fileName: "module-media/m9-wifi-hero.jpg",
+            alt: "Future Wi-Fi Concept",
+            brief: "Futuristic router emitting glowing neon waves connecting devices."
+          },
+          analogy: {
+            fileName: "module-media/m9-wifi-radio.jpg",
+            alt: "Router Radio Analogy",
+            brief: "Split visual standard radio/walkie-talkie vs router showing similarity."
+          }
+        },
+        bands: {
+          band24: {
+            name: "2.4 GHz Band",
+            title: "The Marathon Runner",
+            range: 100,
+            speed: 40,
+            desc: "Travels far and passes through walls easily, but is slower."
+          },
+          band5: {
+            name: "5 GHz Band",
+            title: "The Sprinter",
+            range: 50,
+            speed: 100,
+            desc: "Extremely fast data speeds, but gets blocked by walls and distance."
+          }
+        },
+        killers: [
+          { name: "Concrete Walls", icon: "🧱", desc: "Thick materials block signal." },
+          { name: "Microwaves", icon: "📺", desc: "Appliances cause interference." },
+          { name: "Distance", icon: "📏", desc: "Signal fades as you move away." }
+        ]
+      },
+      cables: {
+        intro: "While Wi-Fi is convenient, cables are king for speed and stability. Ethernet cables are the veins that carry the lifeblood of the internet.",
+        images: {
+          hero: {
+            fileName: "module-media/m9-cables-hero.jpg",
+            alt: "Ethernet Cable Glowing",
+            brief: "Close up of an ethernet cable plugged into a port with glowing data streams."
+          },
+          rj45: {
+            fileName: "module-media/m9-rj45.jpg",
+            alt: "RJ45 Connector",
+            brief: "Clear diagram of the 8-pin connector head."
+          },
+          twisted: {
+            fileName: "module-media/m9-twisted-pair.jpg",
+            alt: "Inside the Cable",
+            brief: "Cutaway view showing the 4 twisted pairs of copper wires."
+          }
+        },
+        categories: [
+          { name: "Cat 5e", speed: "1 Gbps", freq: "100 MHz", desc: "The old standard. Good for basic home use." },
+          { name: "Cat 6", speed: "10 Gbps", freq: "250 MHz", desc: "The current standard. Great for gaming and 4K streaming." },
+          { name: "Cat 8", speed: "40 Gbps", freq: "2000 MHz", desc: "The future. Enterprise speeds for data centers." }
+        ]
+      },
+      dns: {
+        intro: "In the world of networking, computers don't use names like 'google.com'; they use numbers (IP addresses). DNS (Domain Name System) is the phonebook that translates human-friendly names into computer-friendly numbers.",
+        images: {
+          hero: { fileName: "module-media/m9-dns-hero.jpg", alt: "DNS Phonebook Concept", brief: "Phonebook showing Names mapped to Numbers." },
+          analogy: { fileName: "module-media/m9-dns-analogy.jpg", alt: "Phone Contacts Analogy", brief: "Person tapping a contact name vs dialing a number." }
+        },
+        records: [
+          { type: "A Record", title: "Address Record", desc: "Maps a hostname to an IPv4 address (e.g., example.com → 93.184.216.34)." },
+          { type: "AAAA Record", title: "Quad-A Record", desc: "Maps a hostname to an IPv6 address. (The future standard)." },
+          { type: "CNAME", title: "Canonical Name", desc: "An alias. Maps one name to another (e.g., www.example.com → example.com)." },
+          { type: "MX Record", title: "Mail Exchange", desc: "Directs email to the correct mail server." },
+          { type: "NS Record", title: "Name Server", desc: "Indicates which DNS server is authoritative for the domain." }
+        ]
+      },
+      ping: {
+        intro: "Speed isn't just about how much data you can move (Bandwidth), but how fast it gets there (Latency).",
+        images: {
+          hero: { fileName: "module-media/m9-ping-hero.jpg", alt: "Sonar Echo", brief: "Submarine using sonar ping to detect distance." },
+          analogy: { fileName: "module-media/m9-pipe-analogy.jpg", alt: "Water Pipe Analogy", brief: "Wide pipe (Bandwidth) vs Fast Water (Latency)." },
+          loss: { fileName: "module-media/m9-packet-loss.jpg", alt: "Packet Loss Glitch", brief: "Visual of a glitched video call due to missing packets." }
+        },
+        metrics: [
+          { name: "Ping (Latency)", unit: "ms", desc: "Time limit. Lower is better. Critical for gaming.", ideal: "< 20ms" },
+          { name: "Download", unit: "Mbps", desc: "Receiving speed. Critical for streaming video.", ideal: "100+ Mbps" },
+          { name: "Upload", unit: "Mbps", desc: "Sending speed. Critical for video calls.", ideal: "10+ Mbps" }
+        ]
+      },
+      hotspot: {
+        intro: "Turn your smartphone into a portable Wi-Fi router. This is called 'Tethering'. It acts as a bridge between the cellular network (4G/5G) and your Wi-Fi only devices.",
+        images: {
+          hero: { fileName: "module-media/m9-hotspot-hero.jpg", alt: "Phone radiating Wi-Fi", brief: "Smartphone acting as a router for a laptop." },
+          analogy: { fileName: "module-media/m9-bridge-analogy.jpg", alt: "Bridge over Water", brief: "Phone bridging the gap between Cell Tower and Laptop." },
+          security: { fileName: "module-media/m9-wifi-security.jpg", alt: "Lock on Wi-Fi Signal", brief: "Padlock icon over a Wi-Fi symbol." }
+        },
+        simulation: {
+          title: "Hotspot Interface",
+          toggleLabel: "Personal Hotspot",
+          desc: "Toggle the switch to start broadcasting Wi-Fi.",
+          connectedMsg: "1 connection: Laptop-X1"
+        },
+        comparison: {
+          title: "Home Wi-Fi vs Mobile Hotspot",
+          wifi: { speed: "High (100+ Mbps)", stability: "Stable", data: "Unlimited (Usually)", battery: "Plugged In" },
+          hotspot: { speed: "Variable (4G/5G)", stability: "Moving Target", data: "Limited Cap", battery: "Drains Fast" }
+        },
+        steps: [
+          { title: "Enable", desc: "Settings > Network & Internet > Hotspot & Tethering." },
+          { title: "Configure", desc: "Set a Wi-Fi Name (SSID) and a STRONG Password." },
+          { title: "Connect", desc: "On your laptop, find the phone's name in the Wi-Fi list and connect." }
+        ],
+        warnings: [
+          "Phone Battery Drains Quickly",
+          "Mobile Data Limits Apply",
+          "Phone Can Overheat"
+        ]
+      },
+      troubleshooting: {
+        intro: "90% of network problems can be solved with a few simple steps. Understanding the 'Chain of Connection' allows you to pinpoint where the break is.",
+        images: {
+          hero: { fileName: "module-media/m9-troubleshooting.jpg", alt: "Confused User vs Happy User", brief: "Before/After of fixing internet." },
+          chain: { fileName: "module-media/m9-chain-diagram.jpg", alt: "Chain of Connection", brief: "Device -> Router -> Modem -> ISP." },
+          restart: { fileName: "module-media/m9-restart-router.jpg", alt: "Unplugging Router", brief: "Hand unplugging power cable." }
+        },
+        chain: ["Your Device", "Router (Home)", "Modem (Gateway)", "ISP (Provider)", "Internet Cloud"],
+        tools: [
+          { cmd: "ping 8.8.8.8", desc: "Checks if you can reach Google. Low ms = Good." },
+          { cmd: "ipconfig", desc: "Shows your local IP. Look for 192.168.x.x (Good) vs 169.254.x.x (Bad)." }
+        ],
+        steps: [
+          { step: 1, title: "Physical Check", desc: "Is the cable plugged in? Is the Wi-Fi switch on? Are lights blinking?" },
+          { step: 2, title: "Restart (Cycle)", desc: "Turn it off. Count to 10. Turn it on. This clears RAM glitches." },
+          { step: 3, title: "Forget & Rejoin", desc: "Delete the Wi-Fi profile and type the password again." },
+          { step: 4, title: "Check IP", desc: "Ensure you have a valid local IP address." }
+        ]
+      },
+      future: {
+        intro: "The network never stops evolving. From 5G speeds that rival fiber to satellites beaming internet from space, the future is connected.",
+        images: {
+          hero: { fileName: "module-media/m9-future-hero.jpg", alt: "Futuristic City", brief: "Cityscape with digital overlays." },
+          starlink: { fileName: "module-media/m9-starlink.jpg", alt: "Satellite Constellation", brief: "Web of satellites around Earth." },
+          iot: { fileName: "module-media/m9-iot.jpg", alt: "Smart Home", brief: "Fridge, Toaster, AC connected to Wi-Fi." },
+          security: { fileName: "module-media/m9-cyber-security.jpg", alt: "Digital Shield", brief: "Quantum encryption lock." }
+        },
+        speedRace: {
+          g4: { name: "4G LTE", speed: "100 Mbps", latency: "50ms", use: "HD Video" },
+          g5: { name: "5G", speed: "10,000 Mbps", latency: "1ms", use: "Self-driving Cars" }
+        },
+        trends: [
+          { name: "5G & 6G", desc: "Zero latency. Remote surgery and hologram calls become possible." },
+          { name: "Starlink", desc: "Low Earth Orbit (LEO) satellites bringing high-speed internet to deserts and oceans." },
+          { name: "IoT Explosion", desc: "Billions of devices. Your clothes, cups, and walls will be online." }
+        ]
+      },
+      summary: {
+        intro: "You've mastered the basics. You know that the Internet is just a massive web of cables, routers, and rules (Protocols).",
+        timeline: [
+          { layer: "Physical", item: "Cables/Wi-Fi" },
+          { layer: "Identity", item: "MAC Address" },
+          { layer: "Location", item: "IP Address" },
+          { layer: "Navigation", item: "DNS" }
+        ],
+        quiz: [
+          { q: "Which address changes when you move?", options: ["MAC Address", "IP Address"], answer: "IP Address" },
+          { q: "What translates 'google.com' to numbers?", options: ["DNS", "Ping"], answer: "DNS" },
+          { q: "What is the 'Golden Rule' of fixing?", options: ["Buy new one", "Restart it"], answer: "Restart it" }
+        ],
+        keyTakeaways: [
+          "IP = Where (Changeable). MAC = Who (Permanent).",
+          "DNS is the Phonebook of the internet.",
+          "Bandwidth is width. Latency is travel time.",
+          "Wi-Fi is radio. Cables are faster.",
+          "Always restart your router first."
+        ]
+      }
+    };
+  };
+
+  const getModule10Sections = () => {
+    return {
+      cybersecurity: {
+        hero: {
+          title: "What is Cybersecurity?",
+          subtitle: "The locks, alarms, and fences for your digital life.",
+          visual: "module-media/m10-hero-shield.jpg"
+        },
+        cia: {
+          title: "The CIA Triad",
+          desc: "Security stands on three pillars. Click each letter to reveal its meaning.",
+          c: { letter: "C", title: "Confidentiality", text: "Keeping secrets secret.\n\nOnly authorized people should access the data. (Example: Your Password)", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500" },
+          i: { letter: "I", title: "Integrity", text: "Keeping data unchanged.\n\nNo one should be able to alter the data without permission. (Example: Bank Balance)", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500" },
+          a: { letter: "A", title: "Availability", text: "Keeping systems running.\n\nThe service should be available when you need it. (Example: Streaming Video)", color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500" }
+        },
+        castle: {
+          title: "The Digital Castle",
+          analogy: "Your computer is a kingdom. Your data is the treasure.",
+          parts: [
+            { name: "🏰 Walls", digital: "Firewalls", desc: "Blocks outsiders from entering." },
+            { name: "🛡️ Gate", digital: "Passwords", desc: "Checks ID at the entrance." },
+            { name: "⚔️ Guards", digital: "Antivirus", desc: "Patrols inside for intruders." },
+            { name: "💎 Vault", digital: "Your Data", desc: "The valuable information." }
+          ]
+        },
+        motives: [
+          { icon: "💰", title: "The Thief", role: "Cybercriminal", desc: "Wants your money. Uses Ransomware and Scams." },
+          { icon: "🕵️", title: "The Spy", role: "Espionage", desc: "Wants trade secrets or government info." },
+          { icon: "🎭", title: "The Vandal", role: "Hacktivist", desc: "Wants to cause chaos or make a statement." }
+        ],
+        simulation: {
+          title: "Vulnerability Scanner",
+          desc: "Interactive Challenge: Find 3 Security Risks on this desk.",
+          items: [
+            { id: "note", x: 20, y: 60, label: "Sticky Note", feedback: "⚠️ Risk Found! Never write passwords on sticky notes." },
+            { id: "email", x: 50, y: 30, label: "Phishing Email", feedback: "⚠️ Risk Found! Don't open 'You Won $1M' emails." },
+            { id: "av", x: 80, y: 70, label: "Antivirus Off", feedback: "⚠️ Risk Found! Always keep Antivirus enabled." }
+          ]
+        }
+      },
+      passwordSecurity: {
+        hero: {
+          title: "Password Security",
+          subtitle: "Your passwords are the keys to your digital kingdom. Learn how to build a fortress, not a fence.",
+          visual: "module-media/m10-password-hero.jpg"
+        },
+        intro: {
+          title: "The First Line of Defense",
+          desc: "Your password is the lock on your digital front door. A weak lock lets anyone in, but a strong one protects your money, identity, and privacy."
+        },
+        tips: [
+          { icon: "📏", title: "Length", desc: "At least 12 characters. Length beats complexity." },
+          { icon: "🔣", title: "Complexity", desc: "Mix Upper, Lower, Numbers, and Symbols." },
+          { icon: "🦄", title: "Uniqueness", desc: "Never use the same password twice." }
+        ],
+        mistakes: [
+          { icon: "🔄", title: "The Recycler", desc: "Using the same password everywhere.\n(Risk: One breach = All accounts lost.)" },
+          { icon: "🐶", title: "The Sentimental", desc: "Using pet names or birthdays.\n(Risk: Easy to guess from social media.)" },
+          { icon: "⌨️", title: "The Lazy", desc: "Using '123456' or 'password'.\n(Risk: Cracked instantly.)" }
+        ],
+        manager: {
+          title: "The Solution: Password Managers",
+          analogy: "Don't carry 50 keys. Carry one Master Key to a secure vault.",
+          benefits: [
+            "Generates random, uncrackable passwords.",
+            "Remembers them for you.",
+            "Auto-fills on websites."
+          ]
+        }
+      },
+      mfa: {
+        hero: {
+          title: "Multi-Factor Authentication",
+          subtitle: "Two locks are better than one. MFA ensures that stealing your password isn't enough to hack your account.",
+          visual: "module-media/m10-mfa-hero.jpg"
+        },
+        factors: [
+          { icon: "🧠", title: "Knowledge", subtitle: "Something You Know", desc: "Password, PIN, or Security Question." },
+          { icon: "📱", title: "Possession", subtitle: "Something You Have", desc: "Smartphone, USB Key, or Smart Card." },
+          { icon: "👆", title: "Inherence", subtitle: "Something You Are", desc: "Fingerprint, Face ID, or Voice." }
+        ],
+        triangleVisual: {
+          image: "module-media/mfa-triangle-diagram.jpg",
+          alt: "The Triangle of Security Diagram showing Knowledge, Possession, and Inherence",
+          caption: "Real security requires combining at least two different factors (e.g., Knowledge + Possession)."
+        },
+        process: {
+          title: "How It Works",
+          desc: "It involves a two-step verification process. First, you enter your password. Second, you prove it's really you using a different device.",
+          image: "module-media/mfa-process-diagram.jpg"
+        },
+        arsenal: [
+          { icon: "📱", title: "SMS Verification", desc: "Receiving a code via text message. Common but vulnerable to SIM swapping." },
+          { icon: "🔢", title: "Authenticator App", desc: "Generates codes every 30 seconds offline. More secure than SMS." },
+          { icon: "🧬", title: "Biometrics", desc: "Using your physical traits. Very convenient but has privacy concerns." },
+          { icon: "🗝️", title: "Hardware Key", desc: "Physical USB key (YubiKey). The highest level of protection available." }
+        ],
+        interactive: {
+          title: "Experience the Difference",
+          desc: "Turn on Multi-Factor Authentication to see how it secures the account."
+        }
+      },
+      social: {
+        hero: {
+          title: "Social Engineering",
+          subtitle: "Hacking Humans. Attackers target your trust, helpfulness, or fear to trick you.",
+          visual: "module-media/m10-social-hero.jpg"
+        },
+        triggers: [
+          { id: "fear", icon: "😨", title: "Fear", msg: "IRS: Arrest Warrant Issued! Call now!", color: "bg-red-500" },
+          { id: "urgency", icon: "⏳", title: "Urgency", msg: "Your account will be deleted in 24 hours.", color: "bg-orange-500" },
+          { id: "greed", icon: "🤑", title: "Greed", msg: "You won $1,000,000! Click to claim.", color: "bg-green-500" },
+          { id: "curiosity", icon: "🧐", title: "Curiosity", msg: "Look at these photos of you from the party!", color: "bg-blue-500" }
+        ],
+        attacks: [
+          { title: "Phishing", desc: "Deceptive emails designed to make you click links or download attachments.", icon: "📧" },
+          { title: "Vishing", desc: "Voice phishing. Scammers calling you pretending to be your bank or the government.", icon: "📞" },
+          { title: "Smishing", desc: "SMS phishing. Text messages with malicious links (e.g., 'Delivery Failed').", icon: "📱" },
+          { title: "Pretexting", desc: "Creating a fake scenario or identity (pretext) to get information from you.", icon: "🕵️" }
+        ]
+      }
+    };
+  };
+
+  // Module 1 specific content sections (Topic-based structure)
   const getModule1Sections = () => {
     return {
       hero: {
@@ -105,7 +578,7 @@ const ModuleDetail = () => {
           alt: "Input devices on the left, CPU and gears in the middle, and monitor plus speakers on the right connected with glowing arrows representing the IPO (Input → Process → Output) cycle.",
           brief:
             "Illustrate the IPO cycle as a horizontal scene: on the left show realistic input devices (keyboard, mouse, microphone, touchscreen hand). In the center place a glowing CPU chip with animated arrows and floating code to represent processing. On the right depict a sleek monitor and speakers emitting light as the output. Connect the three zones with curved neon arrows labeled Input, Process, Output. Background: dark charcoal with subtle grid, highlight colors cyan and purple for a tech feel."
-          },
+        },
         simulation: {
           title: "Interactive IPO Playground",
           description: "Type anything, send it through the virtual CPU, and watch it appear on the output screen to feel how data flows.",
@@ -129,7 +602,7 @@ const ModuleDetail = () => {
           { id: "automation", icon: "🤖", title: "Automation", description: "Follows programmed steps automatically.", example: "Example: Spreadsheet formulas updating totals automatically." },
           { id: "versatility", icon: "🔄", title: "Versatility", description: "Handles multiple types of tasks.", example: "Example: Same device can stream video, edit documents, and play games." },
           { id: "reliability", icon: "✅", title: "Reliability", description: "Consistent performance over long periods.", example: "Example: ATMs dispensing money accurately day and night." }
-          ]
+        ]
       },
       examples: {
         title: "Real-world Computer Examples",
@@ -448,7 +921,9 @@ const ModuleDetail = () => {
     };
   };
 
-  // Module 2 specific content sections (Topic-based structure)
+
+
+  // Module 1 specific content sections (Topic-based structure)
   const getModule2Sections = () => {
     return {
       cpuBasics: {
@@ -1231,20 +1706,20 @@ const ModuleDetail = () => {
           }
         },
         steps: [
-          { 
-            name: "Power On", 
-            icon: "🔌", 
-            description: "When you press the power button, electricity flows to all components and the computer begins initializing." 
+          {
+            name: "Power On",
+            icon: "🔌",
+            description: "When you press the power button, electricity flows to all components and the computer begins initializing."
           },
-          { 
-            name: "POST", 
-            icon: "✅", 
-            description: "Power-On Self-Test checks all hardware components to ensure everything is working correctly before loading the operating system." 
+          {
+            name: "POST",
+            icon: "✅",
+            description: "Power-On Self-Test checks all hardware components to ensure everything is working correctly before loading the operating system."
           },
-          { 
-            name: "Loading OS", 
-            icon: "🚀", 
-            description: "The bootloader finds and loads the operating system from storage into RAM, then starts system services." 
+          {
+            name: "Loading OS",
+            icon: "🚀",
+            description: "The bootloader finds and loads the operating system from storage into RAM, then starts system services."
           }
         ]
       },
@@ -3712,8 +4187,1039 @@ const ModuleDetail = () => {
     };
   };
 
-  // Get sections based on module ID - Modules 1, 2, 3, 4, 5, 6, and 7 are supported
-  const sections = moduleId === 1 ? getModule1Sections() : moduleId === 2 ? getModule2Sections() : moduleId === 3 ? getModule3Sections() : moduleId === 4 ? getModule4Sections() : moduleId === 5 ? getModule5Sections() : moduleId === 6 ? getModule6Sections() : moduleId === 7 ? getModule7Sections() : null;
+  const getModule8Sections = () => {
+    return {
+      preInstallationRequirements: {
+        title: "Pre-Installation Requirements",
+        intro: "Before installing a new operating system, you need to check a few things. Make sure your computer meets the minimum requirements. Back up all your important files.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-pre-installation-hero.jpg",
+            alt: "Pre-installation requirements checklist showing system requirements",
+            brief: "Create a visual showing pre-installation checklist: hardware check, backup, license key, bootable media. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-pre-installation-overview.jpg",
+            alt: "System requirements compatibility check diagram",
+            brief: "Show a system requirements diagram: CPU, RAM, storage compatibility check. Include labels. Clean educational diagram style."
+          },
+          checklist: {
+            fileName: "module-media/m8-pre-installation-checklist.jpg",
+            alt: "Pre-installation checklist visual showing requirements",
+            brief: "Create a checklist visual showing all pre-installation requirements. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-pre-installation-why-matters.jpg",
+            alt: "Real-world pre-installation scenario",
+            brief: "Show a real-world scenario: person checking system requirements before installation. Clean, modern aesthetic."
+          },
+          compatibility: {
+            fileName: "module-media/m8-pre-installation-compatibility.jpg",
+            alt: "Hardware compatibility chart",
+            brief: "Show a hardware compatibility chart comparing system specs with OS requirements. Clean educational diagram style."
+          }
+        },
+        requirements: [
+          {
+            name: "Hardware Check",
+            icon: "💻",
+            description: "Verify CPU, RAM, and storage meet specs. Check if your computer can run the OS."
+          },
+          {
+            name: "Software License",
+            icon: "🔑",
+            description: "Get valid OS license key ready. You'll need it during installation."
+          },
+          {
+            name: "Backup Data",
+            icon: "💾",
+            description: "Save files to external drive or cloud. Protect your important data."
+          },
+          {
+            name: "Bootable Media",
+            icon: "📀",
+            description: "Create USB or DVD with OS image. Needed to start installation."
+          },
+          {
+            name: "Drivers Ready",
+            icon: "⚙️",
+            description: "Download drivers for your hardware. Keep them on USB drive."
+          },
+          {
+            name: "Internet Connection",
+            icon: "🌐",
+            description: "For updates and activation. Helps complete setup after install."
+          }
+        ]
+      },
+      biosUefiConfiguration: {
+        title: "BIOS/UEFI Configuration",
+        intro: "BIOS and UEFI are firmware that control your computer's startup. They let you change boot order, enable hardware, and configure system settings.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-bios-hero.jpg",
+            alt: "BIOS/UEFI interface showing configuration options",
+            brief: "Create a visual showing BIOS/UEFI interface: menu options, boot order, settings. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-bios-overview.jpg",
+            alt: "BIOS/UEFI configuration diagram",
+            brief: "Show a BIOS/UEFI configuration diagram: different settings and options. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-bios-fullwidth.jpg",
+            alt: "BIOS/UEFI settings overview",
+            brief: "Create a full-width visual showing BIOS/UEFI settings screen. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-bios-why-matters.jpg",
+            alt: "Real-world BIOS/UEFI configuration scenario",
+            brief: "Show a real-world scenario: person configuring BIOS/UEFI settings. Clean, modern aesthetic."
+          }
+        },
+        concepts: [
+          {
+            name: "Boot Order",
+            icon: "🔄",
+            description: "Set which device starts first. Choose USB, DVD, or hard drive."
+          },
+          {
+            name: "Secure Boot",
+            icon: "🔒",
+            description: "Security feature that checks software. Prevents unauthorized programs from starting."
+          },
+          {
+            name: "Hardware Enable",
+            icon: "⚙️",
+            description: "Turn on or off hardware features. Control USB ports, network, and more."
+          },
+          {
+            name: "System Time",
+            icon: "🕐",
+            description: "Set date and time. Keeps your computer clock accurate."
+          }
+        ]
+      },
+      bootableUsbCreation: {
+        title: "Bootable USB Creation",
+        intro: "A bootable USB lets you install an operating system from a USB drive. You need special software to create one from an OS image file.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-bootable-usb-hero.jpg",
+            alt: "Bootable USB creation process visualization",
+            brief: "Create a visual showing bootable USB creation: USB drive, software, OS image. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-bootable-usb-overview.jpg",
+            alt: "Bootable USB creation steps diagram",
+            brief: "Show a bootable USB creation diagram: step-by-step process. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-bootable-usb-fullwidth.jpg",
+            alt: "Bootable USB tools and process",
+            brief: "Create a full-width visual showing bootable USB creation tools. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-bootable-usb-why-matters.jpg",
+            alt: "Real-world bootable USB creation scenario",
+            brief: "Show a real-world scenario: person creating bootable USB. Clean, modern aesthetic."
+          },
+          tools: {
+            fileName: "module-media/m8-bootable-usb-tools.jpg",
+            alt: "Bootable USB creation tools",
+            brief: "Show different bootable USB creation tools and software. Clean educational diagram style."
+          }
+        },
+        steps: [
+          {
+            name: "Get OS Image",
+            icon: "📥",
+            description: "Download the OS installation file. Usually an ISO or IMG file."
+          },
+          {
+            name: "Choose Tool",
+            icon: "🛠️",
+            description: "Pick bootable USB software. Popular tools include Rufus, Etcher, or Media Creation Tool."
+          },
+          {
+            name: "Select USB",
+            icon: "💿",
+            description: "Choose your USB drive. Make sure it's at least 8GB and empty."
+          },
+          {
+            name: "Create Bootable",
+            icon: "⚡",
+            description: "Run the tool and follow steps. It will copy OS files to USB."
+          },
+          {
+            name: "Verify",
+            icon: "✅",
+            description: "Check if USB is bootable. Test it on another computer if possible."
+          }
+        ]
+      },
+      osInstallationSteps: {
+        title: "OS Installation Steps",
+        intro: "Installing an operating system involves several steps. You boot from USB, choose settings, and let the installer do its work.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-os-install-hero.jpg",
+            alt: "OS installation process visualization",
+            brief: "Create a visual showing OS installation: installer screen, progress, steps. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-os-install-overview.jpg",
+            alt: "OS installation steps diagram",
+            brief: "Show an OS installation diagram: timeline of installation steps. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-os-install-fullwidth.jpg",
+            alt: "OS installation process overview",
+            brief: "Create a full-width visual showing complete OS installation process. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-os-install-why-matters.jpg",
+            alt: "Real-world OS installation scenario",
+            brief: "Show a real-world scenario: person installing OS. Clean, modern aesthetic."
+          },
+          timeline: {
+            fileName: "module-media/m8-os-install-timeline.jpg",
+            alt: "OS installation timeline",
+            brief: "Show OS installation timeline with steps. Clean educational diagram style."
+          }
+        },
+        steps: [
+          {
+            name: "Boot from USB",
+            icon: "🚀",
+            description: "Start computer from bootable USB. Press key to enter boot menu."
+          },
+          {
+            name: "Start Installer",
+            icon: "▶️",
+            description: "OS installer loads. Choose language and region settings."
+          },
+          {
+            name: "Enter License",
+            icon: "🔑",
+            description: "Type your product key. Or skip if installing trial version."
+          },
+          {
+            name: "Choose Partition",
+            icon: "💾",
+            description: "Select where to install OS. Pick drive and partition."
+          },
+          {
+            name: "Install",
+            icon: "⏳",
+            description: "Installer copies files. This takes 20-60 minutes."
+          },
+          {
+            name: "First Boot",
+            icon: "🎉",
+            description: "Computer restarts. Complete initial setup wizard."
+          }
+        ]
+      },
+      partitionManagement: {
+        title: "Partition Management",
+        intro: "Partitions divide your hard drive into separate sections. Each partition acts like a separate drive, helping you organize data and install multiple operating systems.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-partition-hero.jpg",
+            alt: "Disk partition visualization",
+            brief: "Create a visual showing disk partitions: divided drive, different partitions. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-partition-overview.jpg",
+            alt: "Partition management diagram",
+            brief: "Show a partition diagram: how disk is divided. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-partition-fullwidth.jpg",
+            alt: "Partition management tools",
+            brief: "Create a full-width visual showing partition management interface. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-partition-why-matters.jpg",
+            alt: "Real-world partition management scenario",
+            brief: "Show a real-world scenario: person managing disk partitions. Clean, modern aesthetic."
+          },
+          types: {
+            fileName: "module-media/m8-partition-types.jpg",
+            alt: "Partition types comparison",
+            brief: "Show different partition types and their uses. Clean educational diagram style."
+          }
+        },
+        concepts: [
+          {
+            name: "Primary Partition",
+            icon: "📦",
+            description: "Main partition for OS. Can boot and run programs."
+          },
+          {
+            name: "Extended Partition",
+            icon: "📚",
+            description: "Container for logical drives. Allows more than 4 partitions."
+          },
+          {
+            name: "Logical Drive",
+            icon: "💿",
+            description: "Drive inside extended partition. Used for data storage."
+          },
+          {
+            name: "Format",
+            icon: "🗂️",
+            description: "Prepare partition for use. Choose file system like NTFS or FAT32."
+          },
+          {
+            name: "Resize",
+            icon: "📏",
+            description: "Change partition size. Make it bigger or smaller."
+          },
+          {
+            name: "Delete",
+            icon: "🗑️",
+            description: "Remove partition. Frees up space for new partitions."
+          }
+        ]
+      },
+      initialSystemConfiguration: {
+        title: "Initial System Configuration",
+        intro: "After installing the OS, you need to set up basic settings. Configure your region, language, user account, and privacy preferences.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-initial-config-hero.jpg",
+            alt: "Initial system configuration setup",
+            brief: "Create a visual showing initial setup: settings screen, options. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-initial-config-overview.jpg",
+            alt: "Initial configuration steps diagram",
+            brief: "Show an initial configuration diagram: setup wizard steps. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-initial-config-fullwidth.jpg",
+            alt: "System configuration options",
+            brief: "Create a full-width visual showing configuration options. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-initial-config-why-matters.jpg",
+            alt: "Real-world initial configuration scenario",
+            brief: "Show a real-world scenario: person setting up new system. Clean, modern aesthetic."
+          },
+          settings: {
+            fileName: "module-media/m8-initial-config-settings.jpg",
+            alt: "Initial configuration settings",
+            brief: "Show different configuration settings and options. Clean educational diagram style."
+          }
+        },
+        settings: [
+          {
+            name: "Region & Language",
+            icon: "🌍",
+            description: "Choose your country and language. Sets date, time, and currency format."
+          },
+          {
+            name: "User Account",
+            icon: "👤",
+            description: "Create your user account. Set username and password."
+          },
+          {
+            name: "Privacy",
+            icon: "🔒",
+            description: "Choose privacy settings. Control data sharing and telemetry."
+          },
+          {
+            name: "Network",
+            icon: "🌐",
+            description: "Connect to Wi-Fi or Ethernet. Get internet access."
+          },
+          {
+            name: "Updates",
+            icon: "🔄",
+            description: "Enable automatic updates. Keeps system secure and current."
+          },
+          {
+            name: "Cortana/Assistant",
+            icon: "🎤",
+            description: "Set up voice assistant. Enable or disable as needed."
+          }
+        ]
+      },
+      installingDrivers: {
+        title: "Installing Drivers",
+        intro: "Drivers are software that let your OS talk to hardware. Install drivers for graphics, sound, network, and other devices to make them work properly.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-drivers-hero.jpg",
+            alt: "Driver installation process",
+            brief: "Create a visual showing driver installation: driver files, installation process. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-drivers-overview.jpg",
+            alt: "Driver installation diagram",
+            brief: "Show a driver installation diagram: how drivers work. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-drivers-fullwidth.jpg",
+            alt: "Driver types and sources",
+            brief: "Create a full-width visual showing different driver types. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-drivers-why-matters.jpg",
+            alt: "Real-world driver installation scenario",
+            brief: "Show a real-world scenario: person installing drivers. Clean, modern aesthetic."
+          }
+        },
+        driverTypes: [
+          {
+            name: "Graphics Driver",
+            icon: "🖥️",
+            description: "Controls your display and graphics card. Needed for games and video."
+          },
+          {
+            name: "Audio Driver",
+            icon: "🔊",
+            description: "Makes sound work. Controls speakers and microphone."
+          },
+          {
+            name: "Network Driver",
+            icon: "📡",
+            description: "Enables internet connection. Controls Wi-Fi and Ethernet."
+          },
+          {
+            name: "Chipset Driver",
+            icon: "🔧",
+            description: "Controls motherboard features. Essential for system stability."
+          }
+        ]
+      },
+      installingEssentialSoftware: {
+        title: "Installing Essential Software",
+        intro: "Essential software includes web browsers, office apps, media players, and security tools. Install what you need for daily computer use.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-software-hero.jpg",
+            alt: "Essential software installation",
+            brief: "Create a visual showing essential software: apps, installation. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-software-overview.jpg",
+            alt: "Essential software categories",
+            brief: "Show essential software categories diagram. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-software-fullwidth.jpg",
+            alt: "Software installation process",
+            brief: "Create a full-width visual showing software installation. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-software-why-matters.jpg",
+            alt: "Real-world software installation scenario",
+            brief: "Show a real-world scenario: person installing software. Clean, modern aesthetic."
+          }
+        },
+        softwareCategories: [
+          {
+            name: "Web Browser",
+            icon: "🌐",
+            description: "Chrome, Firefox, or Edge. Needed to browse the internet."
+          },
+          {
+            name: "Office Suite",
+            icon: "📄",
+            description: "Word, Excel, PowerPoint. For documents and spreadsheets."
+          },
+          {
+            name: "Media Player",
+            icon: "🎬",
+            description: "VLC or Windows Media Player. Play videos and music."
+          },
+          {
+            name: "PDF Reader",
+            icon: "📕",
+            description: "Adobe Reader or similar. Open and read PDF files."
+          },
+          {
+            name: "Antivirus",
+            icon: "🛡️",
+            description: "Windows Defender or third-party. Protects from viruses."
+          },
+          {
+            name: "Compression Tool",
+            icon: "📦",
+            description: "7-Zip or WinRAR. Extract ZIP and RAR files."
+          }
+        ]
+      },
+      userAccountsPermissions: {
+        title: "User Accounts & Permissions",
+        intro: "User accounts let multiple people use the same computer. Each account has its own files, settings, and permissions.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-accounts-hero.jpg",
+            alt: "User accounts and permissions",
+            brief: "Create a visual showing user accounts: different users, permissions. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-accounts-overview.jpg",
+            alt: "User account types diagram",
+            brief: "Show user account types diagram: admin, standard, guest. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-accounts-fullwidth.jpg",
+            alt: "User permissions overview",
+            brief: "Create a full-width visual showing user permissions. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-accounts-why-matters.jpg",
+            alt: "Real-world user accounts scenario",
+            brief: "Show a real-world scenario: multiple users on one computer. Clean, modern aesthetic."
+          },
+          permissions: {
+            fileName: "module-media/m8-accounts-permissions.jpg",
+            alt: "User permissions comparison",
+            brief: "Show different permission levels and what they can do. Clean educational diagram style."
+          }
+        },
+        accountTypes: [
+          {
+            name: "Administrator",
+            icon: "👑",
+            description: "Full system access. Can install software and change settings."
+          },
+          {
+            name: "Standard User",
+            icon: "👤",
+            description: "Limited access. Can use apps but can't change system settings."
+          },
+          {
+            name: "Guest",
+            icon: "🚪",
+            description: "Temporary access. Very limited permissions for visitors."
+          },
+          {
+            name: "Password",
+            icon: "🔐",
+            description: "Protect account with password. Keeps your files safe."
+          }
+        ]
+      },
+      displaySettingsConfiguration: {
+        title: "Display Settings Configuration",
+        intro: "Display settings control how your screen looks. Adjust resolution, brightness, color, and multiple monitor setup.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-display-hero.jpg",
+            alt: "Display settings configuration",
+            brief: "Create a visual showing display settings: resolution, brightness, color. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-display-overview.jpg",
+            alt: "Display settings options",
+            brief: "Show display settings diagram: different options. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-display-fullwidth.jpg",
+            alt: "Display configuration interface",
+            brief: "Create a full-width visual showing display settings screen. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-display-why-matters.jpg",
+            alt: "Real-world display configuration scenario",
+            brief: "Show a real-world scenario: person adjusting display settings. Clean, modern aesthetic."
+          }
+        },
+        settings: [
+          {
+            name: "Resolution",
+            icon: "📐",
+            description: "Set screen resolution. Higher resolution means sharper images."
+          },
+          {
+            name: "Brightness",
+            icon: "☀️",
+            description: "Adjust screen brightness. Make it brighter or dimmer."
+          },
+          {
+            name: "Color",
+            icon: "🎨",
+            description: "Calibrate colors. Adjust color temperature and saturation."
+          },
+          {
+            name: "Multiple Monitors",
+            icon: "🖥️",
+            description: "Connect extra monitors. Extend or duplicate your display."
+          }
+        ]
+      },
+      soundSettings: {
+        title: "Sound Settings",
+        intro: "Sound settings control audio output and input. Adjust volume, choose speakers, and configure microphone settings.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-sound-hero.jpg",
+            alt: "Sound settings configuration",
+            brief: "Create a visual showing sound settings: volume, speakers, microphone. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-sound-overview.jpg",
+            alt: "Sound settings options",
+            brief: "Show sound settings diagram: audio options. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-sound-fullwidth.jpg",
+            alt: "Sound configuration interface",
+            brief: "Create a full-width visual showing sound settings screen. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-sound-why-matters.jpg",
+            alt: "Real-world sound configuration scenario",
+            brief: "Show a real-world scenario: person adjusting sound settings. Clean, modern aesthetic."
+          },
+          audio: {
+            fileName: "module-media/m8-sound-audio.jpg",
+            alt: "Audio device configuration",
+            brief: "Show different audio devices and settings. Clean educational diagram style."
+          }
+        },
+        soundOptions: [
+          {
+            name: "Volume",
+            icon: "🔊",
+            description: "Adjust system volume. Control overall sound level."
+          },
+          {
+            name: "Output Device",
+            icon: "🎧",
+            description: "Choose speakers or headphones. Select audio output device."
+          },
+          {
+            name: "Input Device",
+            icon: "🎤",
+            description: "Select microphone. Choose audio input device."
+          }
+        ]
+      },
+      networkSetup: {
+        title: "Network Setup",
+        intro: "Network setup connects your computer to the internet. Configure Wi-Fi, Ethernet, and network sharing settings.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-network-hero.jpg",
+            alt: "Network setup configuration",
+            brief: "Create a visual showing network setup: Wi-Fi, Ethernet, router. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-network-overview.jpg",
+            alt: "Network setup steps",
+            brief: "Show network setup diagram: connection steps. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-network-fullwidth.jpg",
+            alt: "Network configuration interface",
+            brief: "Create a full-width visual showing network settings. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-network-why-matters.jpg",
+            alt: "Real-world network setup scenario",
+            brief: "Show a real-world scenario: person setting up network connection. Clean, modern aesthetic."
+          }
+        },
+        setupSteps: [
+          {
+            name: "Choose Connection",
+            icon: "📡",
+            description: "Select Wi-Fi or Ethernet. Pick your connection type."
+          },
+          {
+            name: "Enter Password",
+            icon: "🔑",
+            description: "Type Wi-Fi password. Connect to your network."
+          },
+          {
+            name: "Configure IP",
+            icon: "🌐",
+            description: "Set IP address. Use automatic or manual settings."
+          },
+          {
+            name: "Test Connection",
+            icon: "✅",
+            description: "Check internet access. Make sure it works."
+          }
+        ]
+      },
+      bluetoothSetup: {
+        title: "Bluetooth Setup",
+        intro: "Bluetooth lets you connect wireless devices. Pair headphones, speakers, mice, keyboards, and other Bluetooth gadgets.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-bluetooth-hero.jpg",
+            alt: "Bluetooth setup configuration",
+            brief: "Create a visual showing Bluetooth setup: pairing devices, connection. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-bluetooth-overview.jpg",
+            alt: "Bluetooth pairing process",
+            brief: "Show Bluetooth pairing diagram: connection steps. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-bluetooth-fullwidth.jpg",
+            alt: "Bluetooth devices",
+            brief: "Create a full-width visual showing Bluetooth devices. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-bluetooth-why-matters.jpg",
+            alt: "Real-world Bluetooth setup scenario",
+            brief: "Show a real-world scenario: person pairing Bluetooth devices. Clean, modern aesthetic."
+          }
+        },
+        bluetoothDevices: [
+          {
+            name: "Headphones",
+            icon: "🎧",
+            description: "Pair wireless headphones. Listen to music without cables."
+          },
+          {
+            name: "Mouse & Keyboard",
+            icon: "🖱️",
+            description: "Connect wireless mouse and keyboard. Work without wires."
+          },
+          {
+            name: "Speakers",
+            icon: "🔊",
+            description: "Pair Bluetooth speakers. Play audio wirelessly."
+          },
+          {
+            name: "Phone",
+            icon: "📱",
+            description: "Connect smartphone. Transfer files and share internet."
+          }
+        ]
+      },
+      printerScannerSetup: {
+        title: "Printer & Scanner Setup",
+        intro: "Set up printers and scanners to print documents and scan images. Connect via USB, Wi-Fi, or network.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-printer-hero.jpg",
+            alt: "Printer and scanner setup",
+            brief: "Create a visual showing printer/scanner setup: connection, installation. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-printer-overview.jpg",
+            alt: "Printer setup process",
+            brief: "Show printer setup diagram: installation steps. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-printer-fullwidth.jpg",
+            alt: "Printer configuration",
+            brief: "Create a full-width visual showing printer settings. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-printer-why-matters.jpg",
+            alt: "Real-world printer setup scenario",
+            brief: "Show a real-world scenario: person setting up printer. Clean, modern aesthetic."
+          },
+          connection: {
+            fileName: "module-media/m8-printer-connection.jpg",
+            alt: "Printer connection methods",
+            brief: "Show different printer connection methods. Clean educational diagram style."
+          }
+        },
+        setupOptions: [
+          {
+            name: "USB Connection",
+            icon: "🔌",
+            description: "Connect printer via USB cable. Simple and reliable."
+          },
+          {
+            name: "Wi-Fi Setup",
+            icon: "📡",
+            description: "Connect wirelessly. Print from anywhere on network."
+          },
+          {
+            name: "Install Drivers",
+            icon: "💿",
+            description: "Install printer drivers. Lets computer talk to printer."
+          },
+          {
+            name: "Test Print",
+            icon: "🖨️",
+            description: "Print test page. Make sure everything works."
+          },
+          {
+            name: "Scanner Setup",
+            icon: "📷",
+            description: "Configure scanner. Set up scanning options."
+          },
+          {
+            name: "Network Share",
+            icon: "🌐",
+            description: "Share printer on network. Others can use it too."
+          }
+        ]
+      },
+      settingUpSecurity: {
+        title: "Setting Up Security",
+        intro: "Security settings protect your computer from threats. Enable firewall, antivirus, Windows Defender, and configure privacy options.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-security-hero.jpg",
+            alt: "Security settings configuration",
+            brief: "Create a visual showing security settings: firewall, antivirus, protection. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-security-overview.jpg",
+            alt: "Security features diagram",
+            brief: "Show security features diagram: different protection layers. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-security-fullwidth.jpg",
+            alt: "Security configuration interface",
+            brief: "Create a full-width visual showing security settings. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-security-why-matters.jpg",
+            alt: "Real-world security setup scenario",
+            brief: "Show a real-world scenario: person configuring security settings. Clean, modern aesthetic."
+          }
+        },
+        securityFeatures: [
+          {
+            name: "Windows Defender",
+            icon: "🛡️",
+            description: "Built-in antivirus. Scans and removes malware automatically."
+          },
+          {
+            name: "Firewall",
+            icon: "🔥",
+            description: "Blocks unauthorized access. Controls network traffic."
+          },
+          {
+            name: "Updates",
+            icon: "🔄",
+            description: "Automatic security updates. Keeps system protected."
+          },
+          {
+            name: "Privacy",
+            icon: "🔒",
+            description: "Control data sharing. Limit what apps can access."
+          }
+        ]
+      },
+      backupSetup: {
+        title: "Backup Setup",
+        intro: "Backup setup protects your files. Configure automatic backups to external drive or cloud storage to keep your data safe.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-backup-hero.jpg",
+            alt: "Backup setup configuration",
+            brief: "Create a visual showing backup setup: external drive, cloud, schedule. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-backup-overview.jpg",
+            alt: "Backup options diagram",
+            brief: "Show backup options diagram: different backup methods. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-backup-fullwidth.jpg",
+            alt: "Backup configuration interface",
+            brief: "Create a full-width visual showing backup settings. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-backup-why-matters.jpg",
+            alt: "Real-world backup setup scenario",
+            brief: "Show a real-world scenario: person setting up backups. Clean, modern aesthetic."
+          }
+        },
+        backupMethods: [
+          {
+            name: "External Drive",
+            icon: "💾",
+            description: "Backup to USB or external hard drive. Keep it safe and separate."
+          },
+          {
+            name: "Cloud Backup",
+            icon: "☁️",
+            description: "Backup to cloud storage. Access files from anywhere."
+          },
+          {
+            name: "Automatic Schedule",
+            icon: "⏰",
+            description: "Set automatic backups. Runs daily or weekly."
+          },
+          {
+            name: "File History",
+            icon: "📚",
+            description: "Enable file history. Keeps versions of your files."
+          },
+          {
+            name: "System Image",
+            icon: "💿",
+            description: "Create system image. Full backup of entire system."
+          },
+          {
+            name: "Restore Point",
+            icon: "↩️",
+            description: "Set restore points. Revert system to previous state."
+          }
+        ]
+      },
+      systemRestoreRecovery: {
+        title: "System Restore & Recovery",
+        intro: "System restore lets you undo changes and recover from problems. Use restore points to go back to when your computer worked fine.",
+        images: {
+          hero: {
+            fileName: "module-media/m8-restore-hero.jpg",
+            alt: "System restore and recovery",
+            brief: "Create a visual showing system restore: restore points, recovery. Use modern gradient background. Clean, educational style."
+          },
+          overview: {
+            fileName: "module-media/m8-restore-overview.jpg",
+            alt: "System restore process",
+            brief: "Show system restore diagram: recovery steps. Include labels. Clean educational diagram style."
+          },
+          fullWidth: {
+            fileName: "module-media/m8-restore-fullwidth.jpg",
+            alt: "Recovery options",
+            brief: "Create a full-width visual showing recovery options. Use visual indicators. Clean diagram style."
+          },
+          whyMatters: {
+            fileName: "module-media/m8-restore-why-matters.jpg",
+            alt: "Real-world system restore scenario",
+            brief: "Show a real-world scenario: person using system restore. Clean, modern aesthetic."
+          },
+          recovery: {
+            fileName: "module-media/m8-restore-recovery.jpg",
+            alt: "Recovery methods",
+            brief: "Show different recovery methods and options. Clean educational diagram style."
+          }
+        },
+        recoveryOptions: [
+          {
+            name: "Restore Point",
+            icon: "⏮️",
+            description: "Go back to previous state. Undo system changes."
+          },
+          {
+            name: "Reset PC",
+            icon: "🔄",
+            description: "Reset to factory settings. Removes apps but keeps files."
+          },
+          {
+            name: "Recovery Drive",
+            icon: "💿",
+            description: "Boot from recovery USB. Fix serious problems."
+          },
+          {
+            name: "Safe Mode",
+            icon: "🛡️",
+            description: "Start in safe mode. Troubleshoot issues safely."
+          },
+          {
+            name: "System Repair",
+            icon: "🔧",
+            description: "Automatic repair tool. Fixes common startup problems."
+          },
+          {
+            name: "Command Prompt",
+            icon: "⌨️",
+            description: "Advanced recovery. Use commands to fix issues."
+          }
+        ]
+      }
+    };
+  };
+
+  const getModule11Sections = () => {
+    return {
+      digitalCitizenship: {
+        title: "Digital Citizenship Basics",
+        intro: "Your online identity is as real as your physical one. Learn your rights and responsibilities in the digital world.",
+        topics: [
+          { title: "Online Identity", desc: "Who you are on the internet.", icon: "🆔" },
+          { title: "Digital Rights", desc: "Freedom of speech and privacy online.", icon: "⚖️" }
+        ]
+      },
+      onlineEtiquette: {
+        title: "Online Etiquette (Netiquette)",
+        intro: "Politeness matters everywhere. Treat others online as you would in real life.",
+        rules: [
+          { rule: "Be Respectful", desc: "No name-calling or insults.", icon: "🤝" },
+          { rule: "Think Before Posting", desc: "Once it's out, it's there forever.", icon: "🧠" }
+        ]
+      },
+      dataPrivacy: {
+        title: "Data Privacy",
+        intro: "Your personal information is valuable. Learn how to protect it from misuse.",
+        points: [
+          { title: "Personal Data", desc: "Name, address, phone number.", icon: "📝" },
+          { title: "Consent", desc: "Agreeing to share your data.", icon: "✅" }
+        ]
+      },
+      socialMedia: {
+        title: "Safe Social Media Usage",
+        intro: "Connect with friends safely. Avoid fake profiles and oversharing.",
+        tips: [
+          { tip: "Privacy Settings", desc: "Control who sees your posts.", icon: "🔒" },
+          { tip: "Fake Profiles", desc: "Spotting imposters.", icon: "🎭" }
+        ]
+      },
+      payments: {
+        title: "UPI & Online Payments Safety",
+        intro: "Secure your money. Learn safe practices for UPI and digital transactions.",
+        steps: [
+          { step: "UPI PIN", desc: "Never share your PIN.", icon: "🔢" },
+          { step: "Verify Receiver", desc: "Check the name before paying.", icon: "👀" }
+        ]
+      },
+      digitalFootprint: {
+        title: "Digital Footprint",
+        intro: "Every click leaves a trace. Understanding your digital history.",
+        facts: [
+          { fact: "Permanent Record", desc: "Deleted posts can still be found.", icon: "👣" },
+          { fact: "Tracking", desc: "Websites track your visits.", icon: "🌐" }
+        ]
+      },
+      cyberbullying: {
+        title: "Cyberbullying Awareness",
+        intro: "Bullying is never okay. Recognizing and stopping online harassment.",
+        actions: [
+          { action: "Don't Respond", desc: "Ignore the bully.", icon: "🔇" },
+          { action: "Block & Report", desc: "Use platform tools.", icon: "🚫" }
+        ]
+      },
+      deviceUsage: {
+        title: "Responsible Device Usage",
+        intro: "Balance your screen time. Use technology to enhance life, not control it.",
+        habits: [
+          { habit: "Screen Time", desc: "Take breaks.", icon: "⏳" },
+          { habit: "Permissions", desc: "Check app access.", icon: "📱" }
+        ]
+      },
+      fakeNews: {
+        title: "Fake News Detection",
+        intro: "Don't believe everything you read. Verify sources before sharing.",
+        checks: [
+          { check: "Source", desc: "Is it a reputable site?", icon: "📰" },
+          { check: "Fact Check", desc: "Use fact-checking tools.", icon: "✅" }
+        ]
+      },
+      ethics: {
+        title: "Ethical Behavior Online",
+        intro: "Be a good digital citizen. Respect copyright and avoid plagiarism.",
+        principles: [
+          { principle: "Plagiarism", desc: "Copying without credit.", icon: "©️" },
+          { principle: "Sharing", desc: "Share responsible content.", icon: "📤" }
+        ]
+      }
+    };
+  };
+
+  // Get sections based on module ID - Modules 1-11 are supported
+  const sections = moduleId === 1 ? getModule1Sections() : moduleId === 2 ? getModule2Sections() : moduleId === 3 ? getModule3Sections() : moduleId === 4 ? getModule4Sections() : moduleId === 5 ? getModule5Sections() : moduleId === 6 ? getModule6Sections() : moduleId === 7 ? getModule7Sections() : moduleId === 8 ? getModule8Sections() : moduleId === 9 ? getModule9Sections() : moduleId === 10 ? getModule10Sections() : moduleId === 11 ? getModule11Sections() : null;
 
   const module1Sections = moduleId === 1 && sections ? (sections as ReturnType<typeof getModule1Sections>) : null;
   const module2Sections = moduleId === 2 && sections ? (sections as ReturnType<typeof getModule2Sections>) : null;
@@ -3722,6 +5228,7 @@ const ModuleDetail = () => {
   const module5Sections = moduleId === 5 && sections ? (sections as ReturnType<typeof getModule5Sections>) : null;
   const module6Sections = moduleId === 6 && sections ? (sections as ReturnType<typeof getModule6Sections>) : null;
   const module7Sections = moduleId === 7 && sections ? (sections as ReturnType<typeof getModule7Sections>) : null;
+  const module8Sections = moduleId === 8 && sections ? (sections as ReturnType<typeof getModule8Sections>) : null;
 
   const resolveHeroContent = () => {
     if (moduleId === 1) {
@@ -4120,6 +5627,114 @@ const ModuleDetail = () => {
         subtitle: "Explore file organization, operations, types, compression, backups, security, and file management. Learn how to effectively manage your files and data."
       };
     }
+    if (moduleId === 8) {
+      if (topicId === "1") {
+        return {
+          title: "Pre-Installation Requirements",
+          subtitle: "Prepare your system before installing a new operating system. Check hardware compatibility, backup data, and gather necessary tools."
+        };
+      }
+      if (topicId === "2") {
+        return {
+          title: "BIOS/UEFI Configuration",
+          subtitle: "Learn how to access and configure BIOS/UEFI settings. Set boot order, enable hardware, and configure system startup options."
+        };
+      }
+      if (topicId === "3") {
+        return {
+          title: "Bootable USB Creation",
+          subtitle: "Create a bootable USB drive to install an operating system. Learn how to use tools like Rufus or Media Creation Tool."
+        };
+      }
+      if (topicId === "4") {
+        return {
+          title: "OS Installation Steps",
+          subtitle: "Follow the complete operating system installation process. Learn each step from booting to first setup."
+        };
+      }
+      if (topicId === "5") {
+        return {
+          title: "Partition Management",
+          subtitle: "Understand how to manage disk partitions. Create, resize, format, and delete partitions for your operating system."
+        };
+      }
+      if (topicId === "6") {
+        return {
+          title: "Initial System Configuration",
+          subtitle: "Configure your system after installation. Set up region, language, user account, and privacy settings."
+        };
+      }
+      if (topicId === "7") {
+        return {
+          title: "Installing Drivers",
+          subtitle: "Install drivers for your hardware. Learn how to get graphics, audio, network, and chipset drivers working."
+        };
+      }
+      if (topicId === "8") {
+        return {
+          title: "Installing Essential Software",
+          subtitle: "Install essential software for daily use. Get web browsers, office apps, media players, and security tools."
+        };
+      }
+      if (topicId === "9") {
+        return {
+          title: "User Accounts & Permissions",
+          subtitle: "Create and manage user accounts. Understand administrator, standard user, and guest account types."
+        };
+      }
+      if (topicId === "10") {
+        return {
+          title: "Display Settings Configuration",
+          subtitle: "Configure display settings for your monitor. Adjust resolution, brightness, color, and multiple monitor setup."
+        };
+      }
+      if (topicId === "11") {
+        return {
+          title: "Sound Settings",
+          subtitle: "Configure audio output and input. Set up speakers, headphones, and microphone for your system."
+        };
+      }
+      if (topicId === "12") {
+        return {
+          title: "Network Setup",
+          subtitle: "Set up network connections. Configure Wi-Fi, Ethernet, and network sharing on your computer."
+        };
+      }
+      if (topicId === "13") {
+        return {
+          title: "Bluetooth Setup",
+          subtitle: "Connect Bluetooth devices to your computer. Pair headphones, speakers, mice, and other wireless gadgets."
+        };
+      }
+      if (topicId === "14") {
+        return {
+          title: "Printer & Scanner Setup",
+          subtitle: "Set up printers and scanners. Connect via USB or Wi-Fi and install necessary drivers."
+        };
+      }
+      if (topicId === "15") {
+        return {
+          title: "Setting Up Security",
+          subtitle: "Configure security settings to protect your computer. Enable firewall, antivirus, and privacy options."
+        };
+      }
+      if (topicId === "16") {
+        return {
+          title: "Backup Setup",
+          subtitle: "Set up automatic backups for your files. Configure backup to external drive or cloud storage."
+        };
+      }
+      if (topicId === "17") {
+        return {
+          title: "System Restore & Recovery",
+          subtitle: "Learn how to use system restore and recovery options. Recover from problems and restore your system to previous states."
+        };
+      }
+      return {
+        title: "System Setup, Installation & Configuration",
+        subtitle: "Learn how to install operating systems, configure system settings, set up hardware, and manage user accounts and permissions."
+      };
+    }
     if (moduleId === 2) {
       if (topicId === "1") {
         return {
@@ -4213,6 +5828,10 @@ const ModuleDetail = () => {
     }
 
 
+    if (moduleId === 9 || moduleId === 10) {
+      return { title: null, subtitle: null };
+    }
+
     return {
       title: `Module ${moduleId}`,
       subtitle: "Module description"
@@ -4222,7 +5841,7 @@ const ModuleDetail = () => {
   const { title: heroTitle, subtitle: heroSubtitle } = resolveHeroContent();
 
   if (!sections) {
-  return (
+    return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Module {moduleId}</h2>
@@ -4236,7 +5855,7 @@ const ModuleDetail = () => {
   }
 
   return (
-    <div 
+    <div
       className={`min-h-screen bg-background hide-scrollbar ${isTransitioning ? 'page-enter' : ''} ${isModule1Light ? 'module-1-light' : ''}`}
       style={isModule1Light ? {
         '--background': 'hsl(var(--module1-bg))',
@@ -4255,13 +5874,13 @@ const ModuleDetail = () => {
           <div className="flex items-center justify-between gap-4 max-w-full">
             <div className="flex items-center gap-4 min-w-0">
               <SidebarTrigger className="-ml-1 shrink-0" />
-          <button
-            onClick={() => navigate("/dashboard")}
-            className={`flex items-center gap-2 ${isModule1Light ? 'text-[#2C666E] hover:text-[#2C666E]/80' : 'text-muted-foreground hover:text-primary'} transition-colors shrink-0`}
-          >
-            <ArrowLeft className="h-5 w-5" />
-            <span className="whitespace-nowrap">Back to Dashboard</span>
-          </button>
+              <button
+                onClick={() => navigate("/dashboard")}
+                className={`flex items-center gap-2 ${isModule1Light ? 'text-[#2C666E] hover:text-[#2C666E]/80' : 'text-muted-foreground hover:text-primary'} transition-colors shrink-0`}
+              >
+                <ArrowLeft className="h-5 w-5" />
+                <span className="whitespace-nowrap">Back to Dashboard</span>
+              </button>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <ThemeToggle />
@@ -4271,34 +5890,34 @@ const ModuleDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''}`}>
+      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 9 || moduleId === 10 ? '!hidden' : ''}`} style={{ display: moduleId === 9 || moduleId === 10 ? 'none' : undefined }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className={`absolute top-10 left-10 w-72 h-72 ${isModule1Light ? 'bg-[#2C666E]/10' : 'bg-primary/5'} dark:bg-primary/10 rounded-full blur-3xl`}></div>
           <div className={`absolute bottom-10 right-10 w-96 h-96 ${isModule1Light ? 'bg-[#2C666E]/5' : 'bg-secondary/5'} dark:bg-secondary/10 rounded-full blur-3xl`}></div>
         </div>
-        
+
         <div className="container mx-auto px-4 py-12 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 className={`text-4xl lg:text-5xl font-bold mb-4 ${isModule1Light ? 'text-[#2C666E]' : 'text-foreground'} dark:text-primary`}>
                 {heroTitle}
-                </h1>
-              
+              </h1>
+
               <p className="text-lg text-foreground/80 dark:text-foreground/90 mb-6 leading-relaxed">
                 {heroSubtitle}
-                </p>
-              </div>
-              
+              </p>
+            </div>
+
             <div className="hidden lg:block">
               {simulator ? (
                 <SimulatorPreview simulator={simulator} />
               ) : moduleId === 1 && topicId === "1" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-hero.jpeg")} 
-                    alt="What is a Computer?" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-hero.jpeg")}
+                    alt="What is a Computer?"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4307,10 +5926,10 @@ const ModuleDetail = () => {
               ) : moduleId === 1 && topicId === "2" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/types-combined.jpg")} 
-                    alt="Types of Computers" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/types-combined.jpg")}
+                    alt="Types of Computers"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleTypesHero;
                     }}
@@ -4319,22 +5938,22 @@ const ModuleDetail = () => {
               ) : moduleId === 1 && topicId === "3" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-hardware-hero.jpg")} 
-                    alt="Hardware Basics" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-hardware-hero.jpg")}
+                    alt="Hardware Basics"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
                   />
-              </div>
+                </div>
               ) : moduleId === 1 && topicId === "4" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-software-hero.jpg")} 
-                    alt="Software Basics" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-software-hero.jpg")}
+                    alt="Software Basics"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleSoftwareHero;
                     }}
@@ -4343,10 +5962,10 @@ const ModuleDetail = () => {
               ) : moduleId === 1 && topicId === "5" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-hw-sw-hero.jpg")} 
-                    alt="Hardware vs Software" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-hw-sw-hero.jpg")}
+                    alt="Hardware vs Software"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4355,10 +5974,10 @@ const ModuleDetail = () => {
               ) : moduleId === 1 && topicId === "6" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-input-hero.jpg")} 
-                    alt="Input Devices" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-input-hero.jpg")}
+                    alt="Input Devices"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4367,10 +5986,10 @@ const ModuleDetail = () => {
               ) : moduleId === 1 && topicId === "7" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-output-hero.jpg")} 
-                    alt="Output Devices" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-output-hero.jpg")}
+                    alt="Output Devices"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4379,10 +5998,10 @@ const ModuleDetail = () => {
               ) : moduleId === 1 && topicId === "8" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m1-io-hero.jpg")} 
-                    alt="I/O Devices" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m1-io-hero.jpg")}
+                    alt="I/O Devices"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4391,19 +6010,19 @@ const ModuleDetail = () => {
               ) : moduleId === 1 ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={moduleIntro} 
-                    alt="Module cover" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={moduleIntro}
+                    alt="Module cover"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               ) : moduleId === 2 && topicId === "1" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-cpu-hero.jpg")} 
-                    alt="CPU Basics" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-cpu-hero.jpg")}
+                    alt="CPU Basics"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4412,10 +6031,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "2" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-ram-hero.jpg")} 
-                    alt="RAM Basics" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-ram-hero.jpg")}
+                    alt="RAM Basics"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4424,10 +6043,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "3" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-rom-hero.jpg")} 
-                    alt="ROM Basics" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-rom-hero.jpg")}
+                    alt="ROM Basics"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4436,10 +6055,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "4" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-storage-hero.jpg")} 
-                    alt="Storage Concepts" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-storage-hero.jpg")}
+                    alt="Storage Concepts"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4448,10 +6067,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "5" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-hdd-hero.jpg")} 
-                    alt="HDD - Hard Disk Drive" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-hdd-hero.jpg")}
+                    alt="HDD - Hard Disk Drive"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4460,10 +6079,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "6" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-ssd-hero.jpg")} 
-                    alt="SSD & NVMe" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-ssd-hero.jpg")}
+                    alt="SSD & NVMe"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4472,10 +6091,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "7" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-motherboard-hero.jpg")} 
-                    alt="Motherboard" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-motherboard-hero.jpg")}
+                    alt="Motherboard"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4484,10 +6103,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "8" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-ports-hero.jpg")} 
-                    alt="Ports & Connectors" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-ports-hero.jpg")}
+                    alt="Ports & Connectors"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4496,10 +6115,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "9" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-gpu-hero.jpg")} 
-                    alt="GPU Basics" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-gpu-hero.jpg")}
+                    alt="GPU Basics"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4508,10 +6127,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "10" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-alu-hero.jpg")} 
-                    alt="ALU - Arithmetic Logic Unit" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-alu-hero.jpg")}
+                    alt="ALU - Arithmetic Logic Unit"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4520,10 +6139,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "11" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-cu-hero.jpg")} 
-                    alt="CU - Control Unit" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-cu-hero.jpg")}
+                    alt="CU - Control Unit"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4532,10 +6151,10 @@ const ModuleDetail = () => {
               ) : moduleId === 2 && topicId === "12" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m2-firmware-hero.jpg")} 
-                    alt="Firmware" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m2-firmware-hero.jpg")}
+                    alt="Firmware"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4544,10 +6163,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "1" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-boot-hero.jpg")} 
-                    alt="Boot Process" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-boot-hero.jpg")}
+                    alt="Boot Process"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4556,10 +6175,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "2" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-os-hero.jpg")} 
-                    alt="Operating Systems" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-os-hero.jpg")}
+                    alt="Operating Systems"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4568,10 +6187,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "3" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-filesystem-hero.jpg")} 
-                    alt="File System" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-filesystem-hero.jpg")}
+                    alt="File System"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4580,10 +6199,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "4" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-extensions-hero.jpg")} 
-                    alt="File Extensions" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-extensions-hero.jpg")}
+                    alt="File Extensions"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4592,10 +6211,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "5" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-management-hero.jpg")} 
-                    alt="File Management" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-management-hero.jpg")}
+                    alt="File Management"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4604,10 +6223,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "6" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-specs-hero.jpg")} 
-                    alt="System Specifications" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-specs-hero.jpg")}
+                    alt="System Specifications"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4616,10 +6235,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "7" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-mobile-hero.jpg")} 
-                    alt="Mobile = A Computer" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-mobile-hero.jpg")}
+                    alt="Mobile = A Computer"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4628,10 +6247,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "8" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-sensors-hero.jpg")} 
-                    alt="Sensors in Devices" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-sensors-hero.jpg")}
+                    alt="Sensors in Devices"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4640,10 +6259,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "9" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-program-hero.jpg")} 
-                    alt="What is a Program?" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={getImageUrl("module-media/m3-program-hero.jpg")}
+                    alt="What is a Program?"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4652,10 +6271,10 @@ const ModuleDetail = () => {
               ) : moduleId === 3 && topicId === "10" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m3-data-hero.jpg")} 
+                  <img
+                    src={getImageUrl("module-media/m3-data-hero.jpg")}
                     alt="What is Data?"
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4664,10 +6283,10 @@ const ModuleDetail = () => {
               ) : moduleId === 4 && topicId === "1" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m4-inside-hero.jpg")} 
+                  <img
+                    src={getImageUrl("module-media/m4-inside-hero.jpg")}
                     alt="Inside a Computer"
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4676,10 +6295,10 @@ const ModuleDetail = () => {
               ) : moduleId === 4 && topicId === "2" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m4-cpu-hero.jpg")} 
+                  <img
+                    src={getImageUrl("module-media/m4-cpu-hero.jpg")}
                     alt="CPU Architecture"
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4688,10 +6307,10 @@ const ModuleDetail = () => {
               ) : moduleId === 4 && topicId === "3" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={getImageUrl("module-media/m4-gpu-hero.jpg")} 
+                  <img
+                    src={getImageUrl("module-media/m4-gpu-hero.jpg")}
                     alt="GPU Architecture"
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = moduleIntro;
                     }}
@@ -4700,10 +6319,10 @@ const ModuleDetail = () => {
               ) : (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <img 
-                    src={moduleSoftware} 
-                    alt="Module cover" 
-                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500" 
+                  <img
+                    src={moduleSoftware}
+                    alt="Module cover"
+                    className="relative w-full rounded-2xl shadow-soft-lg transform group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               )}
@@ -4719,8 +6338,8 @@ const ModuleDetail = () => {
           <section className="container mx-auto px-4 py-16">
             <div className="max-w-3xl mx-auto text-center space-y-4">
               <p className="text-lg text-foreground/80 leading-relaxed">{sections.hero.summary}</p>
-          </div>
-      </section>
+            </div>
+          </section>
 
           {/* IPO Section */}
           <section className="container mx-auto px-4 pb-16">
@@ -4730,41 +6349,41 @@ const ModuleDetail = () => {
                   <p className={`text-sm uppercase tracking-[0.2em] ${isModule1Light ? 'text-[#2C666E]' : 'text-primary'} font-semibold mb-2`}>Topic 1</p>
                   <h2 className={`text-3xl font-bold ${isModule1Light ? 'text-[#2C666E]' : 'text-foreground'} mb-3`}>{sections.ipo.title}</h2>
                   <p className="text-foreground/80 leading-relaxed">{sections.ipo.description}</p>
-                  </div>
+                </div>
                 <div className="space-y-4">
                   {sections.ipo.steps.map((step) => (
                     <div key={step.id} className={`border ${isModule1Light ? 'border-[#2C666E]/30 hover:border-[#2C666E]/50' : 'border-border hover:border-primary/50'} rounded-2xl p-4 transition`}>
                       <h3 className={`text-lg font-semibold ${isModule1Light ? 'text-[#2C666E]' : 'text-primary'}`}>{step.label}</h3>
                       <p className="text-sm text-foreground/80 mt-1">{step.detail}</p>
-          </div>
+                    </div>
                   ))}
-        </div>
-            </Card>
+                </div>
+              </Card>
 
               <Card className={`p-0 rounded-[28px] overflow-hidden border ${isModule1Light ? 'border-[#2C666E]/20 bg-white' : 'border-border'}`}>
                 <div className="relative w-full h-full min-h-[360px]">
-                <img 
+                  <img
                     src={getImageUrl(sections.ipo.visualAsset.fileName)}
                     alt={sections.ipo.visualAsset.alt}
                     className="w-full h-full object-cover"
-                  onError={(e) => {
+                    onError={(e) => {
                       (e.target as HTMLImageElement).style.display = "none";
-                    const parent = (e.target as HTMLImageElement).parentElement;
-                    if (parent) {
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
                         parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">
                           IPO visual graphic will appear here. Save it as ${sections.ipo.visualAsset.fileName} inside src/assets/module-media/.
                         </div>`;
-                    }
-                  }}
-                />
-          </div>
-            </Card>
+                      }
+                    }}
+                  />
                 </div>
+              </Card>
+            </div>
 
             <div className="mt-10">
               <Card className={`p-8 space-y-6 ${isModule1Light ? 'bg-white border-[#2C666E]/20' : ''}`}>
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div>
+                  <div>
                     <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground mb-1">Hands-on</p>
                     <h3 className="text-2xl font-semibold text-foreground">{sections.ipo.simulation.title}</h3>
                     <p className="text-sm text-foreground/80 mt-1">{sections.ipo.simulation.description}</p>
@@ -4783,16 +6402,16 @@ const ModuleDetail = () => {
                       placeholder={sections.ipo.simulation.placeholder}
                       className={`w-full rounded-xl border ${isModule1Light ? 'border-[#2C666E]/30' : 'border-border/80'} bg-muted/40 px-3 py-2 text-sm focus:outline-none focus:ring-2 ${isModule1Light ? 'focus:ring-[#2C666E]' : 'focus:ring-primary'}`}
                     />
-                <Button 
+                    <Button
                       className="w-full"
                       onClick={handleIpoSimulation}
                       disabled={!ipoInput.trim() || isProcessingIpo}
                     >
                       {isProcessingIpo ? "Processing..." : sections.ipo.simulation.buttonLabel}
-                </Button>
+                    </Button>
                     <p className="text-xs text-muted-foreground">{sections.ipo.simulation.helper}</p>
-            </div>
-            
+                  </div>
+
                   <div className={`space-y-4 rounded-2xl border ${isModule1Light ? 'border-[#2C666E]/20 bg-gradient-to-br from-[#2C666E]/5 to-[#2C666E]/10' : 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10'} p-6 flex flex-col items-center justify-center shadow-inner`}>
                     <p className={`text-xs font-semibold ${isModule1Light ? 'text-[#2C666E]' : 'text-primary'} tracking-[0.45em] uppercase`}>Process (P)</p>
                     {isProcessingIpo ? (
@@ -4802,10 +6421,10 @@ const ModuleDetail = () => {
                             <Cog
                               className={`h-10 w-10 ${isModule1Light ? 'text-[#2C666E]' : 'text-primary'} animate-spin`}
                               style={{ animationDuration: "1.5s" }}
-                    />
-              </div>
+                            />
+                          </div>
                           <span className={`absolute inset-0 rounded-full border ${isModule1Light ? 'border-[#2C666E]/40' : 'border-primary/40'} animate-ping`} aria-hidden />
-            </div>
+                        </div>
                         <div className={`flex items-center gap-2 text-xs font-mono ${isModule1Light ? 'text-[#2C666E]/80' : 'text-primary/80'}`}>
                           <span className={`w-2 h-2 rounded-full ${isModule1Light ? 'bg-[#2C666E]' : 'bg-primary'} animate-bounce`} />
                           <span
@@ -4816,7 +6435,7 @@ const ModuleDetail = () => {
                             className={`w-2 h-2 rounded-full ${isModule1Light ? 'bg-[#2C666E]/50' : 'bg-primary/50'} animate-bounce`}
                             style={{ animationDelay: "0.3s" }}
                           />
-          </div>
+                        </div>
                         <p className={`text-xs ${isModule1Light ? 'text-[#2C666E]/80' : 'text-primary/80'} uppercase tracking-[0.35em]`}>
                           Processing input…
                         </p>
@@ -4834,21 +6453,21 @@ const ModuleDetail = () => {
                   <div className={`space-y-3 rounded-2xl border ${isModule1Light ? 'border-[#2C666E]/20' : 'border-border'} p-4 ${isModule1Light ? 'bg-white' : 'bg-background/80'}`}>
                     <p className="text-sm font-semibold text-foreground">{sections.ipo.simulation.outputLabel}</p>
                     <div className={`relative rounded-[18px] border ${isModule1Light ? 'border-[#2C666E]/30 bg-gradient-to-br from-[#2C666E]/10 to-[#2C666E]/5 text-[#2C666E]' : 'border-primary/30 bg-gradient-to-br from-slate-900 to-slate-800 text-primary'} min-h-[140px] flex items-center justify-center px-4`}>
-                  <div className="text-center">
+                      <div className="text-center">
                         <p className={`text-xs uppercase tracking-[0.4em] ${isModule1Light ? 'text-[#2C666E]/70' : 'text-primary/70'} mb-2`}>
                           Output
                         </p>
                         <p className={`text-lg font-semibold ${isModule1Light ? 'text-[#2C666E]' : 'text-white'} break-words max-w-full`}>
                           {ipoOutput || sections.ipo.simulation.idleScreen}
-            </p>
-          </div>
+                        </p>
+                      </div>
                       <div className={`absolute -bottom-6 left-1/2 -translate-x-1/2 w-16 h-6 ${isModule1Light ? 'bg-[#2C666E]/10 border-[#2C666E]/30' : 'bg-slate-900 border-primary/30'} rounded-b-xl border`}></div>
+                    </div>
                   </div>
                 </div>
-                  </div>
-                </Card>
-        </div>
-      </section>
+              </Card>
+            </div>
+          </section>
 
           {/* Characteristics */}
           <section className="bg-muted/30">
@@ -4858,7 +6477,7 @@ const ModuleDetail = () => {
                 <p className="text-lg text-foreground/80 max-w-3xl mx-auto leading-relaxed">
                   {sections.characteristics.intro}
                 </p>
-            </div>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sections.characteristics.traits.map((trait) => (
                   <Card key={trait.id} className="p-6 space-y-3 h-full">
@@ -4866,30 +6485,30 @@ const ModuleDetail = () => {
                     <h3 className="text-xl font-semibold text-foreground">{trait.title}</h3>
                     <p className="text-sm text-foreground/80">{trait.description}</p>
                     <p className="text-xs text-muted-foreground">{trait.example}</p>
-              </Card>
+                  </Card>
                 ))}
-          </div>
-        </div>
-      </section>
+              </div>
+            </div>
+          </section>
 
           {/* Real-world examples */}
-      <section className="container mx-auto px-4 py-16">
+          <section className="container mx-auto px-4 py-16">
             <div className="text-center mb-12 space-y-3">
               <h2 className="text-3xl font-bold text-foreground">{sections.examples.title}</h2>
               <p className="text-lg text-foreground/80 max-w-3xl mx-auto">{sections.examples.intro}</p>
-                  </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
               {sections.examples.cards.map((card) => (
                 <Card key={card.id} className="p-6 flex flex-col gap-3">
                   <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{card.id.toUpperCase()}</div>
                   <h3 className="text-xl font-semibold text-foreground">{card.title}</h3>
                   <p className="text-sm text-foreground/80 flex-1">{card.description}</p>
-            </Card>
+                </Card>
               ))}
             </div>
             <Card className="p-0 overflow-hidden rounded-[32px] border border-border mt-10">
               <div className="relative w-full h-full">
-            <img 
+                <img
                   src={getImageUrl("module-media/m1-realworld.jpg")}
                   alt="Collage of smartphones, ATMs, smart TVs, and embedded systems that all follow the IPO cycle."
                   className="w-full h-full object-cover"
@@ -4913,12 +6532,12 @@ const ModuleDetail = () => {
                 <h2 className="text-3xl font-bold text-foreground">{sections.knowledgeCheck.title}</h2>
                 <p className="text-lg text-foreground/80">{sections.knowledgeCheck.question}</p>
                 <p className="text-sm text-muted-foreground">{sections.knowledgeCheck.tip}</p>
-                </div>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {sections.knowledgeCheck.items.map((item) => {
                   const isRevealed = revealedMatches.includes(item.id);
-            return (
-            <Card 
+                  return (
+                    <Card
                       key={item.id}
                       className="p-6 cursor-pointer transition hover:shadow-lg space-y-4 border border-border/60"
                       onClick={() =>
@@ -4943,12 +6562,12 @@ const ModuleDetail = () => {
                         </p>
                         {isRevealed && (
                           <p className="text-sm text-foreground/80">{item.explanation}</p>
-                    )}
-                  </div>
-          </Card>
+                        )}
+                      </div>
+                    </Card>
                   );
                 })}
-                    </div>
+              </div>
               {revealedMatches.length === sections.knowledgeCheck.items.length && (
                 <div className="text-center mt-6">
                   <p className="text-sm text-primary font-semibold">Great! You connected every scenario to its IPO stage.</p>
@@ -4963,7 +6582,7 @@ const ModuleDetail = () => {
               <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/1")}>
                 ← Back to topic list
               </Button>
-              <Button 
+              <Button
                 size="lg"
                 className="w-full md:w-auto"
                 onClick={() => navigate("/module/1/topic/2")}
@@ -4972,7 +6591,7 @@ const ModuleDetail = () => {
               </Button>
             </div>
           </section>
-            </div>
+        </div>
       ))(module1Sections)}
 
       {/* Topic 2: Types of Computers */}
@@ -5017,15 +6636,15 @@ const ModuleDetail = () => {
             {/* Everyday Computers */}
             <section className="container mx-auto px-4">
               <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <div className="space-y-6">
-                <div>
+                <div className="space-y-6">
+                  <div>
                     <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Everyday Computers</p>
                     <h2 className="text-3xl font-semibold text-foreground mb-3">Desktops & Laptops</h2>
                     <p className="text-foreground/80 leading-relaxed">
                       Most learners meet computers in classrooms, homes, or offices. Desktops stay on desks, while laptops follow you to study
                       sessions and coworking spaces.
                     </p>
-                </div>
+                  </div>
                   <div className="grid gap-4">
                     {everydayHighlights.map((item) => (
                       <Card key={item.title} className="p-6 border-border/70">
@@ -5053,9 +6672,9 @@ const ModuleDetail = () => {
                       }}
                     />
                   </div>
-          </Card>
-        </div>
-      </section>
+                </Card>
+              </div>
+            </section>
 
             {/* Portable & Pocket Devices */}
             <section className="container mx-auto px-4">
@@ -5067,8 +6686,8 @@ const ModuleDetail = () => {
                     <p className="text-sm text-foreground/80 leading-relaxed">
                       Tablets feel like slim notebooks for reading, sketching, and presenting. Smartphones shrink an entire computer into your
                       pocket with touch, sensors, and constant connectivity.
-            </p>
-                      </div>
+                    </p>
+                  </div>
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>Swipe-friendly</span>
                     <span>•</span>
@@ -5109,12 +6728,12 @@ const ModuleDetail = () => {
                   <p className="text-sm text-foreground/80 max-w-2xl mx-auto">
                     Rotate the model to see how massive supercomputers compare with servers, desktops, laptops, tablets, phones, and embedded chips.
                   </p>
-                    </div>
+                </div>
                 <div className="relative w-full rounded-3xl overflow-hidden border border-border/60 bg-gradient-to-br from-muted/30 to-muted/10">
                   <div className="w-full aspect-video max-h-[500px] [&_.sketchfab-embed-wrapper]:w-full [&_.sketchfab-embed-wrapper]:h-full [&_iframe]:w-full [&_iframe]:h-full [&_p]:hidden">
-                    <div 
+                    <div
                       className="w-full h-full"
-                      dangerouslySetInnerHTML={{ 
+                      dangerouslySetInnerHTML={{
                         __html: `<div class="sketchfab-embed-wrapper"> <iframe title="Raspberry Pi 2" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="100%" height="100%" style="width: 100%; height: 100%;" src="https://sketchfab.com/models/89dc28451c7148fc8c8dd867d17af25b/embed?autostart=0&camera=0&preload=1&ui_hint=2"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/raspberry-pi-2-89dc28451c7148fc8c8dd867d17af25b?utm_medium=embed&utm_campaign=share-popup&utm_content=89dc28451c7148fc8c8dd867d17af25b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Raspberry Pi 2 </a> by <a href="https://sketchfab.com/VirtualStudio?utm_medium=embed&utm_campaign=share-popup&utm_content=89dc28451c7148fc8c8dd867d17af25b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Virtual Studio </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=89dc28451c7148fc8c8dd867d17af25b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>`
                       }}
                     />
@@ -5136,10 +6755,10 @@ const ModuleDetail = () => {
                 {powerCards.map((card) => (
                   <Card key={card.title} className="p-6 space-y-4 border border-border/70">
                     <div className="text-4xl">{card.icon}</div>
-                <div>
+                    <div>
                       <h3 className="text-xl font-semibold text-primary mb-1">{card.title}</h3>
                       <p className="text-sm text-foreground/80 leading-relaxed">{card.description}</p>
-                  </div>
+                    </div>
                   </Card>
                 ))}
               </div>
@@ -5179,8 +6798,8 @@ const ModuleDetail = () => {
                           }
                         }}
                       />
-                </div>
-              </Card>
+                    </div>
+                  </Card>
                 </div>
               </Card>
             </section>
@@ -5193,10 +6812,10 @@ const ModuleDetail = () => {
                 </Button>
                 <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/1/topic/3")}>
                   Next Topic: Hardware Basics →
-                      </Button>
-                    </div>
+                </Button>
+              </div>
             </section>
-                  </div>
+          </div>
         );
       })(module1Sections)}
 
@@ -5215,19 +6834,19 @@ const ModuleDetail = () => {
             <section className="container mx-auto px-4">
               <div className="grid lg:grid-cols-2 gap-10 items-center">
                 <div className="space-y-6">
-                <div>
+                  <div>
                     <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">External Hardware</p>
                     <h2 className="text-3xl font-semibold text-foreground mb-3">Devices You Can Touch</h2>
                     <p className="text-foreground/80 leading-relaxed">
                       External hardware includes all devices you can see and touch outside the computer. These are the parts you interact with daily.
                     </p>
-              </div>
+                  </div>
                   <div className="grid grid-cols-3 gap-4">
                     {sections.hardwareBasics.externalExamples.map((device) => (
                       <Card key={device.name} className="p-4 text-center border border-border/70">
                         <div className="text-3xl mb-2">{device.icon}</div>
                         <p className="text-sm font-medium text-foreground">{device.name}</p>
-            </Card>
+                      </Card>
                     ))}
                   </div>
                 </div>
@@ -5237,20 +6856,20 @@ const ModuleDetail = () => {
                       src={getImageUrl(externalImage.fileName)}
                       alt={externalImage.alt}
                       className="w-full h-full object-cover"
-                    onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                      const parent = (e.target as HTMLImageElement).parentElement;
-                      if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${externalImage.fileName}. ${externalImage.brief}
                             </div>`;
-                      }
-                    }}
-                  />
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
               </div>
-            </Card>
-            </div>
             </section>
 
             {/* Internal Hardware */}
@@ -5261,26 +6880,26 @@ const ModuleDetail = () => {
                     src={getImageUrl(internalImage.fileName)}
                     alt={internalImage.alt}
                     className="w-full h-full object-cover"
-                  onError={(e) => {
+                    onError={(e) => {
                       (e.target as HTMLImageElement).style.display = "none";
-                    const parent = (e.target as HTMLImageElement).parentElement;
-                    if (parent) {
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
                         parent.innerHTML =
                           `<div class="p-8 text-center text-sm text-muted-foreground">
                             Add ${internalImage.fileName}. ${internalImage.brief}
                           </div>`;
-                    }
-                  }}
-                />
-          </div>
+                      }
+                    }}
+                  />
+                </div>
                 <div className="p-8 text-center space-y-2">
                   <h2 className="text-3xl font-semibold text-foreground">Internal Hardware</h2>
                   <p className="text-foreground/80 max-w-2xl mx-auto">
                     Components hidden inside the computer case that process data and power the system. These parts need careful handling and expertise to work with.
                   </p>
-              </div>
-            </Card>
-      </section>
+                </div>
+              </Card>
+            </section>
 
             {/* Comparison Cards + Image */}
             <section className="container mx-auto px-4">
@@ -5308,7 +6927,7 @@ const ModuleDetail = () => {
                         <span>Keyboard, Mouse, Monitor</span>
                       </li>
                     </ul>
-          </div>
+                  </div>
                   <div>
                     <h3 className="text-2xl font-semibold text-primary mb-4">Internal</h3>
                     <ul className="space-y-2 text-sm text-foreground/80">
@@ -5368,28 +6987,28 @@ const ModuleDetail = () => {
                       <li>Internal parts need careful handling and technical knowledge.</li>
                       <li>Both work together to make your computer function properly.</li>
                     </ul>
-                </div>
+                  </div>
                   <Card className="p-0 overflow-hidden border border-border/60 rounded-[28px]">
                     <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
                       <img
                         src={getImageUrl(closingImage.fileName)}
                         alt={closingImage.alt}
                         className="w-full h-full object-contain rounded-[28px]"
-              onError={(e) => {
+                        onError={(e) => {
                           (e.target as HTMLImageElement).style.display = "none";
-                const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) {
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) {
                             parent.innerHTML =
                               `<div class="p-8 text-center text-sm text-muted-foreground">
                                 Add ${closingImage.fileName}. ${closingImage.brief}
                               </div>`;
-                }
-              }}
-            />
+                          }
+                        }}
+                      />
                     </div>
-          </Card>
+                  </Card>
                 </div>
-          </Card>
+              </Card>
             </section>
 
             {/* Navigation */}
@@ -5397,12 +7016,12 @@ const ModuleDetail = () => {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
                 <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/1/topic/2")}>
                   ← Previous Topic
-              </Button>
+                </Button>
                 <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/1/topic/4")}>
                   Next Topic: Software Basics →
                 </Button>
-            </div>
-      </section>
+              </div>
+            </section>
           </div>
         );
       })(module1Sections)}
@@ -5446,10 +7065,10 @@ const ModuleDetail = () => {
                         }
                       }}
                     />
-            </div>
+                  </div>
                 </Card>
-        </div>
-      </section>
+              </div>
+            </section>
 
             {/* Application Software */}
             <section className="container mx-auto px-4">
@@ -5488,9 +7107,9 @@ const ModuleDetail = () => {
                       }}
                     />
                   </div>
-          </Card>
-        </div>
-      </section>
+                </Card>
+              </div>
+            </section>
 
             {/* Firmware & Drivers */}
             <section className="container mx-auto px-4">
@@ -5524,8 +7143,8 @@ const ModuleDetail = () => {
                       <h3 className="text-2xl font-semibold text-primary mb-3">Drivers</h3>
                       <p className="text-foreground/80">
                         Small programs that help the OS communicate with hardware devices. They translate between software and hardware.
-            </p>
-          </div>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -5537,7 +7156,7 @@ const ModuleDetail = () => {
                 <div className="text-center space-y-2">
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Software Architecture</p>
                   <h2 className="text-3xl font-semibold text-foreground">How Software Layers Work</h2>
-                  </div>
+                </div>
                 <Card className="p-0 overflow-hidden border border-border/60 rounded-[28px]">
                   <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
                     <img
@@ -5666,16 +7285,16 @@ const ModuleDetail = () => {
                   <Card key={index} className="p-6 border border-border/70">
                     <h3 className="text-xl font-semibold text-primary mb-4">{comp.label}</h3>
                     <div className="space-y-3">
-                  <div>
+                      <div>
                         <p className="text-sm font-medium text-foreground mb-1">Hardware:</p>
                         <p className="text-sm text-foreground/80">{comp.hardware}</p>
-                  </div>
+                      </div>
                       <div>
                         <p className="text-sm font-medium text-foreground mb-1">Software:</p>
                         <p className="text-sm text-foreground/80">{comp.software}</p>
-                  </div>
-                </div>
-              </Card>
+                      </div>
+                    </div>
+                  </Card>
                 ))}
               </div>
             </section>
@@ -5696,28 +7315,28 @@ const ModuleDetail = () => {
                       src={getImageUrl(mappingImage.fileName)}
                       alt={mappingImage.alt}
                       className="w-full h-full object-cover"
-                    onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                      const parent = (e.target as HTMLImageElement).parentElement;
-                      if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${mappingImage.fileName}. ${mappingImage.brief}
                             </div>`;
-                      }
-                    }}
-                  />
-            </div>
-              </Card>
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
                 <div className="grid md:grid-cols-3 gap-4">
                   {sections.hardwareVsSoftware.mapping.map((map, index) => (
                     <Card key={index} className="p-6 border border-border/70">
                       <h3 className="text-lg font-semibold text-primary mb-3">{map.action}</h3>
                       <div className="space-y-2 text-sm">
-                  <div>
+                        <div>
                           <span className="font-medium text-foreground">Hardware: </span>
                           <span className="text-foreground/80">{map.hardware}</span>
-            </div>
+                        </div>
                         <div>
                           <span className="font-medium text-foreground">Software: </span>
                           <span className="text-foreground/80">{map.software}</span>
@@ -5725,9 +7344,9 @@ const ModuleDetail = () => {
                       </div>
                     </Card>
                   ))}
-          </div>
-        </div>
-      </section>
+                </div>
+              </div>
+            </section>
 
             {/* Why It Matters */}
             <section className="container mx-auto px-4 pb-4">
@@ -5833,7 +7452,7 @@ const ModuleDetail = () => {
                       }}
                     />
                   </div>
-            </Card>
+                </Card>
               </div>
             </section>
 
@@ -5853,19 +7472,19 @@ const ModuleDetail = () => {
                       src={getImageUrl(flowImage.fileName)}
                       alt={flowImage.alt}
                       className="w-full h-full object-cover"
-              onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${flowImage.fileName}. ${flowImage.brief}
                             </div>`;
-                }
-              }}
-            />
+                        }
+                      }}
+                    />
                   </div>
-          </Card>
+                </Card>
               </div>
             </section>
 
@@ -5895,7 +7514,7 @@ const ModuleDetail = () => {
                     Some input devices are designed for specific tasks like gaming, design, or data entry. These specialized devices make certain tasks easier and more efficient.
                   </p>
                 </div>
-          </Card>
+              </Card>
             </section>
 
             {/* Why It Matters */}
@@ -5931,11 +7550,11 @@ const ModuleDetail = () => {
                           }
                         }}
                       />
+                    </div>
+                  </Card>
                 </div>
               </Card>
-                </div>
-              </Card>
-      </section>
+            </section>
 
             {/* Navigation */}
             <section className="container mx-auto px-4 pb-14">
@@ -5990,20 +7609,20 @@ const ModuleDetail = () => {
                       src={getImageUrl(commonImage.fileName)}
                       alt={commonImage.alt}
                       className="w-full h-full object-cover"
-                    onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                      const parent = (e.target as HTMLImageElement).parentElement;
-                      if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${commonImage.fileName}. ${commonImage.brief}
                             </div>`;
-                      }
-                    }}
-                  />
-            </div>
-              </Card>
-            </div>
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
             </section>
 
             {/* How They Work */}
@@ -6015,28 +7634,28 @@ const ModuleDetail = () => {
                   <p className="text-foreground/80 leading-relaxed">
                     The computer processes data and sends signals to output devices. These devices convert digital signals into visible, audible, or physical output that you can perceive.
                   </p>
-          </div>
+                </div>
                 <Card className="p-0 overflow-hidden rounded-[32px] border border-border/70">
                   <div className="relative w-full h-full min-h-[300px] bg-muted">
                     <img
                       src={getImageUrl(flowImage.fileName)}
                       alt={flowImage.alt}
                       className="w-full h-full object-cover"
-              onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${flowImage.fileName}. ${flowImage.brief}
                             </div>`;
-                }
-              }}
-            />
+                        }
+                      }}
+                    />
                   </div>
-          </Card>
-        </div>
-      </section>
+                </Card>
+              </div>
+            </section>
 
             {/* Specialized Output Devices */}
             <section className="container mx-auto px-4">
@@ -6057,14 +7676,14 @@ const ModuleDetail = () => {
                       }
                     }}
                   />
-                  </div>
+                </div>
                 <div className="p-8 text-center space-y-2">
                   <h2 className="text-3xl font-semibold text-foreground">Specialized Output Devices</h2>
                   <p className="text-foreground/80 max-w-2xl mx-auto">
                     Some output devices serve specialized purposes. 3D printers create physical objects, braille displays help visually impaired users, and large format printers produce posters and banners.
                   </p>
                 </div>
-          </Card>
+              </Card>
             </section>
 
             {/* Why It Matters */}
@@ -6082,7 +7701,7 @@ const ModuleDetail = () => {
                       <li>Understanding output flow helps with troubleshooting display or audio issues.</li>
                       <li>Quality output devices improve your computing experience.</li>
                     </ul>
-                    </div>
+                  </div>
                   <Card className="p-0 overflow-hidden border border-border/60">
                     <div className="relative w-full h-full min-h-[260px] bg-muted">
                       <img
@@ -6101,10 +7720,10 @@ const ModuleDetail = () => {
                         }}
                       />
                     </div>
-            </Card>
+                  </Card>
                 </div>
               </Card>
-      </section>
+            </section>
 
             {/* Navigation */}
             <section className="container mx-auto px-4 pb-14">
@@ -6159,19 +7778,19 @@ const ModuleDetail = () => {
                       src={getImageUrl(commonImage.fileName)}
                       alt={commonImage.alt}
                       className="w-full h-full object-cover"
-              onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${commonImage.fileName}. ${commonImage.brief}
                             </div>`;
-                }
-              }}
-            />
+                        }
+                      }}
+                    />
                   </div>
-          </Card>
+                </Card>
               </div>
             </section>
 
@@ -6191,21 +7810,21 @@ const ModuleDetail = () => {
                       src={getImageUrl(flowImage.fileName)}
                       alt={flowImage.alt}
                       className="w-full h-full object-cover"
-              onError={(e) => {
+                      onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
-                const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) {
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
                               Add ${flowImage.fileName}. ${flowImage.brief}
                             </div>`;
-                }
-              }}
-            />
+                        }
+                      }}
+                    />
                   </div>
-          </Card>
-                    </div>
-      </section>
+                </Card>
+              </div>
+            </section>
 
             {/* Real-World Examples */}
             <section className="container mx-auto px-4">
@@ -6233,7 +7852,7 @@ const ModuleDetail = () => {
                     Touchscreens let you interact directly with what you see. Headsets let you hear audio while speaking into the microphone. USB and Bluetooth devices transfer data both ways, making them perfect for sharing files and connecting peripherals.
                   </p>
                 </div>
-          </Card>
+              </Card>
             </section>
 
             {/* Why It Matters */}
@@ -6251,7 +7870,7 @@ const ModuleDetail = () => {
                       <li>They reduce the need for separate input and output devices.</li>
                       <li>Understanding I/O devices helps you troubleshoot connection and communication issues.</li>
                     </ul>
-                    </div>
+                  </div>
                   <Card className="p-0 overflow-hidden border border-border/60">
                     <div className="relative w-full h-full min-h-[260px] bg-muted">
                       <img
@@ -6273,7 +7892,7 @@ const ModuleDetail = () => {
                   </Card>
                 </div>
               </Card>
-      </section>
+            </section>
 
             {/* Navigation - Last Topic */}
             <section className="container mx-auto px-4 pb-14">
@@ -6564,9 +8183,9 @@ const ModuleDetail = () => {
                 </div>
                 <div className="relative w-full rounded-3xl overflow-hidden border border-border/60 bg-gradient-to-br from-muted/30 to-muted/10">
                   <div className="w-full aspect-video max-h-[500px] [&_.sketchfab-embed-wrapper]:w-full [&_.sketchfab-embed-wrapper]:h-full [&_iframe]:w-full [&_iframe]:h-full [&_p]:hidden">
-                    <div 
+                    <div
                       className="w-full h-full"
-                      dangerouslySetInnerHTML={{ 
+                      dangerouslySetInnerHTML={{
                         __html: `<div class="sketchfab-embed-wrapper"> <iframe title="DIMM RAM Stick" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="100%" height="100%" style="width: 100%; height: 100%;" src="https://sketchfab.com/models/8401e8e91db9418fb00f94e340c0f944/embed?autostart=0&camera=0&preload=1&ui_hint=2"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/dimm-ram-stick-8401e8e91db9418fb00f94e340c0f944?utm_medium=embed&utm_campaign=share-popup&utm_content=8401e8e91db9418fb00f94e340c0f944" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> DIMM RAM Stick </a> by <a href="https://sketchfab.com/jaromir.ternavskiy?utm_medium=embed&utm_campaign=share-popup&utm_content=8401e8e91db9418fb00f94e340c0f944" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Kroko.blend </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=8401e8e91db9418fb00f94e340c0f944" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>`
                       }}
                     />
@@ -15405,8 +17024,4741 @@ const ModuleDetail = () => {
         );
       })()}
 
+      {/* Module 8 Topic 1: Pre-Installation Requirements - Text Left + Image Right, Cards Grid (3x2), Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {moduleId === 8 && module8Sections && topicId === "1" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          checklist: checklistImage,
+          whyMatters: whyMattersImage,
+          compatibility: compatibilityImage
+        } = module8Sections.preInstallationRequirements.images;
+
+        return (
+          <div id="topic-pre-installation-requirements" className="space-y-16">
+            {/* Section 1: Text Left + Image Right */}
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">What You Need Before Installation</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.preInstallationRequirements.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Check hardware meets minimum requirements</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Back up all important files</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Have OS license key ready</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* Section 2: Centered Title + Cards Grid (3x2) */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Essential Requirements</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Essential Requirements</h2>
+                  <p className="text-foreground/80">
+                    Make sure you have everything ready before starting the installation process.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.preInstallationRequirements.requirements.map((requirement, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{requirement.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{requirement.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{requirement.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Section 3: Full-Width Image */}
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(checklistImage.fileName)}
+                    alt={checklistImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${checklistImage.fileName}. ${checklistImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            {/* Section 4: Why It Matters Card */}
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚠️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Why This Matters</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Skipping pre-installation checks can cause problems. Your system might not work properly. You could lose important files if you don't back up first.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            {/* Section 5: Image Left + Text Right (Reversed Layout) */}
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(compatibilityImage.fileName)}
+                      alt={compatibilityImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${compatibilityImage.fileName}. ${compatibilityImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Compatibility</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Checking Your System</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Check your computer's specifications. Look at the processor, RAM, and storage space. Compare them with the OS requirements.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Check CPU speed and cores</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Verify RAM amount meets minimum</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Ensure enough storage space</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/2")}>Next Topic: BIOS/UEFI Configuration →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 2: BIOS/UEFI Configuration - Image Left + Text Right, Cards Grid (4), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "2" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.biosUefiConfiguration.images;
+
+        return (
+          <div id="topic-bios-uefi-configuration" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Firmware</p>
+                  <h2 className="text-3xl font-semibold text-foreground">BIOS/UEFI Configuration</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.biosUefiConfiguration.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Access BIOS/UEFI during startup</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Change boot order</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Enable or disable hardware</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Configuration Options</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">BIOS/UEFI Settings</h2>
+                  <p className="text-foreground/80">
+                    Learn about key BIOS/UEFI settings and what they do.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module8Sections.biosUefiConfiguration.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                    <div className="p-8 text-white">
+                      <h3 className="text-3xl font-semibold mb-2">BIOS/UEFI Interface</h3>
+                      <p className="text-lg text-white/90">
+                        BIOS/UEFI provides low-level control over your system. Use it carefully to configure hardware and boot options.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚙️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding BIOS/UEFI</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  BIOS/UEFI configuration lets you control how your computer starts and which hardware is enabled. This knowledge is essential for installing operating systems and troubleshooting startup problems.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/1")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/3")}>Next Topic: Bootable USB Creation →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 3: Bootable USB Creation - Text Left + Image Right, Step Cards (vertical), Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {moduleId === 8 && module8Sections && topicId === "3" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          tools: toolsImage
+        } = module8Sections.bootableUsbCreation.images;
+
+        return (
+          <div id="topic-bootable-usb-creation" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Installation Media</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Bootable USB Creation</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.bootableUsbCreation.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Need OS image file</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Use bootable USB software</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">USB drive must be empty</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Creation Process</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Step-by-Step Guide</h2>
+                  <p className="text-foreground/80">
+                    Follow these steps to create a bootable USB drive.
+                  </p>
+                </div>
+                <div className="max-w-3xl mx-auto space-y-4">
+                  {module8Sections.bootableUsbCreation.steps.map((step, index) => (
+                    <Card key={index} className="p-6 border border-border/70">
+                      <div className="flex items-start gap-4">
+                        <div className="text-4xl shrink-0">{step.icon}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-sm font-semibold text-primary">Step {index + 1}</span>
+                            <h3 className="text-xl font-semibold text-foreground">{step.name}</h3>
+                          </div>
+                          <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💿</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Bootable USB</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Creating a bootable USB is the first step to installing a new operating system. This knowledge is essential for system installation and recovery.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(toolsImage.fileName)}
+                      alt={toolsImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${toolsImage.fileName}. ${toolsImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Bootable USB Tools</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Popular Tools</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Several tools can create bootable USB drives. Rufus is popular for Windows, Etcher works on all platforms, and Media Creation Tool is Microsoft's official tool.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Rufus - Fast and reliable</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Etcher - Cross-platform</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Media Creation Tool - Official Windows tool</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/2")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/4")}>Next Topic: OS Installation Steps →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 4: OS Installation Steps - Centered Title + Image, Step Cards (horizontal timeline), Full-Width Image, Why It Matters, Text Left + Image Right */}
+      {moduleId === 8 && module8Sections && topicId === "4" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          timeline: timelineImage
+        } = module8Sections.osInstallationSteps.images;
+
+        return (
+          <div id="topic-os-installation-steps" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Installation Process</p>
+                <h2 className="text-3xl font-semibold text-foreground">OS Installation Steps</h2>
+                <p className="text-foreground/80">
+                  {module8Sections.osInstallationSteps.intro}
+                </p>
+              </div>
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 max-w-4xl mx-auto">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(heroImage.fileName)}
+                    alt={heroImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${heroImage.fileName}. ${heroImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Installation Timeline</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Step-by-Step Installation</h2>
+                  <p className="text-foreground/80">
+                    Follow these steps to install your operating system.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.osInstallationSteps.steps.map((step, index) => (
+                    <Card key={index} className="p-6 border border-border/70 relative">
+                      <div className="flex flex-col items-center text-center">
+                        <div className="text-5xl mb-4">{step.icon}</div>
+                        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="text-sm font-semibold text-primary">{index + 1}</span>
+                        </div>
+                        <h3 className="text-xl font-semibold text-primary mb-3">{step.name}</h3>
+                        <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💿</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding OS Installation</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Knowing how to install an operating system is essential for setting up new computers, upgrading systems, and recovering from problems. This knowledge gives you control over your computer.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Installation Tips</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Important Notes</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    During installation, make sure your computer stays plugged in. Don't interrupt the process. The installer will restart your computer several times.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Keep computer plugged in</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Don't turn off during install</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Wait for automatic restarts</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(timelineImage.fileName)}
+                      alt={timelineImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${timelineImage.fileName}. ${timelineImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/3")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/5")}>Next Topic: Partition Management →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 5: Partition Management - Image Left + Text Right, Cards Grid (2x3), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "5" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          types: typesImage
+        } = module8Sections.partitionManagement.images;
+
+        return (
+          <div id="topic-partition-management" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Disk Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Partition Management</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.partitionManagement.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Divide disk into sections</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Each partition acts like separate drive</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Organize data and install multiple OS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Partition Concepts</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Understanding Partitions</h2>
+                  <p className="text-foreground/80">
+                    Learn about different partition types and operations.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.partitionManagement.concepts.map((concept, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{concept.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{concept.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{concept.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💾</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Partition Management</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Partition management helps you organize your data, install multiple operating systems, and protect your files. This knowledge is essential for advanced system setup.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/4")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/6")}>Next Topic: Initial System Configuration →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 6: Initial System Configuration - Text Left + Image Right, Cards Grid (3x2), Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {moduleId === 8 && module8Sections && topicId === "6" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          settings: settingsImage
+        } = module8Sections.initialSystemConfiguration.images;
+
+        return (
+          <div id="topic-initial-system-configuration" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Post-Installation</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Initial System Configuration</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.initialSystemConfiguration.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Set region and language</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Create user account</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Configure privacy settings</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Configuration Options</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Initial Setup Settings</h2>
+                  <p className="text-foreground/80">
+                    Configure these settings during initial setup.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.initialSystemConfiguration.settings.map((setting, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{setting.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{setting.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{setting.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">⚙️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Initial Configuration</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Initial system configuration sets up your computer for first use. This knowledge helps you personalize your system and set up privacy preferences correctly.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(settingsImage.fileName)}
+                      alt={settingsImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${settingsImage.fileName}. ${settingsImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Setup Wizard</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Configuration Tips</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Take your time during initial setup. You can change most settings later, but it's easier to set them up correctly from the start.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Choose correct region for time zone</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Use strong password for account</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Review privacy settings carefully</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/5")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/7")}>Next Topic: Installing Drivers →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 7: Installing Drivers - Image Left + Text Right, Cards Grid (4), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "7" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.installingDrivers.images;
+
+        return (
+          <div id="topic-installing-drivers" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Hardware Support</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Installing Drivers</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.installingDrivers.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Drivers make hardware work</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Download from manufacturer website</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Install graphics, audio, network drivers</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Driver Types</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Essential Drivers</h2>
+                  <p className="text-foreground/80">
+                    Install these drivers to make your hardware work properly.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module8Sections.installingDrivers.driverTypes.map((driver, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{driver.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{driver.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{driver.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💿</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Drivers</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Drivers are essential for hardware to work. Without proper drivers, your graphics, sound, and network won't function correctly. This knowledge helps you get all your hardware working.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/6")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/8")}>Next Topic: Installing Essential Software →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 8: Installing Essential Software - Text Left + Image Right, Cards Grid (3x2), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "8" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.installingEssentialSoftware.images;
+
+        return (
+          <div id="topic-installing-essential-software" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Software Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Installing Essential Software</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.installingEssentialSoftware.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Install web browser first</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Get office apps for work</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Add security and media tools</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Software Categories</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Essential Software Types</h2>
+                  <p className="text-foreground/80">
+                    Install these essential software categories for daily computer use.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.installingEssentialSoftware.softwareCategories.map((software, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{software.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{software.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{software.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📦</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Essential Software</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Essential software makes your computer useful for daily tasks. Installing the right software helps you browse the web, create documents, play media, and stay secure.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/7")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/9")}>Next Topic: User Accounts & Permissions →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 9: User Accounts & Permissions - Centered Title + Cards, Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {moduleId === 8 && module8Sections && topicId === "9" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          permissions: permissionsImage
+        } = module8Sections.userAccountsPermissions.images;
+
+        return (
+          <div id="topic-user-accounts-permissions" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">User Management</p>
+                <h2 className="text-3xl font-semibold text-foreground">User Accounts & Permissions</h2>
+                <p className="text-foreground/80">
+                  {module8Sections.userAccountsPermissions.intro}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                {module8Sections.userAccountsPermissions.accountTypes.map((account, index) => (
+                  <Card key={index} className="p-6 text-center border border-border/70">
+                    <div className="text-5xl mb-4">{account.icon}</div>
+                    <h3 className="text-xl font-semibold text-primary mb-3">{account.name}</h3>
+                    <p className="text-sm text-foreground/80 leading-relaxed">{account.description}</p>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">👤</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding User Accounts</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  User accounts protect your files and settings. They let multiple people use the same computer safely. This knowledge helps you manage access and keep your system secure.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(permissionsImage.fileName)}
+                      alt={permissionsImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${permissionsImage.fileName}. ${permissionsImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Permission Levels</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Understanding Permissions</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Different account types have different permissions. Administrator accounts can change system settings, while standard users can only use apps.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Admin can install software</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Standard user is safer for daily use</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Guest account has very limited access</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/8")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/10")}>Next Topic: Display Settings Configuration →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 10: Display Settings Configuration - Image Left + Text Right, Cards Grid (4), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "10" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.displaySettingsConfiguration.images;
+
+        return (
+          <div id="topic-display-settings-configuration" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Display Configuration</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Display Settings Configuration</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.displaySettingsConfiguration.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Adjust screen resolution</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Change brightness and color</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Set up multiple monitors</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Display Options</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Display Settings</h2>
+                  <p className="text-foreground/80">
+                    Configure these display settings for optimal viewing.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module8Sections.displaySettingsConfiguration.settings.map((setting, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{setting.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{setting.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{setting.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🖥️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Display Settings</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Display settings affect how you see everything on your screen. Proper configuration reduces eye strain and improves productivity. This knowledge helps you set up your monitor correctly.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/9")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/11")}>Next Topic: Sound Settings →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 11: Sound Settings - Text Left + Image Right, Cards Grid (3), Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {moduleId === 8 && module8Sections && topicId === "11" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          audio: audioImage
+        } = module8Sections.soundSettings.images;
+
+        return (
+          <div id="topic-sound-settings" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Audio Configuration</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Sound Settings</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.soundSettings.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Adjust volume levels</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Choose output device</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Configure microphone</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Audio Options</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Sound Configuration</h2>
+                  <p className="text-foreground/80">
+                    Configure these sound settings for optimal audio.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                  {module8Sections.soundSettings.soundOptions.map((option, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{option.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{option.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{option.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🔊</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Sound Settings</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Sound settings control audio output and input. Proper configuration ensures you can hear audio clearly and use your microphone effectively. This knowledge helps you set up audio correctly.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(audioImage.fileName)}
+                      alt={audioImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${audioImage.fileName}. ${audioImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Audio Devices</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Device Configuration</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    You can connect multiple audio devices. Switch between speakers, headphones, and other audio outputs as needed.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Test speakers after setup</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Adjust microphone levels</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Set default playback device</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/10")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/12")}>Next Topic: Network Setup →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 12: Network Setup - Image Left + Text Right, Step Cards (vertical), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "12" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.networkSetup.images;
+
+        return (
+          <div id="topic-network-setup" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Internet Connection</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Network Setup</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.networkSetup.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Connect to Wi-Fi or Ethernet</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Enter network password</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Configure network sharing</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Setup Process</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Network Setup Steps</h2>
+                  <p className="text-foreground/80">
+                    Follow these steps to set up your network connection.
+                  </p>
+                </div>
+                <div className="max-w-3xl mx-auto space-y-4">
+                  {module8Sections.networkSetup.setupSteps.map((step, index) => (
+                    <Card key={index} className="p-6 border border-border/70">
+                      <div className="flex items-start gap-4">
+                        <div className="text-4xl shrink-0">{step.icon}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-sm font-semibold text-primary">Step {index + 1}</span>
+                            <h3 className="text-xl font-semibold text-foreground">{step.name}</h3>
+                          </div>
+                          <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🌐</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Network Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Network setup connects your computer to the internet and other devices. This knowledge is essential for accessing online resources, sharing files, and using network features.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/11")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/13")}>Next Topic: Bluetooth Setup →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 13: Bluetooth Setup - Text Left + Image Right, Cards Grid (4), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "13" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.bluetoothSetup.images;
+
+        return (
+          <div id="topic-bluetooth-setup" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Wireless Connection</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Bluetooth Setup</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.bluetoothSetup.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Enable Bluetooth on computer</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Put device in pairing mode</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Connect and pair devices</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Bluetooth Devices</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Common Bluetooth Devices</h2>
+                  <p className="text-foreground/80">
+                    Connect these common Bluetooth devices to your computer.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module8Sections.bluetoothSetup.bluetoothDevices.map((device, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{device.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{device.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{device.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">📱</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Bluetooth Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Bluetooth setup lets you connect wireless devices without cables. This knowledge helps you use headphones, speakers, mice, and other Bluetooth gadgets with your computer.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/12")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/14")}>Next Topic: Printer & Scanner Setup →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 14: Printer & Scanner Setup - Image Left + Text Right, Cards Grid (3x2), Full-Width Image, Why It Matters, Text Left + Image Right */}
+      {moduleId === 8 && module8Sections && topicId === "14" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          connection: connectionImage
+        } = module8Sections.printerScannerSetup.images;
+
+        return (
+          <div id="topic-printer-scanner-setup" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Peripheral Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Printer & Scanner Setup</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.printerScannerSetup.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Connect via USB or Wi-Fi</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Install printer drivers</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Test print and scan</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Setup Options</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Printer & Scanner Setup Steps</h2>
+                  <p className="text-foreground/80">
+                    Follow these steps to set up your printer and scanner.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.printerScannerSetup.setupOptions.map((option, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{option.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{option.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{option.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🖨️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Printer & Scanner Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Printer and scanner setup lets you print documents and scan images. This knowledge helps you connect and use these essential peripherals with your computer.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Connection Methods</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Wired vs Wireless</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    You can connect printers via USB cable or Wi-Fi. USB is simpler and more reliable, while Wi-Fi lets you print from anywhere on your network.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">USB connection is plug and play</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Wi-Fi setup requires network configuration</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Both methods need driver installation</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(connectionImage.fileName)}
+                      alt={connectionImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${connectionImage.fileName}. ${connectionImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/13")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/15")}>Next Topic: Setting Up Security →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 15: Setting Up Security - Text Left + Image Right, Cards Grid (4), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "15" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.settingUpSecurity.images;
+
+        return (
+          <div id="topic-setting-up-security" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Protection</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Setting Up Security</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.settingUpSecurity.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Enable Windows Defender</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Configure firewall settings</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Set up automatic updates</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Security Features</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Security Options</h2>
+                  <p className="text-foreground/80">
+                    Enable these security features to protect your computer.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {module8Sections.settingUpSecurity.securityFeatures.map((feature, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{feature.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{feature.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">🛡️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Security Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Security settings protect your computer from viruses, malware, and unauthorized access. This knowledge is essential for keeping your system and data safe.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/14")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/16")}>Next Topic: Backup Setup →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 16: Backup Setup - Image Left + Text Right, Cards Grid (3x2), Full-Width Image, Why It Matters */}
+      {moduleId === 8 && module8Sections && topicId === "16" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage
+        } = module8Sections.backupSetup.images;
+
+        return (
+          <div id="topic-backup-setup" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Data Protection</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Backup Setup</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.backupSetup.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Backup to external drive or cloud</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Set up automatic backups</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Create system restore points</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Backup Methods</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Backup Options</h2>
+                  <p className="text-foreground/80">
+                    Choose from these backup methods to protect your data.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.backupSetup.backupMethods.map((method, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70">
+                      <div className="text-5xl mb-4">{method.icon}</div>
+                      <h3 className="text-xl font-semibold text-primary mb-3">{method.name}</h3>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{method.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">💾</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Backup Setup</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  Backup setup protects your important files from loss. This knowledge helps you recover from hardware failure, accidental deletion, or malware attacks.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/15")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/17")}>Next Topic: System Restore & Recovery →</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 8 Topic 17: System Restore & Recovery - Text Left + Image Right, Step Cards (horizontal), Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {moduleId === 8 && module8Sections && topicId === "17" && (() => {
+        const {
+          hero: heroImage,
+          overview: overviewImage,
+          fullWidth: fullWidthImage,
+          whyMatters: whyMattersImage,
+          recovery: recoveryImage
+        } = module8Sections.systemRestoreRecovery.images;
+
+        return (
+          <div id="topic-system-restore-recovery" className="space-y-16">
+            <section className="container mx-auto px-4 pt-16">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="space-y-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Recovery</p>
+                  <h2 className="text-3xl font-semibold text-foreground">System Restore & Recovery</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module8Sections.systemRestoreRecovery.intro}
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Use restore points to undo changes</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Reset PC to factory settings</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Recover from serious problems</p>
+                    </div>
+                  </div>
+                </div>
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(heroImage.fileName)}
+                      alt={heroImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="space-y-6">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recovery Options</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Recovery Methods</h2>
+                  <p className="text-foreground/80">
+                    Use these recovery options to fix system problems.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {module8Sections.systemRestoreRecovery.recoveryOptions.map((option, index) => (
+                    <Card key={index} className="p-6 border border-border/70 relative">
+                      <div className="flex flex-col items-center text-center">
+                        <div className="text-5xl mb-4">{option.icon}</div>
+                        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="text-sm font-semibold text-primary">{index + 1}</span>
+                        </div>
+                        <h3 className="text-xl font-semibold text-primary mb-3">{option.name}</h3>
+                        <p className="text-sm text-foreground/80 leading-relaxed">{option.description}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <img
+                    src={getImageUrl(fullWidthImage.fileName)}
+                    alt={fullWidthImage.alt}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                      const parent = (e.target as HTMLImageElement).parentElement;
+                      if (parent) {
+                        parent.innerHTML =
+                          `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                      }
+                    }}
+                  />
+                </div>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+                <div className="text-center space-y-2">
+                  <div className="text-5xl mb-4">↩️</div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding System Restore</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
+                </div>
+                <p className="text-foreground/80 leading-relaxed text-center">
+                  System restore and recovery options let you fix problems and restore your computer to a working state. This knowledge is essential for troubleshooting and recovering from serious issues.
+                </p>
+                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                  <div className="relative w-full h-full min-h-[260px] bg-muted">
+                    <img
+                      src={getImageUrl(whyMattersImage.fileName)}
+                      alt={whyMattersImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+              </Card>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(recoveryImage.fileName)}
+                      alt={recoveryImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${recoveryImage.fileName}. ${recoveryImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recovery Tips</p>
+                  <h2 className="text-3xl font-semibold text-foreground">When to Use Recovery</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Use system restore when your computer has problems after installing software or updates. Use reset PC when you want to start fresh but keep your files.
+                  </p>
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Restore point before major changes</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Reset when system is very slow</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary font-semibold">•</span>
+                      <p className="text-sm text-foreground/80">Recovery drive for serious problems</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4 pb-14">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/16")}>← Previous Topic</Button>
+                <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
+              </div>
+            </section>
+          </div>
+        );
+      })()}
+
+      {/* Module 9: Networking Fundamentals */}
+      {moduleId === 9 && (() => {
+        const sections = getModule9Sections();
+
+        // Topic 1: What is a Network?
+        if (topicId === "1") {
+          const { networking } = sections;
+          const { hero, diagram } = networking.images;
+          return (
+            <div id="topic-what-is-network" className="space-y-16">
+              {/* Section 1: Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-3xl font-semibold text-foreground">What is a Network?</h2>
+                    <p className="text-foreground/80 leading-relaxed">
+                      {networking.intro}
+                    </p>
+                    <Button
+                      className="mt-4 gap-2"
+                      onClick={() => navigate("/simulator/networking-internet")}
+                    >
+                      Try Networking Simulator <span className="text-lg">🌐</span>
+                    </Button>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(hero.fileName)}
+                        alt={hero.alt}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${hero.fileName}. ${hero.brief}</div>`;
+                        }}
+                      />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Section 2: Types of Networks */}
+              <section className="container mx-auto px-4">
+                <div className="text-center max-w-2xl mx-auto mb-10">
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Types of Networks</h2>
+                  <p className="text-foreground/80">Networks vary in size, from a few meters to the entire globe.</p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {networking.types.map((type, index) => (
+                    <Card key={index} className="p-6 text-center border border-border/70 group hover:border-primary/50 transition-colors">
+                      <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{type.icon}</div>
+                      <h3 className="text-xl font-bold text-foreground mb-1">{type.name}</h3>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">{type.full}</p>
+                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Section 3: Diagram */}
+              <section className="container mx-auto px-4">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(diagram.fileName)}
+                      alt={diagram.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${diagram.fileName}. ${diagram.brief}</div>`;
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                      <div className="p-8 text-white">
+                        <h3 className="text-3xl font-semibold mb-2">LAN vs WAN</h3>
+                        <p className="text-lg text-white/90">
+                          Understanding the difference between your local home network (LAN) and the global internet (WAN).
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </section>
+
+              {/* Section 4: Network Architecture */}
+              <section className="container mx-auto px-4">
+                <div className="text-center max-w-2xl mx-auto mb-10">
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">{networking.architecture.title}</h2>
+                  <p className="text-foreground/80">{networking.architecture.intro}</p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 flex flex-col">
+                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(networking.architecture.clientServer.fileName)}
+                        alt="Client Server Architecture"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${networking.architecture.clientServer.fileName}</div>`;
+                        }}
+                      />
+                    </div>
+                    <div className="p-8 flex-1">
+                      <h3 className="text-2xl font-bold mb-3">{networking.architecture.clientServer.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{networking.architecture.clientServer.description}</p>
+                    </div>
+                  </Card>
+
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 flex flex-col">
+                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(networking.architecture.p2p.fileName)}
+                        alt="P2P Architecture"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${networking.architecture.p2p.fileName}</div>`;
+                        }}
+                      />
+                    </div>
+                    <div className="p-8 flex-1">
+                      <h3 className="text-2xl font-bold mb-3">{networking.architecture.p2p.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{networking.architecture.p2p.description}</p>
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Section 5: Why it Matters */}
+              <section className="container mx-auto px-4">
+                <Card className="p-8 md:p-12 rounded-[32px] bg-secondary/10 border-none space-y-6">
+                  <div className="text-center space-y-2">
+                    <span className="text-5xl">🌐</span>
+                    <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground pt-2">Big Picture</p>
+                    <h2 className="text-3xl font-bold text-foreground">{networking.whyMatters.title}</h2>
+                  </div>
+                  <p className="text-lg text-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
+                    {networking.whyMatters.text}
+                  </p>
+                </Card>
+              </section>
+
+              {/* Section 6: Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/2")}>Next Topic: Network Devices →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 2: Network Devices
+        if (topicId === "2") {
+          const { devices } = sections;
+          return (
+            <div id="topic-network-devices" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-3xl font-semibold text-foreground">Network Devices</h2>
+                    <p className="text-lg text-muted-foreground">{devices.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(devices.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Device List Grid */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {devices.list.map((dev, i) => (
+                    <Card key={i} className="p-8 border border-border/70 hover:border-primary/50 transition-colors">
+                      <div className="flex items-start gap-6">
+                        <span className="text-5xl bg-muted p-2 rounded-xl">{dev.icon}</span>
+                        <div className="space-y-2">
+                          <h3 className="text-xl font-bold text-foreground">{dev.name}</h3>
+                          <p className="text-xs font-bold text-primary uppercase tracking-wider">{dev.role}</p>
+                          <p className="text-foreground/80 leading-relaxed">{dev.description}</p>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* 3. Hub vs Switch */}
+              <section className="container mx-auto px-4">
+                <div className="bg-secondary/10 rounded-3xl p-8 md:p-12">
+                  <div className="text-center max-w-2xl mx-auto mb-10">
+                    <h3 className="text-3xl font-bold mb-4">Hub vs. Switch</h3>
+                    <p className="text-lg text-muted-foreground">Why a Switch is smarter than a Hub.</p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl">
+                      <div className="relative aspect-video">
+                        <img src={getImageUrl(devices.images.comparison.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                    <div className="space-y-6">
+                      <div className="bg-background rounded-xl p-6 border border-border">
+                        <h4 className="font-bold text-red-500 mb-1">Hub (Dumb)</h4>
+                        <p className="text-sm">Receives data and yells it to EVERYONE. "Who is this for?!" Creates traffic jams.</p>
+                      </div>
+                      <div className="bg-background rounded-xl p-6 border border-border">
+                        <h4 className="font-bold text-green-500 mb-1">Switch (Smart)</h4>
+                        <p className="text-sm">Reads the address and whispers data ONLY to the destination. "This is for you." fast and efficient.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* 4. NIC and WAP */}
+              <section className="container mx-auto px-4">
+                <div className="space-y-16">
+                  {/* NIC: Image Right, Text Left */}
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5 order-2 md:order-1">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-2">
+                        <span className="text-2xl">💳</span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-foreground">{devices.nic.title}</h3>
+                      <p className="text-lg text-foreground/80 leading-relaxed">
+                        {devices.nic.description}
+                      </p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(devices.nic.fileName)}
+                          alt="NIC Card"
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                          }}
+                        />
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* WAP: Image Left, Text Right */}
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(devices.wap.fileName)}
+                          alt="Wireless Access Point"
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                          }}
+                        />
+                      </div>
+                    </Card>
+                    <div className="space-y-5">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-2">
+                        <span className="text-2xl">📡</span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-foreground">{devices.wap.title}</h3>
+                      <p className="text-lg text-foreground/80 leading-relaxed">
+                        {devices.wap.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Section 5: Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/1")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/3")}>Next Topic: IP Addressing →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 3: IP Addressing
+        if (topicId === "3") {
+          const { ipAddressing } = sections;
+          return (
+            <div id="topic-ip-addressing" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">IP Addressing</h2>
+                    <p className="text-lg text-muted-foreground">{ipAddressing.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(ipAddressing.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Public vs Private */}
+              <section className="container mx-auto px-4">
+                <div className="bg-secondary/10 rounded-[32px] p-8 md:p-12">
+                  <h3 className="text-2xl font-bold text-center mb-8">{ipAddressing.publicVsPrivate.title}</h3>
+                  <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <div className="space-y-4">
+                      <p className="text-lg">{ipAddressing.publicVsPrivate.description}</p>
+                      <div className="flex flex-col gap-3">
+                        <div className="bg-background p-4 rounded-xl border border-border">
+                          <span className="font-bold text-blue-500">Private IP</span>
+                          <p className="text-sm">192.168.1.5 (Only works at home)</p>
+                        </div>
+                        <div className="bg-background p-4 rounded-xl border border-border">
+                          <span className="font-bold text-green-500">Public IP</span>
+                          <p className="text-sm">173.24.11.9 (Address on the Internet)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-lg">
+                      <div className="relative aspect-video">
+                        <img src={getImageUrl(ipAddressing.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* 3. IPv4 vs IPv6 */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {ipAddressing.types.map((type, i) => (
+                    <Card key={i} className="p-8 border border-border/70">
+                      <div className="text-4xl mb-4">{type.icon}</div>
+                      <h3 className="text-xl font-bold mb-1">{type.name}</h3>
+                      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">{type.full}</p>
+                      <p className="text-foreground/80">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* 4. Why it Matters */}
+              <section className="container mx-auto px-4">
+                <div className="text-center max-w-3xl mx-auto space-y-4">
+                  <h3 className="text-2xl font-bold">{ipAddressing.whyMatters.title}</h3>
+                  <p className="text-lg text-foreground/80 leading-relaxed">
+                    {ipAddressing.whyMatters.text}
+                  </p>
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/2")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/4")}>Next Topic: MAC Address →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 4: MAC Address
+        if (topicId === "4") {
+          const { macAddress } = sections;
+          return (
+            <div id="topic-mac-address" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">MAC Address</h2>
+                    <p className="text-lg text-muted-foreground">{macAddress.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(macAddress.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Analogy */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(macAddress.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold">The VIN Number Analogy</h3>
+                    <p className="text-muted-foreground text-lg">Think of a car:</p>
+                    <div className="space-y-4">
+                      <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
+                        <p className="font-bold text-primary">License Plate (IP Address)</p>
+                        <p className="text-sm">Changes if you move to a new state. Used to locate the car.</p>
+                      </div>
+                      <div className="bg-secondary/10 p-4 rounded-xl border border-secondary/20">
+                        <p className="font-bold text-foreground">VIN Number (MAC Address)</p>
+                        <p className="text-sm">Stamped on the engine at the factory. NEVER changes, no matter where you go.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* 3. Anatomy */}
+              <section className="container mx-auto px-4 text-center">
+                <h3 className="text-2xl font-bold mb-8">{macAddress.anatomy.title}</h3>
+                <div className="inline-flex flex-col md:flex-row gap-2 md:gap-0 font-mono text-3xl md:text-5xl font-bold bg-black text-green-400 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-[url('https://media.istockphoto.com/id/1136592956/vector/matrix-background-streaming-binary-code-poster-matrix.jpg?s=612x612&w=0&k=20&c=XShUdbvOQp0B0j8b5k0g4f0q8y3o7x0p7z8n8m9l0k=')] opacity-10 mix-blend-overlay"></div>
+                  <div className="relative z-10 flex flex-col items-center p-4 border-2 border-transparent hover:border-green-500/50 rounded-xl transition-colors">
+                    <span>00:1A:2B</span>
+                    <span className="text-sm font-sans font-normal text-muted-foreground mt-2">{macAddress.anatomy.oui}</span>
+                  </div>
+                  <span className="hidden md:block py-4 text-white/20">:</span>
+                  <div className="relative z-10 flex flex-col items-center p-4 border-2 border-transparent hover:border-green-500/50 rounded-xl transition-colors">
+                    <span>3C:4D:5E</span>
+                    <span className="text-sm font-sans font-normal text-muted-foreground mt-2">{macAddress.anatomy.uaa}</span>
+                  </div>
+                </div>
+              </section>
+
+              {/* 4. Comparison Table */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-6 text-center">{macAddress.comparison.title}</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full max-w-4xl mx-auto border-collapse">
+                    <thead>
+                      <tr className="bg-muted">
+                        <th className="p-4 text-left rounded-tl-xl">Feature</th>
+                        <th className="p-4 text-left">IP Address</th>
+                        <th className="p-4 text-left rounded-tr-xl">MAC Address</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {macAddress.comparison.items.map((row, i) => (
+                        <tr key={i} className="border-b border-border/50 hover:bg-muted/30">
+                          <td className="p-4 font-semibold">{row.label}</td>
+                          <td className="p-4 text-muted-foreground">{row.ip}</td>
+                          <td className="p-4 text-muted-foreground">{row.mac}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/3")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/5")}>Next Topic: Wi-Fi Basics →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 5: Wi-Fi Basics
+        if (topicId === "5") {
+          const { wifi } = sections;
+          return (
+            <div id="topic-wifi" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">Wi-Fi Basics</h2>
+                    <p className="text-lg text-muted-foreground">{wifi.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(wifi.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Analogy */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg order-2 md:order-1">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(wifi.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                  <div className="space-y-4 order-1 md:order-2">
+                    <h3 className="text-2xl font-bold">The Radio Station Analogy</h3>
+                    <p className="text-muted-foreground text-lg">Wi-Fi is just a two-way radio.</p>
+                    <div className="bg-secondary/10 p-6 rounded-2xl border border-secondary/20">
+                      <p className="italic mb-2">"Your router is a radio station antenna. Your laptop is the radio. If you get too far away, the music (internet) gets static and stops."</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* 3. Frequency Bands */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-6 text-center">Frequency Bands: 2.4 vs 5 GHz</h3>
+                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  {/* 2.4 GHz */}
+                  <Card className="p-8 border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
+                    <h4 className="text-2xl font-bold text-orange-600 mb-2">{wifi.bands.band24.name}</h4>
+                    <p className="font-bold text-foreground/80 mb-4">{wifi.bands.band24.title}</p>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span>Range (Distance)</span>
+                          <span className="font-bold">Long</span>
+                        </div>
+                        <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-orange-500 w-[90%]"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span>Speed</span>
+                          <span className="font-bold">Slower</span>
+                        </div>
+                        <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-orange-500 w-[40%]"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm text-muted-foreground">{wifi.bands.band24.desc}</p>
+                  </Card>
+
+                  {/* 5 GHz */}
+                  <Card className="p-8 border-2 border-blue-200 bg-blue-50/50 dark:bg-blue-950/10">
+                    <h4 className="text-2xl font-bold text-blue-600 mb-2">{wifi.bands.band5.name}</h4>
+                    <p className="font-bold text-foreground/80 mb-4">{wifi.bands.band5.title}</p>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span>Range (Distance)</span>
+                          <span className="font-bold">Short</span>
+                        </div>
+                        <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-500 w-[40%]"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span>Speed</span>
+                          <span className="font-bold">Fast!</span>
+                        </div>
+                        <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-500 w-[95%]"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm text-muted-foreground">{wifi.bands.band5.desc}</p>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 4. Killers */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-6 text-center">Wi-Fi Killers</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {wifi.killers.map((k, i) => (
+                    <Card key={i} className="p-6 text-center border border-red-200/50 hover:border-red-500/50 transition-colors">
+                      <div className="text-4xl mb-3 grayscale group-hover:grayscale-0">{k.icon}</div>
+                      <h4 className="font-bold text-foreground mb-1">{k.name}</h4>
+                      <p className="text-sm text-muted-foreground">{k.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/4")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/6")}>Next Topic: Network Cables →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 6: Network Cables
+        if (topicId === "6") {
+          const { cables } = sections;
+          return (
+            <div id="topic-cables" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">Network Cables</h2>
+                    <p className="text-lg text-muted-foreground">{cables.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(cables.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Visuals - Connectors & Inside */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold">RJ45 Connector</h3>
+                    <p className="text-muted-foreground">The "Phone jack on steroids". This is the plug at the end of every Ethernet cable.</p>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                        <img src={getImageUrl(cables.images.rj45.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-2xl font-bold">Twisted Pairs</h3>
+                      <div className="flex gap-4 pt-4">
+                        <div className="h-12 w-12 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 font-bold border border-orange-500/20">1</div>
+                        <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center text-green-600 font-bold border border-green-500/20">2</div>
+                        <div className="h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 font-bold border border-blue-500/20">3</div>
+                        <div className="h-12 w-12 rounded-full bg-amber-900/10 flex items-center justify-center text-amber-900 font-bold border border-amber-900/20">4</div>
+                      </div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider">4 Pairs = 8 Wires</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rotate-1 group-hover:rotate-0 transition-transform duration-700 shadow-2xl border-4 border-background">
+                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                        <img src={getImageUrl(cables.images.twisted.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* Speed Race (Comparison) */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-3xl font-bold text-center mb-10">The Speed Race: Cable Categories</h3>
+                <div className="space-y-6">
+                  {cables.categories.map((cat, idx) => (
+                    <div key={idx} className="group relative bg-card hover:bg-muted/50 border border-border rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-md">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                        <div>
+                          <h4 className="text-2xl font-bold text-primary">{cat.name}</h4>
+                          <p className="text-sm text-foreground/70">{cat.desc}</p>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-3xl font-bold">{cat.speed}</span>
+                          <p className="text-xs text-muted-foreground">{cat.freq} Bandwidth</p>
+                        </div>
+                      </div>
+                      {/* Progress Bar Visualization */}
+                      <div className="h-4 bg-secondary/20 rounded-full overflow-hidden relative">
+                        <div
+                          className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                          style={{ width: idx === 0 ? '5%' : idx === 1 ? '25%' : '100%' }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/5")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/7")}>Next Topic: DNS Basics →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 7: DNS Basics
+        if (topicId === "7") {
+          const { dns } = sections as any;
+          return (
+            <div id="topic-dns" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">DNS: The Phonebook</h2>
+                    <p className="text-lg text-muted-foreground">{dns.intro}</p>
+                    <div className="flex items-center gap-2 text-sm font-mono bg-muted px-4 py-2 rounded-lg w-fit">
+                      <span className="text-primary">google.com</span>
+                      <span>→</span>
+                      <span className="text-foreground">142.250.190.46</span>
+                    </div>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(dns.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. The Analogy */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(dns.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold">Why do we need it?</h3>
+                    <p className="text-muted-foreground text-lg">Imagine if you had to memorize the phone number of every friend you wanted to call. Impossible, right?</p>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-3">
+                        <div className="bg-primary/10 p-2 rounded-full">📱</div>
+                        <div>
+                          <p className="font-semibold">Contact List</p>
+                          <p className="text-sm text-muted-foreground">You tap "Mom", phone dials "+1-555-0199".</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <div className="bg-primary/10 p-2 rounded-full">🌐</div>
+                        <div>
+                          <p className="font-semibold">DNS Server</p>
+                          <p className="text-sm text-muted-foreground">You type "youtube.com", browser goes to "208.65.153.238".</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              {/* 3. Visual Flow */}
+              <section className="container mx-auto px-4 bg-secondary/5 rounded-3xl p-8 md:p-12">
+                <h3 className="text-2xl font-bold text-center mb-8">How a DNS Request Works</h3>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center relative z-10">
+                  {/* Steps */}
+                  <div className="bg-background p-6 rounded-xl border border-border/50 shadow-sm relative">
+                    <div className="text-4xl mb-3">🧑‍💻</div>
+                    <p className="font-bold">You</p>
+                    <p className="text-xs text-muted-foreground">"Open fb.com"</p>
+                    <div className="hidden md:block absolute top-1/2 -right-6 text-2xl text-muted-foreground">→</div>
+                  </div>
+                  <div className="bg-background p-6 rounded-xl border border-border/50 shadow-sm relative">
+                    <div className="text-4xl mb-3">🕵️</div>
+                    <p className="font-bold">Resolver</p>
+                    <p className="text-xs text-muted-foreground">"I'll find it."</p>
+                    <div className="hidden md:block absolute top-1/2 -right-6 text-2xl text-muted-foreground">→</div>
+                  </div>
+                  <div className="bg-background p-6 rounded-xl border border-border/50 shadow-sm relative">
+                    <div className="text-4xl mb-3">🗄️</div>
+                    <p className="font-bold">Name Server</p>
+                    <p className="text-xs text-muted-foreground">"Here is the IP."</p>
+                    <div className="hidden md:block absolute top-1/2 -right-6 text-2xl text-muted-foreground">→</div>
+                  </div>
+                  <div className="bg-background p-6 rounded-xl border border-border/50 shadow-sm">
+                    <div className="text-4xl mb-3">🚀</div>
+                    <p className="font-bold">Website</p>
+                    <p className="text-xs text-muted-foreground">Page Loads</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* 4. Interactive Lookup (Simulation) */}
+              <section className="container mx-auto px-4">
+                <Card className="max-w-xl mx-auto p-8 border-2 border-primary/20 hover:border-primary/50 transition-colors">
+                  <h3 className="text-xl font-bold mb-4 text-center">Try the Translator</h3>
+                  <div className="flex gap-2 mb-4">
+                    <div className="flex-1 bg-muted rounded-md px-4 py-2 text-sm font-mono flex items-center">
+                      <span className="text-muted-foreground select-none">https://</span>
+                      <span className="text-foreground ml-1">openai.com</span>
+                    </div>
+                    <Button variant="default">Resolve</Button>
+                  </div>
+                  <div className="bg-black/90 p-4 rounded-lg font-mono text-xs md:text-sm text-green-400">
+                    <p>&gt; Looking up openai.com...</p>
+                    <p>&gt; Contacting DNS server...</p>
+                    <p>&gt; IP Found: <span className="text-white bg-green-900/50 px-1">104.18.2.161</span></p>
+                    <p className="animate-pulse mt-2">_</p>
+                  </div>
+                </Card>
+              </section>
+
+              {/* 5. DNS Records */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-6">Common DNS Records</h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {dns.records.map((rec: any, i: number) => (
+                    <Card key={i} className="p-6 border border-border/60 hover:bg-muted/50">
+                      <div className="text-primary font-bold text-lg mb-1">{rec.type}</div>
+                      <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">{rec.title}</p>
+                      <p className="text-sm leading-relaxed">{rec.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/6")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/8")}>Next Topic: Ping & Speed →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+
+        // Topic 8: Ping & Speed
+        if (topicId === "8") {
+          const { ping } = sections as any;
+          return (
+            <div id="topic-ping" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">Ping & Speed</h2>
+                    <p className="text-lg text-muted-foreground">{ping.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(ping.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Water Pipe Analogy */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold">Bandwidth vs Latency</h3>
+                    <p className="text-muted-foreground text-lg">Think of your internet connection like a water pipe.</p>
+                    <div className="space-y-4 pt-2">
+                      <div className="p-4 bg-muted/30 rounded-xl border border-border">
+                        <h4 className="font-bold text-primary">Bandwidth (Width)</h4>
+                        <p className="text-sm">How <strong>wide</strong> the pipe is. Determines how much water (data) can flow at once. Critical for downloading large files.</p>
+                      </div>
+                      <div className="p-4 bg-muted/30 rounded-xl border border-border">
+                        <h4 className="font-bold text-primary">Latency (Pressure)</h4>
+                        <p className="text-sm">How <strong>fast</strong> the water shoots out. Determines how quickly a drop travels from A to B. Critical for gaming.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(ping.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 3. Interactive Ping Simulation */}
+              <section className="container mx-auto px-4 text-center">
+                <h3 className="text-2xl font-bold mb-8">Visualizing Ping</h3>
+                <div className="relative h-32 bg-secondary/10 rounded-full border border-border overflow-hidden max-w-3xl mx-auto flex items-center justify-between px-8">
+                  <div className="text-4xl">💻</div>
+                  <div className="relative flex-1 h-1 bg-border/50 mx-4">
+                    <div className="absolute top-1/2 -translate-y-1/2 h-3 w-3 bg-primary rounded-full animate-ping-move-horizontal"></div>
+                  </div>
+                  <div className="text-4xl">server</div>
+                </div>
+                <p className="text-xs text-muted-foreground mt-4">Low Ping = Fast travel time. High Ping = Lag.</p>
+              </section>
+
+              {/* 4. Key Metrics Grid */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-6 text-center">Understanding Speed Test Results</h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {ping.metrics.map((m: any, i: number) => (
+                    <Card key={i} className="p-6 text-center border border-border/60 hover:shadow-lg transition-shadow">
+                      <div className="text-3xl font-black text-primary mb-1">{m.name}</div>
+                      <p className="font-mono text-sm text-muted-foreground mb-4">Measured in {m.unit}</p>
+                      <div className="bg-secondary/20 p-2 rounded mb-4">
+                        <span className="text-xs font-bold uppercase text-foreground/70">Ideal: {m.ideal}</span>
+                      </div>
+                      <p className="text-sm">{m.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* 5. Packet Loss */}
+              <section className="container mx-auto px-4">
+                <div className="bg-red-500/5 rounded-3xl p-8 border border-red-500/10 grid md:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold text-red-600 mb-2">Whatever happened to Packet Loss?</h3>
+                    <p className="text-foreground/80 mb-4">If Bandwidth is width, and Latency is speed, then <strong>Packet Loss</strong> is like a leak in the pipe.</p>
+                    <p className="text-sm text-muted-foreground">When packets (data chunks) get lost on the way, you see:</p>
+                    <ul className="list-disc list-inside text-sm mt-2 space-y-1 opacity-80">
+                      <li>Teleporting players in games</li>
+                      <li>Robotic voice in calls</li>
+                      <li>Video buffering</li>
+                    </ul>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-xl border border-red-200/20 shadow-sm opacity-90 grayscale hover:grayscale-0 transition-all">
+                    <div className="relative w-full aspect-video bg-black overflow-hidden group">
+                      <img src={getImageUrl(ping.images.loss.fileName)} className="w-full h-full object-cover opacity-60" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white font-mono bg-red-600 px-3 py-1 text-xs">CONNECTION UNSTABLE</span>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/7")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/9")}>Next Topic: Hotspot & Tethering →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 9: Hotspot & Tethering
+        if (topicId === "9") {
+          const { hotspot } = sections as any;
+          return (
+            <div id="topic-hotspot" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">Hotspot & Tethering</h2>
+                    <p className="text-lg text-muted-foreground">{hotspot.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(hotspot.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Analogy */}
+              <section className="container mx-auto px-4">
+                <div className="bg-secondary/10 rounded-3xl p-8 md:p-12 text-center">
+                  <h3 className="text-2xl font-bold mb-6">The Data Bridge</h3>
+                  <div className="relative max-w-2xl mx-auto aspect-video rounded-xl overflow-hidden mb-6 border border-border/50 shadow-lg">
+                    <img src={getImageUrl(hotspot.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                      <p className="text-white font-bold text-xl px-4">Cell Tower ↔️ Phone ↔️ Laptop</p>
+                    </div>
+                  </div>
+                  <p className="text-lg text-muted-foreground">Your phone takes the 4G signal from the air and re-broadcasts it as a Wi-Fi signal for your devices.</p>
+                </div>
+              </section>
+
+              {/* 3. Comparison */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-8 text-center">When to use it?</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="p-6 border-l-4 border-l-blue-500">
+                    <h4 className="text-xl font-bold mb-4 flex items-center gap-2">🏠 Home Wi-Fi</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex justify-between"><span>Speed:</span> <span className="font-bold">{hotspot.comparison.wifi.speed}</span></li>
+                      <li className="flex justify-between"><span>Stability:</span> <span className="font-bold">{hotspot.comparison.wifi.stability}</span></li>
+                      <li className="flex justify-between"><span>Battery:</span> <span className="font-bold">{hotspot.comparison.wifi.battery}</span></li>
+                    </ul>
+                  </Card>
+                  <Card className="p-6 border-l-4 border-l-orange-500">
+                    <h4 className="text-xl font-bold mb-4 flex items-center gap-2">📱 Mobile Hotspot</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex justify-between"><span>Speed:</span> <span className="font-bold">{hotspot.comparison.hotspot.speed}</span></li>
+                      <li className="flex justify-between"><span>Stability:</span> <span className="font-bold">{hotspot.comparison.hotspot.stability}</span></li>
+                      <li className="flex justify-between"><span>Battery:</span> <span className="font-bold">{hotspot.comparison.hotspot.battery}</span></li>
+                    </ul>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 4. Setup Steps */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-8">How to Set it Up</h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {hotspot.steps.map((step: any, i: number) => (
+                    <div key={i} className="bg-secondary/10 p-6 rounded-2xl border border-secondary/20 relative">
+                      <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</div>
+                      <h4 className="font-bold text-lg mb-2 mt-2">{step.title}</h4>
+                      <p className="text-sm text-foreground/80">{step.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* 5. Simulation Mockup */}
+              <section className="container mx-auto px-4">
+                <Card className="max-w-md mx-auto p-8 bg-black/90 text-white border-4 border-gray-800 rounded-[30px] shadow-2xl">
+                  <div className="flex items-center justify-between mb-8 border-b border-gray-700 pb-4">
+                    <span className="font-bold text-lg">Settings</span>
+                    <div className="w-8 h-8 bg-gray-700 rounded-full"></div>
+                  </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span>{hotspot.simulation.toggleLabel}</span>
+                    <div
+                      className={`w-14 h-8 rounded-full relative cursor-pointer transition-colors duration-300 ${isHotspotOn ? 'bg-green-500' : 'bg-gray-600'}`}
+                      onClick={() => setIsHotspotOn(!isHotspotOn)}
+                    >
+                      <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${isHotspotOn ? 'translate-x-7' : 'translate-x-1'}`}></div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-400 mb-6">{hotspot.simulation.desc}</p>
+                  {isHotspotOn ? (
+                    <div className="bg-gray-800 rounded-lg p-3 text-xs text-green-400 font-mono animate-pulse">
+                      {hotspot.simulation.connectedMsg}
+                    </div>
+                  ) : (
+                    <div className="bg-gray-800 rounded-lg p-3 text-xs text-gray-500 font-mono">
+                      Hotspot Disabled
+                    </div>
+                  )}
+                </Card>
+              </section>
+
+              {/* 6. Warnings */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                  <Card className="p-8 border-2 border-yellow-500/20 bg-yellow-500/5">
+                    <h3 className="text-xl font-bold text-yellow-600 mb-4">⚠️ Important Warnings</h3>
+                    <ul className="space-y-3">
+                      {hotspot.warnings.map((w: string, i: number) => (
+                        <li key={i} className="flex items-center gap-3">
+                          <span className="text-yellow-600">⚠️</span>
+                          <span>{w}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                      <img src={getImageUrl(hotspot.images.security.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/8")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/10")}>Next Topic: Troubleshooting →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 10: Troubleshooting
+        if (topicId === "10") {
+          const { troubleshooting } = sections as any;
+          return (
+            <div id="topic-troubleshooting" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">Troubleshooting</h2>
+                    <p className="text-lg text-muted-foreground">{troubleshooting.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(troubleshooting.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Chain of Connection */}
+              <section className="container mx-auto px-4 text-center">
+                <h3 className="text-2xl font-bold mb-8">The Chain of Connection</h3>
+                <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-bold md:gap-8">
+                  {troubleshooting.chain.map((link: string, i: number) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <div className="px-6 py-3 bg-secondary rounded-full">{link}</div>
+                      {i < troubleshooting.chain.length - 1 && <span className="text-muted-foreground text-xl">→</span>}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* 3. Flowchart */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-8 text-center">The Fix-It Flowchart</h3>
+                <div className="space-y-6 max-w-3xl mx-auto">
+                  {troubleshooting.steps.map((step: any, i: number) => (
+                    <div key={i} className="flex gap-6 items-start group">
+                      <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-110 transition-transform">{step.step}</div>
+                        {i < troubleshooting.steps.length - 1 && <div className="w-1 h-16 bg-border my-2"></div>}
+                      </div>
+                      <Card className="flex-1 p-6 hover:border-primary/50 transition-colors">
+                        <h4 className="text-xl font-bold mb-1">{step.title}</h4>
+                        <p className="text-muted-foreground">{step.desc}</p>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* 4. Restart Ritual */}
+              <section className="container mx-auto px-4">
+                <div className="bg-secondary/10 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold mb-4">When in doubt...</h3>
+                    <p className="text-lg">Unplug the router. Count to 10. Plug it back in.</p>
+                    <p className="text-sm text-muted-foreground mt-2">It sounds like a joke, but it clears the router's short-term memory (RAM) and fixes 99% of glitches.</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-xl border border-border/50 w-full md:w-64">
+                    <div className="aspect-square bg-muted">
+                      <img src={getImageUrl(troubleshooting.images.restart.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 5. Command Tools */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-8">Pro Tools: Command Line</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {troubleshooting.tools.map((t: any, i: number) => (
+                    <Card key={i} className="bg-black text-green-400 font-mono p-6 border-gray-800 text-sm">
+                      <p className="mb-2 text-white opacity-50">// {t.desc}</p>
+                      <p className="flex items-center gap-2">
+                        <span className="text-blue-400">&gt;</span>
+                        {t.cmd}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/9")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/11")}>Next Topic: Future Trends →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        // Topic 11: Future Trends
+        if (topicId === "11") {
+          const { future } = sections as any;
+          return (
+            <div id="topic-future" className="space-y-16">
+              {/* 1. Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                    <h2 className="text-4xl font-bold">The Future of Networks</h2>
+                    <p className="text-lg text-muted-foreground">{future.intro}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img src={getImageUrl(future.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 2. Speed Race */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-2xl font-bold mb-8 text-center">Need for Speed</h3>
+                <div className="bg-secondary/10 p-8 rounded-3xl space-y-8">
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <span className="font-bold">{future.speedRace.g4.name}</span>
+                      <span>{future.speedRace.g4.speed}</span>
+                    </div>
+                    <div className="h-4 bg-muted rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-500 w-[10%]"></div>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">Good for {future.speedRace.g4.use}</p>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <span className="font-bold text-primary">{future.speedRace.g5.name}</span>
+                      <span>{future.speedRace.g5.speed}</span>
+                    </div>
+                    <div className="h-4 bg-muted rounded-full overflow-hidden">
+                      <div className="h-full bg-purple-500 w-full animate-pulse"></div>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">Required for {future.speedRace.g5.use}</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* 3. Trends Grid */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-6">
+                  {future.trends.map((t: any, i: number) => (
+                    <Card key={i} className="p-6 bg-gradient-to-br from-background to-secondary/10 border-border/50">
+                      <h4 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-2">{t.name}</h4>
+                      <p className="text-foreground/80 leading-relaxed">{t.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* 4. IoT */}
+              <section className="container mx-auto px-4 text-center">
+                <h3 className="text-2xl font-bold mb-8">The Smart Home (IoT)</h3>
+                <div className="relative max-w-4xl mx-auto rounded-[32px] overflow-hidden border border-border/50 shadow-2xl group">
+                  <img src={getImageUrl(future.images.iot.fileName)} className="w-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-8">
+                    <p className="text-xl font-bold mb-2">Everything Connected</p>
+                    <p>In the near future, your fridge will order milk, your lights will know when you're sleeping, and your car will talk to traffic lights.</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* 5. Starlink */}
+              <section className="container mx-auto px-4">
+                <div className="md:flex items-center gap-10 bg-black/5 rounded-3xl p-8 border border-border/50">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold mb-4">Space Internet</h3>
+                    <p>Companies like Starlink are launching thousands of satellites into Low Earth Orbit (LEO). This brings high-speed internet to places that cables can't reach—like mountains, oceans, and deserts.</p>
+                  </div>
+                  <div className="flex-1 mt-6 md:mt-0">
+                    <Card className="p-0 overflow-hidden rounded-xl border border-white/10">
+                      <img src={getImageUrl(future.images.starlink.fileName)} className="w-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/10")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/modules")}>Finish Module 9 →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+      })()}
+
+      {moduleId === 10 && (() => {
+        const sections = getModule10Sections();
+
+        if (topicId === "6") {
+          return <SafeBrowsingTopic />;
+        }
+
+        if (topicId === "7") {
+          return <FirewallTopic />;
+        }
+
+        if (topicId === "8") {
+          return <AntivirusTopic />;
+        }
+
+        if (topicId === "9") {
+          return <SecureWiFiTopic />;
+        }
+
+        if (topicId === "10") {
+          return <BackupTopic />;
+        }
+
+        if (topicId === "11") {
+          return <ScamsTopic />;
+        }
+
+        if (topicId === "12") {
+          return <CyberHygieneTopic />;
+        }
+
+        if (topicId === "5") {
+          return <PhishingTopic />;
+        }
+
+        if (topicId === "1") {
+          const { cybersecurity } = sections as any;
+          const { hero, cia, castle, motives, simulation } = cybersecurity;
+
+          return (
+            <div id="topic-cybersecurity" className="space-y-16">
+              {/* Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
+                    <h2 className="text-5xl font-bold">{hero.title}</h2>
+                    <p className="text-xl text-muted-foreground">{hero.subtitle}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 rotate-3 transition-transform hover:rotate-0">
+                    <div className="aspect-video bg-gradient-to-br from-blue-900 to-black flex items-center justify-center">
+                      <span className="text-9xl">🛡️</span>
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* CIA Triad */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-3xl font-bold mb-8 text-center">{cia.title}</h3>
+                <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{cia.desc}</p>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                  {['c', 'i', 'a'].map((key) => (
+                    <Card
+                      key={key}
+                      className={`p-8 cursor-pointer transition-all duration-300 hover:scale-105 border-2 ${ciaSelection === key ? cia[key].border + ' ' + cia[key].bg : 'border-border'}`}
+                      onClick={() => setCiaSelection(key)}
+                    >
+                      <div className={`text-6xl font-bold mb-4 ${cia[key].color}`}>{cia[key].letter}</div>
+                      <h4 className="text-2xl font-bold mb-2">{cia[key].title}</h4>
+                      {ciaSelection === key ? (
+                        <p className="text-sm border-t border-dashed border-gray-500 pt-4 mt-4 whitespace-pre-line animate-in fade-in">{cia[key].text}</p>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">Click to reveal</p>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Castle Analogy */}
+              <section className="container mx-auto px-4">
+                <div className="bg-secondary/10 rounded-[40px] p-10 md:p-16">
+                  <div className="text-center mb-12 space-y-8">
+                    <h3 className="text-3xl font-bold mb-4">{castle.title}</h3>
+
+                    {/* Image Container */}
+                    <div className="relative w-full max-w-4xl mx-auto h-64 md:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-secondary/20 group">
+                      <img
+                        src={getImageUrl("module-media/digital-castle.jpg")}
+                        alt="Digital Castle Analogy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                        }}
+                      />
+                      {/* Fallback */}
+                      <div className="hidden w-full h-full bg-slate-800 flex items-center justify-center flex-col gap-4">
+                        <span className="text-9xl opacity-50">🏰</span>
+                        <span className="text-muted-foreground">Image: Digital Castle</span>
+                      </div>
+                    </div>
+
+                    <p className="text-xl italic text-muted-foreground">"{castle.analogy}"</p>
+                  </div>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {castle.parts.map((part: any, i: number) => (
+                      <Card key={i} className="p-6 text-center border-none shadow-lg bg-background/80 backdrop-blur-sm">
+                        <h4 className="text-xl font-bold mb-2">{part.name}</h4>
+                        <div className="w-8 h-1 bg-primary mx-auto mb-4 rounded-full"></div>
+                        <p className="font-mono text-xs text-primary mb-1 uppercase tracking-wider">Digital Equivalent</p>
+                        <p className="font-bold text-lg mb-2">{part.digital}</p>
+                        <p className="text-sm text-muted-foreground">{part.desc}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* Motives */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-3xl font-bold mb-12 text-center">Who are the Attackers?</h3>
+                <div className="grid md:grid-cols-3 gap-8">
+                  {motives.map((m: any, i: number) => (
+                    <Card key={i} className="group relative overflow-hidden text-center p-8 hover:border-primary transition-colors">
+                      <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">{m.icon}</div>
+                      <h4 className="text-2xl font-bold mb-1">{m.title}</h4>
+                      <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4">{m.role}</p>
+                      <p className="text-muted-foreground">{m.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Interactive Simulation: Scanner */}
+              <section className="container mx-auto px-4">
+                <Card className="max-w-4xl mx-auto overflow-hidden border-4 border-gray-800 bg-gray-900 text-white rounded-xl shadow-2xl">
+                  <div className="p-4 bg-gray-800 flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <span className="ml-4 font-mono font-bold text-green-400">VULNERABILITY_SCANNER_V1.0</span>
+                    </div>
+                    <div className="font-mono text-sm">
+                      Risks Found: <span className="text-red-500 font-bold text-xl">{foundRisks.length}</span> / 3
+                    </div>
+                  </div>
+
+                  <div className="relative aspect-[16/9] bg-gray-700 w-full overflow-hidden group cursor-crosshair">
+                    {/* Background Desk Image Placeholder - Using CSS Shapes for now */}
+                    {/* Background Desk Image */}
+                    <img
+                      src={getImageUrl("module-media/vulnerable-desk.jpg")}
+                      alt="Vulnerable Workspace"
+                      className="absolute inset-0 w-full h-full object-cover opacity-80"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                    {/* Fallback CSS Scene if image missing */}
+                    <div className="hidden absolute inset-0 bg-gray-700">
+                      <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                        <span className="text-9xl">🖥️</span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-[#3d3d3d]"></div>
+                      <div className="absolute bottom-1/3 left-1/4 right-1/4 top-1/4 bg-black border-4 border-gray-600 rounded-t-lg"></div>
+                    </div>
+
+                    {/* Interactive Items */}
+                    {simulation.items.map((item: any) => (
+                      <div
+                        key={item.id}
+                        className={`absolute w-16 h-16 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${foundRisks.includes(item.id) ? 'scale-125' : 'hover:scale-110 animate-pulse'}`}
+                        style={{ left: `${item.x}%`, top: `${item.y}%` }}
+                        onClick={() => {
+                          if (!foundRisks.includes(item.id)) {
+                            setFoundRisks([...foundRisks, item.id]);
+                          }
+                        }}
+                      >
+                        {/* Visual for the item */}
+                        <div className={`w-full h-full rounded-full flex items-center justify-center text-3xl shadow-lg border-2 ${foundRisks.includes(item.id) ? 'bg-green-500 border-white' : 'bg-red-500/50 border-red-500'}`}>
+                          {foundRisks.includes(item.id) ? '✅' : '⚠️'}
+                        </div>
+
+                        {/* Label */}
+                        <div className={`absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-black/80 px-2 py-1 rounded text-xs whitespace-nowrap ${foundRisks.includes(item.id) ? 'text-green-400' : 'text-white'}`}>
+                          {foundRisks.includes(item.id) ? item.feedback : item.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-6 bg-gray-800 text-center">
+                    {foundRisks.length === 3 ? (
+                      <div className="text-green-400 font-bold text-xl animate-bounce">Testing Complete! System Secured. 🛡️</div>
+                    ) : (
+                      <p className="text-gray-400">Click the pulsing red circles to identify risk factors.</p>
+                    )}
+                  </div>
+                </Card>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex justify-end p-6">
+                  <Button size="lg" onClick={() => navigate("/module/10/topic/2")}>Next Topic: Password Security →</Button>
+                </div>
+              </section>
+            </div>
+          );
+        }
+
+        if (topicId === "2") {
+          const { passwordSecurity } = sections as any;
+          const { hero, intro, tips, mistakes, manager } = passwordSecurity;
+
+          const getStrength = (pass: string) => {
+            let score = 0;
+            if (pass.length > 0) score += 10;
+            if (pass.length >= 8) score += 30;
+            if (pass.length >= 12) score += 20;
+            if (/[A-Z]/.test(pass)) score += 10;
+            if (/[0-9]/.test(pass)) score += 10;
+            if (/[^A-Za-z0-9]/.test(pass)) score += 20;
+            return Math.min(100, score);
+          };
+          const strength = getStrength(passwordInput);
+          const crackTime = strength < 30 ? "Instantly ❌" : strength < 60 ? "2 Minutes ⚠️" : strength < 80 ? "2 Weeks ⚠️" : "3 Million Years ✅";
+
+          return (
+            <div className="space-y-16">
+              {/* Hero - Option A: Digital Vault */}
+              <section className="relative overflow-hidden min-h-[60vh] flex items-center bg-gradient-to-b from-slate-900 to-black text-white">
+                {/* Background Glow */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 blur-[100px] rounded-full mix-blend-screen animate-pulse"></div>
+
+                <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                  {/* Left: Text */}
+                  <div className="space-y-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-sm font-semibold tracking-wide uppercase">
+                      <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                      Cybersecurity Essentials
+                    </div>
+                    <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+                      {hero.title}
+                    </h1>
+                    <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-lg">
+                      {hero.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Right: Visual (Vault Lock) */}
+                  <div className="relative flex justify-center">
+                    <div className="relative w-72 h-72 lg:w-96 lg:h-96">
+                      {/* Outer Ring */}
+                      <div className="absolute inset-0 rounded-full border-[20px] border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                        {/* Inner Ring */}
+                        <div className="w-[80%] h-[80%] rounded-full border-[10px] border-slate-700 flex items-center justify-center bg-slate-900">
+                          {/* The Lock Icon */}
+                          <div className="text-9xl filter drop-shadow-[0_0_20px_rgba(59,130,246,0.5)] animate-pulse">
+                            🔐
+                          </div>
+                        </div>
+                      </div>
+                      {/* Decorative Dots */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-green-500 rounded-full shadow-[0_0_10px_#22c55e]"></div>
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full opacity-50"></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Intro Text (Enhanced) */}
+              <section className="container mx-auto px-4">
+                <div className="max-w-3xl mx-auto text-center space-y-6">
+                  <h2 className="text-3xl font-bold">{intro.title}</h2>
+                  <p className="text-xl text-muted-foreground leading-relaxed whitespace-pre-line">
+                    {intro.desc}
+                  </p>
+                </div>
+              </section>
+
+              {/* Interactive Meter */}
+              <section className="container mx-auto px-4">
+                <Card className="p-10 border-2 border-primary/20 bg-secondary/5">
+                  <h3 className="text-3xl font-bold mb-6 text-center">🔐 Password Strength Meter</h3>
+                  <div className="max-w-xl mx-auto space-y-6">
+                    <Input
+                      type="text"
+                      placeholder="Type a password here (Not your real one!)..."
+                      className="text-xl p-6"
+                      value={passwordInput}
+                      onChange={(e) => setPasswordInput(e.target.value)}
+                    />
+
+                    {/* Bar */}
+                    <div className="h-4 w-full bg-secondary/20 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full transition-all duration-500 ${strength < 40 ? 'bg-red-500' : strength < 80 ? 'bg-yellow-500' : 'bg-green-500'}`}
+                        style={{ width: `${strength}%` }}
+                      ></div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div className="p-4 bg-background rounded-xl border">
+                        <p className="text-sm text-muted-foreground">Score</p>
+                        <p className="text-2xl font-bold">{strength}/100</p>
+                      </div>
+                      <div className="p-4 bg-background rounded-xl border">
+                        <p className="text-sm text-muted-foreground">Time to Crack</p>
+                        <p className="text-xl font-bold">{crackTime}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </section>
+
+              {/* Tips */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-6">
+                  {tips.map((tip: any, i: number) => (
+                    <Card key={i} className="p-6 text-center hover:bg-secondary/10 transition-colors">
+                      <div className="text-4xl mb-4">{tip.icon}</div>
+                      <h4 className="text-xl font-bold mb-2">{tip.title}</h4>
+                      <p className="text-muted-foreground">{tip.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Mistakes (Hall of Shame) */}
+              <section className="container mx-auto px-4">
+                <h3 className="text-3xl font-bold text-center mb-10">🚫 The Hall of Shame (Common Mistakes)</h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {mistakes.map((m: any, i: number) => (
+                    <Card key={i} className="p-6 border-red-500/20 bg-red-500/5">
+                      <div className="text-4xl mb-4 text-center">{m.icon}</div>
+                      <h4 className="text-xl font-bold text-red-500 mb-2 text-center">{m.title}</h4>
+                      <p className="text-center whitespace-pre-line">{m.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Manager */}
+              <section className="container mx-auto px-4">
+                <div className="bg-gradient-to-r from-blue-900 to-black text-white p-12 rounded-[40px] grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <h3 className="text-3xl font-bold mb-4">{manager.title}</h3>
+                    <p className="text-xl italic text-blue-200 mb-8">"{manager.analogy}"</p>
+                    <ul className="space-y-4">
+                      {manager.benefits.map((b: string, i: number) => (
+                        <li key={i} className="flex items-center gap-3">
+                          <span className="text-green-400">✅</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="flex justify-center relative">
+                    <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full"></div>
+                    <Card className="relative overflow-hidden w-full max-w-sm border-blue-500/30 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+                      <img
+                        src={getImageUrl("module-media/password-manager-dashboard.jpg")}
+                        alt="Password Manager Interface"
+                        className="w-full h-auto object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                        }}
+                      />
+                      {/* Fallback Visual if image missing */}
+                      <div className="hidden w-full h-64 bg-slate-900 flex items-center justify-center flex-col gap-4 p-6 text-center">
+                        <span className="text-6xl">🛡️</span>
+                        <p className="font-bold text-blue-200">Secure Vault</p>
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="flex justify-between p-6">
+                  <Button variant="outline" size="lg" onClick={() => navigate("/module/10/topic/1")}>← Previous Topic</Button>
+                  <Button size="lg" onClick={() => navigate("/module/10/topic/3")}>Next Topic: OTP & MFA →</Button>
+                </div>
+
+              </section>
+            </div>
+          );
+        }
+
+        if (topicId === "3") {
+          const { mfa } = sections as any || {};
+          if (!mfa) return null;
+
+          return (
+            <div className="space-y-16">
+              {/* Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
+                    <h2 className="text-3xl font-semibold text-foreground">{mfa.hero.title}</h2>
+                    <p className="text-lg text-muted-foreground">{mfa.hero.subtitle}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(mfa.hero.visual)}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                        }}
+                      />
+                      {/* Fallback */}
+                      <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
+                        <span className="text-6xl mb-4">🔐</span>
+                        <p className="font-bold">MFA Security</p>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* Factors Grid */}
+              <section className="container mx-auto px-4">
+                <div className="text-center mb-10">
+                  <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-2">THE 3 FACTORS</p>
+                  <h3 className="text-3xl font-bold">The Triangle of Security</h3>
+                  <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+                    Security experts divide authentication into three categories. Strong security means combining at least two of these.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-6 mb-12">
+                  {mfa.factors.map((factor: any, i: number) => (
+                    <Card key={i} className="p-8 border border-border/70 hover:border-primary/50 transition-colors text-center bg-card shadow-sm hover:shadow-md">
+                      <div className="text-5xl mb-6 bg-secondary/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto">{factor.icon}</div>
+                      <h3 className="text-xl font-bold mb-2">{factor.title}</h3>
+                      <p className="text-xs font-bold text-primary uppercase mb-4 tracking-wider">{factor.subtitle}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{factor.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Big Visual Container */}
+                <Card className="p-0 overflow-hidden rounded-[32px] border border-border/70 shadow-lg">
+                  <div className="relative w-full aspect-[21/9] bg-muted overflow-hidden group">
+                    <img
+                      src={getImageUrl(mfa.triangleVisual?.image)}
+                      alt={mfa.triangleVisual?.alt}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                    {/* Fallback - Diagram Representation */}
+                    <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+                      <div className="grid grid-cols-3 gap-12 items-center mb-8 opacity-80">
+                        <div className="flex flex-col items-center">
+                          <span className="text-6xl mb-2">🧠</span>
+                          <span className="text-sm uppercase">Know</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <span className="text-6xl mb-2">📱</span>
+                          <span className="text-sm uppercase">Have</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <span className="text-6xl mb-2">👆</span>
+                          <span className="text-sm uppercase">Are</span>
+                        </div>
+                      </div>
+                      <div className="w-full h-1 bg-white/20 mb-8 max-w-lg mx-auto relative">
+                        <div className="absolute top-0 left-0 h-full bg-green-500 w-2/3 animate-pulse"></div>
+                      </div>
+                      <p className="font-bold text-xl max-w-xl leading-relaxed text-blue-100">{mfa.triangleVisual?.caption || "Combinations create security."}</p>
+                    </div>
+                  </div>
+                </Card>
+              </section>
+
+              {/* Process (Split) */}
+              <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center bg-secondary/10 rounded-3xl p-8 md:p-12">
+                  <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl">
+                    <div className="relative aspect-video bg-white flex items-center justify-center">
+                      <div className="text-center space-y-4">
+                        <span className="text-4xl">👤</span>
+                        <span className="text-2xl">➡️</span>
+                        <span className="text-4xl">🔒</span>
+                        <span className="text-2xl">➡️</span>
+                        <span className="text-6xl animate-pulse">📱</span>
+                        <span className="text-2xl">➡️</span>
+                        <span className="text-4xl">✅</span>
+                      </div>
+                    </div>
+                  </Card>
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-bold">{mfa.process.title}</h3>
+                    <p className="text-lg text-muted-foreground">{mfa.process.desc}</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Interactive Toggle */}
+              <section className="container mx-auto px-4">
+                <Card className={`p-12 text-center border-2 transition-all duration-500 ${mfaToggle ? 'border-green-500 bg-green-500/5' : 'border-red-500 bg-red-500/5'}`}>
+                  <h2 className="text-3xl font-bold mb-2">{mfa.interactive.title}</h2>
+                  <p className="text-muted-foreground mb-8">{mfa.interactive.desc}</p>
+
+                  <div className="flex items-center justify-center gap-4 mb-6">
+                    <span className={`text-sm font-bold ${!mfaToggle ? 'text-red-500' : 'text-muted-foreground'}`}>OFF</span>
+                    <Switch checked={mfaToggle} onCheckedChange={setMfaToggle} className="scale-150" />
+                    <span className={`text-sm font-bold ${mfaToggle ? 'text-green-500' : 'text-muted-foreground'}`}>ON</span>
+                  </div>
+
+                  <div className="transition-all duration-500 transform">
+                    <div className="text-8xl mb-4 pt-4">{mfaToggle ? '🛡️' : '🔓'}</div>
+                    <p className={`text-2xl font-bold ${mfaToggle ? 'text-green-600' : 'text-red-600'}`}>
+                      {mfaToggle ? "Account Secured" : "Account Vulnerable"}
+                    </p>
+                  </div>
+                </Card>
+              </section>
+
+              {/* Arsenal Grid */}
+              <section className="container mx-auto px-4">
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl font-bold">Types of Authenticators</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {mfa.arsenal.map((item: any, i: number) => (
+                    <Card key={i} className="p-6 flex items-start gap-4 hover:shadow-lg transition-all">
+                      <div className="text-4xl bg-muted p-3 rounded-xl">{item.icon}</div>
+                      <div>
+                        <h4 className="text-lg font-bold">{item.title}</h4>
+                        <p className="text-muted-foreground text-sm">{item.desc}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* Navigation */}
+              <TopicNavigation currentModuleId={10} currentTopicId="m10-t3" />
+            </div>
+          );
+        }
+
+        if (topicId === "4") {
+          const { social } = sections as any || {};
+          if (!social) return null;
+
+          return (
+            <div className="space-y-16">
+              {/* Hero */}
+              <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
+                    <h2 className="text-3xl font-semibold text-foreground">{social.hero.title}</h2>
+                    <p className="text-lg text-muted-foreground">{social.hero.subtitle}</p>
+                  </div>
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(social.hero.visual)}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                        }}
+                      />
+                      {/* Fallback */}
+                      <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
+                        <span className="text-6xl mb-4">🎭</span>
+                        <p className="font-bold">Social Engineering</p>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              </section>
+
+              {/* 1. Interactive: The Human Bugs */}
+              <section className="container mx-auto px-4">
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl font-bold mb-2">The Human Bugs</h3>
+                  <p className="text-muted-foreground">Hackers exploit your emotions. Click a trigger to see how.</p>
+                </div>
+                <div className="grid md:grid-cols-4 gap-4 mb-8">
+                  {social.triggers.map((trigger: any) => (
+                    <Button
+                      key={trigger.id}
+                      variant={activeTrigger === trigger.id ? "default" : "outline"}
+                      className="h-24 flex flex-col gap-2 border-2"
+                      onClick={() => setActiveTrigger(trigger.id)}
+                    >
+                      <span className="text-3xl">{trigger.icon}</span>
+                      <span className="font-bold">{trigger.title}</span>
+                    </Button>
+                  ))}
+                </div>
+                {activeTrigger && (
+                  <Card className="p-8 bg-slate-100 dark:bg-slate-900 border-l-8 border-l-red-500 animate-in fade-in slide-in-from-top-4">
+                    <h4 className="font-bold text-red-500 mb-2 uppercase">Scam Example:</h4>
+                    <p className="text-2xl font-mono text-foreground">
+                      "{social.triggers.find((t: any) => t.id === activeTrigger)?.msg}"
+                    </p>
+                  </Card>
+                )}
+              </section>
+
+              {/* 2. Common Attacks Grid */}
+              <section className="container mx-auto px-4">
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl font-bold">Common Attack Types</h3>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {social.attacks.map((attack: any, i: number) => (
+                    <Card key={i} className="p-6 text-center hover:scale-105 transition-transform duration-300">
+                      <div className="text-4xl mb-3">{attack.icon}</div>
+                      <h4 className="font-bold mb-1">{attack.title}</h4>
+                      <p className="text-sm text-muted-foreground">{attack.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              {/* 3. Interactive: URL Inspector */}
+              <section className="container mx-auto px-4">
+                <Card className="p-12 bg-secondary/5 border-2 border-dashed border-border">
+                  <div className="text-center max-w-2xl mx-auto">
+                    <h3 className="text-2xl font-bold mb-4">Interactive Training: The URL Inspector</h3>
+                    <p className="mb-8 text-muted-foreground">Links lie. Hover over the button below (don't click!) to see where it really goes.</p>
+
+                    <div className="relative inline-block group">
+                      <Button
+                        size="lg"
+                        className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6 h-auto shadow-xl"
+                        onMouseEnter={() => setIsUrlHovered(true)}
+                        onMouseLeave={() => setIsUrlHovered(false)}
+                      >
+                        UNLOCK YOUR ACCOUNT NOW 🔒
+                      </Button>
+
+                      {/* Tooltip Inspector */}
+                      {isUrlHovered && (
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-black text-white p-4 rounded-xl shadow-2xl z-20 w-[300px] animate-in zoom-in-95">
+                          <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Link Inspector</p>
+                          <p className="font-mono text-red-400 break-all">http://www.secure-bank-login.ru/scam/login.php</p>
+                          <div className="mt-2 text-sm font-bold text-red-500 bg-red-900/20 py-1 px-2 rounded inline-block">
+                            ⚠️ MALICIOUS LINK
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              </section>
+
+              {/* 4. Interactive: Spot the Phish */}
+              <section className="container mx-auto px-4 pb-14">
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl font-bold font-mono">Exam: Spot the Phish 🎣</h3>
+                  <p className="text-muted-foreground">Which email is real? Select one.</p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
+                  {/* Email A (Real) */}
+                  <Card
+                    className={`p-6 cursor-pointer border-4 transition-all ${phishSelection === "A" ? 'border-green-500 bg-green-50/10' : 'border-transparent hover:border-slate-300'}`}
+                    onClick={() => setPhishSelection("A")}
+                  >
+                    <div className="flex justify-between items-start mb-4 border-b pb-4">
+                      <div>
+                        <p className="font-bold">From: no-reply@accounts.google.com</p>
+                        <p className="text-sm text-muted-foreground">To: You</p>
+                      </div>
+                      <div className="text-xs bg-slate-200 dark:bg-slate-800 px-2 py-1 rounded">2:30 PM</div>
+                    </div>
+                    <h4 className="font-bold mb-2">Security Alert</h4>
+                    <p className="text-sm">We noticed a new login. If this wasn't you, please check your activity.</p>
+                  </Card>
+
+                  {/* Email B (Fake) */}
+                  <Card
+                    className={`p-6 cursor-pointer border-4 transition-all ${phishSelection === "B" ? 'border-red-500 bg-red-50/10' : 'border-transparent hover:border-slate-300'}`}
+                    onClick={() => setPhishSelection("B")}
+                  >
+                    <div className="flex justify-between items-start mb-4 border-b pb-4">
+                      <div>
+                        <p className="font-bold">From: google-support@securitycheck-now.net</p>
+                        <p className="text-sm text-muted-foreground">To: You</p>
+                      </div>
+                      <div className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded font-bold">URGENT</div>
+                    </div>
+                    <h4 className="font-bold mb-2">URGENT: ACCOUNT DELETED IN 2 MINUTES!!</h4>
+                    <p className="text-sm">YOUR ACCOUNT IS HACKED. CLICK HERE NOW TO STOP DELETION. DO NOT WAIT.</p>
+                  </Card>
+                </div>
+
+                {phishSelection && (
+                  <div className={`text-center p-6 rounded-xl animate-in fade-in slide-in-from-bottom-4 ${phishSelection === "A" ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                    <h4 className="text-2xl font-bold mb-2">{phishSelection === "A" ? "✅ CORRECT!" : "❌ YOU GOT HACKED!"}</h4>
+                    <p>
+                      {phishSelection === "A"
+                        ? "The sender address is legitimate (google.com) and the tone is calm."
+                        : "The sender domain is fake, and it uses extreme urgency to panic you."}
+                    </p>
+                  </div>
+                )}
+              </section>
+
+              {/* Navigation */}
+              <TopicNavigation currentModuleId={10} currentTopicId="m10-t4" />
+            </div>
+          );
+        }
+      })()}
       {/* End of Module Content */}
-    </div>
+    </div >
   );
 };
 

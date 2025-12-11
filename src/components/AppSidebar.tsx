@@ -29,14 +29,14 @@ type ModuleTopic = {
 };
 
 const modules = [
-  { id: 1, title: "INTRODUCTION TO COMPUTERS", path: "/module/1" },
+  { id: 1, title: "Introduction to Computers", path: "/module/1" },
   { id: 2, title: "Internal Components & Architecture", path: "/module/2" },
   { id: 3, title: "Operating Systems, Files & Mobile Computing", path: "/module/3" },
   { id: 4, title: "Computer Hardware (Deep Dive)", path: "/module/4" },
   { id: 5, title: "Storage Systems", path: "/module/5" },
   { id: 6, title: "Software & Operating Systems", path: "/module/6" },
   { id: 7, title: "File Systems & Data Management", path: "/module/7" },
-  { id: 8, title: "System Setup, Installation & Configuration", path: "/module/8" },
+  { id: 8, title: "System Setup & Configuration", path: "/module/8" },
   { id: 9, title: "Networking Fundamentals", path: "/module/9" },
   { id: 10, title: "Cybersecurity Basics", path: "/module/10" },
   { id: 11, title: "Security Ethics & Digital Citizenship", path: "/module/11" },
@@ -44,11 +44,11 @@ const modules = [
   { id: 13, title: "Digital Literacy & Online Tools", path: "/module/13" },
   { id: 14, title: "Troubleshooting & Maintenance", path: "/module/14" },
   { id: 15, title: "Device Management (Mobile + PC)", path: "/module/15" },
-  { id: 16, title: "Productivity Tools (Word, Excel, PowerPoint)", path: "/module/16" },
+  { id: 16, title: "Productivity Tools (Office)", path: "/module/16" },
   { id: 17, title: "Data & AI Basics", path: "/module/17" },
   { id: 18, title: "Programming Basics", path: "/module/18" },
-  { id: 19, title: "Databases", path: "/module/19" },
-  { id: 20, title: "Web Concepts", path: "/module/20" },
+  { id: 19, title: "Databases & SQL", path: "/module/19" },
+  { id: 20, title: "Web Development Concepts", path: "/module/20" },
   { id: 21, title: "Virtualization & Containers", path: "/module/21" },
   { id: 22, title: "Raspberry Pi & Embedded Systems", path: "/module/22" },
   { id: 23, title: "Blockchain & Digital Currency", path: "/module/23" },
@@ -63,8 +63,8 @@ const moduleTopics: Record<number, ModuleTopic[]> = {
       title: "What is a Computer?",
       summary: "",
       hash: "#topic-what-is-a-computer",
-  },
-  {
+    },
+    {
       id: "m1-t2",
       title: "Types of Computers",
       summary: "",
@@ -81,8 +81,8 @@ const moduleTopics: Record<number, ModuleTopic[]> = {
       title: "Software Basics",
       summary: "",
       hash: "#topic-software-basics",
-  },
-  {
+    },
+    {
       id: "m1-t5",
       title: "Hardware vs Software",
       summary: "",
@@ -105,7 +105,7 @@ const moduleTopics: Record<number, ModuleTopic[]> = {
       title: "I/O Devices",
       summary: "",
       hash: "#topic-io-devices",
-  },
+    },
   ],
   2: [
     {
@@ -608,12 +608,12 @@ export function AppSidebar() {
     }
     // Extract module ID from path (e.g., "/module/2" -> "2")
     const moduleIdFromPath = path.split("/").pop();
-    
+
     // Check if we're on the module page
     if (location.pathname.startsWith(path)) {
       return true;
     }
-    
+
     // Check if we're on a lesson page for this module
     // Lesson paths are like "/lesson/2/1" where 2 is the module ID
     const lessonPathMatch = location.pathname.match(/^\/lesson\/(\d+)\//);
@@ -621,7 +621,7 @@ export function AppSidebar() {
       const currentModuleId = lessonPathMatch[1];
       return currentModuleId === moduleIdFromPath;
     }
-    
+
     return false;
   };
 
@@ -671,136 +671,152 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-sidebar-foreground/60">
-                <span>Learning Modules</span>
-            </SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu className="space-y-1">
-                  {modules.map((module) => {
-                    const active = isActive(module.path) || location.pathname.startsWith(`/module/${module.id}/part`) || location.pathname.startsWith(`/module/${module.id}/topic`);
-                    const moduleNumber = module.id.toString().padStart(2, "0");
-                    const numberClasses = cn(
-                      "text-[11px] font-semibold tracking-wider uppercase text-muted-foreground",
-                                  active && "text-primary"
-                    );
-                    const titleClasses = cn(
-                      "text-sm leading-relaxed flex-1 text-left break-words min-w-0 whitespace-normal overflow-visible",
-                                  active && "text-primary font-semibold"
-                    );
-                    const topics = moduleTopics[module.id] ?? [];
-                    const hasTopics = topics.length > 0;
-                    
-                    if (hasTopics) {
-                      const moduleStates = {
-                        1: { isOpen: isModule1Open, setIsOpen: setIsModule1Open },
-                        2: { isOpen: isModule2Open, setIsOpen: setIsModule2Open },
-                        3: { isOpen: isModule3Open, setIsOpen: setIsModule3Open },
-                        4: { isOpen: isModule4Open, setIsOpen: setIsModule4Open },
-                        5: { isOpen: isModule5Open, setIsOpen: setIsModule5Open },
-                        6: { isOpen: isModule6Open, setIsOpen: setIsModule6Open },
-                        7: { isOpen: isModule7Open, setIsOpen: setIsModule7Open },
-                        8: { isOpen: isModule8Open, setIsOpen: setIsModule8Open },
-                        9: { isOpen: isModule9Open, setIsOpen: setIsModule9Open },
-                        10: { isOpen: isModule10Open, setIsOpen: setIsModule10Open },
-                        11: { isOpen: isModule11Open, setIsOpen: setIsModule11Open },
-                        12: { isOpen: isModule12Open, setIsOpen: setIsModule12Open },
-                        13: { isOpen: isModule13Open, setIsOpen: setIsModule13Open },
-                        14: { isOpen: isModule14Open, setIsOpen: setIsModule14Open },
-                        15: { isOpen: isModule15Open, setIsOpen: setIsModule15Open },
-                        16: { isOpen: isModule16Open, setIsOpen: setIsModule16Open },
-                        17: { isOpen: isModule17Open, setIsOpen: setIsModule17Open },
-                        18: { isOpen: isModule18Open, setIsOpen: setIsModule18Open },
-                        19: { isOpen: isModule19Open, setIsOpen: setIsModule19Open },
-                        20: { isOpen: isModule20Open, setIsOpen: setIsModule20Open },
-                        21: { isOpen: isModule21Open, setIsOpen: setIsModule21Open },
-                        22: { isOpen: isModule22Open, setIsOpen: setIsModule22Open },
-                        23: { isOpen: isModule23Open, setIsOpen: setIsModule23Open },
-                        24: { isOpen: isModule24Open, setIsOpen: setIsModule24Open },
-                        25: { isOpen: isModule25Open, setIsOpen: setIsModule25Open },
-                      };
-                      const moduleState = moduleStates[module.id as keyof typeof moduleStates];
-                      const isModuleOpen = moduleState.isOpen;
-                      const setIsModuleOpen = moduleState.setIsOpen;
-                      
-                      return (
-                        <Collapsible
-                          key={module.id}
-                          open={isModuleOpen}
-                          onOpenChange={setIsModuleOpen}
-                        >
-                          <SidebarMenuItem>
-                            <CollapsibleTrigger asChild>
-                              <SidebarMenuButton
-                                isActive={active}
-                                className={cn(
-                                  "min-h-11 px-3 gap-2 transition-all duration-200 group w-full items-start py-2.5",
-                                  "hover:bg-sidebar-accent/80 hover:shadow-sm",
-                                  active && "bg-primary/20 dark:bg-primary/30 shadow-md font-semibold",
-                                  "[&>span:nth-child(2)]:!overflow-visible [&>span:nth-child(2)]:!whitespace-normal [&>span:nth-child(2)]:!text-clip"
-                                )}
-                              >
-                                <span className={cn(numberClasses, "shrink-0 mt-0.5")}>{moduleNumber}.</span>
-                                <span className={titleClasses}>{module.title}</span>
-                                <span className="shrink-0 mt-0.5">
-                                  {isModuleOpen ? (
-                                  <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-                                ) : (
-                                  <ChevronRight className="h-4 w-4 transition-transform duration-200" />
+            <span>Learning Modules</span>
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu className="space-y-1">
+              {modules.map((module) => {
+                const active = isActive(module.path) || location.pathname.startsWith(`/module/${module.id}/part`) || location.pathname.startsWith(`/module/${module.id}/topic`);
+                const moduleNumber = module.id.toString().padStart(2, "0");
+                const numberClasses = cn(
+                  "text-[11px] font-semibold tracking-wider uppercase text-muted-foreground",
+                  active && "text-primary"
+                );
+                const titleClasses = cn(
+                  "text-sm leading-relaxed flex-1 text-left break-words min-w-0 whitespace-normal overflow-visible",
+                  active && "text-primary font-semibold"
+                );
+                const topics = moduleTopics[module.id] ?? [];
+                const hasTopics = topics.length > 0;
+
+                if (hasTopics) {
+                  const moduleStates = {
+                    1: { isOpen: isModule1Open, setIsOpen: setIsModule1Open },
+                    2: { isOpen: isModule2Open, setIsOpen: setIsModule2Open },
+                    3: { isOpen: isModule3Open, setIsOpen: setIsModule3Open },
+                    4: { isOpen: isModule4Open, setIsOpen: setIsModule4Open },
+                    5: { isOpen: isModule5Open, setIsOpen: setIsModule5Open },
+                    6: { isOpen: isModule6Open, setIsOpen: setIsModule6Open },
+                    7: { isOpen: isModule7Open, setIsOpen: setIsModule7Open },
+                    8: { isOpen: isModule8Open, setIsOpen: setIsModule8Open },
+                    9: { isOpen: isModule9Open, setIsOpen: setIsModule9Open },
+                    10: { isOpen: isModule10Open, setIsOpen: setIsModule10Open },
+                    11: { isOpen: isModule11Open, setIsOpen: setIsModule11Open },
+                    12: { isOpen: isModule12Open, setIsOpen: setIsModule12Open },
+                    13: { isOpen: isModule13Open, setIsOpen: setIsModule13Open },
+                    14: { isOpen: isModule14Open, setIsOpen: setIsModule14Open },
+                    15: { isOpen: isModule15Open, setIsOpen: setIsModule15Open },
+                    16: { isOpen: isModule16Open, setIsOpen: setIsModule16Open },
+                    17: { isOpen: isModule17Open, setIsOpen: setIsModule17Open },
+                    18: { isOpen: isModule18Open, setIsOpen: setIsModule18Open },
+                    19: { isOpen: isModule19Open, setIsOpen: setIsModule19Open },
+                    20: { isOpen: isModule20Open, setIsOpen: setIsModule20Open },
+                    21: { isOpen: isModule21Open, setIsOpen: setIsModule21Open },
+                    22: { isOpen: isModule22Open, setIsOpen: setIsModule22Open },
+                    23: { isOpen: isModule23Open, setIsOpen: setIsModule23Open },
+                    24: { isOpen: isModule24Open, setIsOpen: setIsModule24Open },
+                    25: { isOpen: isModule25Open, setIsOpen: setIsModule25Open },
+                  };
+                  const moduleState = moduleStates[module.id as keyof typeof moduleStates];
+                  const isModuleOpen = moduleState.isOpen;
+                  const setIsModuleOpen = moduleState.setIsOpen;
+
+                  return (
+                    <Collapsible
+                      key={module.id}
+                      open={isModuleOpen}
+                      onOpenChange={setIsModuleOpen}
+                    >
+                      <SidebarMenuItem>
+                        <CollapsibleTrigger asChild>
+                          <SidebarMenuButton
+                            isActive={active}
+                            className={cn(
+                              "h-auto min-h-11 px-3 gap-2 transition-all duration-200 group w-full items-start py-2.5",
+                              "hover:bg-sidebar-accent/80 hover:shadow-sm",
+                              active && "bg-primary/20 dark:bg-primary/30 shadow-md font-semibold",
+                              "[&>span:nth-child(2)]:!overflow-visible [&>span:nth-child(2)]:!whitespace-normal [&>span:nth-child(2)]:!text-clip"
+                            )}
+                          >
+                            <span className={cn(numberClasses, "shrink-0 mt-0.5")}>{moduleNumber}.</span>
+                            <span className={titleClasses}>{module.title}</span>
+                            <span className="shrink-0 mt-0.5">
+                              {isModuleOpen ? (
+                                <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                              ) : (
+                                <ChevronRight className="h-4 w-4 transition-transform duration-200" />
+                              )}
+                            </span>
+                          </SidebarMenuButton>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="relative pl-0 pt-1 pb-2 overflow-hidden">
+                          <SidebarMenu className="gap-0.5">
+                            {topics.map((topic, index) => {
+                              const topicNumber = index + 1;
+                              const topicPath = `${module.path}/topic/${topicNumber}`;
+                              const isTopicActive = location.pathname === topicPath;
+                              const isLast = index === topics.length - 1;
+
+                              return (
+                                <SidebarMenuItem key={topic.id} className="relative">
+                                  {/* Tree Connectors */}
+                                  {!isLast ? (
+                                    <>
+                                      <div className="absolute left-[23px] top-0 bottom-0 w-[1.5px] bg-muted-foreground/30" />
+                                      <div className="absolute left-[23px] top-[18px] w-3 h-[1.5px] bg-muted-foreground/30" />
+                                    </>
+                                  ) : (
+                                    <>
+                                      <div className="absolute left-[23px] top-0 h-[6px] w-[1.5px] bg-muted-foreground/30" />
+                                      <div className="absolute left-[23px] top-[6px] w-3 h-3 border-l-[1.5px] border-b-[1.5px] border-muted-foreground/30 rounded-bl-xl" />
+                                    </>
                                   )}
-                                </span>
-                              </SidebarMenuButton>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent className="pl-4 pt-1 space-y-1 overflow-hidden">
-                              <SidebarMenu>
-                                {topics.map((topic, index) => {
-                                  // Extract topic number from topic.id (e.g., "m1-t1" -> 1, "m2-t1" -> 1)
-                                  const topicNumber = index + 1;
-                                  const topicPath = `${module.path}/topic/${topicNumber}`;
-                                  const isTopicActive = location.pathname === topicPath;
-                                  return (
-                                    <SidebarMenuItem key={topic.id}>
-                                <SidebarMenuButton
-                                        onClick={() => navigate(topicPath)}
-                                        isActive={isTopicActive}
-                                  className={cn(
-                                          "w-full px-3 py-2 gap-2 rounded-md text-left transition-all duration-200",
-                                          "hover:bg-sidebar-accent/60 hover:translate-x-1",
-                                          isTopicActive && "bg-primary/10 text-primary shadow-sm"
-                                        )}
-                                      >
-                                        <div className="flex flex-col">
-                                          <span className="text-xs font-semibold">{topic.title}</span>
-                                        </div>
-                                </SidebarMenuButton>
-                              </SidebarMenuItem>
-                                  );
-                                })}
-                              </SidebarMenu>
-                            </CollapsibleContent>
-                          </SidebarMenuItem>
-                        </Collapsible>
-                      );
-                    }
-                    
-                    // For modules without topics (shouldn't happen with only 1 and 2, but keeping for safety)
-                    return (
-                      <SidebarMenuItem key={module.id}>
-                        <SidebarMenuButton
-                          onClick={() => navigate(module.path)}
-                          isActive={active}
-                          className={cn(
-                            "h-11 px-3 gap-3 transition-all duration-200 group",
-                            "hover:bg-sidebar-accent/80 hover:shadow-sm",
-                            active && "bg-primary/20 dark:bg-primary/30 shadow-md font-semibold"
-                          )}
-                        >
-                          <span className={numberClasses}>{moduleNumber}.</span>
-                          <span className={titleClasses}>{module.title}</span>
-                        </SidebarMenuButton>
+
+                                  <SidebarMenuButton
+                                    onClick={() => navigate(topicPath)}
+                                    isActive={isTopicActive}
+                                    className={cn(
+                                      "w-[calc(100%-40px)] ml-9 h-auto min-h-9 py-1.5 px-3 gap-2 rounded-md text-left transition-all duration-200 border-l-[3px] border-transparent",
+                                      "hover:bg-sidebar-accent/50 hover:text-foreground",
+                                      isTopicActive
+                                        ? "bg-primary/10 text-primary font-medium border-primary"
+                                        : "text-muted-foreground font-normal"
+                                    )}
+                                  >
+                                    <div className="flex flex-col">
+                                      <span className="text-[13px] leading-snug">{topic.title}</span>
+                                    </div>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              );
+                            })}
+                          </SidebarMenu>
+                        </CollapsibleContent>
                       </SidebarMenuItem>
-                    );
-                  })}
-                </SidebarMenu>
-              </SidebarGroupContent>
+                    </Collapsible>
+                  );
+                }
+
+                // For modules without topics (shouldn't happen with only 1 and 2, but keeping for safety)
+                return (
+                  <SidebarMenuItem key={module.id}>
+                    <SidebarMenuButton
+                      onClick={() => navigate(module.path)}
+                      isActive={active}
+                      className={cn(
+                        "h-11 px-3 gap-3 transition-all duration-200 group",
+                        "hover:bg-sidebar-accent/80 hover:shadow-sm",
+                        active && "bg-primary/20 dark:bg-primary/30 shadow-md font-semibold"
+                      )}
+                    >
+                      <span className={numberClasses}>{moduleNumber}.</span>
+                      <span className={titleClasses}>{module.title}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
