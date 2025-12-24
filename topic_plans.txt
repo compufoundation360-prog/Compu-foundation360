@@ -1,0 +1,140 @@
+[ASCII WIREFRAME - TOPIC 4: PRINTING & SCANNING]
+
+SECTION 1: HERO - SPLIT LAYOUT
+-----------------------------------------------------------------------
+|  [ LEFT: TEXT ]                            |  [ RIGHT: VISUAL ]     |
+|                                            |                        |
+|  [Badge: "Paper Meets Digital"]            | [ IMG: 3D Printer ]    |
+|  TITLE: "Printing & Scanning Mastery"      | (Clean, no heavy bg)   |
+|  SUBTITLE: "Learn to bridge the physical   |                        |
+|  and digital worlds with ease."            |                        |
+|                                            |                        |
+-----------------------------------------------------------------------
+
+SECTION 2: CONCEPT - THE CYCLE (Interactive Diagram)
+-----------------------------------------------------------------------
+| (Title: "The Digital-Physical Cycle")                               |
+|                                                                     |
+|    [  📄 PAPER  ]  --->  ( SCANNING )  --->  [ 💻 DIGITAL ]       |
+|          ^                                         |                |
+|          |___________ ( PRINTING ) <_______________|                |
+|                                                                     |
+| [ Interactivity: Hover to see flow animation ]                      |
+-----------------------------------------------------------------------
+
+SECTION 3: PRINTING - INTERACTIVE CARDS (Grid x 3)
+-----------------------------------------------------------------------
+| (Title: "Mastering the Printer")                                    |
+|                                                                     |
+| [ CARD 1: CONNECTIONS ]   [ CARD 2: SETUP ]     [ CARD 3: SETTINGS ]|
+| | Icon: USB/Wifi      |   | Icon: Driver CD |   | Icon: Sliders    ||
+| | "Wired vs Wireless" |   | "Install/Add"   |   | "Color/B&W"      ||
+| | [Learn More ->]     |   | [Learn More ->] |   | [Learn More ->]  ||
+| ---------------------     -------------------   ------------------- |
+-----------------------------------------------------------------------
+
+SECTION 4: SIMULATOR - "THE PRINT DIALOG" (Interactive)
+-----------------------------------------------------------------------
+| (Title: "Try It: The Print Preview")                                |
+|                                                                     |
+|  [ PREVIEW AREA: IMAGE OF DOC ]   [ SETTINGS PANEL ]               |
+|                                   | Copies: [-] 1 [+]              |
+|                                   | Color: [X] Color [ ] B&W       |
+|                                   | Pages: [All]                   |
+|                                   |                                |
+|                                   | [ BIG BUTTON: PRINT ]          |
+|                                   ---------------------------------|
+| (Feedback: "Printing 1 copy in Color...")                          |
+-----------------------------------------------------------------------
+
+SECTION 5: SCANNING - STEP-BY-STEP (Tabs)
+-----------------------------------------------------------------------
+| (Title: "How to Scan")                                              |
+|                                                                     |
+| [ TAB 1: PREPARE ]  [ TAB 2: SCAN ]  [ TAB 3: SAVE ]                |
+|                                                                     |
+|  -----------------------------------------------------------------  |
+|  | [ STEP CONTENT ]                                              |  |
+|  | "Place document face down..."                                 |  |
+|  | [ IMG: Scanner Lid Open ]                                     |  |
+|  -----------------------------------------------------------------  |
+-----------------------------------------------------------------------
+
+SECTION 6: FORMATS - COMPARISON (Grid x 2)
+-----------------------------------------------------------------------
+| (Title: "Choosing the Right Format")                                |
+|                                                                     |
+| [ PDF ]                           [ JPG/PNG ]                       |
+| | Best for: Documents             | Best for: Photos                |
+| | "Editable text, multi-page"     | "High quality, single image"    |
+| --------------------------------- --------------------------------- |
+-----------------------------------------------------------------------
+
+SECTION 7: QUIZ
+-----------------------------------------------------------------------
+| (Scenario-based Quiz)                                               |
+| "Scenario: You need to email a signed contract. What do you do?"    |
+| [ Option A: Scan as PDF ]  [ Option B: Take blurry photo ] ...      |
+-----------------------------------------------------------------------
+
+
+[ASCII WIREFRAME - TOPIC 5: SCREENSHOTS & RECORDING]
+
+SECTION 1: HERO - SPLIT LAYOUT
+-----------------------------------------------------------------------
+|  [ LEFT: TEXT ]                            |  [ RIGHT: VISUAL ]     |
+|                                            |                        |
+|  [Badge: "Capture Everything"]             | [ IMG: Screen Capture ]|
+|  TITLE: "Screenshots & Recordings"         | (Clean, simple)        |
+|  SUBTITLE: "Save exactly what you see      |                        |
+|  on your screen instantly."                |                        |
+|                                            |                        |
+-----------------------------------------------------------------------
+
+SECTION 2: WHY CAPTURE? (Grid x 3)
+-----------------------------------------------------------------------
+| (Title: "Why do we need this?")                                     |
+|                                                                     |
+| [ CARD: PROOF ]      [ CARD: SHARING ]      [ CARD: TROUBLESHOOT ]  |
+| "Save receipts"      "Show friend error"    "Send to IT support"    |
+-----------------------------------------------------------------------
+
+SECTION 3: KEYBOARD SHORTCUTS - "CHEAT SHEET" (Interactive)
+-----------------------------------------------------------------------
+| (Title: "The Magic Keys")                                           |
+|                                                                     |
+| [ KEY: PrtScn ]       -> "Copies full screen"                       |
+| [ KEY: Alt+PrtScn ]   -> "Copies active window"                     |
+| [ KEY: Win+Shift+S ]  -> "Opens Snipping Tool (Best!)"              |
+|                                                                     |
+| (Click a key combo to see a demo animation of what it captures)      |
+-----------------------------------------------------------------------
+
+SECTION 4: SIMULATOR - "SNIPPING TOOL" (Interactive)
+-----------------------------------------------------------------------
+| (Title: "Try It: Take a Snip")                                      |
+|                                                                     |
+|  [ BACKGROUND IMAGE: A Mock Website ]                               |
+|                                                                     |
+|  [ OVERLAY UI: "Select Mode" ]                                      |
+|  [ Rectangular ]  [ Freeform ]  [ Window ]                          |
+|                                                                     |
+|  (User drags a box over the image -> "Snapshot Taken!")              |
+-----------------------------------------------------------------------
+
+SECTION 5: SCREEN RECORDING (Video/Gif Section)
+-----------------------------------------------------------------------
+| (Title: "Recording Video")                                          |
+|                                                                     |
+| [ TEXT: "Sometimes a picture isn't enough." ]                       |
+| "Use Win+G (Game Bar) to record video."                             |
+|                                                                     |
+| [ VIDEO PLAYER: Short tutorial on Win+G ]                           |
+-----------------------------------------------------------------------
+
+SECTION 6: QUIZ
+-----------------------------------------------------------------------
+| (Scenario-based Quiz)                                               |
+| "Scenario: Tech support needs to see an error message. Do you..?"   |
+| [ Option A: Write it down ] [ Option B: Send Screenshot ] ...       |
+-----------------------------------------------------------------------

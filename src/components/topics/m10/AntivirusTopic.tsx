@@ -147,6 +147,37 @@ export function AntivirusTopic() {
                 </div>
             </section>
 
+            {/* NEW: HOW IT WORKS (INTELLECT) */}
+            <section className="container mx-auto px-4">
+                <div className="bg-blue-600 text-white p-12 rounded-[40px] shadow-2xl overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[120px]"></div>
+                    <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+                        <div className="text-left">
+                            <Badge className="bg-white text-blue-600 hover:bg-white mb-4">DEEP DIVE</Badge>
+                            <h3 className="text-4xl font-bold mb-6">Signatures vs. Heuristics</h3>
+                            <p className="text-blue-100 text-lg leading-relaxed mb-6">
+                                How does an Antivirus catch a virus that was created just 5 minutes ago?
+                            </p>
+                            <div className="space-y-4">
+                                <div className="p-4 bg-white/10 rounded-xl border border-white/20">
+                                    <h4 className="font-bold mb-1">Fingerprinting (Signatures)</h4>
+                                    <p className="text-sm">Matching a file against a list of known "criminals". This is 100% accurate but only works for old viruses.</p>
+                                </div>
+                                <div className="p-4 bg-white/10 rounded-xl border border-white/20">
+                                    <h4 className="font-bold mb-1">Behavior Analysis (Heuristics)</h4>
+                                    <p className="text-sm">Looking for "shady" behavior. If a file tries to delete your system logs and hide itself, the AV blocks it even if it has never seen that file before.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="w-64 h-64 bg-white/5 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center">
+                                <Bug className="w-32 h-32 opacity-20 animate-bounce" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* 5. TOOLS LIST */}
             <section className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">

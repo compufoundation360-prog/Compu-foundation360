@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Settings, ChevronRight, ChevronDown } from "lucide-react";
+import { Settings, ChevronRight, ChevronDown, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,6 +49,30 @@ export function NewAppSidebar() {
 
             <SidebarContent className="p-0">
                 <SidebarMenu className="gap-0.5 px-2 py-2">
+                    {/* DASHBOARD LINK */}
+                    <SidebarMenuItem>
+                        <Link to="/dashboard">
+                            <SidebarMenuButton
+                                isActive={location.pathname === "/dashboard"}
+                                className={cn(
+                                    "w-full justify-start h-auto min-h-[40px] px-3 py-2 transition-all duration-200 select-none",
+                                    "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                                    location.pathname === "/dashboard" && "bg-sidebar-accent font-medium text-primary shadow-sm"
+                                )}
+                            >
+                                <LayoutDashboard className="h-4 w-4 shrink-0" />
+                                <span className="text-sm font-medium ml-3">Dashboard</span>
+                            </SidebarMenuButton>
+                        </Link>
+                    </SidebarMenuItem>
+
+                    {/* MODULES HEADER */}
+                    <div className="px-2 py-3 mt-2 mb-1">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 select-none">
+                            Modules
+                        </h4>
+                    </div>
+
                     {modules.map((module) => {
                         const isActive = location.pathname.startsWith(module.path);
                         const isOpen = expandedModuleId === module.id;
@@ -91,8 +115,17 @@ export function NewAppSidebar() {
                                         <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                                             <div className="relative ml-[15px] mt-1 mb-2 pl-3 space-y-0.5">
                                                 {module.topics.map((topic, index) => {
-                                                    const topicNumber = index + 1;
-                                                    const topicPath = `${module.path}/topic/${topicNumber}`;
+                                                    const isIntro = topic.id.endsWith("-intro");
+                                                    let topicPath;
+
+                                                    if (isIntro) {
+                                                        topicPath = `${module.path}/topic/${topic.id}`;
+                                                    } else {
+                                                        const firstIsIntro = module.topics.length > 0 && module.topics[0].id.endsWith("-intro");
+                                                        const effectiveNumber = firstIsIntro ? index : index + 1;
+                                                        topicPath = `${module.path}/topic/${effectiveNumber}`;
+                                                    }
+
                                                     const isTopicActive = location.pathname === topicPath;
                                                     const isLast = index === module.topics.length - 1;
 

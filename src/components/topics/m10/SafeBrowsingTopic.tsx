@@ -279,6 +279,25 @@ export function SafeBrowsingTopic() {
             </section>
 
 
+            {/* NEW: THE PADLOCK PARADOX */}
+            <section className="container mx-auto px-4">
+                <div className="bg-emerald-500/10 border border-emerald-500/20 p-10 rounded-[40px] flex flex-col md:flex-row items-center gap-10">
+                    <div className="text-6xl animate-pulse">🔒</div>
+                    <div>
+                        <Badge className="bg-emerald-600 mb-2">PRO LEVEL KNOWLEDGE</Badge>
+                        <h3 className="text-3xl font-bold mb-4">The Padlock Paradox</h3>
+                        <p className="text-muted-foreground leading-relaxed text-left">
+                            Many people think the little <strong>Padlock</strong> in the address bar means "This site is safe."
+                            <strong>That is a dangerous myth.</strong> The padlock only means the connection is private (no one can eavesdrop).
+                            A scammer can have a padlock on their fake bank site too!
+                        </p>
+                        <div className="mt-4 p-4 bg-background/50 rounded-xl border border-emerald-500/30 text-left">
+                            <p className="font-bold text-sm">💡 THE LESSON: Encryption (HTTPS) protects the pipe, but not the person at the other end. Always check the domain name!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* 4. NEW: BROWSER WARNINGS */}
             <section className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -291,7 +310,7 @@ export function SafeBrowsingTopic() {
                             <div className="w-3 h-3 rounded-full bg-white/20"></div>
                             <div className="w-3 h-3 rounded-full bg-white/20"></div>
                             <div className="bg-red-900 px-4 py-1 rounded text-xs flex-1 flex items-center gap-2">
-                                <AlertTriangle className="w-3 h-3" /> Not Secure | dangerous-site.com
+                                <AlertTriangle className="w-3 h-3 text-white" /> Not Secure | dangerous-site.com
                             </div>
                         </div>
 

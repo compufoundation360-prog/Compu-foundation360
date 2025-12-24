@@ -107,6 +107,31 @@ export function FirewallTopic() {
                 </div>
             </section>
 
+            {/* NEW: INBOUND VS OUTBOUND */}
+            <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-10 items-center bg-orange-600 text-white p-10 rounded-[40px] shadow-xl">
+                    <div className="text-left space-y-4">
+                        <h3 className="text-3xl font-bold">Inbound vs. Outbound</h3>
+                        <p className="text-orange-100 leading-relaxed">
+                            A firewall is a two-way street. It doesn't just block people coming IN; it monitors what goes OUT.
+                        </p>
+                        <div className="mt-6 space-y-4">
+                            <div className="bg-white/10 p-4 rounded-xl border border-white/10">
+                                <span className="font-bold">⬅️ Inbound (The Guard):</span> Prevents hackers from "knocking" on your computer's ports or entering your network.
+                            </div>
+                            <div className="bg-white/10 p-4 rounded-xl border border-white/10">
+                                <span className="font-bold">➡️ Outbound (The Whistleblower):</span> Stops malware (like Spyware) on your PC from sending your private data back to the hacker.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex justify-center">
+                        <div className="w-48 h-48 rounded-full bg-white/10 border-8 border-white/20 flex items-center justify-center animate-pulse">
+                            <ShieldAlert className="w-20 h-20 text-white" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* 4. INTERACTIVE GAME */}
             <section className="container mx-auto px-4">
                 <div className="max-w-3xl mx-auto text-center space-y-6">

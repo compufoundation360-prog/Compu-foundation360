@@ -56,8 +56,8 @@ export function ScamsTopic() {
                             {callScript.slice(0, callStep + 1).map((line, i) => (
                                 <div key={i} className={`flex ${line.speaker === "you" ? "justify-end" : "justify-start"}`}>
                                     <div className={`max-w-[80%] p-4 rounded-xl text-sm ${line.speaker === "you" ? "bg-blue-500 text-white rounded-br-none" :
-                                            line.speaker === "system" ? "bg-yellow-500/10 border border-yellow-500 text-yellow-600 w-full text-center font-bold" :
-                                                "bg-gray-200 dark:bg-gray-800 rounded-bl-none text-foreground"
+                                        line.speaker === "system" ? "bg-yellow-500/10 border border-yellow-500 text-yellow-600 w-full text-center font-bold" :
+                                            "bg-gray-200 dark:bg-gray-800 rounded-bl-none text-foreground"
                                         }`}>
                                         <div className="text-xs opacity-50 mb-1 uppercase tracking-wider">{line.speaker}</div>
                                         <div className={line.style}>{line.text}</div>
@@ -170,6 +170,31 @@ export function ScamsTopic() {
                             <h3 className="text-3xl font-black text-red-600 mb-2">VIRUS DETECTED!!!</h3>
                             <p className="font-bold">Call Microsoft Support: +1-800-FAKE-NUM</p>
                             <p className="text-xs text-muted-foreground mt-4">(This is just a webpage, not a real virus. Close the tab.)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* NEW: EMERGING SCAMS */}
+            <section className="container mx-auto px-4">
+                <div className="bg-gradient-to-br from-red-600 to-black text-white p-12 rounded-[40px] shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-red-400/10 blur-[130px]"></div>
+                    <div className="relative z-10 text-center space-y-8">
+                        <Badge className="bg-white text-red-600">WATCH OUT: 2025 EDITION</Badge>
+                        <h3 className="text-4xl font-black">Emerging Scams to Fear</h3>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <Card className="bg-white/5 border-white/10 p-6 text-white text-left">
+                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">🤖 AI Voice Cloning</h4>
+                                <p className="text-sm text-slate-300">Scammers use a 3-second clip of your relative's voice to fake a "kidnapping" or "accident" call. Always have a 'family safe word'.</p>
+                            </Card>
+                            <Card className="bg-white/5 border-white/10 p-6 text-white text-left">
+                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">🖼️ Quishing (QR Phishing)</h4>
+                                <p className="text-sm text-slate-300">Fake QR codes on parking meters or restaurant menus that lead to stolen credit card forms.</p>
+                            </Card>
+                            <Card className="bg-white/5 border-white/10 p-6 text-white text-left">
+                                <h4 className="text-xl font-bold mb-2 flex items-center gap-2">🐖 Pig Butchering</h4>
+                                <p className="text-sm text-slate-300">A long-term scam where someone befriends you on WhatsApp or dating apps, builds trust for weeks, then "helps" you invest in fake Crypto.</p>
+                            </Card>
                         </div>
                     </div>
                 </div>

@@ -179,6 +179,42 @@ export function CyberHygieneTopic() {
                 </div>
             </section>
 
+            {/* NEW: IOT HYGIENE */}
+            <section className="container mx-auto px-4">
+                <div className="bg-indigo-900 text-white p-12 rounded-[40px] flex flex-col md:flex-row items-center gap-12 shadow-2xl relative overflow-hidden">
+                    <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-500/20 rounded-full blur-[80px]"></div>
+                    <div className="flex-1 space-y-6 text-left">
+                        <Badge className="bg-indigo-400 text-white">THE HIDDEN RISK</Badge>
+                        <h3 className="text-4xl font-bold">Hygiene for the "Internet of Things" (IoT)</h3>
+                        <p className="text-indigo-100 text-lg leading-relaxed">
+                            Your smart fridge, smart lights, and security cameras are often the **weakest link** in your home security.
+                        </p>
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-4">
+                                <span className="bg-indigo-700 p-2 rounded-full">🚫</span>
+                                <div>
+                                    <p className="font-bold">Default Passwords:</p>
+                                    <p className="text-sm text-indigo-200">Scammers scan for devices using 'admin/admin'. Change them immediately!</p>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-4">
+                                <span className="bg-indigo-700 p-2 rounded-full">🔄</span>
+                                <div>
+                                    <p className="font-bold">Forgotten Updates:</p>
+                                    <p className="text-sm text-indigo-200">Cameras rarely ask you to update. You must login to their apps and check manually.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="w-full md:w-1/3 flex justify-center">
+                        <div className="relative">
+                            <RefreshCw className="w-48 h-48 text-indigo-400/20 animate-spin-slow" />
+                            <Shield className="absolute inset-0 m-auto w-24 h-24 text-indigo-400" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <TopicNavigation currentModuleId={10} currentTopicId="m10-t12" />
         </div>
     );

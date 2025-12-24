@@ -789,30 +789,30 @@ export const module1Lessons: Lesson[] = [
           title: 'Data Flow in Computer System',
           data: {
             steps: [
-              { 
-                id: "input", 
-                label: "Input", 
-                description: "User enters data (e.g., typing on keyboard)" 
+              {
+                id: "input",
+                label: "Input",
+                description: "User enters data (e.g., typing on keyboard)"
               },
-              { 
-                id: "storage1", 
-                label: "Temporary Storage", 
-                description: "Data stored in RAM temporarily" 
+              {
+                id: "storage1",
+                label: "Temporary Storage",
+                description: "Data stored in RAM temporarily"
               },
-              { 
-                id: "process", 
-                label: "Processing", 
-                description: "CPU processes the data" 
+              {
+                id: "process",
+                label: "Processing",
+                description: "CPU processes the data"
               },
-              { 
-                id: "output", 
-                label: "Output", 
-                description: "Results displayed on monitor" 
+              {
+                id: "output",
+                label: "Output",
+                description: "Results displayed on monitor"
               },
-              { 
-                id: "storage2", 
-                label: "Permanent Storage", 
-                description: "Data saved to hard disk if needed" 
+              {
+                id: "storage2",
+                label: "Permanent Storage",
+                description: "Data saved to hard disk if needed"
               }
             ]
           }
@@ -10145,145 +10145,26 @@ export const module6Lessons: Lesson[] = [
 export const module11Lessons: Lesson[] = [
   {
     id: 1,
-    title: "Online Forms & Accounts",
-    description: "Learn about filling forms, OTP verification, and downloads",
-    duration: "12 min",
+    title: "Digital Citizenship Basics",
+    description: "Your digital identity, rights, and responsibilities online.",
+    duration: "15 min",
     content: {
       sections: [
         {
           type: 'text',
-          title: 'Working with Online Forms',
+          title: 'Digital Citizenship',
           data: {
-            text: "Online forms are used to create accounts and submit information.\n\nUnderstanding how to fill them correctly is essential for digital literacy.",
-            audio: true,
-            audioTitle: "Online Forms Introduction"
-          }
-        },
-        {
-          type: 'card',
-          title: 'Filling Forms',
-          data: {
-            cards: [
-              {
-                title: "📝 Form Fields",
-                description: "Forms have fields for name, email, password, and more.\n\nFill required fields marked with asterisk (*). Double-check information before submitting.",
-                image: "form-fields.jpg",
-                details: []
-              },
-              {
-                title: "✅ Form Validation",
-                description: "Forms check if information is correct.\n\nShows errors if fields are empty or invalid. Fix errors before submitting.",
-                image: "form-validation.jpg",
-                details: []
-              },
-              {
-                title: "💾 Saving Forms",
-                description: "Some forms can be saved and completed later.\n\nUse 'Save Draft' option if available. Return to complete later.",
-                image: "save-form.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'video',
-          title: 'Video: Online Forms',
-          data: {
-            description: "Learn how to fill online forms correctly and securely."
-          }
-        },
-        {
-          type: 'card',
-          title: 'OTP Verification',
-          data: {
-            cards: [
-              {
-                title: "🔐 What is OTP?",
-                description: "One-Time Password sent to your phone or email.\n\nUsed to verify your identity. Enter code to complete registration.",
-                image: "otp-verification.jpg",
-                details: []
-              },
-              {
-                title: "📱 Receiving OTP",
-                description: "OTP arrives via SMS or email.\n\nCheck your phone or email inbox. Code expires quickly.",
-                image: "receive-otp.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'card',
-          title: 'Downloads',
-          data: {
-            cards: [
-              {
-                title: "⬇️ Downloading Files",
-                description: "Save files from internet to your computer.\n\nClick download link. Choose save location. Wait for download to complete.",
-                image: "download-files.jpg",
-                details: []
-              },
-              {
-                title: "📁 Download Location",
-                description: "Files usually download to Downloads folder.\n\nCheck browser settings to change location. Organize downloads regularly.",
-                image: "download-location.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'text',
-          title: 'Key Takeaways',
-          data: {
-            text: "Fill forms carefully and verify information before submitting.\n\nUse OTP to secure your accounts. Organize downloaded files regularly."
+            text: "This topic is interactive. Click to start.",
           }
         }
       ]
     },
-    quiz: [
-      {
-        id: 1,
-        question: "What does OTP stand for?",
-        options: [
-          "One-Time Password",
-          "Online Transfer Protocol",
-          "Official Time Period",
-          "Open Text Program"
-        ],
-        correctAnswer: 0,
-        explanation: "OTP stands for One-Time Password, a security code sent to verify your identity when creating accounts."
-      },
-      {
-        id: 2,
-        question: "What should you do before submitting an online form?",
-        options: [
-          "Submit immediately",
-          "Double-check all information",
-          "Skip required fields",
-          "Leave it incomplete"
-        ],
-        correctAnswer: 1,
-        explanation: "Always double-check all information in online forms before submitting to ensure accuracy and avoid errors."
-      },
-      {
-        id: 3,
-        question: "Where do downloaded files usually go?",
-        options: [
-          "Desktop",
-          "Downloads folder",
-          "Documents",
-          "Nowhere"
-        ],
-        correctAnswer: 1,
-        explanation: "Downloaded files are typically saved to the Downloads folder, though you can change this location in browser settings."
-      }
-    ]
+    quiz: []
   },
   {
     id: 2,
     title: "Email Basics",
-    description: "Learn about sending emails, attaching files, and email etiquette",
+    description: "Master the art of email: composing, etiquette, and understanding your address.",
     duration: "14 min",
     content: {
       sections: [
@@ -10453,165 +10334,14 @@ export const module11Lessons: Lesson[] = [
       sections: [
         {
           type: 'text',
-          title: 'Working with Office Tools',
+          title: 'Office Tools',
           data: {
-            text: "Office tools help you create documents, spreadsheets, and presentations.\n\nCommon tools include Word, Excel, and PDF readers.",
-            audio: true,
-            audioTitle: "Office Tools Introduction"
-          }
-        },
-        {
-          type: 'card',
-          title: 'MS Word Operations',
-          data: {
-            cards: [
-              {
-                title: "📄 Creating Documents",
-                description: "Word lets you create text documents.\n\nType text, format fonts, add images. Save as .docx file.",
-                image: "word-document.jpg",
-                details: []
-              },
-              {
-                title: "✏️ Text Formatting",
-                description: "Change font size, color, and style.\n\nBold, italic, underline text. Adjust alignment and spacing.",
-                image: "text-formatting.jpg",
-                details: []
-              },
-              {
-                title: "💾 Saving Documents",
-                description: "Save documents regularly to avoid losing work.\n\nUse Ctrl+S to save quickly. Choose save location.",
-                image: "save-document.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'card',
-          title: 'Excel Operations',
-          data: {
-            cards: [
-              {
-                title: "📊 Spreadsheets",
-                description: "Excel organizes data in rows and columns.\n\nCreate tables, charts, and calculations. Useful for budgets and lists.",
-                image: "excel-spreadsheet.jpg",
-                details: []
-              },
-              {
-                title: "🔢 Formulas",
-                description: "Excel can calculate numbers automatically.\n\nUse formulas like =SUM() for totals. Updates when data changes.",
-                image: "excel-formulas.jpg",
-                details: []
-              },
-              {
-                title: "📈 Charts",
-                description: "Create visual charts from data.\n\nBar charts, pie charts, line graphs. Makes data easy to understand.",
-                image: "excel-charts.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'video',
-          title: 'Video: Office Tools',
-          data: {
-            description: "See how to use Word and Excel for common tasks."
-          }
-        },
-        {
-          type: 'card',
-          title: 'PDF Operations',
-          data: {
-            cards: [
-              {
-                title: "📑 What is PDF?",
-                description: "PDF (Portable Document Format) preserves document formatting.\n\nLooks same on all devices. Cannot be easily edited.",
-                image: "pdf-document.jpg",
-                details: []
-              },
-              {
-                title: "👁️ Viewing PDFs",
-                description: "Open PDFs with PDF reader software.\n\nAdobe Reader, browser, or built-in viewer. Scroll to read pages.",
-                image: "view-pdf.jpg",
-                details: []
-              },
-              {
-                title: "🖨️ Printing PDFs",
-                description: "Print PDFs like regular documents.\n\nFile → Print. Choose printer and settings. Click Print.",
-                image: "print-pdf.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'comparison',
-          title: 'Office Tools Comparison',
-          data: {
-            type: 'table',
-            items: [
-              {
-                tool: "Word",
-                use: "Text documents",
-                format: ".docx",
-                features: "Formatting, images"
-              },
-              {
-                tool: "Excel",
-                use: "Data and calculations",
-                format: ".xlsx",
-                features: "Formulas, charts"
-              },
-              {
-                tool: "PDF",
-                use: "Fixed format documents",
-                format: ".pdf",
-                features: "Viewing, printing"
-              }
-            ]
+            text: "This topic is interactive. Click to start."
           }
         }
       ]
     },
-    quiz: [
-      {
-        id: 1,
-        question: "What is MS Word used for?",
-        options: [
-          "Creating spreadsheets",
-          "Creating text documents",
-          "Viewing PDFs",
-          "Sending emails"
-        ],
-        correctAnswer: 1,
-        explanation: "MS Word is used for creating and editing text documents with formatting options like fonts, images, and layouts."
-      },
-      {
-        id: 2,
-        question: "What can Excel do?",
-        options: [
-          "Only type text",
-          "Organize data, calculate numbers, and create charts",
-          "Send emails",
-          "Browse internet"
-        ],
-        correctAnswer: 1,
-        explanation: "Excel can organize data in spreadsheets, perform calculations using formulas, and create visual charts from data."
-      },
-      {
-        id: 3,
-        question: "What is a PDF?",
-        options: [
-          "A spreadsheet program",
-          "A document format that preserves formatting",
-          "An email service",
-          "A web browser"
-        ],
-        correctAnswer: 1,
-        explanation: "PDF (Portable Document Format) is a file format that preserves document formatting and looks the same on all devices."
-      }
-    ]
+    quiz: []
   },
   {
     id: 4,

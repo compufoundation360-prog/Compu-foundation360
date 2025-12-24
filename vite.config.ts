@@ -28,8 +28,14 @@ export default defineConfig(({ mode }) => ({
             if (id.includes('react-router')) {
               return 'router-vendor';
             }
+            if (id.includes('lucide-react')) {
+              return 'lucide-vendor';
+            }
             if (id.includes('recharts')) {
               return 'charts-vendor';
+            }
+            if (id.includes('motion')) {
+              return 'motion-vendor';
             }
             if (id.includes('@radix-ui')) {
               return 'radix-vendor';
@@ -44,9 +50,15 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('ModuleDetail')) {
             return 'module-detail';
           }
+          if (id.includes('Module11')) {
+            return 'module-11';
+          }
+          if (id.includes('Module12')) {
+            return 'module-12';
+          }
         },
       },
     },
-    chunkSizeWarningLimit: 1000, // Increase warning limit to 1MB (optional)
+    chunkSizeWarningLimit: 2000,
   },
 }));

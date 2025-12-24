@@ -152,6 +152,38 @@ export function SecureWiFiTopic() {
                 </div>
             </section>
 
+            {/* NEW: GUEST NETWORKS */}
+            <section className="container mx-auto px-4">
+                <div className="bg-cyan-600 text-white p-12 rounded-[40px] shadow-2xl overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 blur-[100px]"></div>
+                    <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+                        <div className="text-left space-y-6">
+                            <Badge className="bg-white text-cyan-600 hover:bg-white">SMART SECURITY</Badge>
+                            <h3 className="text-4xl font-bold">The Guest Network Hack</h3>
+                            <p className="text-cyan-50 text-lg leading-relaxed">
+                                When friends ask for WiFi, don't give them your main password. Use a <strong>Guest Network</strong>.
+                            </p>
+                            <div className="space-y-4">
+                                <div className="p-4 bg-white/10 rounded-xl border border-white/20">
+                                    <h4 className="font-bold">Device Isolation</h4>
+                                    <p className="text-sm">Guest networks prevent visitors from seeing your shared folders, printers, or smart cameras.</p>
+                                </div>
+                                <div className="p-4 bg-white/10 rounded-xl border border-white/20">
+                                    <h4 className="font-bold">The IoT Buffer</h4>
+                                    <p className="text-sm">Keep cheap smart bulbs and un-updated gadgets on the Guest network so they can't infect your main PC.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center flex-col items-center">
+                            <div className="w-56 h-56 bg-white/10 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center animate-pulse mb-4">
+                                <Wifi className="w-24 h-24 text-white opacity-40" />
+                            </div>
+                            <span className="font-mono text-sm opacity-60">Isolate → Protect → Browse</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <TopicNavigation currentModuleId={10} currentTopicId="m10-t9" />
         </div>
     );

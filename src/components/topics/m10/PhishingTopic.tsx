@@ -10,7 +10,9 @@ import {
     AlertTriangle,
     FileWarning,
     Smartphone,
-    Phone
+    Phone,
+    MessageSquare,
+    Target
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { TopicNavigation } from "@/components/TopicNavigation";
@@ -178,6 +180,45 @@ export function PhishingTopic() {
                         <h3 className="text-xl font-bold mb-2">Vishing (Voice)</h3>
                         <p className="text-muted-foreground">Scammers calling you. "This is Microsoft support, your PC has a virus."</p>
                     </Card>
+                    <Card className="p-6 hover:shadow-lg transition-all border-l-4 border-l-pink-500">
+                        <MessageSquare className="w-10 h-10 text-pink-500 mb-4" />
+                        <h3 className="text-xl font-bold mb-2">WhatsApp Scams</h3>
+                        <p className="text-muted-foreground">Messages from "Family" asking for money or sharing "Win a Prize" QR codes.</p>
+                    </Card>
+                </div>
+            </section>
+
+            {/* NEW: ADVANCED TECHNIQUES */}
+            <section className="container mx-auto px-4">
+                <div className="flex flex-col md:flex-row gap-8 items-center bg-slate-900 text-white p-10 rounded-[40px] overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px]"></div>
+                    <div className="flex-1 space-y-6">
+                        <Badge className="bg-primary hover:bg-primary">ADVANCED DEFENSE</Badge>
+                        <h2 className="text-3xl font-bold">Spear Phishing vs. Whaling</h2>
+                        <p className="text-slate-300 leading-relaxed">
+                            Standard phishing is like throwing a net (catching anyone).
+                            Advanced attacks are surgical and much harder to spot.
+                        </p>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                                <Target className="w-8 h-8 text-primary mb-2" />
+                                <h4 className="font-bold">Spear Phishing</h4>
+                                <p className="text-xs text-slate-400">Targeted at YOU. They use your name, your job title, or your recent purchases to look real.</p>
+                            </div>
+                            <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                                <ShieldAlert className="w-8 h-8 text-yellow-500 mb-2" />
+                                <h4 className="font-bold">Whaling</h4>
+                                <p className="text-xs text-slate-400">Targeted at CEOs or big fish. They use "legal subpoenas" or "tax audits" to cause panic.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full md:w-1/3 flex justify-center">
+                        <div className="relative">
+                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-primary/50 animate-spin-slow flex items-center justify-center">
+                                <Target className="w-24 h-24 text-primary" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

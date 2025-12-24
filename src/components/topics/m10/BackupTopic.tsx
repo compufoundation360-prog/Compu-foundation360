@@ -160,6 +160,24 @@ export function BackupTopic() {
                 </div>
             </section>
 
+            {/* NEW: SYSTEM RESTORE */}
+            <section className="container mx-auto px-4">
+                <div className="bg-slate-900 text-white p-10 rounded-[40px] flex flex-col md:flex-row items-center gap-10">
+                    <div className="flex-1 space-y-6 text-left">
+                        <Badge className="bg-emerald-500">WINDOWS TIP</Badge>
+                        <h3 className="text-3xl font-bold">System Restore Points</h3>
+                        <p className="text-slate-300 leading-relaxed">
+                            Think of a <strong>Restore Point</strong> as a "Save Game" for your computer's settings and drivers.
+                            If you install a bad update or your PC starts acting weird, you can "Wind Back the Clock" without losing your photos or documents.
+                        </p>
+                        <div className="p-4 bg-emerald-500/10 border-l-4 border-emerald-500 rounded text-sm">
+                            <strong>Note:</strong> This only fixes system files and settings. It does NOT backup your personal files (Photos/Words). You still need the 3-2-1 rule!
+                        </div>
+                    </div>
+                    <div className="text-9xl opacity-20">🕒</div>
+                </div>
+            </section>
+
             <TopicNavigation currentModuleId={10} currentTopicId="m10-t10" />
         </div>
     );

@@ -1,0 +1,93 @@
+[ASCII WIREFRAME - TOPIC 6: CYBER ETHICS]
+
+SECTION 1: HERO - SPLIT LAYOUT
+-----------------------------------------------------------------------
+|  [ LEFT: TEXT ]                            |  [ RIGHT: VISUAL ]     |
+|                                            |                        |
+|  [Badge: "Good Digital Citizen"]           | [ IMG: Digital World ] |
+|  TITLE: "Cyber Ethics & You"               | (Globe with connections)|
+|  SUBTITLE: "How to stay safe, respectful,  |                        |
+|  and responsible in the online world."     |                        |
+|                                            |                        |
+-----------------------------------------------------------------------
+
+SECTION 2: THE 3 GOLDEN RULES (Grid x 3)
+-----------------------------------------------------------------------
+| (Title: "The Code of the Web")                                      |
+|                                                                     |
+| [ CARD: RESPECT ]    [ CARD: PRIVACY ]      [ CARD: HONESTY ]       |
+| "Treat others nicely"  "Keep secrets safe"    "Don't cheat/steal"   |
+| (Icon: Handshake)    (Icon: Lock)           (Icon: Scale)           |
+-----------------------------------------------------------------------
+
+SECTION 3: DIGITAL FOOTPRINT (Interactive Visual)
+-----------------------------------------------------------------------
+| (Title: "Your Digital Footprint")                                   |
+|                                                                     |
+|   [ FOOTPRINT PATH ANIMATION ]                                      |
+|   Step 1: "Posted a photo" -> [ Icon: Image ] (Stays forever)       |
+|   Step 2: "Mean comment" -> [ Icon: Message ] (Hard to delete)      |
+|                                                                     |
+|   (Interactive: "Walk" down the path to see what sticks)            |
+-----------------------------------------------------------------------
+
+SECTION 4: SIMULATOR - "THE COMMENT SECTION" (Choice Based)
+-----------------------------------------------------------------------
+| (Title: "To Post or Not To Post?")                                  |
+|                                                                     |
+|  [ SCENARIO: "Someone posted a funny bad photo of your friend." ]   |
+|                                                                     |
+|  [ OPTION A: Share it & Laugh ]  [ OPTION B: Message them nicely ]  |
+|                                                                     |
+|  (Feedback: "Option B is correct! Be a true friend.")               |
+-----------------------------------------------------------------------
+
+SECTION 5: COPYRIGHT & PLAGIARISM (Split Text/Image)
+-----------------------------------------------------------------------
+| (Title: "Respecting Creativity")                                    |
+|                                                                     |
+|  [ LEFT: TEXT ]                            | [ RIGHT: IMAGE ]       |
+|  "Don't steal art or homework."            | [ IMG: Copyright ]     |
+|  "Always give credit."                     | (© Symbol creative)    |
+-----------------------------------------------------------------------
+
+SECTION 6: QUIZ
+-----------------------------------------------------------------------
+| (Scenario-based Quiz)                                               |
+| "Scenario: You found a cool song online. Can you sell it?"          |
+| [ No, that's piracy ]  [ Yes, I found it ] ...                      |
+-----------------------------------------------------------------------
+
+
+[ASCII WIREFRAME - TOPIC 7: FUTURE TECH (BONUS)]
+(Since original Module 11 list stopped at 6, adding a forward-looking closure)
+
+SECTION 1: HERO - SPLIT LAYOUT
+-----------------------------------------------------------------------
+|  [ LEFT: TEXT ]                            |  [ RIGHT: VISUAL ]     |
+|                                            |                        |
+|  [Badge: "What's Next?"]                   | [ IMG: Robot/AI ]      |
+|  TITLE: "The Future of Computing"          | (Futuristic 3D render) |
+|  SUBTITLE: "AI, Robots, and what comes     |                        |
+|  next for you!"                            |                        |
+|                                            |                        |
+-----------------------------------------------------------------------
+
+SECTION 2: EMERGING TECH (Cards)
+-----------------------------------------------------------------------
+| (Title: "Tomorrow's Tools")                                         |
+|                                                                     |
+| [ AI ]               [ VR / AR ]           [ CLOUD ]                |
+| "Thinking Machines"  "Virtual Worlds"      "Everywhere Data"        |
+-----------------------------------------------------------------------
+
+SECTION 3: YOU ARE READY (Conclusion)
+-----------------------------------------------------------------------
+| (Title: "Your Journey Starts Here")                                 |
+|                                                                     |
+|  [ BIG BADGE: "FOUNDATION COMPLETE" ]                               |
+|                                                                     |
+|  "You have mastered the basics. Now go build something amazing!"    |
+|                                                                     |
+|  [ BUTTON: Finish Course ]                                          |
+-----------------------------------------------------------------------

@@ -16,6 +16,7 @@ export const modules: Module[] = [
         title: "Introduction to Computers",
         path: "/module/1",
         topics: [
+            { id: "m1-intro", title: "▶ Intro Video" }, // Added Intro Video
             { id: "m1-t1", title: "What is a Computer?" },
             { id: "m1-t2", title: "Types of Computers" },
             { id: "m1-t3", title: "Hardware Basics" },
@@ -168,6 +169,7 @@ export const modules: Module[] = [
             { id: "m9-t9", title: "Hotspot & Tethering" },
             { id: "m9-t10", title: "Mobile Data Networks" },
             { id: "m9-t11", title: "Common Network Problems" },
+            { id: "m9-t12", title: "How Internet Works" },
         ]
     },
     {
