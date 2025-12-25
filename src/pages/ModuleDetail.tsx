@@ -1999,10 +1999,14 @@ const ModuleDetail = () => {
   // Get image URL helper - works with Vite's asset handling
   const getImageUrl = (imageName: string) => {
     if (!imageName) return "";
+    // If it's an absolute URL, return as is
+    if (imageName.startsWith("http")) return imageName;
+    
+    // In production, we reference from root since assets are in public/
     if (imageName.startsWith("module-media/")) {
-      return `/src/assets/${imageName}`;
+      return `/${imageName}`;
     }
-    return `/src/assets/module-media/${imageName}`;
+    return `/module-media/${imageName}`;
   };
 
   // Redirect Module 2 to Topic 1 if no topic specified (topic-based navigation)
