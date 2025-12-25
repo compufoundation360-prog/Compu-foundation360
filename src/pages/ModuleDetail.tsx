@@ -2001,7 +2001,7 @@ const ModuleDetail = () => {
     if (!imageName) return "";
     // If it's an absolute URL, return as is
     if (imageName.startsWith("http")) return imageName;
-    
+
     // In production, we reference from root since assets are in public/
     if (imageName.startsWith("module-media/")) {
       return `/${imageName}`;
@@ -6609,7 +6609,7 @@ const ModuleDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 ? 'none' : undefined }}>
+      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 ? 'none' : undefined }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className={`absolute top-10 left-10 w-72 h-72 ${isModule1Light ? 'bg-[#2C666E]/10' : 'bg-primary/5'} dark:bg-primary/10 rounded-full blur-3xl`}></div>
           <div className={`absolute bottom-10 right-10 w-96 h-96 ${isModule1Light ? 'bg-[#2C666E]/5' : 'bg-secondary/5'} dark:bg-secondary/10 rounded-full blur-3xl`}></div>
