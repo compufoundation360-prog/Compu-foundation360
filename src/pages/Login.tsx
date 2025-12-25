@@ -35,10 +35,10 @@ const Login = () => {
               <span className="bg-gradient-to-r from-primary via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 Compu-Foundation 360°
               </span>
-          </h2>
-            
+            </h2>
+
             {/* Globe Container */}
-            <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full flex items-center justify-center min-h-[400px]">
               <Globe className="top-0" />
             </div>
           </div>
@@ -92,8 +92,8 @@ const Login = () => {
               />
             </div>
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full h-12 bg-primary hover:bg-primary-dark text-primary-foreground text-lg font-semibold"
             >
               Sign In

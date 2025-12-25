@@ -464,71 +464,100 @@ function Topic2_OnlineEtiquette() {
     const [commentQuality, setCommentQuality] = useState<"good" | "bad" | null>(null);
 
     return (
-        <div className="space-y-20 pb-20">
-            {/* HER0 */}
-            <section className="relative overflow-hidden pt-10 pb-20">
-                <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+        <div id="topic-etiquette" className="space-y-24">
+            {/* HER0 - MODULE 18 STYLE */}
+            <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
                     <div className="space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold tracking-wide uppercase">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            Digital Manners
-                        </div>
-                        <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-foreground">
-                            Online <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-green-500">Etiquette</span>
+                        <p className="text-xs uppercase tracking-[0.25em] text-emerald-500 font-bold">Social Skills 2.0</p>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight">
+                            Online <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">Etiquette</span>
                         </h1>
                         <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                            The internet is a public place. Learn the golden rules of respect, kindness, and clear communication online.
+                            The internet is a public place with billions of people. Learn the golden rules of respect, kindness, and clear communication to thrive in the digital world.
                         </p>
                     </div>
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-emerald-500/10 blur-[100px] rounded-full"></div>
-                        <div className="relative z-10 bg-emerald-100/50 dark:bg-emerald-900/20 backdrop-blur-sm rounded-[40px] border-4 border-white dark:border-slate-800 w-full aspect-[4/3] flex items-center justify-center transform rotate-2 hover:rotate-0 transition-all duration-700">
-                            <MessageSquare size={120} className="text-emerald-500/50" />
+
+                    {/* Visual - Glass Card */}
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-emerald-500/20 shadow-2xl bg-emerald-500/5">
+                        <div className="relative aspect-square flex items-center justify-center p-12 overflow-hidden">
+                            {/* Abstract Visual */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 blur-3xl"></div>
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl mix-blend-multiply filter opacity-50 animate-blob"></div>
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl mix-blend-multiply filter opacity-50 animate-blob animation-delay-2000"></div>
+
+                            <div className="relative z-10 grid grid-cols-1 gap-6 w-full max-w-sm">
+                                <div className="bg-background/60 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-lg flex flex-col items-center gap-4 transform rotate-3 hover:rotate-0 transition-all duration-500">
+                                    <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 rounded-2xl flex items-center justify-center">
+                                        <MessageSquare className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                                    </div>
+                                    <div className="space-y-2 w-full">
+                                        <div className="h-2 w-3/4 bg-slate-200 dark:bg-slate-700/50 rounded-full mx-auto"></div>
+                                        <div className="h-2 w-1/2 bg-slate-200 dark:bg-slate-700/50 rounded-full mx-auto"></div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-background/60 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-lg flex flex-col items-center gap-4 transform -rotate-2 hover:rotate-0 transition-all duration-500 translate-x-8">
+                                    <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-2xl flex items-center justify-center">
+                                        <Heart className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                                    </div>
+                                    <div className="space-y-2 w-full">
+                                        <div className="h-2 w-3/4 bg-slate-200 dark:bg-slate-700/50 rounded-full mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             </section>
 
-            {/* SECTION 1: DEFINITION & RULES (Standardized) */}
+            {/* SECTION 1: DEFINITION (Standardized) */}
             <section className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto text-center mb-16">
-                    <h2 className="text-4xl font-bold mb-6">What is "Netiquette"?</h2>
-                    <div className="p-6 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-left border-l-4 border-emerald-500 shadow-md">
-                        <p className="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-                            <strong>Definition:</strong> "Netiquette" (Network Etiquette) is the set of professional and social rules for communicating on the internet. It includes how we speak, how we share, and how we treat others in a digital space where we cannot see their faces.
-                        </p>
+                <div className="max-w-4xl mx-auto mb-16">
+                    <div className="text-center mb-10">
+                        <p className="text-xs uppercase tracking-[0.25em] text-emerald-500 font-bold mb-2">The Definition</p>
+                        <h2 className="text-3xl font-bold">What is "Netiquette"?</h2>
                     </div>
+                    <Card className="p-8 bg-background/50 backdrop-blur-sm border border-emerald-500/20 shadow-xl rounded-[32px]">
+                        <div className="flex flex-col md:flex-row gap-6 items-center">
+                            <div className="bg-emerald-100 dark:bg-emerald-900/30 p-6 rounded-2xl shrink-0">
+                                <BookOpen className="w-10 h-10 text-emerald-600 dark:text-emerald-400" />
+                            </div>
+                            <div className="space-y-2">
+                                <h3 className="font-bold text-xl">Network Etiquette</h3>
+                                <p className="text-lg leading-relaxed text-muted-foreground">
+                                    The set of professional and social rules for communicating on the internet. It includes how we speak, how we share, and how we treat others in a digital space where we cannot see their faces.
+                                </p>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
 
-                <div className="max-w-6xl mx-auto mb-20">
-                    <h3 className="text-2xl font-bold mb-8 flex items-center justify-center gap-2">
-                        <BookOpen className="text-emerald-500" />
-                        The Core Rules of Netiquette
-                    </h3>
+                <div className="max-w-7xl mx-auto mb-20">
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <Card className="p-6 hover:shadow-lg transition-shadow border-t-4 border-t-emerald-500">
-                            <div className="bg-emerald-100 dark:bg-emerald-900/30 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-emerald-600">
+                        <Card className="p-6 bg-background/50 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-emerald-500/50 transition-all duration-300">
+                            <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-4 text-emerald-600">
                                 <User className="w-6 h-6" />
                             </div>
                             <h4 className="font-bold text-lg mb-2">Remember the Human</h4>
                             <p className="text-sm text-muted-foreground">There is a real person with feelings behind every screen. If you wouldn't say it to their face, don't type it.</p>
                         </Card>
-                        <Card className="p-6 hover:shadow-lg transition-shadow border-t-4 border-t-blue-500">
-                            <div className="bg-blue-100 dark:bg-blue-900/30 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-blue-600">
+                        <Card className="p-6 bg-background/50 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-blue-500/50 transition-all duration-300">
+                            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4 text-blue-600">
                                 <Globe className="w-6 h-6" />
                             </div>
                             <h4 className="font-bold text-lg mb-2">Know Where You Are</h4>
                             <p className="text-sm text-muted-foreground">Netiquette varies by domain. Texting a friend is different from emailing a teacher. Adapt your tone.</p>
                         </Card>
-                        <Card className="p-6 hover:shadow-lg transition-shadow border-t-4 border-t-purple-500">
-                            <div className="bg-purple-100 dark:bg-purple-900/30 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-purple-600">
+                        <Card className="p-6 bg-background/50 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-purple-500/50 transition-all duration-300">
+                            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-4 text-purple-600">
                                 <Clock className="w-6 h-6" />
                             </div>
                             <h4 className="font-bold text-lg mb-2">Respect Time</h4>
                             <p className="text-sm text-muted-foreground">Don't spam group chats. People are busy. Post relevant information and avoid unnecessary noise.</p>
                         </Card>
-                        <Card className="p-6 hover:shadow-lg transition-shadow border-t-4 border-t-orange-500">
-                            <div className="bg-orange-100 dark:bg-orange-900/30 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-orange-600">
+                        <Card className="p-6 bg-background/50 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-orange-500/50 transition-all duration-300">
+                            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4 text-orange-600">
                                 <Heart className="w-6 h-6" />
                             </div>
                             <h4 className="font-bold text-lg mb-2">Forgive Mistakes</h4>
@@ -538,53 +567,38 @@ function Topic2_OnlineEtiquette() {
                 </div>
             </section>
 
-            {/* IMAGE PLACEHOLDER: TROLL VS CITIZEN DIVIDER */}
-            <section className="container mx-auto px-4">
-                <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-800 flex items-center justify-center mb-12 group">
-                    {/* Placeholder Image */}
-                    <img
-                        src="/module-media/m11-t2-netiquette.jpg"
-                        alt="Good vs Bad Netiquette Illustration"
-                        className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                        onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                            e.currentTarget.parentElement?.classList.add('bg-gradient-to-r', 'from-emerald-100', 'to-blue-100');
-                        }}
-                    />
-                    <div className="z-10 bg-white/90 backdrop-blur px-8 py-4 rounded-full shadow-lg">
-                        <p className="font-bold text-slate-800 text-lg flex items-center gap-2">
-                            <CheckCircle className="text-green-500" /> Positive Online Vibes
-                        </p>
-                    </div>
-                </div>
-            </section>
-
             {/* SECTION: TROLL VS CITIZEN (Refined) */}
             <section className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold mb-4">Who Do You Want to Be?</h2>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <Card className="p-8 border-t-8 border-red-500 bg-red-50/50 dark:bg-red-900/10 hover:scale-105 transition-transform">
-                            <h3 className="text-2xl font-bold text-red-600 mb-4 flex items-center gap-2">
+                <div className="text-center mb-16">
+                    <p className="text-xs uppercase tracking-[0.25em] text-emerald-500 font-bold mb-2">Identity</p>
+                    <h2 className="text-3xl font-bold mb-4">Who Do You Want to Be?</h2>
+
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12">
+                        <Card className="p-8 border-t-8 border-red-500 bg-background/50 dark:bg-red-900/5 backdrop-blur-sm hover:scale-105 transition-transform overflow-hidden relative">
+                            <div className="absolute top-0 right-0 p-8 opacity-10">
+                                <XCircle className="w-32 h-32" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
                                 <span className="text-4xl">😈</span> The Troll
                             </h3>
-                            <ul className="space-y-3 text-red-800 dark:text-red-200">
-                                <li className="flex gap-2"><XCircle className="shrink-0" /> Posts mean comments just to hurt others.</li>
-                                <li className="flex gap-2"><XCircle className="shrink-0" /> SHOUTS IN ALL CAPS (it looks like yelling).</li>
-                                <li className="flex gap-2"><XCircle className="shrink-0" /> Spams the chat with "spam spam spam".</li>
+                            <ul className="space-y-4 text-left relative z-10">
+                                <li className="flex gap-3 items-start"><div className="mt-1 bg-red-100 rounded-full p-1"><XCircle className="w-4 h-4 text-red-500" /></div> <span className="text-muted-foreground">Posts mean comments to hurt others.</span></li>
+                                <li className="flex gap-3 items-start"><div className="mt-1 bg-red-100 rounded-full p-1"><XCircle className="w-4 h-4 text-red-500" /></div> <span className="text-muted-foreground">SHOUTS IN ALL CAPS.</span></li>
+                                <li className="flex gap-3 items-start"><div className="mt-1 bg-red-100 rounded-full p-1"><XCircle className="w-4 h-4 text-red-500" /></div> <span className="text-muted-foreground">Spams the chat constantly.</span></li>
                             </ul>
                         </Card>
 
-                        <Card className="p-8 border-t-8 border-green-500 bg-green-50/50 dark:bg-green-900/10 hover:scale-105 transition-transform">
-                            <h3 className="text-2xl font-bold text-green-600 mb-4 flex items-center gap-2">
-                                <span className="text-4xl">😇</span> The Digital Citizen
+                        <Card className="p-8 border-t-8 border-green-500 bg-background/50 dark:bg-green-900/5 backdrop-blur-sm hover:scale-105 transition-transform overflow-hidden relative">
+                            <div className="absolute top-0 right-0 p-8 opacity-10">
+                                <CheckCircle className="w-32 h-32 text-green-500" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-green-600 mb-6 flex items-center gap-2">
+                                <span className="text-4xl">😇</span> The Citizen
                             </h3>
-                            <ul className="space-y-3 text-green-800 dark:text-green-200">
-                                <li className="flex gap-2"><CheckCircle className="shrink-0" /> Is polite, even when they disagree.</li>
-                                <li className="flex gap-2"><CheckCircle className="shrink-0" /> Helps others find the right answer.</li>
-                                <li className="flex gap-2"><CheckCircle className="shrink-0" /> Thinks before clicking "Send".</li>
+                            <ul className="space-y-4 text-left relative z-10">
+                                <li className="flex gap-3 items-start"><div className="mt-1 bg-green-100 rounded-full p-1"><CheckCircle className="w-4 h-4 text-green-600" /></div> <span className="text-muted-foreground">Is polite, even when disagreeing.</span></li>
+                                <li className="flex gap-3 items-start"><div className="mt-1 bg-green-100 rounded-full p-1"><CheckCircle className="w-4 h-4 text-green-600" /></div> <span className="text-muted-foreground">Helps others find answers.</span></li>
+                                <li className="flex gap-3 items-start"><div className="mt-1 bg-green-100 rounded-full p-1"><CheckCircle className="w-4 h-4 text-green-600" /></div> <span className="text-muted-foreground">Thinks before clicking "Send".</span></li>
                             </ul>
                         </Card>
                     </div>
@@ -593,39 +607,47 @@ function Topic2_OnlineEtiquette() {
 
             {/* SECTION 2: COMMENT SIMULATOR */}
             <section className="container mx-auto px-4 py-12">
-                <Card className="max-w-3xl mx-auto p-12 bg-slate-900 text-white rounded-[40px] text-center relative overflow-hidden">
+                <Card className="max-w-3xl mx-auto p-12 bg-slate-900 text-white rounded-[40px] text-center relative overflow-hidden ring-4 ring-slate-900/20 shadow-2xl">
                     <div className="relative z-10">
-                        <h2 className="text-3xl font-bold mb-6">Test Your Skills</h2>
-                        <div className="bg-white/10 p-6 rounded-2xl mb-8 text-left">
-                            <p className="text-sm text-slate-400 mb-2">Post by @NewGamer123:</p>
-                            <p className="text-xl">"Help! I keep losing on Level 1. This game is too hard! 😢"</p>
+                        <p className="text-xs uppercase tracking-[0.25em] text-emerald-400 font-bold mb-4">Simulation</p>
+                        <h2 className="text-3xl font-bold mb-8">Test Your Skills</h2>
+
+                        <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl mb-10 text-left border border-white/10">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-lg font-bold">N</div>
+                                <div>
+                                    <p className="text-sm font-bold">@NewGamer123</p>
+                                    <p className="text-xs text-slate-400">2 minutes ago</p>
+                                </div>
+                            </div>
+                            <p className="text-xl leading-relaxed">"Help! I keep losing on Level 1. This game is too hard! 😢"</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Button
-                                className="h-auto p-6 flex flex-col items-center gap-2 bg-red-500/20 hover:bg-red-500/40 border border-red-500/50"
+                                variant="outline"
+                                className="h-auto p-6 flex flex-col items-center gap-3 bg-red-500/10 hover:bg-red-500/20 border-red-500/30 hover:border-red-500 text-red-200 hover:text-red-100 transition-all"
                                 onClick={() => setCommentQuality("bad")}
                             >
-                                <span className="font-bold text-lg">"You're just a NOOB! Quit the game!"</span>
+                                <span className="text-2xl">😠</span>
+                                <span className="font-bold text-lg">"You're just a NOOB! Quit!"</span>
                             </Button>
                             <Button
-                                className="h-auto p-6 flex flex-col items-center gap-2 bg-green-500/20 hover:bg-green-500/40 border-green-500/50 border"
+                                variant="outline"
+                                className="h-auto p-6 flex flex-col items-center gap-3 bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30 hover:border-emerald-500 text-emerald-200 hover:text-emerald-100 transition-all"
                                 onClick={() => setCommentQuality("good")}
                             >
+                                <span className="text-2xl">🤝</span>
                                 <span className="font-bold text-lg">"Don't give up! Try jumping earlier."</span>
                             </Button>
                         </div>
 
-                        {commentQuality === 'good' && (
-                            <div className="mt-8 p-4 bg-green-600 rounded-xl animate-in zoom-in">
-                                <h4 className="font-bold text-xl">Great Job! 🎉</h4>
-                                <p>That was helpful and encouraging. You just made someone's day better.</p>
-                            </div>
-                        )}
-                        {commentQuality === 'bad' && (
-                            <div className="mt-8 p-4 bg-red-600 rounded-xl animate-in zoom-in">
-                                <h4 className="font-bold text-xl">Not Cool. 🛑</h4>
-                                <p>Calling names hurts feelings and solves nothing. Try being helpful instead.</p>
+                        {commentQuality && (
+                            <div className={`mt-8 p-6 rounded-2xl animate-in zoom-in slide-in-from-bottom-4 duration-300 ${commentQuality === 'good' ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'}`}>
+                                <h4 className="font-bold text-2xl mb-2">{commentQuality === 'good' ? "Great Job! 🎉" : "Not Cool. 🛑"}</h4>
+                                <p className="text-lg opacity-90">
+                                    {commentQuality === 'good' ? "That was helpful and encouraging. You just made someone's day better." : "Name calling hurts feelings and solves nothing. Try being helpful instead."}
+                                </p>
                             </div>
                         )}
                     </div>
@@ -634,98 +656,30 @@ function Topic2_OnlineEtiquette() {
 
             {/* SECTION 3: THE GOLDEN RULE (T.H.I.N.K) */}
             <section className="container mx-auto px-4 py-8">
-                <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/10 dark:to-teal-900/10 p-8 rounded-[32px]">
-                    <div className="text-center mb-10">
+                <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/10 dark:to-teal-900/10 p-8 md:p-12 rounded-[40px] border border-emerald-100 dark:border-emerald-800/30">
+                    <div className="text-center mb-12">
+                        <p className="text-xs uppercase tracking-[0.25em] text-emerald-600 dark:text-emerald-400 font-bold mb-2">The Golden Rule</p>
                         <h2 className="text-3xl font-bold mb-4">Before You Post... THINK!</h2>
-                        <p className="text-muted-foreground">Ask yourself these five questions.</p>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                         {[
                             { letter: "T", word: "True?", desc: "Is it a fact or a rumor?" },
                             { letter: "H", word: "Helpful?", desc: "Does it help anyone?" },
                             { letter: "I", word: "Inspiring?", desc: "Does it lift people up?" },
-                            { letter: "N", word: "Necessary?", desc: "Does it really need to be said?" },
+                            { letter: "N", word: "Necessary?", desc: "Does it need to be said?" },
                             { letter: "K", word: "Kind?", desc: "Is it nice?" },
                         ].map((item, i) => (
-                            <div key={i} className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm text-center transform hover:-translate-y-2 transition-transform duration-300">
-                                <div className="text-5xl font-black text-emerald-200 dark:text-emerald-900 mb-2">{item.letter}</div>
-                                <h3 className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-1">{item.word}</h3>
-                                <p className="text-sm text-muted-foreground">{item.desc}</p>
-                            </div>
+                            <Card key={i} className="p-6 rounded-2xl shadow-sm text-center transform hover:-translate-y-2 transition-transform duration-300 border-none bg-white/60 dark:bg-slate-800/60 backdrop-blur-md">
+                                <div className="text-5xl font-black text-emerald-200 dark:text-emerald-800 mb-2">{item.letter}</div>
+                                <h3 className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">{item.word}</h3>
+                                <p className="text-xs text-muted-foreground">{item.desc}</p>
+                            </Card>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* SECTION 4: HANDLING CONFLICT */}
-            <section className="container mx-auto px-4 py-8">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="order-2 md:order-1 relative">
-                        <div className="absolute inset-0 bg-red-100 dark:bg-red-900/20 rounded-full blur-3xl"></div>
-                        <div className="relative z-10 bg-red-50 dark:bg-red-900/10 rounded-3xl shadow-xl w-full aspect-video flex items-center justify-center border-2 border-red-100 dark:border-red-900 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                            <Shield size={80} className="text-red-400" />
-                        </div>
-                    </div>
-                    <div className="order-1 md:order-2 space-y-6">
-                        <h2 className="text-3xl font-bold">When Things Get Heated🔥</h2>
-                        <p className="text-lg text-muted-foreground">
-                            Sometimes people are mean online. Here is your shield against toxicity.
-                        </p>
-
-                        <div className="space-y-4">
-                            <div className="flex gap-4 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-                                <span className="text-2xl">✋</span>
-                                <div>
-                                    <h4 className="font-bold">1. Don't Reply</h4>
-                                    <p className="text-sm text-muted-foreground">Trolls want attention. Don't feed them.</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-4 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-                                <span className="text-2xl">📸</span>
-                                <div>
-                                    <h4 className="font-bold">2. Screenshot It</h4>
-                                    <p className="text-sm text-muted-foreground">Save the proof in case you need to show an adult.</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-4 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-                                <span className="text-2xl">🚫</span>
-                                <div>
-                                    <h4 className="font-bold">3. Block & Report</h4>
-                                    <p className="text-sm text-muted-foreground">Use the platform's tools to make them disappear.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* SECTION 5: DIGITAL BODY LANGUAGE */}
-            <section className="container mx-auto px-4 py-8">
-                <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold">It's Not What You Say...</h2>
-                    <p className="text-muted-foreground">It's *how* you type it. Text has no tone of voice!</p>
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-6">
-                    <Card className="p-6 border-l-4 border-l-blue-500">
-                        <div className="font-mono bg-slate-100 dark:bg-slate-800 p-2 rounded mb-4 text-center">"Nice job."</div>
-                        <h4 className="font-bold mb-2">The Period</h4>
-                        <p className="text-sm text-muted-foreground">Can sound serious, cold, or sarcastic. Be careful!</p>
-                    </Card>
-                    <Card className="p-6 border-l-4 border-l-yellow-500">
-                        <div className="font-mono bg-slate-100 dark:bg-slate-800 p-2 rounded mb-4 text-center">"NICE JOB!!!"</div>
-                        <h4 className="font-bold mb-2">All Caps</h4>
-                        <p className="text-sm text-muted-foreground">Looks like you are YELLING. Use sparingly for excitement.</p>
-                    </Card>
-                    <Card className="p-6 border-l-4 border-l-green-500">
-                        <div className="font-mono bg-slate-100 dark:bg-slate-800 p-2 rounded mb-4 text-center">"Nice job! 😄"</div>
-                        <h4 className="font-bold mb-2">Emojis</h4>
-                        <p className="text-sm text-muted-foreground">The best way to show you are friendly and joking.</p>
-                    </Card>
-                </div>
-            </section>
-
-            <div className="pt-8">
+            <div className="pb-12 pt-8">
                 <TopicNavigation currentModuleId={11} currentTopicId="m11-t2" />
             </div>
         </div>

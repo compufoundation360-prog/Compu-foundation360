@@ -97,31 +97,35 @@ export function Globe({
       canvas.width = internalWidth
       canvas.height = internalHeight
 
-      globeRef.current = createGlobe(canvas, {
-        devicePixelRatio,
-        width: internalWidth,
-        height: internalHeight,
-        phi: phiRef.current,
-        theta: thetaRef.current,
-        dark: dark ?? (theme === "dark" ? 1 : 0),
-        scale,
-        diffuse,
-        mapSamples,
-        mapBrightness,
-        baseColor: resolvedBaseColor,
-        markerColor: resolvedMarkerColor,
-        glowColor: resolvedGlowColor,
-        opacity: 1,
-        offset: [0, 0],
-        markers: [],
-        onRender: (state: Record<string, any>) => {
-          if (!isDragging.current) {
-            phiRef.current += autoRotateSpeed
-          }
-          state.phi = phiRef.current
-          state.theta = thetaRef.current
-        },
-      })
+      try {
+        globeRef.current = createGlobe(canvas, {
+          devicePixelRatio,
+          width: internalWidth,
+          height: internalHeight,
+          phi: phiRef.current,
+          theta: thetaRef.current,
+          dark: dark ?? (theme === "dark" ? 1 : 0),
+          scale,
+          diffuse,
+          mapSamples,
+          mapBrightness,
+          baseColor: resolvedBaseColor,
+          markerColor: resolvedMarkerColor,
+          glowColor: resolvedGlowColor,
+          opacity: 1,
+          offset: [0, 0],
+          markers: [],
+          onRender: (state: Record<string, any>) => {
+            if (!isDragging.current) {
+              phiRef.current += autoRotateSpeed
+            }
+            state.phi = phiRef.current
+            state.theta = thetaRef.current
+          },
+        })
+      } catch (error) {
+        console.error("Failed to initialize globe:", error);
+      }
     }
 
     const onMouseDown = (e: MouseEvent) => {
