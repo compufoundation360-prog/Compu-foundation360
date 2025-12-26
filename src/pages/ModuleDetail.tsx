@@ -1,6 +1,6 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { ArrowLeft, Cog, CheckCircle, Search, Target, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowDown, Cog, CheckCircle, Search, Target, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +33,7 @@ const Module16 = React.lazy(() => import("@/pages/Module16"));
 const Module17 = React.lazy(() => import("@/pages/Module17"));
 const Module18 = React.lazy(() => import("@/pages/Module18"));
 const Module19 = React.lazy(() => import("@/pages/Module19"));
+const Module20 = React.lazy(() => import("@/pages/Module20"));
 import moduleSoftware from "@/assets/module-software.png";
 import moduleIntro from "@/assets/module-media/m1-hero.jpeg";
 import moduleTypesHero from "@/assets/module-media/types-combined.jpg";
@@ -6508,7 +6509,7 @@ const ModuleDetail = () => {
     }
 
 
-    if (moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 || moduleId === 19) {
+    if (moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 || moduleId === 19 || moduleId === 20) {
       return { title: null, subtitle: null };
     }
 
@@ -6520,7 +6521,7 @@ const ModuleDetail = () => {
 
   const { title: heroTitle, subtitle: heroSubtitle } = resolveHeroContent();
 
-  if (!sections && moduleId !== 7 && moduleId !== 9 && moduleId !== 10 && moduleId !== 11 && moduleId !== 12 && moduleId !== 13 && moduleId !== 14 && moduleId !== 15 && moduleId !== 16 && moduleId !== 17 && moduleId !== 18 && moduleId !== 19) {
+  if (!sections && moduleId !== 7 && moduleId !== 9 && moduleId !== 10 && moduleId !== 11 && moduleId !== 12 && moduleId !== 13 && moduleId !== 14 && moduleId !== 15 && moduleId !== 16 && moduleId !== 17 && moduleId !== 18 && moduleId !== 19 && moduleId !== 20) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 text-center">
@@ -6610,7 +6611,7 @@ const ModuleDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 ? 'none' : undefined }}>
+      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 ? 'none' : undefined }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className={`absolute top-10 left-10 w-72 h-72 ${isModule1Light ? 'bg-[#2C666E]/10' : 'bg-primary/5'} dark:bg-primary/10 rounded-full blur-3xl`}></div>
           <div className={`absolute bottom-10 right-10 w-96 h-96 ${isModule1Light ? 'bg-[#2C666E]/5' : 'bg-secondary/5'} dark:bg-secondary/10 rounded-full blur-3xl`}></div>
@@ -11773,10 +11774,7 @@ const ModuleDetail = () => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;
                         if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${foldersImage.fileName}. ${foldersImage.brief}
-                            </div>`;
+                          parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${foldersImage.fileName}. ${foldersImage.brief}</div>`;
                         }
                       }}
                     />
@@ -15910,7 +15908,7 @@ const ModuleDetail = () => {
             </section>
 
             <section className="container mx-auto px-4">
-              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
+              <Card className="p-8 rounded-[32px] border border-border space-y-6 max-w-3xl mx-auto">
                 <div className="text-center space-y-2">
                   <div className="text-5xl mb-4">🪟</div>
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Windows</p>
@@ -19423,185 +19421,391 @@ const ModuleDetail = () => {
         );
       })()}
 
-      {/* Module 8 Topic 3: Bootable USB Creation - Text Left + Image Right, Step Cards (vertical), Full-Width Image, Why It Matters, Image Left + Text Right */}
+      {/* Module 8 Topic 3: Bootable USB Creation - WIREFRAME IMPLEMENTATION */}
       {moduleId === 8 && module8Sections && topicId === "3" && (() => {
-        const {
-          hero: heroImage,
-          overview: overviewImage,
-          fullWidth: fullWidthImage,
-          whyMatters: whyMattersImage,
-          tools: toolsImage
-        } = module8Sections.bootableUsbCreation.images;
+        const { hero: heroImage } = module8Sections.bootableUsbCreation.images;
 
         return (
-          <div id="topic-bootable-usb-creation" className="space-y-16">
+          <div id="topic-bootable-usb-creation" className="space-y-20">
+
+            {/* SECTION 1: WHAT IS BOOTABLE USB CREATION */}
             <section className="container mx-auto px-4 pt-16">
               <div className="grid lg:grid-cols-2 gap-10 items-center">
-                <div className="space-y-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Installation Media</p>
-                  <h2 className="text-3xl font-semibold text-foreground">Bootable USB Creation</h2>
-                  <p className="text-foreground/80 leading-relaxed">
-                    {module8Sections.bootableUsbCreation.intro}
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide uppercase border border-primary/20">
+                    <Zap className="w-3 h-3" /> Definition
+                  </div>
+                  <h2 className="text-4xl font-semibold text-foreground leading-tight">Bootable USB Creation</h2>
+                  <p className="text-lg text-foreground/80 leading-relaxed">
+                    Bootable USB creation means preparing a USB pen drive so that a computer can start (boot) from it to install or repair an operating system like Windows or Linux.
                   </p>
-                  <div className="space-y-3 pt-4">
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Need OS image file</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Use bootable USB software</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">USB drive must be empty</p>
-                    </div>
+                  <div className="bg-muted p-6 rounded-2xl border border-border">
+                    <p className="text-sm font-medium text-muted-foreground">Normally, a USB is used only for storing files. After making it bootable, the computer can run setup files directly from the USB.</p>
+                  </div>
+                  <div className="w-full h-64 bg-muted/50 rounded-xl border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground mt-6">
+                    <div className="text-4xl mb-2">🖼️</div>
+                    <p className="font-medium">Image: USB Booting into OS Installation Screen</p>
                   </div>
                 </div>
-                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                    <img
-                      src={getImageUrl(heroImage.fileName)}
-                      alt={heroImage.alt}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${heroImage.fileName}. ${heroImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-              </div>
-            </section>
-
-            <section className="container mx-auto px-4">
-              <div className="space-y-6">
-                <div className="text-center max-w-2xl mx-auto">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Creation Process</p>
-                  <h2 className="text-3xl font-semibold text-foreground mb-3">Step-by-Step Guide</h2>
-                  <p className="text-foreground/80">
-                    Follow these steps to create a bootable USB drive.
-                  </p>
-                </div>
-                <div className="max-w-3xl mx-auto space-y-4">
-                  {module8Sections.bootableUsbCreation.steps.map((step, index) => (
-                    <Card key={index} className="p-6 border border-border/70">
-                      <div className="flex items-start gap-4">
-                        <div className="text-4xl shrink-0">{step.icon}</div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="text-sm font-semibold text-primary">Step {index + 1}</span>
-                            <h3 className="text-xl font-semibold text-foreground">{step.name}</h3>
-                          </div>
-                          <p className="text-sm text-foreground/80 leading-relaxed">{step.description}</p>
+                {/* Visual Diagram: USB -> Computer -> OS Setup */}
+                <Card className="p-8 border-border shadow-md rounded-[40px] overflow-hidden relative">
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-6 text-center">
+                    <div className="flex items-center gap-4">
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 bg-muted rounded-xl flex items-center justify-center mb-2 border border-border">
+                          <span className="text-2xl">💾</span>
                         </div>
+                        <span className="text-xs font-mono text-muted-foreground">USB Drive</span>
                       </div>
-                    </Card>
-                  ))}
+                      <ArrowRight className="w-6 h-6 text-muted-foreground" />
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 bg-muted rounded-xl flex items-center justify-center mb-2 border border-border">
+                          <span className="text-2xl">💻</span>
+                        </div>
+                        <span className="text-xs font-mono text-muted-foreground">Computer</span>
+                      </div>
+                      <ArrowRight className="w-6 h-6 text-muted-foreground" />
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-2 border border-primary/20">
+                          <span className="text-2xl">⚙️</span>
+                        </div>
+                        <span className="text-xs font-mono text-primary">OS Setup</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-foreground/60 max-w-xs mt-4">The USB bypasses the internal hard drive to launch the installation environment.</p>
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* SECTION 2: NORMAL USB vs BOOTABLE USB */}
+            <section className="container mx-auto px-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl font-semibold text-foreground">Normal vs. Bootable</h2>
+                <p className="text-muted-foreground mt-2">There is a key difference in how they function.</p>
+              </div>
+
+              <div className="max-w-4xl mx-auto mb-10">
+                <div className="w-full h-48 bg-muted/50 rounded-xl border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground">
+                  <div className="text-4xl mb-2">🖼️</div>
+                  <p className="font-medium">Image: Normal Storage Icons vs Bootable Installer Icons</p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {/* Normal USB */}
+                <Card className="p-8 border-border bg-card shadow-sm">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-full bg-muted text-muted-foreground">
+                      <span className="text-2xl">📁</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg">Normal USB</h3>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">Storage Only</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                      <CheckCircle className="w-5 h-5 text-muted-foreground shrink-0" />
+                      Used for file storage (Photos, Docs)
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                      <CheckCircle className="w-5 h-5 text-muted-foreground shrink-0" />
+                      Can copy/paste files easily
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-muted-foreground font-medium">
+                      <span className="w-5 h-5 text-center font-bold">✕</span>
+                      Cannot boot system
+                    </li>
+                  </ul>
+                </Card>
+
+                {/* Bootable USB */}
+                <Card className="p-8 border-primary/50 bg-primary/5 shadow-sm">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-full bg-primary/20 text-primary">
+                      <span className="text-2xl">🚀</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-primary">Bootable USB</h3>
+                      <p className="text-xs uppercase tracking-wider text-primary/70">System Starter</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                      <CheckCircle className="w-5 h-5 text-primary shrink-0" />
+                      Used to start the computer
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-foreground/80">
+                      <CheckCircle className="w-5 h-5 text-primary shrink-0" />
+                      Runs OS Installer
+                    </li>
+                    <li className="flex items-start gap-3 text-sm text-primary font-medium">
+                      <CheckCircle className="w-5 h-5 text-primary shrink-0" />
+                      Can install/repair OS
+                    </li>
+                  </ul>
+                </Card>
+              </div>
+            </section>
+
+            {/* SECTION 3: TOOLS USED */}
+            <section className="container mx-auto px-4">
+              <div className="text-center mb-12">
+                <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">The Right Software</p>
+                <h2 className="text-3xl font-semibold text-foreground">Tools Used</h2>
+              </div>
+
+              {/* Tool 1: Rufus */}
+              <div className="flex flex-col lg:flex-row gap-10 items-center mb-20 bg-muted/30 p-8 rounded-[40px] border border-border">
+                <div className="flex-1 space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide uppercase">
+                    Windows Choice
+                  </div>
+                  <h3 className="text-3xl font-bold text-foreground">1. Rufus</h3>
+                  <p className="text-lg text-foreground/80">
+                    Rufus is a popular tool mainly used for Windows OS. It is fast, simple, and gives you control over partition schemes.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-card p-4 rounded-2xl border border-border text-sm">
+                      <span className="block font-bold mb-1 text-primary">Fast & Simple</span>
+                      <span className="text-muted-foreground">Lightweight tool</span>
+                    </div>
+                    <div className="bg-card p-4 rounded-2xl border border-border text-sm">
+                      <span className="block font-bold mb-1 text-primary">Partition Control</span>
+                      <span className="text-muted-foreground">Select MBR or GPT</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Rufus Flowchart */}
+                {/* Rufus Flowchart */}
+                <div className="flex-1 w-full space-y-6">
+                  <div className="w-full h-48 bg-background/50 rounded-xl border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground">
+                    <div className="text-4xl mb-2">🖼️</div>
+                    <p className="font-medium">Image: Rufus Software Interface</p>
+                  </div>
+                  <Card className="p-6 bg-card border-border shadow-sm">
+                    <h4 className="font-bold text-center mb-6 text-sm uppercase tracking-widest text-muted-foreground">Rufus Process Flow</h4>
+                    <div className="flex flex-col items-center space-y-3">
+                      <div className="w-48 py-3 bg-primary text-primary-foreground text-center rounded-lg font-bold text-sm shadow-md">Open Rufus</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-muted text-foreground text-center rounded-lg font-medium text-sm border border-border">Select USB Drive</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-muted text-foreground text-center rounded-lg font-medium text-sm border border-border">Select Windows ISO</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-muted text-foreground text-center rounded-lg font-medium text-sm border border-border">Choose MBR or GPT</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-primary text-primary-foreground text-center rounded-lg font-bold text-sm shadow-md">Click START</div>
+                    </div>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Tool 2: BalenaEtcher */}
+              <div className="flex flex-col lg:flex-row-reverse gap-10 items-center bg-muted/30 p-8 rounded-[40px] border border-border">
+                <div className="flex-1 space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide uppercase">
+                    Cross-Platform Choice
+                  </div>
+                  <h3 className="text-3xl font-bold text-foreground">2. BalenaEtcher</h3>
+                  <p className="text-lg text-foreground/80">
+                    BalenaEtcher is easy to use and works on Windows, macOS, and Linux. It focuses on simplicity with fewer technical options.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-card p-4 rounded-2xl border border-border text-sm">
+                      <span className="block font-bold mb-1 text-primary">Very Simple</span>
+                      <span className="text-muted-foreground">User-friendly interface</span>
+                    </div>
+                    <div className="bg-card p-4 rounded-2xl border border-border text-sm">
+                      <span className="block font-bold mb-1 text-primary">Great for Linux</span>
+                      <span className="text-muted-foreground">Perfect for Ubuntu/Pi</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Etcher Flowchart */}
+                {/* Etcher Flowchart */}
+                <div className="flex-1 w-full space-y-6">
+                  <div className="w-full h-48 bg-background/50 rounded-xl border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground">
+                    <div className="text-4xl mb-2">🖼️</div>
+                    <p className="font-medium">Image: BalenaEtcher Interface</p>
+                  </div>
+                  <Card className="p-6 bg-card border-border shadow-sm">
+                    <h4 className="font-bold text-center mb-6 text-sm uppercase tracking-widest text-muted-foreground">Etcher Process Flow</h4>
+                    <div className="flex flex-col items-center space-y-3">
+                      <div className="w-48 py-3 bg-muted text-foreground text-center rounded-lg font-medium text-sm border border-border">Select ISO</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-muted text-foreground text-center rounded-lg font-medium text-sm border border-border">Select USB</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-primary text-primary-foreground text-center rounded-lg font-bold text-sm shadow-md">Click FLASH</div>
+                      <ArrowDown className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-48 py-3 bg-card border border-primary text-primary text-center rounded-lg font-bold text-sm">Bootable USB Ready</div>
+                    </div>
+                  </Card>
                 </div>
               </div>
             </section>
 
+            {/* SECTION 4: SELECTING ISO FILE */}
             <section className="container mx-auto px-4">
-              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
-                  <img
-                    src={getImageUrl(fullWidthImage.fileName)}
-                    alt={fullWidthImage.alt}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                      const parent = (e.target as HTMLImageElement).parentElement;
-                      if (parent) {
-                        parent.innerHTML =
-                          `<div class="p-8 text-center text-sm text-muted-foreground">
-                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
-                          </div>`;
-                      }
-                    }}
-                  />
+              <div className="max-w-4xl mx-auto">
+                <Card className="p-10 rounded-[40px] border border-border bg-card overflow-hidden relative">
+                  <div className="relative z-10 text-center space-y-6">
+                    <h2 className="text-3xl font-semibold text-foreground">Selecting the ISO File</h2>
+                    <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl mx-auto">
+                      An <strong>ISO file</strong> is a complete copy of an operating system in one file. It contains all the setup files required to install the OS.
+                    </p>
+                    <div className="flex justify-center gap-4 flex-wrap">
+                      <div className="px-6 py-3 bg-muted border border-border rounded-xl flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center text-foreground text-lg">💿</div>
+                        <span className="font-mono text-sm">Windows10.iso</span>
+                      </div>
+                      <div className="px-6 py-3 bg-muted border border-border rounded-xl flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center text-foreground text-lg">💿</div>
+                        <span className="font-mono text-sm">Ubuntu22.04.iso</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-center gap-4 pt-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                      <span>ISO File</span>
+                      <ArrowRight className="w-4 h-4" />
+                      <span>Tool</span>
+                      <ArrowRight className="w-4 h-4" />
+                      <span>USB Drive</span>
+                      <ArrowRight className="w-4 h-4" />
+                      <span className="text-primary">Bootable Ready</span>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* SECTION 5: PARTITION SCHEME */}
+            <section className="container mx-auto px-4">
+              <div className="text-center mb-10">
+                <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Technical Settings</p>
+                <h2 className="text-3xl font-semibold text-foreground">Partition Schemes</h2>
+                <p className="text-muted-foreground mt-2">You must choose the right scheme for your computer.</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {/* MBR */}
+                <Card className="p-8 border border-border shadow-sm">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-foreground">MBR</h3>
+                      <p className="text-xs text-muted-foreground font-mono">Master Boot Record</p>
+                    </div>
+                    <div className="bg-muted text-muted-foreground px-3 py-1 rounded text-xs font-bold border border-border">LEGACY</div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-xl">🖥️</div>
+                      <div>
+                        <p className="font-bold text-sm">Older Computers</p>
+                        <p className="text-xs text-muted-foreground">Standard for older hardware</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-xl">💾</div>
+                      <div>
+                        <p className="font-bold text-sm">Legacy BIOS</p>
+                        <p className="text-xs text-muted-foreground">Target System setting</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 p-4 bg-muted/50 rounded-xl text-xs border border-border">
+                      <strong>Example:</strong> Installing Windows 7 on an old desktop.
+                    </div>
+                    <div className="w-full h-32 bg-background/50 rounded-lg border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground text-xs mt-4">
+                      <div className="mb-1">🖼️</div>
+                      <p>Image: Old PC → BIOS → MBR</p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* GPT */}
+                <Card className="p-8 border border-primary/50 bg-primary/5 shadow-sm">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-primary">GPT</h3>
+                      <p className="text-xs text-muted-foreground font-mono">GUID Partition Table</p>
+                    </div>
+                    <div className="bg-primary/10 text-primary px-3 py-1 rounded text-xs font-bold border border-primary/20">MODERN</div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-xl">💻</div>
+                      <div>
+                        <p className="font-bold text-sm">New Computers</p>
+                        <p className="text-xs text-muted-foreground">Standard for Windows 10/11</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-xl">⚡</div>
+                      <div>
+                        <p className="font-bold text-sm">UEFI System</p>
+                        <p className="text-xs text-muted-foreground">Supports faster booting</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 p-4 bg-background rounded-xl text-xs border border-border">
+                      <strong>Example:</strong> Installing Windows 11 on a new laptop.
+                    </div>
+                    <div className="w-full h-32 bg-background/50 rounded-lg border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground text-xs mt-4">
+                      <div className="mb-1">🖼️</div>
+                      <p>Image: Laptop → UEFI → GPT</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            {/* SECTION 6: COMPLETE FLOW */}
+            <section className="container mx-auto px-4">
+              <Card className="p-10 bg-card border border-border rounded-[40px] text-center shadow-lg relative overflow-hidden">
+                <h2 className="text-2xl font-bold mb-8">Complete Creation Process</h2>
+
+                <div className="flex flex-wrap justify-center items-center gap-4 max-w-5xl mx-auto">
+                  <div className="px-5 py-3 bg-muted rounded-full border border-border text-sm font-medium">Download ISO</div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="px-5 py-3 bg-muted rounded-full border border-border text-sm font-medium">Insert USB</div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="px-5 py-3 bg-muted rounded-full border border-border text-sm font-medium">Open Tool</div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="px-5 py-3 bg-muted rounded-full border border-border text-sm font-medium">Select ISO</div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="px-5 py-3 bg-muted rounded-full border border-border text-sm font-medium">Choose Scheme</div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground" />
+                  <div className="px-5 py-3 bg-primary text-primary-foreground rounded-full shadow-md text-sm font-bold">Start Process</div>
                 </div>
               </Card>
             </section>
 
-            <section className="container mx-auto px-4">
-              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
-                <div className="text-center space-y-2">
-                  <div className="text-5xl mb-4">💿</div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding Bootable USB</p>
-                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
-                </div>
-                <p className="text-foreground/80 leading-relaxed text-center">
-                  Creating a bootable USB is the first step to installing a new operating system. This knowledge is essential for system installation and recovery.
-                </p>
-                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
-                  <div className="relative w-full h-full min-h-[260px] bg-muted">
-                    <img
-                      src={getImageUrl(whyMattersImage.fileName)}
-                      alt={whyMattersImage.alt}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
+            {/* SECTION 7: QUICK SUMMARY */}
+            <section className="container mx-auto px-4 pb-8">
+              <div className="bg-card border border-border rounded-3xl p-8 max-w-3xl mx-auto shadow-sm">
+                <h3 className="text-xl font-bold mb-6 text-center border-b border-border pb-4">Quick Summary</h3>
+                <div className="grid sm:grid-cols-2 gap-y-4 gap-x-8">
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">✔</div>
+                    <span className="text-sm text-foreground/80">Bootable USB installs/repairs OS</span>
                   </div>
-                </Card>
-              </Card>
-            </section>
-
-            <section className="container mx-auto px-4">
-              <div className="grid lg:grid-cols-2 gap-10 items-center">
-                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
-                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                    <img
-                      src={getImageUrl(toolsImage.fileName)}
-                      alt={toolsImage.alt}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${toolsImage.fileName}. ${toolsImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">✔</div>
+                    <span className="text-sm text-foreground/80">ISO file is required</span>
                   </div>
-                </Card>
-                <div className="space-y-5 order-1 lg:order-2">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Bootable USB Tools</p>
-                  <h2 className="text-3xl font-semibold text-foreground">Popular Tools</h2>
-                  <p className="text-foreground/80 leading-relaxed">
-                    Several tools can create bootable USB drives. Rufus is popular for Windows, Etcher works on all platforms, and Media Creation Tool is Microsoft's official tool.
-                  </p>
-                  <div className="space-y-3 pt-4">
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Rufus - Fast and reliable</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Etcher - Cross-platform</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Media Creation Tool - Official Windows tool</p>
-                    </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">✔</div>
+                    <span className="text-sm text-foreground/80">Rufus is best for Windows</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">✔</div>
+                    <span className="text-sm text-foreground/80">BalenaEtcher is best for Linux</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">✔</div>
+                    <span className="text-sm text-foreground/80">MBR = Old computers (BIOS)</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">✔</div>
+                    <span className="text-sm text-foreground/80">GPT = New computers (UEFI)</span>
                   </div>
                 </div>
               </div>
@@ -24922,8 +25126,18 @@ const ModuleDetail = () => {
       }
 
       {/* Module 20 to 25 Placeholder - Coming Soon */}
+      {/* Module 20 */}
       {
-        moduleId >= 20 && (
+        moduleId === 20 && (
+          <React.Suspense fallback={<div className="p-10 text-center">Loading Module 20...</div>}>
+            <Module20 />
+          </React.Suspense>
+        )
+      }
+
+      {/* Module 21 to 25 Placeholder - Coming Soon */}
+      {
+        moduleId >= 21 && (
           <div className="flex flex-col items-center justify-center min-h-[50vh] animate-in fade-in zoom-in duration-500">
             <Card className="p-10 bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700 text-center max-w-md shadow-2xl">
               <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner ring-1 ring-white/10">
