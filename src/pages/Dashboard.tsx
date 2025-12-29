@@ -1,4 +1,4 @@
-import { Computer, Cpu, Settings as SettingsIcon, BookOpen, TrendingUp, AlertTriangle, CheckCircle2, Clock, Gamepad2, ArrowRight } from "lucide-react";
+import { Computer, Cpu, Settings as SettingsIcon, BookOpen, TrendingUp, AlertTriangle, CheckCircle2, Clock, Gamepad2, ArrowRight, Shield, Globe, UserCheck, Layers, Lock, Wifi, Database, LayoutTemplate, Cloud, Bot, Smartphone, Link, Rocket, FileSpreadsheet, Code, Briefcase } from "lucide-react";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressCircle } from "@/components/ProgressCircle";
 import { Button } from "@/components/ui/button";
@@ -10,15 +10,40 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { simulators } from "@/data/simulators";
 
+import { useAuth } from "@/context/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
-  // Module data - only Modules 1 and 2
+  // Determine if new user (creation time equals last sign in time roughly)
+  // Fallback: If no name, just say "Hello there!"
+  const displayName = currentUser?.displayName?.split(" ")[0] || "Learner";
+
+  // Logic: If creationTime is same as lastSignInTime, it's likely a new signup.
+  // Note: This is an approximation.
+  const isNew = currentUser?.metadata.creationTime === currentUser?.metadata.lastSignInTime;
+  const greeting = isNew ? "Welcome" : "Welcome back";
+
+  const userInitials = currentUser?.displayName
+    ? currentUser.displayName.split(" ").map(n => n[0]).join("").toUpperCase().substring(0, 2)
+    : "U";
+
+  // Module data
   const modules = [
     {
       id: 1,
       title: "Digital Awareness & Foundation",
-      description: "Learn what computers are, their characteristics, types, and basic components. Understand hardware, software, and I/O devices.",
+      description: "Learn what computers are, their characteristics, types, and basic components.",
       icon: <Computer />,
       progress: 80,
       lessons: 8,
@@ -26,10 +51,183 @@ const Dashboard = () => {
     {
       id: 2,
       title: "Internal Components & Architecture",
-      description: "Explore physical components: CPU, motherboard, RAM, storage devices, GPU, ALU, CU, firmware, and more.",
+      description: "Explore physical components: CPU, motherboard, RAM, storage devices, and more.",
       icon: <Cpu />,
       progress: 50,
       lessons: 12,
+    },
+    // Pending Modules (3-8)
+    {
+      id: 3,
+      title: "Operating Systems",
+      description: "Understanding Windows, macOS, Linux, and system management.",
+      icon: <SettingsIcon />,
+      progress: 0,
+      lessons: 0,
+      locked: true,
+    },
+    {
+      id: 4,
+      title: "Data Representation",
+      description: "Binary, Hexadecimal, ASCII, and digital formats.",
+      icon: <FileSpreadsheet />,
+      progress: 0,
+      lessons: 0,
+      locked: true,
+    },
+    {
+      id: 5,
+      title: "Networks Basics",
+      description: "Introduction to connectivity and network types.",
+      icon: <Wifi />,
+      progress: 0,
+      lessons: 0,
+      locked: true,
+    },
+    {
+      id: 6,
+      title: "The Internet",
+      description: "How the web works, browsers, and protocols.",
+      icon: <Globe />,
+      progress: 0,
+      lessons: 0,
+      locked: true,
+    },
+    {
+      id: 7,
+      title: "Productivity Software",
+      description: "Word processing, spreadsheets, and presentations.",
+      icon: <LayoutTemplate />,
+      progress: 0,
+      lessons: 0,
+      locked: true,
+    },
+    {
+      id: 8,
+      title: "Digital Media",
+      description: "Graphics, audio, and video fundamentals.",
+      icon: <FileSpreadsheet />, // Reusing icon
+      progress: 0,
+      lessons: 0,
+      locked: true,
+    },
+    // Completed/Available Modules (9-21)
+    {
+      id: 9,
+      title: "Networking & Internet Deep Dive",
+      description: "Advanced networking concepts, IP addressing, and DNS.",
+      icon: <Globe />,
+      progress: 0,
+      lessons: 12,
+      route: "/module/9"
+    },
+    {
+      id: 10,
+      title: "Cybersecurity Fundamentals",
+      description: "Protecting digital assets, CIA triad, and safety.",
+      icon: <Shield />,
+      progress: 0,
+      lessons: 8,
+      route: "/module/10"
+    },
+    {
+      id: 11,
+      title: "Digital Citizenship",
+      description: "Online identity, rights, and responsibilities.",
+      icon: <UserCheck />,
+      progress: 0,
+      lessons: 3,
+      route: "/module/11"
+    },
+    {
+      id: 12,
+      title: "Cloud Computing",
+      description: "Cloud services, storage, and remote computing.",
+      icon: <Cloud />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/12"
+    },
+    {
+      id: 13,
+      title: "Programming Logic",
+      description: "Algorithms, flowcharts, and coding basics.",
+      icon: <Code />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/13"
+    },
+    {
+      id: 14,
+      title: "Web Development",
+      description: "HTML, CSS, and building for the web.",
+      icon: <LayoutTemplate />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/14"
+    },
+    {
+      id: 15,
+      title: "Database Management",
+      description: "SQL, data organization, and storage.",
+      icon: <Database />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/15"
+    },
+    {
+      id: 16,
+      title: "Artificial Intelligence",
+      description: "Machine learning, neural networks, and AI ethics.",
+      icon: <Bot />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/16"
+    },
+    {
+      id: 17,
+      title: "Internet of Things (IoT)",
+      description: "Smart devices, sensors, and connectivity.",
+      icon: <Smartphone />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/17"
+    },
+    {
+      id: 18,
+      title: "Blockchain & Crypto",
+      description: "Decentralized ledgers and digital currency.",
+      icon: <Link />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/18"
+    },
+    {
+      id: 19,
+      title: "Future Technologies",
+      description: "Quantum computing, VR/AR, and emerging tech.",
+      icon: <Rocket />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/19"
+    },
+    {
+      id: 20,
+      title: "Tech Careers",
+      description: "Pathways and opportunities in technology.",
+      icon: <Briefcase />,
+      progress: 0,
+      lessons: 5,
+      route: "/module/20"
+    },
+    {
+      id: 21,
+      title: "Virtualization",
+      description: "Virtual Machines, Hypervisors, and Host vs Guest.",
+      icon: <Layers />,
+      progress: 0,
+      lessons: 2,
+      route: "/module/21"
     },
   ];
 
@@ -118,15 +316,33 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center gap-2">
               <ThemeToggle />
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => navigate("/settings")}
-              className="flex items-center gap-2"
-            >
-              <SettingsIcon className="h-4 w-4" />
-              <span className="hidden sm:inline">Settings</span>
-            </Button>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+                    <Avatar className="h-9 w-9 border border-border">
+                      <AvatarImage src={currentUser?.photoURL || ""} alt={displayName} />
+                      <AvatarFallback className="bg-primary/10 text-primary font-medium">{userInitials}</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{currentUser?.displayName}</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {currentUser?.email}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate("/settings")}>
+                    <SettingsIcon className="mr-2 h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                  {/* Logout is handled in Sidebar, but could be here too */}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
@@ -139,8 +355,8 @@ const Dashboard = () => {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-2">
-                Welcome back, Learner! 👋
-              </h2>
+                  {greeting}, {displayName}! 👋
+                </h2>
                 <p className="text-muted-foreground">
                   Continue your learning journey
                 </p>
@@ -218,14 +434,14 @@ const Dashboard = () => {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis 
-                    dataKey="month" 
+                  <XAxis
+                    dataKey="month"
                     tickLine={false}
                     axisLine={false}
                     tickMargin={8}
                     className="text-xs"
                   />
-                  <YAxis 
+                  <YAxis
                     tickLine={false}
                     axisLine={false}
                     tickMargin={8}
@@ -259,10 +475,10 @@ const Dashboard = () => {
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-green-500" />
                 <span className="text-xs text-muted-foreground">Study Hours</span>
-          </div>
-        </div>
+              </div>
+            </div>
           </Card>
-      </section>
+        </section>
 
         {/* SECTION 4 & 5: Recommendations & Simulator Shortcuts */}
         <section className="grid lg:grid-cols-2 gap-6">
@@ -319,12 +535,12 @@ const Dashboard = () => {
                           style={{ width: `${strength.score}%` }}
                         />
                       </div>
-                </div>
+                    </div>
                   ))}
                 </div>
               </div>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full"
                 onClick={() => navigate("/module/2")}
               >
@@ -366,10 +582,10 @@ const Dashboard = () => {
               <div className="text-center py-8 text-muted-foreground">
                 <Gamepad2 className="h-12 w-12 mx-auto mb-2 opacity-50" />
                 <p className="text-sm">No simulators available yet</p>
-          </div>
+              </div>
             )}
-        </Card>
-      </section>
+          </Card>
+        </section>
 
         {/* SECTION 6: Recently Used */}
         <section>
@@ -410,10 +626,10 @@ const Dashboard = () => {
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                 </button>
-          ))}
-        </div>
+              ))}
+            </div>
           </Card>
-      </section>
+        </section>
       </div>
     </div>
   );

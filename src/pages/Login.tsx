@@ -5,22 +5,61 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Globe } from "@/components/ui/globe";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock authentication
-    if (email && password) {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       toast.success("Welcome back! Redirecting to dashboard...");
-      setTimeout(() => navigate("/dashboard"), 1000);
-    } else {
-      toast.error("Please enter your credentials");
+      navigate("/dashboard");
+    } catch (err: any) {
+      console.error("Login Error:", err);
+      let msg = "Failed to sign in. Please try again.";
+
+      // Detailed Error Mapping
+      switch (err.code) {
+        case 'auth/invalid-email':
+          msg = "Please enter a valid email address.";
+          break;
+        case 'auth/user-disabled':
+          msg = "This account has been disabled.";
+          break;
+        case 'auth/user-not-found':
+          msg = "No account found with this email.";
+          break;
+        case 'auth/wrong-password':
+          msg = "Incorrect user ID or password."; // distinct from "wrong password" for security
+          break;
+        case 'auth/too-many-requests':
+          msg = "Too many failed attempts. Please try again later.";
+          break;
+        case 'auth/network-request-failed':
+          msg = "Network error. Please check your connection.";
+          break;
+        case 'auth/invalid-credential':
+          msg = "Invalid credentials provided.";
+          break;
+      }
+
+      setError(msg);
+      toast.error(msg);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,6 +96,12 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
+            {error && (
+              <div className="bg-destructive/15 p-4 rounded-lg flex items-center gap-3 text-destructive border border-destructive/20 animate-in fade-in slide-in-from-top-2">
+                <AlertCircle className="h-5 w-5 shrink-0" />
+                <p className="text-sm font-medium">{error}</p>
+              </div>
+            )}
             <div className="space-y-2">
               <Label htmlFor="email">Email Address</Label>
               <Input
@@ -70,6 +115,8 @@ const Login = () => {
               />
             </div>
 
+
+
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
@@ -81,22 +128,36 @@ const Login = () => {
                   Forgot password?
                 </button>
               </div>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="h-12"
-                required
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-12 pr-10"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
 
             <Button
               type="submit"
+              disabled={isLoading}
               className="w-full h-12 bg-primary hover:bg-primary-dark text-primary-foreground text-lg font-semibold"
             >
-              Sign In
+              {isLoading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
 

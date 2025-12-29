@@ -14,37 +14,44 @@ import Lesson from "./pages/Lesson";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
+import { AuthProvider } from "@/context/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <ThemeProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            {/* Protected Routes (Wrapped in AppLayout for persistent Sidebar) */}
-            <Route element={<AppLayout><Outlet /></AppLayout>}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/module/:id" element={<ModuleDetail />} />
-              <Route path="/module/:id/part/:part" element={<ModuleDetail />} />
-              <Route path="/module/:id/topic/:topicId" element={<ModuleDetail />} />
-              <Route path="/lesson/:moduleId/:lessonId" element={<Lesson />} />
-              <Route path="/settings" element={<Settings />} />
-            </Route>
+              {/* Protected Routes */}
+              <Route element={<ProtectedRoute />}>
+                <Route element={<AppLayout><Outlet /></AppLayout>}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/module/:id" element={<ModuleDetail />} />
+                  <Route path="/module/:id/part/:part" element={<ModuleDetail />} />
+                  <Route path="/module/:id/topic/:topicId" element={<ModuleDetail />} />
+                  <Route path="/lesson/:moduleId/:lessonId" element={<Lesson />} />
+                  <Route path="/settings" element={<Settings />} />
+                </Route>
+              </Route>
 
-            {/* Catch-all */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+              {/* Catch-all */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </AuthProvider>
   </ThemeProvider>
 );
 

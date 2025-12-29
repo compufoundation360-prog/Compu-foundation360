@@ -34,6 +34,8 @@ const Module17 = React.lazy(() => import("@/pages/Module17"));
 const Module18 = React.lazy(() => import("@/pages/Module18"));
 const Module19 = React.lazy(() => import("@/pages/Module19"));
 const Module20 = React.lazy(() => import("@/pages/Module20"));
+const Module21 = React.lazy(() => import("@/pages/Module21"));
+const Module22 = React.lazy(() => import("@/pages/Module22"));
 import moduleSoftware from "@/assets/module-software.png";
 import moduleIntro from "@/assets/module-media/m1-hero.jpeg";
 import moduleTypesHero from "@/assets/module-media/types-combined.jpg";
@@ -6509,7 +6511,7 @@ const ModuleDetail = () => {
     }
 
 
-    if (moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 || moduleId === 19 || moduleId === 20) {
+    if (moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22) {
       return { title: null, subtitle: null };
     }
 
@@ -6521,7 +6523,7 @@ const ModuleDetail = () => {
 
   const { title: heroTitle, subtitle: heroSubtitle } = resolveHeroContent();
 
-  if (!sections && moduleId !== 7 && moduleId !== 9 && moduleId !== 10 && moduleId !== 11 && moduleId !== 12 && moduleId !== 13 && moduleId !== 14 && moduleId !== 15 && moduleId !== 16 && moduleId !== 17 && moduleId !== 18 && moduleId !== 19 && moduleId !== 20) {
+  if (!sections && moduleId !== 7 && moduleId !== 9 && moduleId !== 10 && moduleId !== 11 && moduleId !== 12 && moduleId !== 13 && moduleId !== 14 && moduleId !== 15 && moduleId !== 16 && moduleId !== 17 && moduleId !== 18 && moduleId !== 19 && moduleId !== 20 && moduleId !== 21 && moduleId !== 22) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 text-center">
@@ -6611,7 +6613,7 @@ const ModuleDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 ? 'none' : undefined }}>
+      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 ? 'none' : undefined }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className={`absolute top-10 left-10 w-72 h-72 ${isModule1Light ? 'bg-[#2C666E]/10' : 'bg-primary/5'} dark:bg-primary/10 rounded-full blur-3xl`}></div>
           <div className={`absolute bottom-10 right-10 w-96 h-96 ${isModule1Light ? 'bg-[#2C666E]/5' : 'bg-secondary/5'} dark:bg-secondary/10 rounded-full blur-3xl`}></div>
@@ -25135,27 +25137,25 @@ const ModuleDetail = () => {
         )
       }
 
-      {/* Module 21 to 25 Placeholder - Coming Soon */}
+      {/* MODULE 21 SECTION */}
       {
-        moduleId >= 21 && (
-          <div className="flex flex-col items-center justify-center min-h-[50vh] animate-in fade-in zoom-in duration-500">
-            <Card className="p-10 bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700 text-center max-w-md shadow-2xl">
-              <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner ring-1 ring-white/10">
-                <Zap className="w-10 h-10 text-yellow-400" />
-              </div>
-              <h2 className="text-3xl font-bold text-white mb-2">Module {moduleId}</h2>
-              <p className="text-slate-400 mb-8 text-lg">This module is coming soon.</p>
-              <Button
-                size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold border-none"
-                onClick={() => navigate("/")}
-              >
-                Back to Dashboard
-              </Button>
-            </Card>
-          </div>
+        moduleId === 21 && (
+          <React.Suspense fallback={<div className="p-10 text-center">Loading Module 21...</div>}>
+            <Module21 />
+          </React.Suspense>
         )
       }
+
+      {/* MODULE 22 SECTION */}
+      {
+        moduleId === 22 && (
+          <React.Suspense fallback={<div className="p-10 text-center">Loading Module 22...</div>}>
+            <Module22 />
+          </React.Suspense>
+        )
+      }
+
+      {/* End of Module Content */}
 
       {/* End of Module Content */}
     </div >

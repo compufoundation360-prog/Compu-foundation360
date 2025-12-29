@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Settings, ChevronRight, ChevronDown, LayoutDashboard } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Settings, ChevronRight, LayoutDashboard, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,19 +12,21 @@ import {
     SidebarMenuItem,
     SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { modules, Module } from "@/config/sidebar-data";
+import { modules } from "@/config/sidebar-data";
 import { CompuLogo } from "@/components/CompuLogo";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { toast } from "sonner";
 
 export function NewAppSidebar() {
     const location = useLocation();
+    const navigate = useNavigate();
     // State for expanded module
     const [expandedModuleId, setExpandedModuleId] = React.useState<number | null>(null);
 
     // Derive active module from URL
     React.useEffect(() => {
-        // Determine which module is active based on path
-        // example: /module/3/...
         const match = location.pathname.match(/\/module\/(\d+)/);
         if (match && match[1]) {
             const id = parseInt(match[1], 10);
@@ -32,8 +34,15 @@ export function NewAppSidebar() {
         }
     }, [location.pathname]);
 
-    const toggleModule = (id: number) => {
-        setExpandedModuleId((prev) => (prev === id ? null : id));
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            toast.success("Successfully logged out");
+            navigate("/");
+        } catch (error) {
+            console.error("Logout error:", error);
+            toast.error("Failed to log out");
+        }
     };
 
     return (
@@ -165,13 +174,21 @@ export function NewAppSidebar() {
                 </SidebarMenu>
             </SidebarContent>
 
-            <SidebarFooter className="border-t border-border/50 p-4">
-                <Link to="/settings">
-                    <Button variant="outline" className="w-full justify-start gap-2">
+            <SidebarFooter className="border-t border-border/50 p-4 space-y-2">
+                <Link to="/settings" className="w-full">
+                    <Button variant="ghost" className="w-full justify-start gap-3 h-10 px-3">
                         <Settings className="h-4 w-4" />
-                        Settings
+                        <span className="text-sm font-medium">Settings</span>
                     </Button>
                 </Link>
+                <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-10 px-3 text-red-500 hover:text-red-600 hover:bg-red-500/10 transition-colors"
+                    onClick={handleLogout}
+                >
+                    <LogOut className="h-4 w-4" />
+                    <span className="text-sm font-medium">Logout</span>
+                </Button>
             </SidebarFooter>
         </Sidebar>
     );
