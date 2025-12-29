@@ -1,130 +1,154 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, User, Mail, Lock } from "lucide-react";
+import {
+  ArrowLeft,
+  Camera,
+  Loader2,
+  LogOut
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
+import { updateProfile, signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { Card } from "@/components/ui/card";
 
 const Settings = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("John Doe");
-  const [email, setEmail] = useState("john.doe@example.com");
+  const { currentUser } = useAuth();
 
-  const handleSave = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+
+  useEffect(() => {
+    if (currentUser?.displayName) {
+      setDisplayName(currentUser.displayName);
+    }
+  }, [currentUser]);
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Settings saved successfully!");
+    if (!currentUser) return;
+
+    setIsLoading(true);
+    try {
+      await updateProfile(currentUser, {
+        displayName: displayName,
+      });
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("Failed to update profile.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      toast.success("Signed out successfully");
+      navigate("/");
+    } catch (error) {
+      toast.error("Error signing out");
+    }
+  };
+
+  const userInitials = currentUser?.displayName
+    ? currentUser.displayName.split(" ").map(n => n[0]).join("").toUpperCase().substring(0, 2)
+    : "U";
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50 shadow-soft">
-        <div className="container mx-auto px-4 py-4">
+      <header className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <SidebarTrigger className="-ml-1" />
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <ArrowLeft className="h-5 w-5" />
-            <span>Back to Dashboard</span>
-          </button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/dashboard")} className="gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </Button>
+            <div className="flex flex-col">
+              <h1 className="text-lg font-bold leading-none">Profile Settings</h1>
+            </div>
           </div>
+
+          <Button variant="destructive" size="sm" onClick={handleSignOut} className="gap-2">
+            <LogOut className="h-4 w-4" />
+            <span className="hidden sm:inline">Sign Out</span>
+          </Button>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-12 max-w-3xl">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Settings</h1>
-          <p className="text-muted-foreground">Manage your account preferences</p>
-        </div>
-
-        <div className="space-y-6">
-          {/* Profile Settings */}
-          <Card className="p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <User className="h-5 w-5 text-primary" />
-              </div>
-              <h2 className="text-2xl font-bold text-foreground">Profile Information</h2>
-            </div>
-
-            <form onSubmit={handleSave} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="h-12"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-12"
-                />
-              </div>
-
-              <Button 
-                type="submit"
-                className="bg-primary hover:bg-primary-dark text-primary-foreground"
-              >
-                Save Changes
-              </Button>
-            </form>
-          </Card>
-
-          {/* Security */}
-          <Card className="p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                <Lock className="h-5 w-5 text-secondary" />
-              </div>
-              <h2 className="text-2xl font-bold text-foreground">Security</h2>
-            </div>
-
-            <div className="space-y-4">
-              <p className="text-muted-foreground mb-4">
-                Keep your account secure by updating your password regularly
+      <main className="container mx-auto px-4 py-8 max-w-2xl">
+        <Card className="p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight">Personal Information</h2>
+              <p className="text-muted-foreground">
+                Update your personal details here.
               </p>
-              <Button 
-                variant="outline"
-                onClick={() => navigate("/forgot-password")}
-                className="w-full sm:w-auto"
-              >
-                Change Password
-              </Button>
             </div>
-          </Card>
 
-          {/* Account Actions */}
-          <Card className="p-8 border-destructive/20">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Account Actions</h2>
-            <div className="space-y-4">
-              <Button 
-                variant="outline"
-                onClick={() => {
-                  toast.info("Logging out...");
-                  setTimeout(() => navigate("/"), 1000);
-                }}
-                className="w-full sm:w-auto"
-              >
-                Log Out
-              </Button>
-            </div>
-          </Card>
-        </div>
-      </div>
+            <form onSubmit={handleUpdateProfile} className="space-y-8">
+              <div className="flex flex-col items-center gap-6">
+                {/* Avatar Section */}
+                <div className="flex flex-col items-center gap-4">
+                  <div className="relative group cursor-pointer">
+                    <Avatar className="h-28 w-28 border-4 border-background shadow-lg">
+                      <AvatarImage src={currentUser?.photoURL || ""} />
+                      <AvatarFallback className="text-3xl bg-primary/10 text-primary">{userInitials}</AvatarFallback>
+                    </Avatar>
+                    <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Camera className="h-8 w-8 text-white" />
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground font-medium">
+                    Tap to change avatar
+                  </p>
+                </div>
+
+                {/* Form Fields */}
+                <div className="w-full space-y-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="name">Display Name</Label>
+                    <Input
+                      id="name"
+                      value={displayName}
+                      onChange={(e) => setDisplayName(e.target.value)}
+                      placeholder="Your full name"
+                      className="h-11"
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email Address</Label>
+                    <Input
+                      id="email"
+                      value={currentUser?.email || ""}
+                      disabled
+                      className="bg-muted text-muted-foreground h-11"
+                    />
+                    <p className="text-[0.8rem] text-muted-foreground">
+                      Managed by authentication provider
+                    </p>
+                  </div>
+
+                  <div className="pt-4 flex justify-end">
+                    <Button type="submit" disabled={isLoading} className="w-full sm:w-auto min-w-[140px]">
+                      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                      Save Changes
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </Card>
+      </main>
     </div>
   );
 };

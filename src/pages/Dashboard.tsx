@@ -10,6 +10,9 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { simulators } from "@/data/simulators";
 
+import { auth } from "@/lib/firebase";
+import { toast } from "sonner";
+import { LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import {
   DropdownMenu,
@@ -305,7 +308,7 @@ const Dashboard = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <SidebarTrigger className="-ml-1" />
+              <SidebarTrigger className="-ml-1 hidden md:flex" />
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                 <Computer className="h-6 w-6 text-white" />
               </div>
@@ -340,7 +343,22 @@ const Dashboard = () => {
                     <SettingsIcon className="mr-2 h-4 w-4" />
                     <span>Settings</span>
                   </DropdownMenuItem>
-                  {/* Logout is handled in Sidebar, but could be here too */}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={async () => {
+                      try {
+                        await auth.signOut();
+                        toast.success("Signed out successfully");
+                        navigate("/");
+                      } catch (error) {
+                        toast.error("Error signing out");
+                      }
+                    }}
+                    className="text-destructive focus:text-destructive"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Sign Out</span>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -386,25 +404,29 @@ const Dashboard = () => {
         {/* SECTION 2 & 3: User Progress & Performance Chart */}
         <section className="grid lg:grid-cols-2 gap-6">
           {/* SECTION 2: User Progress */}
-          <Card className="p-6">
+          <Card className="p-4 md:p-6">
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="h-5 w-5 text-primary" />
-              <h3 className="text-xl font-bold text-foreground">Your Learning Progress</h3>
+              <h3 className="text-lg md:text-xl font-bold text-foreground">Your Learning Progress</h3>
             </div>
             <div className="space-y-6">
-              <div className="flex justify-center">
+              <div className="flex justify-center py-2">
                 <ProgressCircle progress={overallProgress} size={120} />
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {modules.filter(m => m.progress > 0).map((module) => (
-                  <div key={module.id} className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-foreground font-medium">{module.title}</span>
-                      <span className="text-muted-foreground">{module.progress}%</span>
+                  <div key={module.id} className="space-y-1.5">
+                    <div className="flex justify-between items-end gap-2 text-sm">
+                      <span className="text-foreground font-medium text-xs sm:text-sm leading-tight line-clamp-2">
+                        {module.title}
+                      </span>
+                      <span className="text-muted-foreground text-xs font-mono shrink-0">
+                        {module.progress}%
+                      </span>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
+                    <div className="w-full bg-muted/50 rounded-full h-2 overflow-hidden">
                       <div
-                        className="bg-primary h-2 rounded-full transition-all"
+                        className="bg-primary h-full rounded-full transition-all duration-500 ease-out"
                         style={{ width: `${module.progress}%` }}
                       />
                     </div>
@@ -415,14 +437,14 @@ const Dashboard = () => {
           </Card>
 
           {/* SECTION 3: Performance Chart */}
-          <Card className="p-6">
+          <Card className="p-4 md:p-6">
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="h-5 w-5 text-primary" />
-              <h3 className="text-xl font-bold text-foreground">Learning Activity</h3>
+              <h3 className="text-lg md:text-xl font-bold text-foreground">Learning Activity</h3>
             </div>
             <div className="w-full overflow-hidden">
-              <ChartContainer config={chartConfig} className="h-[280px] w-full">
-                <AreaChart data={performanceData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+              <ChartContainer config={chartConfig} className="h-[200px] md:h-[280px] w-full">
+                <AreaChart data={performanceData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="fillTopics" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
@@ -433,23 +455,29 @@ const Dashboard = () => {
                       <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" vertical={false} />
                   <XAxis
                     dataKey="month"
                     tickLine={false}
                     axisLine={false}
                     tickMargin={8}
-                    className="text-xs"
+                    className="text-[10px] md:text-xs"
+                    tick={{ fill: 'hsl(var(--muted-foreground))' }}
                   />
                   <YAxis
                     tickLine={false}
                     axisLine={false}
                     tickMargin={8}
-                    className="text-xs"
+                    className="text-[10px] md:text-xs"
                     domain={[0, 20]}
-                    ticks={[0, 5, 10, 15, 20]}
+                    ticks={[0, 10, 20]}
+                    tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    width={25}
                   />
-                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <ChartTooltip
+                    cursor={{ stroke: 'hsl(var(--muted-foreground))', strokeWidth: 1, strokeDasharray: '4 4' }}
+                    content={<ChartTooltipContent indicator="dot" />}
+                  />
                   <Area
                     type="monotone"
                     dataKey="topicsCompleted"
@@ -469,12 +497,12 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center justify-center gap-4 mt-4">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-blue-500" />
-                <span className="text-xs text-muted-foreground">Topics Completed</span>
+                <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                <span className="text-xs text-muted-foreground">Topics</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="text-xs text-muted-foreground">Study Hours</span>
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                <span className="text-xs text-muted-foreground">Hours</span>
               </div>
             </div>
           </Card>

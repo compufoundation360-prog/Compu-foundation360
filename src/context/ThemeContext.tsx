@@ -5,6 +5,7 @@ type Theme = 'light' | 'dark';
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -18,14 +19,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    
+
     // Apply theme immediately on mount and when theme changes
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-    
+
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -34,7 +35,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     const stored = localStorage.getItem('theme') as Theme | null;
     const initialTheme = stored || 'light';
-    
+
     if (initialTheme === 'dark') {
       root.classList.add('dark');
     } else {
@@ -47,7 +48,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

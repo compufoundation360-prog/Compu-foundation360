@@ -174,21 +174,8 @@ export function NewAppSidebar() {
                 </SidebarMenu>
             </SidebarContent>
 
-            <SidebarFooter className="border-t border-border/50 p-4 space-y-2">
-                <Link to="/settings" className="w-full">
-                    <Button variant="ghost" className="w-full justify-start gap-3 h-10 px-3">
-                        <Settings className="h-4 w-4" />
-                        <span className="text-sm font-medium">Settings</span>
-                    </Button>
-                </Link>
-                <Button
-                    variant="ghost"
-                    className="w-full justify-start gap-3 h-10 px-3 text-red-500 hover:text-red-600 hover:bg-red-500/10 transition-colors"
-                    onClick={handleLogout}
-                >
-                    <LogOut className="h-4 w-4" />
-                    <span className="text-sm font-medium">Logout</span>
-                </Button>
+            {/* Footer Removed as per request */}
+            <SidebarFooter className="border-t border-border/50 p-4 space-y-2 hidden">
             </SidebarFooter>
         </Sidebar>
     );

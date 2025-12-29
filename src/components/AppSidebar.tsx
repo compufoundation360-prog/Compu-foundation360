@@ -822,25 +822,7 @@ export function AppSidebar() {
 
       <SidebarFooter className="border-t border-border px-2">
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              onClick={() => navigate("/settings")}
-              isActive={isActive("/settings")}
-              className={cn(
-                "h-10 px-3 gap-3 transition-all duration-200",
-                isActive("/settings") && "bg-primary/20 dark:bg-primary/30 shadow-sm"
-              )}
-            >
-              <Settings className={cn(
-                "h-4 w-4 shrink-0 transition-colors",
-                isActive("/settings") && "text-primary"
-              )} />
-              <span className={cn(
-                "font-medium",
-                isActive("/settings") && "text-primary font-semibold"
-              )}>Settings</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
