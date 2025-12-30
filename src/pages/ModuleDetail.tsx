@@ -36,6 +36,8 @@ const Module19 = React.lazy(() => import("@/pages/Module19"));
 const Module20 = React.lazy(() => import("@/pages/Module20"));
 const Module21 = React.lazy(() => import("@/pages/Module21"));
 const Module22 = React.lazy(() => import("@/pages/Module22"));
+const Module23 = React.lazy(() => import("@/pages/Module23"));
+const Module24 = React.lazy(() => import("@/pages/Module24"));
 import moduleSoftware from "@/assets/module-software.png";
 import moduleIntro from "@/assets/module-media/m1-hero.jpeg";
 import moduleTypesHero from "@/assets/module-media/types-combined.jpg";
@@ -6511,7 +6513,7 @@ const ModuleDetail = () => {
     }
 
 
-    if (moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22) {
+    if (moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 || moduleId === 23 || moduleId === 24) {
       return { title: null, subtitle: null };
     }
 
@@ -6523,7 +6525,7 @@ const ModuleDetail = () => {
 
   const { title: heroTitle, subtitle: heroSubtitle } = resolveHeroContent();
 
-  if (!sections && moduleId !== 7 && moduleId !== 9 && moduleId !== 10 && moduleId !== 11 && moduleId !== 12 && moduleId !== 13 && moduleId !== 14 && moduleId !== 15 && moduleId !== 16 && moduleId !== 17 && moduleId !== 18 && moduleId !== 19 && moduleId !== 20 && moduleId !== 21 && moduleId !== 22) {
+  if (!sections && moduleId !== 7 && moduleId !== 9 && moduleId !== 10 && moduleId !== 11 && moduleId !== 12 && moduleId !== 13 && moduleId !== 14 && moduleId !== 15 && moduleId !== 16 && moduleId !== 17 && moduleId !== 18 && moduleId !== 19 && moduleId !== 20 && moduleId !== 21 && moduleId !== 22 && moduleId !== 23 && moduleId !== 24) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 text-center">
@@ -6613,7 +6615,7 @@ const ModuleDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 ? 'none' : undefined }}>
+      <section className={`bg-background dark:bg-black border-b border-border relative overflow-hidden min-h-[calc(100vh-73px)] flex items-center ${isModule1Light ? 'bg-[#F0EDEE]' : ''} ${moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 || moduleId === 23 || moduleId === 24 ? '!hidden' : ''}`} style={{ display: moduleId === 7 || moduleId === 9 || moduleId === 10 || moduleId === 11 || moduleId === 12 || moduleId === 13 || moduleId === 14 || moduleId === 15 || moduleId === 16 || moduleId === 17 || moduleId === 18 || moduleId === 19 || moduleId === 20 || moduleId === 21 || moduleId === 22 || moduleId === 23 || moduleId === 24 ? 'none' : undefined }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className={`absolute top-10 left-10 w-72 h-72 ${isModule1Light ? 'bg-[#2C666E]/10' : 'bg-primary/5'} dark:bg-primary/10 rounded-full blur-3xl`}></div>
           <div className={`absolute bottom-10 right-10 w-96 h-96 ${isModule1Light ? 'bg-[#2C666E]/5' : 'bg-secondary/5'} dark:bg-secondary/10 rounded-full blur-3xl`}></div>
@@ -25151,6 +25153,24 @@ const ModuleDetail = () => {
         moduleId === 22 && (
           <React.Suspense fallback={<div className="p-10 text-center">Loading Module 22...</div>}>
             <Module22 />
+          </React.Suspense>
+        )
+      }
+
+      {/* MODULE 23 SECTION */}
+      {
+        moduleId === 23 && (
+          <React.Suspense fallback={<div className="p-10 text-center">Loading Module 23...</div>}>
+            <Module23 />
+          </React.Suspense>
+        )
+      }
+
+      {/* MODULE 24 SECTION */}
+      {
+        moduleId === 24 && (
+          <React.Suspense fallback={<div className="p-10 text-center">Loading Module 24...</div>}>
+            <Module24 />
           </React.Suspense>
         )
       }

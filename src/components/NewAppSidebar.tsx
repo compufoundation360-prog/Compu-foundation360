@@ -18,6 +18,8 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { toast } from "sonner";
+import { quizzes } from "@/data/quiz-data";
+import { ClipboardCheck } from "lucide-react";
 
 export function NewAppSidebar() {
     const location = useLocation();
@@ -122,7 +124,7 @@ export function NewAppSidebar() {
                                     {/* Topics Tree */}
                                     {module.topics.length > 0 && (
                                         <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-                                            <div className="relative ml-[15px] mt-1 mb-2 pl-3 space-y-0.5">
+                                            <div className="relative ml-0 mt-1 mb-2 pl-0 space-y-0.5">
                                                 {module.topics.map((topic, index) => {
                                                     const isIntro = topic.id.endsWith("-intro");
                                                     let topicPath;
@@ -136,20 +138,20 @@ export function NewAppSidebar() {
                                                     }
 
                                                     const isTopicActive = location.pathname === topicPath;
-                                                    const isLast = index === module.topics.length - 1;
+                                                    const isLast = index === module.topics.length - 1 && !quizzes[module.id];
 
                                                     return (
                                                         <div key={topic.id} className="relative group/topic">
                                                             {/* Vertical Trunk */}
                                                             <div className={cn(
-                                                                "absolute -left-[1px] top-0 bottom-0 w-[1px] bg-border/60",
+                                                                "absolute left-[23px] top-0 bottom-0 w-[1px] bg-border/60",
                                                                 isLast && "h-[16px] bottom-auto"
                                                             )} />
 
                                                             {/* Horizontal Branch */}
-                                                            <div className="absolute -left-[1px] top-[16px] h-[1px] w-[12px] bg-border/60" />
+                                                            <div className="absolute left-[23px] top-[16px] h-[1px] w-[12px] bg-border/60" />
 
-                                                            <Link to={topicPath} className="block pl-4">
+                                                            <Link to={topicPath} className="block pl-9">
                                                                 <Button
                                                                     variant="ghost"
                                                                     className={cn(
@@ -164,6 +166,38 @@ export function NewAppSidebar() {
                                                         </div>
                                                     );
                                                 })}
+
+                                                {/* Divider for "Extras" like Quiz/Video */}
+                                                {(quizzes[module.id]) && (
+                                                    <>
+                                                        {/* Small spacer to separate topics from assessment */}
+                                                        <div className="relative h-4">
+                                                            <div className="absolute left-[23px] top-0 bottom-0 w-[1px] bg-border/60" />
+                                                        </div>
+
+                                                        {quizzes[module.id] && (
+                                                            <div className="relative group/topic">
+                                                                {/* Tree Connectors */}
+                                                                <div className="absolute left-[23px] top-0 h-[16px] w-[1px] bg-border/60" />
+                                                                <div className="absolute left-[23px] top-[16px] h-[1px] w-[12px] bg-border/60" />
+
+                                                                <Link to={`/module/${module.id}/quiz`} className="block pl-9">
+                                                                    <Button
+                                                                        variant="ghost"
+                                                                        className={cn(
+                                                                            "w-full justify-start h-auto min-h-[32px] py-1 px-3 text-[13px] tracking-tight whitespace-normal text-left transition-colors",
+                                                                            "text-primary font-bold hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                                                                            location.pathname === `/module/${module.id}/quiz` && "bg-sidebar-accent"
+                                                                        )}
+                                                                    >
+                                                                        <ClipboardCheck className="w-4 h-4 mr-2 shrink-0" />
+                                                                        <span>Module Quiz</span>
+                                                                    </Button>
+                                                                </Link>
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
                                             </div>
                                         </CollapsibleContent>
                                     )}

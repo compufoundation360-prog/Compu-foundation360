@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import ModuleDetail from "./pages/ModuleDetail";
 import Lesson from "./pages/Lesson";
 import Settings from "./pages/Settings";
+import Quiz from "./pages/Quiz";
 import NotFound from "./pages/NotFound";
 
 import { AuthProvider } from "@/context/AuthContext";
@@ -42,6 +43,7 @@ const App = () => (
                   <Route path="/module/:id/topic/:topicId" element={<ModuleDetail />} />
                   <Route path="/lesson/:moduleId/:lessonId" element={<Lesson />} />
                   <Route path="/settings" element={<Settings />} />
+                  <Route path="/module/:moduleId/quiz" element={<Quiz />} />
                 </Route>
               </Route>
 
