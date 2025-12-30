@@ -39,7 +39,12 @@ import {
     UserCheck,
     Bot,
     Package,
-    Trophy
+    Trophy,
+    Rocket,
+    Wallet,
+    Users,
+    Wrench,
+    Brain
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -298,7 +303,9 @@ const Topic1WhatIsRaspberryPi = () => {
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 text-green-300 text-xs font-bold tracking-wide uppercase border border-green-500/30 w-fit">
                             <Lightbulb className="w-3 h-3" /> Quick Understanding
                         </div>
-                        <h2 className="text-3xl font-bold">Think of it as a "Tiny Computer Brain" ðŸ§ </h2>
+                        <h2 className="text-3xl font-bold flex items-center justify-center gap-3">
+                            Think of it as a "Tiny Computer Brain" <Brain className="w-8 h-8 text-green-500" />
+                        </h2>
                         <p className="text-slate-300 text-lg leading-relaxed">
                             You can connect eyes (cameras), ears (microphones), and hands (motors) to it, and program it to think and act on its own.
                         </p>
@@ -314,22 +321,26 @@ const Topic1WhatIsRaspberryPi = () => {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <Card className="p-6 border-l-4 border-l-green-500 bg-background shadow-sm hover:shadow-md transition-all">
-                        <p className="text-5xl mb-4">ðŸ’°</p>
+                        <div className="mb-4 text-green-500">
+                            <Wallet className="w-12 h-12" />
+                        </div>
                         <h4 className="text-lg font-bold mb-2">Affordable</h4>
                         <p className="text-sm text-muted-foreground">Costs less than a video game. Perfect for students.</p>
                     </Card>
                     <Card className="p-6 border-l-4 border-l-blue-500 bg-background shadow-sm hover:shadow-md transition-all">
-                        <p className="text-5xl mb-4">âš¡</p>
+                        <div className="mb-4 text-blue-500">
+                            <Zap className="w-12 h-12" />
+                        </div>
                         <h4 className="text-lg font-bold mb-2">Low Power</h4>
                         <p className="text-sm text-muted-foreground">Runs on a phone charger. You can leave it on 24/7.</p>
                     </Card>
                     <Card className="p-6 border-l-4 border-l-purple-500 bg-background shadow-sm hover:shadow-md transition-all">
-                        <p className="text-5xl mb-4">ðŸ¤</p>
+                        <div className="mb-4 text-purple-500"><Users className="w-12 h-12" /></div>
                         <h4 className="text-lg font-bold mb-2">Community</h4>
                         <p className="text-sm text-muted-foreground">Millions of users. If you get stuck, someone has likely solved it.</p>
                     </Card>
                     <Card className="p-6 border-l-4 border-l-orange-500 bg-background shadow-sm hover:shadow-md transition-all">
-                        <p className="text-5xl mb-4">ðŸ› ï¸</p>
+                        <div className="mb-4 text-orange-500"><Wrench className="w-12 h-12" /></div>
                         <h4 className="text-lg font-bold mb-2">Hardware-Software</h4>
                         <p className="text-sm text-muted-foreground">The best way to learn how code controls the physical world.</p>
                     </Card>
