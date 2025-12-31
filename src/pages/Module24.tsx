@@ -1,10 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, ArrowLeft, ArrowRight, Brain, Zap, Globe, Microscope, AlertTriangle, LockIcon } from "lucide-react";
+import { CheckCircle2, ArrowLeft, ArrowRight, Brain, Zap, Globe, Microscope, AlertTriangle, LockIcon, ArrowDown, XCircle } from "lucide-react";
 import { motion } from "framer-motion";
+
+// Simple Image Component to handle missing images
+const ImageWithFallback = ({ src, alt, className, description }: { src: string, alt: string, className?: string, description?: string }) => {
+    const [error, setError] = useState(false);
+
+    if (error) {
+        return (
+            <div className={`flex items-center justify-center bg-muted text-muted-foreground ${className}`}>
+                <div className="text-center p-4">
+                    <p className="text-xs font-bold uppercase">{alt}</p>
+                    {description && <p className="text-[10px] mt-1 opacity-70">{description}</p>}
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <img
+            src={src}
+            alt={alt}
+            className={className}
+            onError={() => setError(true)}
+        />
+    );
+};
 
 const Topic1WhatIsQuantum = () => {
     const navigate = useNavigate();
@@ -1573,7 +1598,7 @@ const Topic7Applications = () => {
                 </div>
             </section>
 
-            {/* SECTION 2: CYBERSECURITY */}
+            {/* SECTION 2: CYBERSECURITY - ENHANCED */}
             <section className="container mx-auto px-4">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
@@ -1584,99 +1609,307 @@ const Topic7Applications = () => {
                         <p className="text-lg text-muted-foreground leading-relaxed">
                             Today's encryption protects your data using math problems that are hard for classical computers but easy for quantum computers.
                         </p>
-                        <div className="space-y-4">
-                            <div className="p-4 border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-900/10 rounded-xl">
-                                <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">The Threat</h4>
-                                <p className="text-sm">A powerful quantum computer could potentially break current security (like banking passwords) in minutes.</p>
+
+                        {/* New Flowchart Block: The Threat Analysis */}
+                        <div className="bg-slate-900 border border-slate-700 rounded-xl p-5 space-y-4">
+                            <h4 className="text-sm font-bold text-slate-300 border-b border-slate-700 pb-2">The Quantum Threat Flow</h4>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-xs font-bold">1</div>
+                                    <div className="text-sm text-slate-400">Hacker steals encrypted data today.</div>
+                                </div>
+                                <div className="pl-4"><ArrowDown className="w-4 h-4 text-slate-600" /></div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-xs font-bold">2</div>
+                                    <div className="text-sm text-slate-400">Waits for Quantum Computer (5-10 years).</div>
+                                </div>
+                                <div className="pl-4"><ArrowDown className="w-4 h-4 text-slate-600" /></div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center text-xs font-bold">3</div>
+                                    <div className="text-sm text-slate-200 font-bold">Unlocks everything instantly.</div>
+                                </div>
                             </div>
+                        </div>
+
+                        <div className="space-y-4 pt-4">
                             <div className="p-4 border border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-900/10 rounded-xl">
-                                <h4 className="font-bold text-green-700 dark:text-green-400 mb-2">The Solution</h4>
-                                <p className="text-sm">"Quantum Encryption" uses the laws of physics to create unhackable communication channels.</p>
+                                <h4 className="font-bold text-green-700 dark:text-green-400 mb-2">The Solution: Quantum Safe</h4>
+                                <p className="text-sm">"Quantum Encryption" uses the laws of physics (not just math) to create unhackable communication channels. If someone tries to intercept, the message destroys itself.</p>
                             </div>
                         </div>
                     </div>
-                    <Card className="p-8 bg-slate-950 border-slate-800 flex items-center justify-center h-[400px] relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#020617_100%)] z-10"></div>
-                        <div className="grid grid-cols-8 gap-2 text-xs font-mono text-green-500/20 absolute inset-0 p-4">
-                            {Array.from({ length: 64 }).map((_, i) => (
-                                <div key={i} className="animate-pulse" style={{ animationDelay: `${Math.random() * 2}s` }}>
-                                    {Math.round(Math.random())}
+
+                    <Card className="p-0 overflow-hidden bg-slate-950 border-slate-800">
+                        {/* Visual Analysis: Encryption Types */}
+                        <div className="p-6 border-b border-slate-800">
+                            <h4 className="font-bold text-white mb-4">Encryption Battle</h4>
+                            <div className="space-y-6">
+                                <div>
+                                    <div className="flex justify-between text-xs text-slate-400 mb-2">
+                                        <span>Classical RSA (Current Standard)</span>
+                                        <span className="text-red-400">Vulnerable</span>
+                                    </div>
+                                    <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                        <div className="h-full bg-red-500 w-[20%]"></div>
+                                    </div>
+                                    <p className="text-[10px] text-slate-500 mt-1">Cracked in minutes by Quantum</p>
                                 </div>
-                            ))}
+                                <div>
+                                    <div className="flex justify-between text-xs text-slate-400 mb-2">
+                                        <span>Lattice-Based (Quantum Safe)</span>
+                                        <span className="text-green-400">Secure</span>
+                                    </div>
+                                    <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                        <div className="h-full bg-green-500 w-[100%]"></div>
+                                    </div>
+                                    <p className="text-[10px] text-slate-500 mt-1">Resistant to Quantum Attacks</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="relative z-20 text-center space-y-4">
-                            <LockIcon className="w-16 h-16 text-primary mx-auto" />
-                            <div className="text-2xl font-bold text-white">Quantum Safe</div>
-                            <div className="text-xs text-slate-400 uppercase tracking-widest">Encryption 2.0</div>
+
+                        <div className="relative h-48 bg-slate-900">
+                            <ImageWithFallback
+                                src="quantum-encryption.png"
+                                alt="Quantum Key Distribution Visual"
+                                description="Visualizing quantum entangled keys"
+                                className="w-full h-full object-cover opacity-50"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <LockIcon className="w-12 h-12 text-primary/80" />
+                            </div>
                         </div>
                     </Card>
                 </div>
             </section>
 
-            {/* SECTION 3: OPTIMIZATION */}
+            {/* SECTION 3: OPTIMIZATION - EXPANDED */}
             <section className="container mx-auto px-4">
                 <div className="bg-primary/5 rounded-3xl p-8 md:p-12">
                     <div className="text-center mb-10">
                         <h3 className="text-2xl font-bold mb-4">Optimization Problems</h3>
-                        <p className="text-muted-foreground">Finding the best solution among billions of options.</p>
+                        <p className="text-muted-foreground max-w-2xl mx-auto">
+                            Optimization means finding the **best solution** among billions of options. Classical computers check one by one; Quantum computers check them all at once.
+                        </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6">
-                        <Card className="p-6">
-                            <h4 className="font-bold flex items-center gap-2 mb-4">
+                        <Card className="p-6 bg-background/50 hover:bg-background transition-colors">
+                            <h4 className="font-bold flex items-center gap-2 mb-4 text-orange-500">
                                 <span className="text-2xl">🚚</span> Logistics
                             </h4>
-                            <p className="text-sm text-foreground">Calculating the perfect route for 10 million delivery trucks to save fuel and time.</p>
+                            <p className="text-sm text-foreground mb-4">
+                                <strong>Problem:</strong> Finding the perfect route for 10,000 delivery trucks to save fuel.
+                            </p>
+                            <div className="h-24 bg-slate-100 dark:bg-slate-800 rounded-lg p-2 relative overflow-hidden">
+                                {/* Simple Map Graphic */}
+                                <div className="absolute top-2 left-2 w-2 h-2 bg-red-500 rounded-full"></div>
+                                <div className="absolute bottom-2 right-2 w-2 h-2 bg-green-500 rounded-full"></div>
+                                <svg className="absolute inset-0 w-full h-full text-slate-300" stroke="currentColor" fill="none">
+                                    <path d="M10 10 Q 50 50 90 90" strokeWidth="2" strokeDasharray="4 4" />
+                                    <path d="M10 10 Q 20 80 90 90" strokeWidth="2" className="text-primary" />
+                                </svg>
+                            </div>
                         </Card>
-                        <Card className="p-6">
-                            <h4 className="font-bold flex items-center gap-2 mb-4">
-                                <span className="text-2xl">🔋</span> Energy
+
+                        <Card className="p-6 bg-background/50 hover:bg-background transition-colors">
+                            <h4 className="font-bold flex items-center gap-2 mb-4 text-blue-500">
+                                <span className="text-2xl">🔋</span> Energy Grids
                             </h4>
-                            <p className="text-sm text-foreground">Designing better batteries or managing a national power grid efficiently.</p>
+                            <p className="text-sm text-foreground mb-4">
+                                <strong>Problem:</strong> Distributing electricity across a nation without waste during peak hours.
+                            </p>
+                            <div className="h-24 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                                <Zap className="w-8 h-8 text-yellow-500 animate-pulse" />
+                            </div>
                         </Card>
-                        <Card className="p-6">
-                            <h4 className="font-bold flex items-center gap-2 mb-4">
+
+                        <Card className="p-6 bg-background/50 hover:bg-background transition-colors">
+                            <h4 className="font-bold flex items-center gap-2 mb-4 text-green-500">
                                 <span className="text-2xl">💰</span> Finance
                             </h4>
-                            <p className="text-sm text-foreground">Balancing investment portfolios to minimize risk instantly.</p>
+                            <p className="text-sm text-foreground mb-4">
+                                <strong>Problem:</strong> Balancing a trillion-dollar portfolio to minimize risk instantly.
+                            </p>
+                            <div className="h-24 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-end justify-center p-2 gap-1">
+                                <div className="w-2 bg-green-500 h-[40%]"></div>
+                                <div className="w-2 bg-green-500 h-[70%]"></div>
+                                <div className="w-2 bg-green-500 h-[50%]"></div>
+                                <div className="w-2 bg-green-500 h-[90%]"></div>
+                            </div>
                         </Card>
                     </div>
                 </div>
             </section>
 
-            {/* SECTION 4: DRUG DISCOVERY */}
+            {/* SECTION 4: DRUG DISCOVERY - VISUALIZED */}
             <section className="container mx-auto px-4">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="relative h-[300px] bg-blue-50 dark:bg-blue-900/20 rounded-3xl flex items-center justify-center overflow-hidden">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-32 h-32 border-4 border-blue-400/30 rounded-full animate-[spin_10s_linear_infinite]"></div>
-                            <div className="w-48 h-48 border-4 border-purple-400/30 rounded-full absolute animate-[spin_15s_linear_infinite_reverse]"></div>
+                    <div className="relative h-[400px] bg-blue-50 dark:bg-blue-900/20 rounded-3xl flex flex-col items-center justify-center overflow-hidden border border-blue-100 dark:border-blue-900/50">
+                        {/* Simulation Visual */}
+                        <div className="grid grid-cols-2 gap-4 mb-8">
+                            <div className="w-16 h-16 rounded-full bg-blue-500/20 animate-bounce delay-75 flex items-center justify-center text-xs font-mono">H</div>
+                            <div className="w-16 h-16 rounded-full bg-purple-500/20 animate-bounce delay-150 flex items-center justify-center text-xs font-mono">O</div>
+                            <div className="w-16 h-16 rounded-full bg-red-500/20 animate-bounce delay-300 flex items-center justify-center text-xs font-mono">C</div>
+                            <div className="w-16 h-16 rounded-full bg-green-500/20 animate-bounce delay-500 flex items-center justify-center text-xs font-mono">N</div>
                         </div>
-                        <div className="relative z-10 text-6xl">💊</div>
+                        <div className="bg-background/80 backdrop-blur px-6 py-2 rounded-full shadow-lg border text-sm font-bold">
+                            Running Quantum Simulation...
+                        </div>
                     </div>
 
-                    <div className="space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">
-                            <Microscope className="w-3 h-3" /> Medicine
+                    <div className="space-y-8">
+                        <div>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
+                                <Microscope className="w-3 h-3" /> Medicine
+                            </div>
+                            <h3 className="text-3xl font-bold mb-4">Drug Discovery Revolution</h3>
+                            <p className="text-lg text-muted-foreground">
+                                Simulating molecules is hard because nature is quantum. Classical computers approximate; Quantum computers simulate nature <strong>exactly</strong>.
+                            </p>
                         </div>
-                        <h3 className="text-3xl font-bold">Drug Discovery</h3>
+
+                        {/* Comparison Table/List */}
+                        <div className="space-y-4">
+                            <div className="flex gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                                <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center shrink-0">
+                                    <XCircle className="w-5 h-5 text-slate-500" />
+                                </div>
+                                <div>
+                                    <h5 className="font-bold text-slate-700 dark:text-slate-300">Old Way (Trial & Error)</h5>
+                                    <p className="text-sm text-slate-500">mix chemicals in a lab → wait years → hope it works.</p>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-center -my-2 relative z-10"><ArrowDown className="w-5 h-5 text-muted-foreground" /></div>
+
+                            <div className="flex gap-4 p-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20">
+                                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-800 flex items-center justify-center shrink-0">
+                                    <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                                </div>
+                                <div>
+                                    <h5 className="font-bold text-blue-700 dark:text-blue-300">Quantum Way (Digital Testing)</h5>
+                                    <p className="text-sm text-blue-600/80 dark:text-blue-400">Simulate efficacy on a computer → only lab test the winners. Saves 10 years.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 5: QUANTUM MACHINE LEARNING (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="bg-slate-950 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl -ml-16 -mb-16"></div>
+
+                    <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold uppercase tracking-wider">
+                                <Brain className="w-3 h-3" /> Artificial Intelligence
+                            </div>
+                            <h3 className="text-3xl font-bold">Quantum Machine Learning (QML)</h3>
+                            <p className="text-lg text-slate-300">
+                                AI is hungry for data. Quantum computers can process massive datasets exponentially faster, training AI models in seconds that would take today's supercomputers months.
+                            </p>
+                            <ul className="space-y-3">
+                                <li className="flex items-center gap-3 text-sm text-slate-400">
+                                    <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400"><Zap className="w-3 h-3" /></div>
+                                    Faster Pattern Recognition
+                                </li>
+                                <li className="flex items-center gap-3 text-sm text-slate-400">
+                                    <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400"><Zap className="w-3 h-3" /></div>
+                                    Handling Complex, High-Dimensional Data
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-800">
+                            {/* Visual: Training Speed Comparison */}
+                            <h4 className="text-sm font-bold text-center mb-6">AI Model Training Time</h4>
+                            <div className="space-y-4">
+                                <div>
+                                    <div className="flex justify-between text-xs mb-1">
+                                        <span className="text-slate-400">Classical Supercomputer</span>
+                                        <span className="text-slate-400">3 Months</span>
+                                    </div>
+                                    <div className="w-full bg-slate-800 rounded-full h-2">
+                                        <div className="bg-slate-500 h-2 rounded-full w-full"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="flex justify-between text-xs mb-1">
+                                        <span className="text-purple-400 font-bold">Quantum Computer</span>
+                                        <span className="text-purple-400 font-bold">1 Hour</span>
+                                    </div>
+                                    <div className="w-full bg-slate-800 rounded-full h-2">
+                                        <div className="bg-purple-500 h-2 rounded-full w-[5%] animate-pulse"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 6: CLIMATE MODELING (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <Card className="p-6 bg-blue-50/50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900/30">
+                        <div className="aspect-square relative rounded-full bg-gradient-to-br from-blue-400 to-green-400 opacity-20 animate-pulse flex items-center justify-center">
+                            <Globe className="w-32 h-32 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div className="absolute inset-0 flex flex-wrap content-center justify-center gap-2 p-12 opacity-50">
+                            {/* Grid Overlay Effect */}
+                            {Array.from({ length: 12 }).map((_, i) => (
+                                <div key={i} className="w-8 h-8 border border-blue-500/20"></div>
+                            ))}
+                        </div>
+                    </Card>
+                    <div className="space-y-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-bold uppercase tracking-wider">
+                            <Globe className="w-3 h-3" /> Environment
+                        </div>
+                        <h3 className="text-3xl font-bold">Saving the Planet</h3>
                         <p className="text-lg text-muted-foreground">
-                            Simulating molecules is hard because nature is quantum. Quantum computers can simulate nature <strong>exactly</strong>.
+                            Modeling the Earth's climate involves billions of variables (wind, heat, ocean currents). It's too complex for standard computers.
                         </p>
-                        <ul className="space-y-3">
-                            <li className="flex gap-3 items-center">
-                                <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                <span>Discover new medicines for incurable diseases.</span>
-                            </li>
-                            <li className="flex gap-3 items-center">
-                                <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                <span>Create personalized treatments for patients.</span>
-                            </li>
-                            <li className="flex gap-3 items-center">
-                                <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                <span>Drastically reduce the cost of research.</span>
-                            </li>
-                        </ul>
+                        <p className="text-muted-foreground">
+                            Quantum computers can analyze these complex interactions to:
+                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="p-3 bg-muted rounded-lg text-sm font-medium">Predict Weather Disasters</div>
+                            <div className="p-3 bg-muted rounded-lg text-sm font-medium">Optimize Carbon Capture</div>
+                            <div className="p-3 bg-muted rounded-lg text-sm font-medium">Design Green Fertilizers</div>
+                            <div className="p-3 bg-muted rounded-lg text-sm font-medium">Track Ocean Changes</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 7: MATERIAL SCIENCE (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="bg-orange-50 dark:bg-orange-950/10 rounded-3xl p-8 md:p-12 border border-orange-100 dark:border-orange-900/30">
+                    <div className="max-w-3xl mx-auto text-center space-y-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-bold uppercase tracking-wider">
+                            <Zap className="w-3 h-3" /> Energy Tech
+                        </div>
+                        <h3 className="text-3xl font-bold">New Wonder Materials</h3>
+                        <p className="text-lg text-muted-foreground">
+                            We can design new materials atom-by-atom.
+                        </p>
+                        <div className="grid md:grid-cols-3 gap-6 text-left mt-8">
+                            <div className="bg-background p-6 rounded-xl shadow-sm">
+                                <h4 className="font-bold mb-2">Better Batteries</h4>
+                                <p className="text-sm text-muted-foreground">EV batteries that charge in 5 minutes and last 1,000 miles.</p>
+                            </div>
+                            <div className="bg-background p-6 rounded-xl shadow-sm">
+                                <h4 className="font-bold mb-2">Solar Panels</h4>
+                                <p className="text-sm text-muted-foreground">Panels that possess 50% efficiency instead of 20%.</p>
+                            </div>
+                            <div className="bg-background p-6 rounded-xl shadow-sm">
+                                <h4 className="font-bold mb-2">Superconductors</h4>
+                                <p className="text-sm text-muted-foreground">Power lines that lose 0% energy during transmission.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1720,53 +1953,137 @@ const Topic8Limitations = () => {
                 </div>
             </section>
 
-            {/* SECTION 2: NOISE & ERRORS */}
+            {/* SECTION 2: NOISE & ERRORS - VISUALIZED */}
             <section className="container mx-auto px-4">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <Card className="p-8 border-orange-500/20 bg-orange-500/5 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4 opacity-20">
-                            <img src="https://media.giphy.com/media/l3vQYm0jCj0eUAiT6/giphy.gif" alt="Static Noise" className="w-32 h-32 object-cover rounded-full mix-blend-overlay" />
+                    <Card className="p-8 border-orange-500/20 bg-orange-500/5 relative overflow-hidden group hover:border-orange-500/50 transition-colors">
+                        {/* Visual: Shaking Qubit */}
+                        <div className="h-40 flex items-center justify-center relative mb-6">
+                            <div className="w-24 h-24 rounded-full border-4 border-orange-500/30 flex items-center justify-center animate-[shake_0.5s_ease-in-out_infinite]">
+                                <span className="text-4xl">😱</span>
+                            </div>
+                            <div className="absolute top-0 right-0 text-xs text-orange-500 font-mono animate-pulse">NOISE DETECTED</div>
+                            <div className="absolute bottom-2 left-10 text-xs text-orange-500 font-mono">Temp +0.001°C</div>
                         </div>
-                        <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-orange-400">1. They are Fragile</h3>
+                        <h3 className="text-2xl font-bold mb-4 text-orange-600 dark:text-orange-400">1. Decoherence ( fragility)</h3>
                         <p className="text-muted-foreground mb-4">
-                            Qubits are extremely sensitive. A tiny vibration, a change in temperature, or a stray magnetic field can cause errors. This is called <strong>Decoherence</strong>.
+                            Qubits are extremely sensitive divas. A tiny vibration, a wifi signal, or a cosmic ray causes them to collapse from superposition to plain old 0 or 1.
                         </p>
-                        <div className="bg-background p-4 rounded-xl border mb-4">
-                            <p className="text-sm font-mono text-center">
-                                Expected: |1⟩ <br />
-                                <span className="text-red-500">Actual: |0⟩ (Error!)</span>
-                            </p>
+                        <div className="bg-background p-4 rounded-xl border border-red-500/20 text-red-500 text-sm font-bold text-center">
+                            "Quantum Memory lasts only microseconds."
                         </div>
                     </Card>
 
-                    <Card className="p-8 border-blue-500/20 bg-blue-500/5">
-                        <h3 className="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">2. Extreme Cold</h3>
-                        <p className="text-muted-foreground mb-4">
-                            Most quantum computers need to operate at temperatures near <strong>Absolute Zero (-273°C)</strong>. This is colder than deep space.
-                        </p>
-                        <div className="flex gap-4 items-center justify-center p-4">
-                            <span className="text-4xl">❄️</span>
-                            <div className="text-sm font-bold text-center">
-                                Requires massive, expensive<br />refrigerators to run.
+                    <Card className="p-8 border-cyan-500/20 bg-cyan-500/5 group hover:border-cyan-500/50 transition-colors">
+                        {/* Visual: Thermometer */}
+                        <div className="h-40 flex items-center justify-center gap-8 mb-6 relative">
+                            <div className="h-32 w-4 bg-slate-200 rounded-full overflow-hidden relative border border-slate-300">
+                                <div className="absolute bottom-0 w-full bg-blue-500 h-[5%]"></div>
                             </div>
+                            <div className="space-y-4 text-xs font-mono text-slate-500">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-red-500 rounded-full"></div> Room Temp (300K)
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-blue-300 rounded-full"></div> Outer Space (2.7K)
+                                </div>
+                                <div className="flex items-center gap-2 font-bold text-cyan-500">
+                                    <div className="w-2 h-2 bg-cyan-500 rounded-full"></div> Quantum Chip (0.01K)
+                                </div>
+                            </div>
+                        </div>
+                        <h3 className="text-2xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">2. Extreme Cold</h3>
+                        <p className="text-muted-foreground mb-4">
+                            Most quantum computers need to run at near <strong>Absolute Zero</strong>. That is colder than deep space.
+                        </p>
+                        <div className="bg-background p-4 rounded-xl border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-sm font-bold text-center">
+                            Requires massive "Golden Chandeliers" (Dilution Refrigerators).
                         </div>
                     </Card>
                 </div>
             </section>
 
-            {/* SECTION 3: SCALABILITY */}
+            {/* SECTION 3: SCALABILITY (WIRES) */}
             <section className="container mx-auto px-4">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h3 className="text-2xl font-bold mb-8">3. The Scaling Problem</h3>
-                    <div className="p-8 border border-dashed border-slate-300 dark:border-slate-700 rounded-3xl">
-                        <div className="flex justify-center items-end gap-2 h-32 mb-4">
-                            <div className="w-16 bg-primary/20 rounded-t-lg h-12 flex items-center justify-center text-xs">Now</div>
-                            <div className="w-16 bg-primary/40 rounded-t-lg h-24 flex items-center justify-center text-xs">Needed</div>
+                <div className="bg-slate-950 text-white rounded-3xl p-8 md:p-12 border border-slate-800">
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-500 text-xs font-bold uppercase tracking-wider">
+                                <AlertTriangle className="w-3 h-3" /> Engineering Challenge
+                            </div>
+                            <h3 className="text-3xl font-bold">3. The Wiring Nightmare</h3>
+                            <p className="text-lg text-slate-400">
+                                Imagine trying to connect wires to millions of lightbulbs that are all smaller than a grain of sand, without them touching each other.
+                            </p>
+                            <p className="text-slate-500">
+                                As we add more qubits, the control wiring becomes unmanageable. We need to invent new ways to control qubits wirelessly or with light.
+                            </p>
                         </div>
-                        <p className="text-lg">
-                            We currently have machines with ~100-1000 qubits. To do useful things (like drug discovery), we need <strong>millions</strong> of qubits.
+                        {/* Visual: Tangled Wires */}
+                        <div className="h-64 bg-black rounded-xl overflow-hidden relative flex items-center justify-center">
+                            <svg className="absolute inset-0 w-full h-full opacity-50" viewBox="0 0 100 100">
+                                {Array.from({ length: 20 }).map((_, i) => (
+                                    <path key={i} d={`M${Math.random() * 100} 0 Q ${Math.random() * 100} 50 ${Math.random() * 100} 100`} stroke={["#ef4444", "#3b82f6", "#eab308"][i % 3]} strokeWidth="0.5" fill="none" />
+                                ))}
+                            </svg>
+                            <div className="relative z-10 bg-slate-900 border border-slate-700 p-4 rounded-lg text-xs font-mono text-center">
+                                <div>Capacity Limit Reached</div>
+                                <div className="text-red-500 font-bold">Overheating...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 4: ERROR CORRECTION (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <Card className="p-6 bg-purple-50 dark:bg-purple-900/10 border-purple-100 dark:border-purple-900/30">
+                        {/* Visual: 1 Logical vs many Physical */}
+                        <div className="h-48 flex items-center justify-center relative">
+                            <div className="absolute inset-0 flex flex-wrap items-center justify-center gap-1 opacity-30">
+                                {Array.from({ length: 50 }).map((_, i) => (
+                                    <div key={i} className="w-2 h-2 rounded-full bg-purple-500"></div>
+                                ))}
+                            </div>
+                            <div className="relative z-10 bg-white dark:bg-slate-950 p-4 rounded-full shadow-xl border-4 border-purple-500 w-24 h-24 flex items-center justify-center font-bold text-xl">
+                                1 Qubit
+                            </div>
+                        </div>
+                        <p className="text-center text-xs text-muted-foreground mt-4">We need 1,000 physical qubits to protect 1 logical qubit.</p>
+                    </Card>
+                    <div className="space-y-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-bold uppercase tracking-wider">
+                            <Microscope className="w-3 h-3" /> The Math Problem
+                        </div>
+                        <h3 className="text-3xl font-bold">4. Error Correction Costs</h3>
+                        <p className="text-lg text-muted-foreground">
+                            Because qubits are so error-prone, we have to group thousands of them together to act as a single, stable "Logical Qubit".
                         </p>
-                        <p className="text-sm text-muted-foreground mt-2">Connecting that many qubits without noise is currently impossible.</p>
+                        <ul className="space-y-2 text-sm text-foreground">
+                            <li className="flex gap-2"><ArrowRight className="w-4 h-4 text-purple-500" /> To get 100 perfect qubits...</li>
+                            <li className="flex gap-2"><ArrowRight className="w-4 h-4 text-purple-500" /> We might need 100,000 physical ones.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 5: THE SOFTWARE GAP (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="bg-muted/50 rounded-3xl p-8 text-center max-w-4xl mx-auto">
+                    <h3 className="text-2xl font-bold mb-6">5. The Skill Shortage</h3>
+                    <p className="text-muted-foreground mb-8">
+                        We have the machines, but we don't have enough people who know how to program them. Thinking in "Quantum" is completely counter-intuitive to how we are taught to think.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="p-4 bg-background rounded-xl border border-border">
+                            <div className="text-4xl font-bold text-slate-300 mb-2">50%</div>
+                            <div className="text-xs uppercase font-bold text-muted-foreground">Jobs Unfilled</div>
+                        </div>
+                        <div className="p-4 bg-background rounded-xl border border-border">
+                            <div className="text-4xl font-bold text-primary mb-2">$150k+</div>
+                            <div className="text-xs uppercase font-bold text-muted-foreground">Starting Salary</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1812,50 +2129,153 @@ const Topic9India = () => {
                 </div>
             </section>
 
-            {/* SECTION 2: NATIONAL MISSION */}
+            {/* SECTION 2: NATIONAL MISSION - ENHANCED */}
             <section className="container mx-auto px-4">
-                <Card className="p-8 md:p-12 border-l-8 border-l-orange-500 shadow-xl bg-card">
-                    <div className="grid md:grid-cols-3 gap-8 items-center">
-                        <div className="col-span-2 space-y-4">
-                            <h3 className="text-3xl font-bold">National Quantum Mission (NQM)</h3>
+                <Card className="p-0 overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-orange-50 to-green-50 dark:from-orange-950/20 dark:to-green-950/20">
+                    <div className="grid md:grid-cols-2">
+                        <div className="p-8 md:p-12 space-y-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold uppercase tracking-wider">
+                                <Globe className="w-3 h-3" /> NQM 2023-2031
+                            </div>
+                            <h3 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-green-600 dark:from-orange-400 dark:to-green-400">
+                                National Quantum Mission
+                            </h3>
                             <p className="text-lg text-muted-foreground">
-                                A massive government initiative to develop quantum technologies within India.
+                                India is one of the few nations with a dedicated mission (₹6003 Cr) to scale up quantum technologies.
                             </p>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                                <li className="flex gap-2 items-center"><CheckCircle2 className="w-4 h-4 text-green-500" /> Build Quantum Computers</li>
-                                <li className="flex gap-2 items-center"><CheckCircle2 className="w-4 h-4 text-green-500" /> Secure Communications</li>
-                                <li className="flex gap-2 items-center"><CheckCircle2 className="w-4 h-4 text-green-500" /> Advanced Sensors</li>
-                                <li className="flex gap-2 items-center"><CheckCircle2 className="w-4 h-4 text-green-500" /> Material Science</li>
-                            </ul>
+                            <div className="bg-background/50 p-4 rounded-xl border border-orange-200 dark:border-orange-900/30">
+                                <div className="text-4xl font-bold text-orange-500 mb-1">₹6,000+ Cr</div>
+                                <div className="text-xs uppercase font-bold text-muted-foreground">Government Funding Approved</div>
+                            </div>
                         </div>
-                        <div className="flex flex-col items-center justify-center p-6 bg-muted/50 rounded-xl text-center">
-                            <div className="text-5xl font-bold text-primary mb-2">₹6000+</div>
-                            <div className="text-sm font-bold uppercase text-muted-foreground">Crores allocated</div>
-                            <p className="text-xs text-muted-foreground mt-2">Dedicated budget for research.</p>
+                        <div className="bg-white/50 dark:bg-black/20 p-8 md:p-12 flex flex-col justify-center space-y-4">
+                            <h4 className="font-bold text-center mb-4">The 4 Mission Pillars</h4>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-background p-4 rounded-lg shadow-sm text-center">
+                                    <div className="text-2xl mb-2">💻</div>
+                                    <div className="text-xs font-bold">Computing</div>
+                                </div>
+                                <div className="bg-background p-4 rounded-lg shadow-sm text-center">
+                                    <div className="text-2xl mb-2">📡</div>
+                                    <div className="text-xs font-bold">Communication</div>
+                                </div>
+                                <div className="bg-background p-4 rounded-lg shadow-sm text-center">
+                                    <div className="text-2xl mb-2">⚡</div>
+                                    <div className="text-xs font-bold">Sensing</div>
+                                </div>
+                                <div className="bg-background p-4 rounded-lg shadow-sm text-center">
+                                    <div className="text-2xl mb-2">🧪</div>
+                                    <div className="text-xs font-bold">Materials</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </Card>
             </section>
 
-            {/* SECTION 3: KEY INSTITUTIONS */}
+            {/* SECTION 3: KEY PLAYERS (Enhanced) */}
             <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center">Who is workings on it?</h3>
+                <h3 className="text-2xl font-bold mb-8 text-center">Research Powerhouses</h3>
                 <div className="grid md:grid-cols-3 gap-6">
-                    <Card className="p-6 text-center hover:shadow-md transition-all">
-                        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🎓</div>
-                        <h4 className="font-bold">IITs & IISc</h4>
-                        <p className="text-sm text-muted-foreground">Top institutes like IISc Bangalore, IIT Madras, and IIT Bombay lead the research.</p>
+                    <Card className="p-6 text-center hover:shadow-lg transition-all border-blue-500/20 group">
+                        <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">🏛️</div>
+                        <h4 className="font-bold text-lg mb-2">IISc Bangalore</h4>
+                        <p className="text-sm text-muted-foreground">Leading the charge in superconducting qubits and advanced physics.</p>
                     </Card>
-                    <Card className="p-6 text-center hover:shadow-md transition-all">
-                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🔬</div>
-                        <h4 className="font-bold">Raman Research Institute</h4>
-                        <p className="text-sm text-muted-foreground">Pioneering experiments in secure quantum communications.</p>
+                    <Card className="p-6 text-center hover:shadow-lg transition-all border-green-500/20 group">
+                        <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">🔬</div>
+                        <h4 className="font-bold text-lg mb-2">TIFR Mumbai</h4>
+                        <p className="text-sm text-muted-foreground">Pioneering work in quantum architectures and control systems.</p>
                     </Card>
-                    <Card className="p-6 text-center hover:shadow-md transition-all">
-                        <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🚀</div>
-                        <h4 className="font-bold">Startups</h4>
-                        <p className="text-sm text-muted-foreground">Young companies like QNu Labs and BosonQ Psi are building real products.</p>
+                    <Card className="p-6 text-center hover:shadow-lg transition-all border-purple-500/20 group">
+                        <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform">📡</div>
+                        <h4 className="font-bold text-lg mb-2">RRI Bangalore</h4>
+                        <p className="text-sm text-muted-foreground">Experimenting with secure quantum satellite communications.</p>
                     </Card>
+                </div>
+            </section>
+
+            {/* SECTION 4: THE STARTUP ECOSYSTEM (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="bg-slate-950 text-white rounded-3xl p-8 md:p-12 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+
+                    <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+                        <span className="text-blue-500">🚀</span> Indian Startups
+                    </h3>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
+                        <div className="p-4 bg-slate-900 rounded-xl border border-slate-800">
+                            <div className="font-bold text-blue-400 mb-1">QNu Labs</div>
+                            <div className="text-xs text-slate-400">Quantum Security & Encryption</div>
+                        </div>
+                        <div className="p-4 bg-slate-900 rounded-xl border border-slate-800">
+                            <div className="font-bold text-green-400 mb-1">BosonQ Psi</div>
+                            <div className="text-xs text-slate-400">Quantum Simulation Software</div>
+                        </div>
+                        <div className="p-4 bg-slate-900 rounded-xl border border-slate-800">
+                            <div className="font-bold text-purple-400 mb-1">QPiAI</div>
+                            <div className="text-xs text-slate-400">AI & Quantum Hardware</div>
+                        </div>
+                        <div className="p-4 bg-slate-900 rounded-xl border border-slate-800">
+                            <div className="font-bold text-orange-400 mb-1">Qulabs</div>
+                            <div className="text-xs text-slate-400">Communication Networks</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 5: INDIA'S QUANTUM VALLEY (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                        <h3 className="text-3xl font-bold">Bangalore & Pune: The Hubs</h3>
+                        <p className="text-lg text-muted-foreground">
+                            Just like Silicon Valley for chips, Bangalore is emerging as the "Quantum Valley" of India, hosting the highest density of research labs and startups.
+                        </p>
+                        <div className="flex gap-4">
+                            <div className="px-4 py-2 bg-muted rounded-full text-sm font-bold">📍 Bangalore (IISc, RRI)</div>
+                            <div className="px-4 py-2 bg-muted rounded-full text-sm font-bold">📍 Pune (IUCAA, CDAC)</div>
+                        </div>
+                    </div>
+                    <Card className="p-6 bg-slate-100 dark:bg-slate-900 flex items-center justify-center min-h-[200px]">
+                        <Globe className="w-24 h-24 text-slate-300 dark:text-slate-700 animate-pulse" />
+                        <div className="absolute font-bold text-xl">Innovation Hubs</div>
+                    </Card>
+                </div>
+            </section>
+
+            {/* SECTION 6: FUTURE JOBS (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white text-center">
+                    <h3 className="text-3xl font-bold mb-6">Future Careers in India</h3>
+                    <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+                        By 2030, India will need thousands of skilled professionals.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <div className="px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20">Quantum Algorithm Engineer</div>
+                        <div className="px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20">Cryogenic Specialist</div>
+                        <div className="px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20">Q-Security Analyst</div>
+                        <div className="px-6 py-3 bg-white/10 backdrop-blur rounded-full border border-white/20">Error Correction Reseacher</div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 7: GOVERNMENT INITIATIVES (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="space-y-2">
+                        <div className="font-bold text-primary">C-DAC</div>
+                        <p className="text-sm text-muted-foreground">Developing indigenous supercomputers (PARAM) that will integrate with future quantum systems.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <div className="font-bold text-primary">MeitY</div>
+                        <p className="text-sm text-muted-foreground">Ministry of Electronics supporting startups through the Q-Sim initiative.</p>
+                    </div>
+                    <div className="space-y-2">
+                        <div className="font-bold text-primary">I-Hub Quantum</div>
+                        <p className="text-sm text-muted-foreground">Incubators specifically focused on turning research papers into products.</p>
+                    </div>
                 </div>
             </section>
 
@@ -1948,7 +2368,7 @@ const Topic10DemoTools = () => {
                             </div>
                         </div>
                     </div>
-                    <Card className="p-4 bg-slate-900 border-slate-700">
+                    <Card className="p-4 bg-slate-900 border-slate-700 shadow-xl">
                         {/* Mockup of Interface */}
                         <div className="aspect-video bg-slate-800 rounded mb-4 overflow-hidden relative">
                             <div className="absolute inset-x-0 top-0 h-8 bg-slate-700 flex items-center px-4 space-x-2">
@@ -1957,29 +2377,114 @@ const Topic10DemoTools = () => {
                                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
                             <div className="p-8 flex items-center gap-4 text-slate-400 font-mono text-sm">
-                                <div>|0⟩</div>
-                                <div className="w-8 h-8 bg-blue-500 text-white flex items-center justify-center rounded">H</div>
-                                <div className="w-24 h-1 bg-slate-600"></div>
-                                <div className="w-8 h-8 bg-purple-500 text-white flex items-center justify-center rounded">X</div>
-                                <div className="w-24 h-1 bg-slate-600"></div>
+                                <div>q0 |0⟩</div>
+                                <div className="w-8 h-8 bg-blue-500 text-white flex items-center justify-center rounded cursor-pointer hover:scale-110 transition-transform">H</div>
+                                <div className="w-24 h-0.5 bg-slate-600"></div>
+                                <div className="w-8 h-8 bg-purple-500 text-white flex items-center justify-center rounded cursor-pointer hover:scale-110 transition-transform">X</div>
+                                <div className="w-24 h-0.5 bg-slate-600"></div>
                                 <div className="w-8 h-8 bg-slate-200 text-black flex items-center justify-center rounded border border-black">?</div>
                             </div>
+                             <div className="absolute bottom-4 right-4 text-xs font-mono text-green-400">Status: Running...</div>
                         </div>
-                        <p className="text-center text-xs text-slate-500">Example of a simple visual circuit builder</p>
+                        <p className="text-center text-xs text-slate-500">The "Composer" view handles the math for you.</p>
                     </Card>
                 </div>
             </section>
 
-            {/* SECTION 3: OTHER WAYS TO LEARN */}
+             {/* SECTION 3: QUIRK (NEW) */}
             <section className="container mx-auto px-4">
-                <div className="bg-primary/5 rounded-3xl p-8 text-center max-w-3xl mx-auto">
-                    <h3 className="text-2xl font-bold mb-4">Learning is Safe</h3>
+                 <div className="bg-yellow-50 dark:bg-yellow-900/10 p-8 rounded-3xl border border-yellow-100 dark:border-yellow-900/30">
+                     <div className="grid md:grid-cols-2 gap-8 items-center">
+                         <div>
+                             <h3 className="text-2xl font-bold mb-4">Quirk Simulator</h3>
+                             <p className="text-muted-foreground mb-4">
+                                 If IBM is too heavy, try <strong>Quirk</strong>. It is an open-source, instant quantum circuit simulator that runs entirely in JavaScript.
+                             </p>
+                             <ul className="space-y-2 text-sm">
+                                 <li className="flex gap-2">✅ Instant feedback (no waiting for queue)</li>
+                                 <li className="flex gap-2">✅ Shows the Bloch Sphere spinning live</li>
+                                 <li className="flex gap-2">✅ Great for learning "What does this gate do?"</li>
+                             </ul>
+                         </div>
+                         <div className="flex items-center justify-center">
+                             <div className="w-full h-32 bg-white dark:bg-black rounded-lg border-2 border-dashed border-yellow-500 flex items-center justify-center text-yellow-500 font-bold">
+                                 algassert.com/quirk
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </section>
+
+             {/* SECTION 4: GOOGLE CIRQ (NEW) */}
+            <section className="container mx-auto px-4">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                     <div className="p-6 bg-slate-900 rounded-xl font-mono text-sm text-slate-300 overflow-hidden">
+<pre>{`import cirq
+
+# Create a qubit
+q = cirq.GridQubit(0, 0)
+
+# Create a circuit
+circuit = cirq.Circuit(
+    cirq.H(q),  # Superposition
+    cirq.measure(q)
+)
+
+print("Hello Quantum World!")
+print(circuit)`}</pre>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+                            For Coders
+                        </div>
+                        <h3 className="text-3xl font-bold">Google Cirq</h3>
+                        <p className="text-lg text-muted-foreground">
+                            Prefer Python? Cirq is Google's python library for writing quantum circuits. It is what they use to run experiments on their "Sycamore" processor.
+                        </p>
+                        <p className="text-muted-foreground">
+                            Combine it with <strong>TensorFlow Quantum</strong> to build Quantum Machine Learning models.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+             {/* SECTION 5: CLOUD GIANTS (NEW) */}
+            <section className="container mx-auto px-4">
+                 <h3 className="text-2xl font-bold mb-8 text-center">The Cloud Wars</h3>
+                 <div className="grid md:grid-cols-2 gap-6">
+                     <Card className="p-6 border-blue-500/20">
+                         <h4 className="font-bold text-xl mb-2 text-blue-600">Azure Quantum</h4>
+                         <p className="text-sm text-muted-foreground mb-4">Microsoft's platform.</p>
+                         <p className="text-sm">Lets you write code in <strong>Q# (Q-Sharp)</strong> and run it on hardware from partners like IonQ and Honeywell.</p>
+                     </Card>
+                      <Card className="p-6 border-orange-500/20">
+                         <h4 className="font-bold text-xl mb-2 text-orange-600">Amazon Braket</h4>
+                         <p className="text-sm text-muted-foreground mb-4">AWS Platform.</p>
+                         <p className="text-sm">Rent quantum computers by the minute, just like you rent servers. Supports D-Wave, Rigetti, and IonQ.</p>
+                     </Card>
+                 </div>
+            </section>
+
+             {/* SECTION 6: YOUR FIRST PROGRAM (NEW) */}
+             <section className="container mx-auto px-4">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-950/30 dark:to-emerald-950/30 rounded-3xl p-8 text-center max-w-3xl mx-auto">
+                    <h3 className="text-2xl font-bold mb-4">Your First "Quantum Hello World"</h3>
                     <p className="text-muted-foreground mb-6">
-                        Mistakes are free. You can't break anything. It is the perfect playground to test your understanding of Superposition and Entanglement.
+                        The "Hello World" of quantum is putting a qubit into Superposition and then measuring it.
                     </p>
-                    <Button variant="outline" className="gap-2">
-                        <Globe className="w-4 h-4" /> Search "Interactive Quantum Tools"
-                    </Button>
+                    <div className="inline-flex flex-col gap-2 p-4 bg-white dark:bg-black rounded-xl shadow-sm text-left font-mono text-sm mx-auto">
+                        <div className="text-slate-500">// 1. Start with 0</div>
+                        <div>reset(q);</div>
+                        <div className="text-slate-500 mt-2">// 2. Enter Superposition</div>
+                        <div>h(q); <span className="text-green-500 text-xs">← The Magic Gate</span></div>
+                        <div className="text-slate-500 mt-2">// 3. Measure</div>
+                        <div>measure(q);</div>
+                    </div>
+                    <div className="mt-8">
+                         <Button variant="default" className="gap-2" onClick={() => window.open('https://quantum-computing.ibm.com/', '_blank')}>
+                            <Globe className="w-4 h-4" /> Open IBM Composer
+                        </Button>
+                    </div>
                 </div>
             </section>
 
