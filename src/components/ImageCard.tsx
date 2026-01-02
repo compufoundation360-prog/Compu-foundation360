@@ -70,8 +70,8 @@ export const ImageCard: React.FC<ImageCardProps> = ({ card, index, alternateLayo
       <DialogTrigger asChild>
         <div className="w-full h-full aspect-[4/3] bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 flex items-center justify-center overflow-hidden cursor-pointer">
           {imagePath ? (
-            <img 
-              src={imagePath} 
+            <img
+              src={imagePath}
               alt={card.title}
               loading="lazy"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -97,8 +97,8 @@ export const ImageCard: React.FC<ImageCardProps> = ({ card, index, alternateLayo
             >
               <X className="h-5 w-5" />
             </Button>
-            <img 
-              src={imagePath} 
+            <img
+              src={imagePath}
               alt={card.title}
               loading="lazy"
               className="w-full h-auto max-h-[90vh] object-contain"

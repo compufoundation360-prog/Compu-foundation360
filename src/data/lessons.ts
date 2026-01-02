@@ -2115,6 +2115,41 @@ export const module2Lessons: Lesson[] = [
 // Module 3: Memory & Storage Management
 export const module3Lessons: Lesson[] = [
   {
+    id: 99, // Special ID for the new Boot Process topic
+    title: "The Boot Process",
+    description: "Understand the step-by-step process of how a computer turns on (POST, BIOS, OS Loading)",
+    duration: "10 min",
+    content: {
+      sections: [
+        {
+          type: 'card',
+          title: 'How a Computer Starts',
+          data: {
+            cards: [
+              {
+                title: "The Boot Sequence",
+                description: "Power On → POST (Self Check) → Load BIOS → Load OS.",
+                image: "m3-boot-overview.jpg"
+              }
+            ]
+          }
+        },
+        {
+          type: 'list',
+          title: 'The 3 Key Steps',
+          data: {
+            items: [
+              "Power On Self Test (POST): The computer checks if RAM, CPU, and GPU are working.",
+              "BIOS/UEFI: The firmware finds the Hard Drive/SSD with the OS.",
+              "OS Loading: Windows/macOS takes control and shows the desktop."
+            ]
+          }
+        }
+      ]
+    },
+    quiz: []
+  },
+  {
     id: 1,
     title: "Data Measurement Units",
     description: "Learn about bits, bytes, KB, MB, GB, TB, and how to convert between them",
@@ -2333,7 +2368,7 @@ export const module3Lessons: Lesson[] = [
                 title: "System Critical",
                 description: "Essential for computer startup.\n\nContains boot instructions.",
                 icon: "⚙️",
-                image: "rom-system.jpg"
+                image: "m3-boot-overview.jpg"
               }
             ]
           }

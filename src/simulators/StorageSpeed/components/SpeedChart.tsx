@@ -13,6 +13,7 @@ import { DRIVE_SPECS } from '../types';
 
 interface SpeedChartProps {
     data: { [key: string]: number };
+    scenario?: string; // Optional if we re-add scenarios later
 }
 
 export function SpeedChart({ data }: SpeedChartProps) {
@@ -28,32 +29,32 @@ export function SpeedChart({ data }: SpeedChartProps) {
     }));
 
     return (
-        <div className="bg-card rounded-xl p-6 border border-border h-[450px] flex flex-col shadow-sm relative overflow-hidden group">
+        <div className="bg-card rounded-xl p-4 lg:p-6 border border-border h-[300px] lg:h-[450px] flex flex-col shadow-sm relative overflow-hidden group">
 
             {/* Tech Background */}
             <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:20px_20px]" />
 
-            <div className="mb-6 relative z-10 flex items-center justify-between">
+            <div className="mb-4 lg:mb-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
                 <div>
-                    <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                    <h3 className="text-lg lg:text-xl font-bold text-foreground flex items-center gap-2">
                         Performance Benchmark
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <p className="text-xs lg:text-sm text-muted-foreground mt-1">
                         Real-time Sequential Write Speed (MB/s)
                     </p>
                 </div>
                 {/* Legend/Key */}
                 <div className="flex gap-4 text-xs font-mono">
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+                        <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
                         <span className="text-muted-foreground">HDD</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                        <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
                         <span className="text-muted-foreground">SATA</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]"></div>
+                        <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]"></div>
                         <span className="text-muted-foreground">NVMe</span>
                     </div>
                 </div>
@@ -63,7 +64,7 @@ export function SpeedChart({ data }: SpeedChartProps) {
                 <BarChart
                     data={chartData}
                     layout="vertical"
-                    margin={{ left: 10, right: 80, top: 10, bottom: 10 }}
+                    margin={{ left: 0, right: 60, top: 0, bottom: 0 }}
                     barGap={4}
                 >
                     {/* Subtle Grid */}
@@ -78,8 +79,8 @@ export function SpeedChart({ data }: SpeedChartProps) {
                         type="category"
                         dataKey="name"
                         stroke="currentColor"
-                        width={120}
-                        tick={{ fill: 'currentColor', fontSize: 13, fontWeight: 600 }}
+                        width={80}
+                        tick={{ fill: 'currentColor', fontSize: 11, fontWeight: 600 }}
                         tickLine={false}
                         axisLine={false}
                         className="text-foreground"
@@ -104,10 +105,10 @@ export function SpeedChart({ data }: SpeedChartProps) {
                     />
 
                     {/* Background Track Bar (Gray) */}
-                    <Bar dataKey="fullMark" barSize={36} radius={[0, 8, 8, 0]} isAnimationActive={false} fill="currentColor" className="opacity-[0.05] absolute" />
+                    <Bar dataKey="fullMark" barSize={24} radius={[0, 8, 8, 0]} isAnimationActive={false} fill="currentColor" className="opacity-[0.05] absolute" />
 
                     {/* Actual Data Bar */}
-                    <Bar dataKey="value" barSize={36} radius={[0, 6, 6, 0]}>
+                    <Bar dataKey="value" barSize={24} radius={[0, 6, 6, 0]}>
                         {chartData.map((entry, index) => (
                             <Cell
                                 key={`cell-${index}`}
@@ -121,8 +122,9 @@ export function SpeedChart({ data }: SpeedChartProps) {
                         <LabelList
                             dataKey="value"
                             position="right"
-                            offset={15}
-                            className="fill-foreground font-mono font-bold text-lg"
+                            offset={10}
+                            fill="currentColor"
+                            className="text-foreground font-mono font-bold text-sm lg:text-lg"
                             formatter={(val: number) => Math.round(val).toLocaleString()}
                         />
                     </Bar>
