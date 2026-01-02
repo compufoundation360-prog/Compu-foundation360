@@ -2,6 +2,8 @@
 import React, { lazy } from 'react';
 import SimulatorWrapper from './SimulatorWrapper';
 
+import { PCBuilderLoader } from './PCBuilder/PCBuilderLoader';
+
 // Lazy Load the Simulators
 const PCBuilderSim = lazy(() => import('./PCBuilder/PCBuilderSim'));
 
@@ -14,6 +16,15 @@ interface SimulatorRegistryProps {
 }
 
 const SimulatorRegistry: React.FC<SimulatorRegistryProps> = ({ id, className }) => {
+
+    const getLoader = () => {
+        switch (id) {
+            case 'pc-builder':
+                return <PCBuilderLoader />;
+            default:
+                return undefined;
+        }
+    };
 
     const renderSimulator = () => {
         switch (id) {
@@ -33,7 +44,11 @@ const SimulatorRegistry: React.FC<SimulatorRegistryProps> = ({ id, className }) 
     };
 
     return (
-        <SimulatorWrapper className={className} fallbackText="Initializing Virtual Lab...">
+        <SimulatorWrapper
+            className={className}
+            fallbackText="Initializing Virtual Lab..."
+            customLoader={getLoader()}
+        >
             {renderSimulator()}
         </SimulatorWrapper>
     );

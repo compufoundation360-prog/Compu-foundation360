@@ -1,8 +1,19 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./index.html",
+    "./src/pages/**/*.{ts,tsx}",
+    "./src/components/**/*.{ts,tsx}",
+    "./src/simulators/**/*.{ts,tsx}",
+    "./src/hooks/**/*.{ts,tsx}",
+    "./src/context/**/*.{ts,tsx}",
+    "./src/App.tsx",
+    "!**/node_modules/**",
+    "!./src/simulators/office-skill-studio-main/node_modules/**"
+  ],
   prefix: "",
   theme: {
     container: {

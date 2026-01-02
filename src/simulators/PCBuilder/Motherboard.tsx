@@ -52,9 +52,14 @@ export const Motherboard = () => {
         // Removed bg-card, shadow, border to prevent "empty space" box effect. Now it floats.
         <div className="relative w-full max-w-[600px] aspect-[3/4] mx-auto overflow-hidden select-none">
             {/* Motherboard Background Image - utilizing bg-contain to maintain aspect ratio */}
-            <div
-                className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-90 dark:opacity-100 dark:invert-[.02]"
-                style={{ backgroundImage: `url(${motherboardImg})` }}
+            {/* Motherboard Background Image - utilizing img tag for better loading priority */}
+            <img
+                src={motherboardImg}
+                alt="Motherboard Schematic"
+                className="absolute inset-0 w-full h-full object-contain object-center opacity-90 dark:opacity-100 dark:invert-[.02]"
+                loading="eager"
+                // @ts-ignore - fetchPriority is standard now but types might lag
+                fetchPriority="high"
             />
 
             {/* Overlay Grid/Texture for tech feel */}
