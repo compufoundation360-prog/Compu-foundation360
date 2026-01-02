@@ -15,6 +15,9 @@
  * - Your own domain/VPS
  */
 
+// Import thumbnail
+import storageSpeedThumb from '../assets/thumbnails/storage-speed-sim-preview.jpg';
+
 export interface Simulator {
   id: string;
   name: string;
@@ -44,7 +47,7 @@ export const simulators: Simulator[] = [
     description: "Learn how to install SSDs correctly. Practice placing M.2 NVMe and SATA SSDs in the right slots on the motherboard.",
     moduleId: 2,
     topicId: "6", // Topic 6: SSD & NVMe
-    previewImage: "module-media/m2-ssd-simulator-thumbnail.jpg", // Placeholder - user will add thumbnail
+    previewImage: storageSpeedThumb, // Use imported variable
     url: "#", // Placeholder - user will add link later
   },
   {

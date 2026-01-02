@@ -2008,8 +2008,8 @@ const ModuleDetail = () => {
   // Get image URL helper - works with Vite's asset handling
   const getImageUrl = (imageName: string) => {
     if (!imageName) return "";
-    // If it's an absolute URL, return as is
-    if (imageName.startsWith("http")) return imageName;
+    // If it's an absolute URL or an imported asset (starts with /), return as is
+    if (imageName.startsWith("http") || imageName.startsWith("/") || imageName.startsWith("/assets")) return imageName;
 
     // In production, we reference from root since assets are in public/
     if (imageName.startsWith("module-media/")) {
