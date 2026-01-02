@@ -1,0 +1,855 @@
+/* ============================================
+   WINDOWS DISK MANAGEMENT STYLE
+   Realistic Disk Partition Simulator
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Windows-style colors */
+    --primary-blue: #0078D4;
+    --primary-blue-dark: #005A9E;
+    --extended-green: #107C10;
+    --extended-green-dark: #0B5A0B;
+    --logical-green: #16A085;
+    --unallocated-black: #000000;
+    --unallocated-gray: #1A1A1A;
+    
+    /* UI Colors */
+    --bg-windows: #F3F3F3;
+    --bg-panel: #FFFFFF;
+    --border-light: #D1D1D1;
+    --border-dark: #A0A0A0;
+    --text-primary: #1F1F1F;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    
+    /* Status colors */
+    --success: #107C10;
+    --error: #E81123;
+    --warning: #FF8C00;
+    --info: #0078D4;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    --transition: all 0.2s ease;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    background: var(--bg-windows);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--bg-panel);
+    border-radius: 4px;
+    box-shadow: var(--shadow-lg);
+    padding: 20px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* ============================================
+   CONTROLS
+   ============================================ */
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--bg-windows);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.btn:hover {
+    background: #E8E8E8;
+    border-color: var(--primary-blue);
+}
+
+.btn:active {
+    background: #D1D1D1;
+}
+
+.btn-primary {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.btn-primary:hover {
+    background: var(--primary-blue-dark);
+    border-color: var(--primary-blue-dark);
+}
+
+.disk-info {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.disk-info strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ============================================
+   DISK HEADER (Windows-style)
+   ============================================ */
+
+.disk-header {
+    background: var(--bg-windows);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+}
+
+.disk-header-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.disk-number {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.disk-type {
+    color: var(--text-secondary);
+}
+
+.disk-status {
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.disk-status.online {
+    background: #E8F5E9;
+    color: var(--success);
+}
+
+.disk-size {
+    color: var(--text-secondary);
+    margin-left: auto;
+}
+
+/* ============================================
+   DISK LAYOUT (Windows-style table)
+   ============================================ */
+
+.disk-layout {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.disk-layout-header {
+    display: grid;
+    grid-template-columns: 120px 1fr 100px 100px 100px 120px;
+    background: var(--bg-windows);
+    border-bottom: 1px solid var(--border-light);
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.layout-col {
+    padding: 0 5px;
+}
+
+.disk-bar {
+    display: flex;
+    height: 100px;
+    position: relative;
+    background: var(--unallocated-black);
+    border-top: 1px solid var(--border-light);
+}
+
+/* ============================================
+   PARTITIONS (Windows-style)
+   ============================================ */
+
+.partition {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border-right: 2px solid var(--bg-panel);
+    min-width: 60px;
+    user-select: none;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Primary Partition - Blue (Windows style) */
+.partition.primary {
+    background: linear-gradient(180deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Extended Partition - Green */
+.partition.extended {
+    background: linear-gradient(180deg, var(--extended-green) 0%, var(--extended-green-dark) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Logical Drive - Light Green */
+.partition.logical {
+    background: linear-gradient(180deg, var(--logical-green) 0%, #0E7A6B 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Unallocated - Black */
+.partition.unallocated {
+    background: var(--unallocated-black);
+    cursor: default;
+    border-color: var(--border-dark);
+}
+
+.partition:hover:not(.unallocated) {
+    filter: brightness(1.1);
+    z-index: 10;
+    box-shadow: 0 0 0 2px var(--primary-blue), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.partition.selected {
+    outline: 3px solid var(--warning);
+    outline-offset: -3px;
+    z-index: 5;
+    box-shadow: 0 0 0 2px var(--warning), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.partition-label {
+    text-align: center;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    width: 100%;
+}
+
+.partition-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.partition-size {
+    font-size: 11px;
+    opacity: 0.95;
+    margin-bottom: 2px;
+}
+
+.partition-type {
+    font-size: 10px;
+    opacity: 0.85;
+    text-transform: uppercase;
+}
+
+.partition.unallocated .partition-label {
+    color: var(--text-muted);
+    text-shadow: none;
+}
+
+/* Partition Info Table Row */
+.partition-info-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 100px 100px 100px 120px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 12px;
+    align-items: center;
+}
+
+.partition-info-row:hover {
+    background: #F8F8F8;
+}
+
+.partition-info-col {
+    padding: 0 5px;
+}
+
+.partition-info-col.volume {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.partition-info-col.status {
+    color: var(--success);
+    font-weight: 500;
+}
+
+/* ============================================
+   RESIZE HANDLES (Left & Right)
+   ============================================ */
+
+.resize-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: ew-resize;
+    z-index: 20;
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.resize-handle.left {
+    left: -3px;
+}
+
+.resize-handle.right {
+    right: -3px;
+}
+
+.resize-handle:hover {
+    background: rgba(255, 255, 255, 0.7);
+    width: 8px;
+}
+
+.resize-handle.left:hover {
+    left: -4px;
+}
+
+.resize-handle.right:hover {
+    right: -4px;
+}
+
+.resize-handle.active {
+    background: var(--warning);
+    width: 8px;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
+}
+
+.resize-handle.left.active {
+    left: -4px;
+}
+
+.resize-handle.right.active {
+    right: -4px;
+}
+
+.partition.unallocated .resize-handle {
+    display: none;
+}
+
+/* ============================================
+   LEGEND
+   ============================================ */
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--bg-windows);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    border: 1px solid var(--border-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+.legend-color.primary {
+    background: var(--primary-blue);
+}
+
+.legend-color.extended {
+    background: var(--extended-green);
+}
+
+.legend-color.logical {
+    background: var(--logical-green);
+}
+
+.legend-color.unallocated {
+    background: var(--unallocated-black);
+}
+
+/* ============================================
+   STATUS MESSAGE
+   ============================================ */
+
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 13px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: var(--transition);
+    max-width: 400px;
+    border: 1px solid;
+}
+
+.status-message.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.status-message.success {
+    background: #E8F5E9;
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.status-message.error {
+    background: #FFEBEE;
+    color: var(--error);
+    border-color: var(--error);
+}
+
+.status-message.warning {
+    background: #FFF3E0;
+    color: var(--warning);
+    border-color: var(--warning);
+}
+
+.status-message.info {
+    background: #E3F2FD;
+    color: var(--info);
+    border-color: var(--info);
+}
+
+/* ============================================
+   CONTEXT MENU (Windows-style)
+   ============================================ */
+
+.context-menu {
+    position: fixed;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dark);
+    border-radius: 3px;
+    box-shadow: var(--shadow-lg);
+    padding: 4px 0;
+    min-width: 180px;
+    z-index: 2000;
+    display: none;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+.context-menu.show {
+    display: block;
+    animation: fadeInScale 0.15s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.context-menu-item {
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.context-menu-item:hover:not(.disabled) {
+    background: #E8E8E8;
+}
+
+.context-menu-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-muted);
+}
+
+.context-menu-separator {
+    height: 1px;
+    background: var(--border-light);
+    margin: 4px 0;
+}
+
+/* ============================================
+   POPUP OVERLAY (Windows-style)
+   ============================================ */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    backdrop-filter: blur(2px);
+}
+
+.popup-overlay.show {
+    display: flex;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.popup {
+    background: var(--bg-panel);
+    border-radius: 4px;
+    padding: 24px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.2s ease-out;
+    border: 1px solid var(--border-dark);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popup-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.popup-description {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.form-input,
+.form-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-dark);
+    border-radius: 3px;
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.btn-popup {
+    padding: 8px 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.btn-popup-primary {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.btn-popup-primary:hover {
+    background: var(--primary-blue-dark);
+}
+
+.btn-popup-secondary {
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    border-color: var(--border-dark);
+}
+
+.btn-popup-secondary:hover {
+    background: #F0F0F0;
+}
+
+.properties-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.properties-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: var(--bg-windows);
+    border-radius: 3px;
+    border: 1px solid var(--border-light);
+}
+
+.properties-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.properties-value {
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* ============================================
+   PROPERTIES PANEL
+   ============================================ */
+
+.properties-panel {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+    background: var(--bg-panel);
+    border-left: 1px solid var(--border-dark);
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.2);
+    z-index: 2500;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.properties-panel.show {
+    right: 0;
+}
+
+.properties-panel-header {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.properties-panel-close {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+}
+
+.properties-panel-close:hover {
+    color: var(--text-primary);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .disk-layout-header {
+        grid-template-columns: 80px 1fr 80px 80px 80px 100px;
+        font-size: 10px;
+    }
+
+    .disk-bar {
+        height: 80px;
+    }
+
+    .partition-label {
+        font-size: 11px;
+        padding: 3px;
+    }
+
+    .partition-name {
+        font-size: 12px;
+    }
+
+    .properties-panel {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes partitionCreate {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes partitionDelete {
+    to {
+        width: 0;
+        opacity: 0;
+    }
+}
+
+.partition.creating {
+    animation: partitionCreate 0.4s ease-out;
+}
+
+.partition.deleting {
+    animation: partitionDelete 0.4s ease-out;
+}

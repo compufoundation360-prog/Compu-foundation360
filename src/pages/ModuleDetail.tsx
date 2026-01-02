@@ -9,11 +9,12 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import { Switch } from "@/components/ui/switch";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ThemeToggle } from "../components/ThemeToggle";
-import { SimulatorPreview } from "@/components/SimulatorPreview";
+
 import { getSimulatorByModuleId, getSimulatorByTopic } from "@/data/simulators";
 import { ContentRenderer } from "@/components/ContentRenderer";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { useTheme } from "@/context/ThemeContext";
+import { useSimulator } from "@/context/SimulatorContext";
 import { PhishingTopic } from "@/components/topics/m10/PhishingTopic";
 import { SafeBrowsingTopic } from "@/components/topics/m10/SafeBrowsingTopic";
 import { FirewallTopic } from "@/components/topics/m10/FirewallTopic";
@@ -50,6 +51,7 @@ const ModuleDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { theme } = useTheme();
+  const { openSimulator } = useSimulator();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [ipoInput, setIpoInput] = useState("");
   const [ipoOutput, setIpoOutput] = useState("");
@@ -6636,7 +6638,24 @@ const ModuleDetail = () => {
 
             <div className="hidden lg:block">
               {simulator ? (
-                <SimulatorPreview simulator={simulator} />
+                <Card className="p-6 border-primary/20 bg-primary/5 cursor-pointer hover:border-primary/50 transition-all group" onClick={() => navigate('/simulator/' + (simulator.componentId || simulator.id))}>
+                  <div className="relative aspect-video rounded-lg overflow-hidden mb-4 bg-muted">
+                    {simulator.previewImage ? (
+                      <img src={getImageUrl(simulator.previewImage)} alt={simulator.name} className="object-cover w-full h-full" />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-muted-foreground">
+                        <Cog className="w-12 h-12" />
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="bg-white/90 text-black px-4 py-2 rounded-full font-bold flex items-center gap-2">
+                        <Zap className="w-4 h-4 fill-current" /> Launch
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="font-bold text-lg mb-1">{simulator.name}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{simulator.description}</p>
+                </Card>
               ) : moduleId === 1 && topicId === "1" ? (
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -7763,6 +7782,33 @@ const ModuleDetail = () => {
                       />
                     </div>
                   </Card>
+                </div>
+              </Card>
+            </section>
+
+            {/* Interactive Simulator: PC Builder */}
+            <section className="container mx-auto px-4 mt-16 mb-16">
+              <Card className="p-8 rounded-[32px] border border-primary/20 bg-primary/5 text-center space-y-6 max-w-3xl mx-auto overflow-hidden relative">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <Cog className="w-32 h-32" />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Cog className="w-10 h-10 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">Interactive PC Builder</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
+                    Explore the inside of a computer in 3D. Identify components and see how they fit together.
+                  </p>
+                  <div className="pt-4">
+                    <Button
+                      size="lg"
+                      onClick={() => navigate('/simulator/pc-builder')}
+                      className="text-lg px-10 py-6 h-auto rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90"
+                    >
+                      <span className="mr-2">🛠️</span> Launch Simulator
+                    </Button>
+                  </div>
                 </div>
               </Card>
             </section>
@@ -10226,6 +10272,34 @@ const ModuleDetail = () => {
               </Card>
             </section>
 
+            {/* Interactive Simulator: PC Builder */}
+            <section className="container mx-auto px-4 mt-16 mb-16">
+              <Card className="p-8 rounded-[32px] border border-primary/20 bg-primary/5 text-center space-y-6 max-w-3xl mx-auto overflow-hidden relative">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <Cog className="w-32 h-32" />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Cog className="w-10 h-10 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">Interactive PC Builder</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
+                    Ready to build? Put your knowledge to the test in our virtual workshop.
+                    Assemble components, connect cables, and power up your custom PC.
+                  </p>
+                  <div className="pt-4">
+                    <Button
+                      size="lg"
+                      onClick={() => navigate('/simulator/pc-builder')}
+                      className="text-lg px-10 py-6 h-auto rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90"
+                    >
+                      <span className="mr-2">🛠️</span> Launch Simulator
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
             {/* Navigation */}
             <section className="container mx-auto px-4 pb-14">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
@@ -11697,8 +11771,8 @@ const ModuleDetail = () => {
                         if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
-                            </div>`;
+                               Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                             </div>`;
                         }
                       }}
                     />
@@ -13429,6 +13503,34 @@ const ModuleDetail = () => {
                     />
                   </div>
                 </Card>
+              </Card>
+            </section>
+
+            {/* Interactive Simulator: PC Builder */}
+            <section className="container mx-auto px-4 mt-16 mb-16">
+              <Card className="p-8 rounded-[32px] border border-primary/20 bg-primary/5 text-center space-y-6 max-w-3xl mx-auto overflow-hidden relative">
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <Cog className="w-32 h-32" />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Cog className="w-10 h-10 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">Interactive PC Builder</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
+                    Ready to build? Put your knowledge to the test in our virtual workshop.
+                    Assemble components, connect cables, and power up your custom PC.
+                  </p>
+                  <div className="pt-4">
+                    <Button
+                      size="lg"
+                      onClick={() => navigate('/simulator/pc-builder')}
+                      className="text-lg px-10 py-6 h-auto rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90"
+                    >
+                      <span className="mr-2">🛠️</span> Launch Simulator
+                    </Button>
+                  </div>
+                </div>
               </Card>
             </section>
 
@@ -22171,7 +22273,7 @@ const ModuleDetail = () => {
                     </p>
                     <Button
                       className="mt-4 gap-2"
-                      onClick={() => navigate("/simulator/networking-internet")}
+                      onClick={() => navigate('/simulator/networking-internet')}
                     >
                       Try Networking Simulator <span className="text-lg">🌐</span>
                     </Button>
@@ -22548,7 +22650,12 @@ const ModuleDetail = () => {
                     </div>
                     <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-lg">
                       <div className="relative aspect-video">
-                        <img src={getImageUrl(ipAddressing.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        <img
+                          src={getImageUrl(ipAddressing.images.analogy.fileName)}
+                          className="w-full h-full object-cover"
+                          alt="Public vs Private IP Analogy"
+                          onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
+                        />
                       </div>
                     </Card>
                   </div>

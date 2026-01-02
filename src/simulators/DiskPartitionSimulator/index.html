@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disk Management - Compu Foundation 360°</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💾 Disk Management</h1>
+            <p class="subtitle">Realistic Disk Partition Simulator</p>
+        </header>
+
+        <div class="controls">
+            <button id="resetBtn" class="btn btn-primary">🔄 Reset to Default</button>
+            <div class="disk-info">
+                <span>Total: <strong id="totalSize">500 GB</strong></span>
+                <span>Unallocated: <strong id="unallocatedSize">180 GB</strong></span>
+            </div>
+        </div>
+
+        <!-- Disk Header (Windows-style) -->
+        <div class="disk-header">
+            <div class="disk-header-info">
+                <span class="disk-number">Disk 0</span>
+                <span class="disk-type">Basic</span>
+                <span class="disk-status online">Online</span>
+                <span class="disk-size">500 GB</span>
+            </div>
+        </div>
+
+        <!-- Disk Visualization -->
+        <div class="disk-container">
+            <div class="disk-layout">
+                <div class="disk-layout-header">
+                    <div class="layout-col">Volume</div>
+                    <div class="layout-col">Layout</div>
+                    <div class="layout-col">Type</div>
+                    <div class="layout-col">File System</div>
+                    <div class="layout-col">Status</div>
+                    <div class="layout-col">Capacity</div>
+                </div>
+                <div id="diskBar" class="disk-bar">
+                    <!-- Partitions will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-color primary"></span>
+                <span>Primary Partition</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color extended"></span>
+                <span>Extended Partition</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color logical"></span>
+                <span>Logical Drive</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color unallocated"></span>
+                <span>Unallocated</span>
+            </div>
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="contextMenu" class="context-menu"></div>
+
+    <!-- Popup Overlay -->
+    <div id="popupOverlay" class="popup-overlay">
+        <div id="popup" class="popup"></div>
+    </div>
+
+    <!-- Properties Panel -->
+    <div id="propertiesPanel" class="properties-panel"></div>
+
+    <!-- Scripts -->
+    <script src="utils/helpers.js"></script>
+    <script src="utils/validations.js"></script>
+    <script src="utils/animations.js"></script>
+    <script src="components/popup.js"></script>
+    <script src="components/contextMenu.js"></script>
+    <script src="components/propertiesPanel.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

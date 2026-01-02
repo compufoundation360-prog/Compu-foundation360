@@ -24,6 +24,7 @@ export interface Simulator {
   previewImage?: string;
   url: string; // Simulator URL - if temporary, update before expiration
   isTemporary?: boolean; // Optional: mark if URL is temporary and needs updating
+  componentId?: string; // Optional: internal component ID for modal-based simulators
 }
 
 export const simulators: Simulator[] = [
@@ -34,8 +35,8 @@ export const simulators: Simulator[] = [
     moduleId: 1,
     topicId: "3", // Topic 3: Hardware Basics
     previewImage: "module-media/pc-build-preview.jpg",
-    url: "https://pc-hardware-simulator--roohisaba5.replit.app", // ⚠️ TEMPORARY: Expires in ~4 days - Update with permanent URL before expiration
-    isTemporary: true, // Mark as temporary so we know to update it
+    url: "#",
+    componentId: "pc-builder",
   },
   {
     id: "ssd-installation",
@@ -53,8 +54,8 @@ export const simulators: Simulator[] = [
     moduleId: 2,
     topicId: "7", // Topic 7: Motherboard
     previewImage: "module-media/pc-build-preview.jpg", // Using existing PC Build thumbnail
-    url: "https://pc-hardware-simulator--roohisaba5.replit.app", // Using existing PC Build link
-    isTemporary: true,
+    url: "#",
+    componentId: "pc-builder",
   },
   {
     id: "file-system-storage",
@@ -83,6 +84,16 @@ export const simulators: Simulator[] = [
     description: "Train yourself to recognize digital dangers. Learn to identify phishing, fake pop-ups, unsafe downloads, and scam patterns.",
     moduleId: 9,
     url: "#", // Placeholder - will be updated when simulator is deployed
+  },
+  {
+    id: "pc-build-module4",
+    name: "PC Build Simulator",
+    description: "Advanced PC Building. Assemble all components including CPU, Cooler, RAM, GPU, PSU, and manage cable connections.",
+    moduleId: 4,
+    topicId: "1", // Topic 1: Inside a Computer
+    previewImage: "module-media/pc-build-preview.jpg",
+    url: "#",
+    componentId: "pc-builder",
   },
 ];
 

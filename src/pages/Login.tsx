@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,10 +10,19 @@ import { toast } from "sonner";
 
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
 
 const Login = () => {
+  const { currentUser, loading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+
+  // Automatically redirect if user is already logged in
+  useEffect(() => {
+    if (!loading && currentUser) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [currentUser, loading, navigate]);
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

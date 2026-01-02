@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,8 +15,11 @@ import Lesson from "./pages/Lesson";
 import Settings from "./pages/Settings";
 import Quiz from "./pages/Quiz";
 import NotFound from "./pages/NotFound";
+import SimulatorPage from "./pages/SimulatorPage";
 
 import { AuthProvider } from "@/context/AuthContext";
+import { SimulatorProvider } from "@/context/SimulatorContext"; // NEW
+import SimulatorModal from "@/components/SimulatorModal"; // NEW
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -23,36 +27,40 @@ const queryClient = new QueryClient();
 const App = () => (
   <ThemeProvider>
     <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
+      <SimulatorProvider> {/* WRAPPED PROVIDER */}
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <SimulatorModal /> {/* GLOBAL MODAL */}
+            <BrowserRouter>
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
 
-              {/* Protected Routes */}
-              <Route element={<ProtectedRoute />}>
-                <Route element={<AppLayout><Outlet /></AppLayout>}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/module/:id" element={<ModuleDetail />} />
-                  <Route path="/module/:id/part/:part" element={<ModuleDetail />} />
-                  <Route path="/module/:id/topic/:topicId" element={<ModuleDetail />} />
-                  <Route path="/lesson/:moduleId/:lessonId" element={<Lesson />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/module/:moduleId/quiz" element={<Quiz />} />
+                {/* Protected Routes */}
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/simulator/:id" element={<SimulatorPage />} /> {/* Full Screen Simulator */}
+                  <Route element={<AppLayout><Outlet /></AppLayout>}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/module/:id" element={<ModuleDetail />} />
+                    <Route path="/module/:id/part/:part" element={<ModuleDetail />} />
+                    <Route path="/module/:id/topic/:topicId" element={<ModuleDetail />} />
+                    <Route path="/lesson/:moduleId/:lessonId" element={<Lesson />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/module/:moduleId/quiz" element={<Quiz />} />
+                  </Route>
                 </Route>
-              </Route>
 
-              {/* Catch-all */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
+                {/* Catch-all */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </SimulatorProvider>
     </AuthProvider>
   </ThemeProvider>
 );
