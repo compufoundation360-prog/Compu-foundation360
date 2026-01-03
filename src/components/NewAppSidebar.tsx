@@ -20,10 +20,14 @@ import { auth } from "@/lib/firebase";
 import { toast } from "sonner";
 import { quizzes } from "@/data/quiz-data";
 import { ClipboardCheck } from "lucide-react";
+import { useSidebar } from "@/components/ui/sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function NewAppSidebar() {
     const location = useLocation();
     const navigate = useNavigate();
+    const { setOpenMobile } = useSidebar();
+    const isMobile = useIsMobile();
     // State for expanded module
     const [expandedModuleId, setExpandedModuleId] = React.useState<number | null>(null);
 
@@ -62,7 +66,15 @@ export function NewAppSidebar() {
                 <SidebarMenu className="gap-0.5 px-2 py-2">
                     {/* DASHBOARD LINK */}
                     <SidebarMenuItem>
-                        <Link to="/dashboard">
+                        <Link 
+                            to="/dashboard"
+                            onClick={() => {
+                                // Close sidebar on mobile when dashboard is clicked
+                                if (isMobile) {
+                                    setOpenMobile(false);
+                                }
+                            }}
+                        >
                             <SidebarMenuButton
                                 isActive={location.pathname === "/dashboard"}
                                 className={cn(
@@ -151,7 +163,16 @@ export function NewAppSidebar() {
                                                             {/* Horizontal Branch */}
                                                             <div className="absolute left-[23px] top-[16px] h-[1px] w-[12px] bg-border/60" />
 
-                                                            <Link to={topicPath} className="block pl-9">
+                                                            <Link 
+                                                                to={topicPath} 
+                                                                className="block pl-9"
+                                                                onClick={() => {
+                                                                    // Close sidebar on mobile when topic is clicked
+                                                                    if (isMobile) {
+                                                                        setOpenMobile(false);
+                                                                    }
+                                                                }}
+                                                            >
                                                                 <Button
                                                                     variant="ghost"
                                                                     className={cn(
@@ -181,7 +202,16 @@ export function NewAppSidebar() {
                                                                 <div className="absolute left-[23px] top-0 h-[16px] w-[1px] bg-border/60" />
                                                                 <div className="absolute left-[23px] top-[16px] h-[1px] w-[12px] bg-border/60" />
 
-                                                                <Link to={`/module/${module.id}/quiz`} className="block pl-9">
+                                                                <Link 
+                                                                    to={`/module/${module.id}/quiz`} 
+                                                                    className="block pl-9"
+                                                                    onClick={() => {
+                                                                        // Close sidebar on mobile when quiz is clicked
+                                                                        if (isMobile) {
+                                                                            setOpenMobile(false);
+                                                                        }
+                                                                    }}
+                                                                >
                                                                     <Button
                                                                         variant="ghost"
                                                                         className={cn(

@@ -11511,8 +11511,6 @@ const ModuleDetail = () => {
           macos: macosImage,
           linux: linuxImage,
           mobileComparison: mobileComparisonImage,
-          android: androidImage,
-          ios: iosImage,
           whyMatters: whyMattersImage
         } = module3Sections.operatingSystems.images;
 
@@ -11698,57 +11696,7 @@ const ModuleDetail = () => {
               </div>
             </section>
 
-            {/* Section 5: Android & iOS - 2-Column Split Cards */}
-            <section className="container mx-auto px-4">
-              <div className="space-y-6">
-                <div className="text-center max-w-2xl mx-auto">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Mobile OS Comparison</p>
-                  <h2 className="text-3xl font-semibold text-foreground mb-3">Android & iOS</h2>
-                  <p className="text-foreground/80">
-                    The two dominant mobile operating systems, each with distinct philosophies and ecosystems.
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {module3Sections.operatingSystems.mobileOS.map((os, index) => {
-                    const images = [androidImage, iosImage];
-                    return (
-                      <Card key={index} className="p-6 border border-border/70 space-y-4">
-                        <div className="text-5xl mb-3 text-center">{os.logo}</div>
-                        <div className="relative w-full aspect-[4/3] bg-muted rounded-lg overflow-hidden mb-4">
-                          <img
-                            src={getImageUrl(images[index].fileName)}
-                            alt={images[index].alt}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = "none";
-                              const parent = (e.target as HTMLImageElement).parentElement;
-                              if (parent) {
-                                parent.innerHTML =
-                                  `<div class="p-4 text-center text-xs text-muted-foreground">
-                                    Add ${images[index].fileName}
-                                  </div>`;
-                              }
-                            }}
-                          />
-                        </div>
-                        <h3 className="text-xl font-semibold text-primary text-center">{os.name}</h3>
-                        <p className="text-sm text-muted-foreground text-center">{os.description}</p>
-                        <div className="space-y-2 pt-2">
-                          {os.features.map((feature, fIndex) => (
-                            <div key={fIndex} className="flex items-start gap-2">
-                              <span className="text-primary text-xs">✓</span>
-                              <p className="text-xs text-foreground/80">{feature}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </Card>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
-
-            {/* Section 6: Why It Matters - Centered Card with Icon */}
+            {/* Section 5: Why It Matters - Centered Card with Icon */}
             <section className="container mx-auto px-4">
               <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
                 <div className="text-center space-y-2">
@@ -11807,7 +11755,6 @@ const ModuleDetail = () => {
       {moduleId === 3 && module3Sections && topicId === "3" && (() => {
         const {
           folders: foldersImage,
-          paths: pathsImage,
           hidden: hiddenImage,
           inAction: inActionImage,
           whyMatters: whyMattersImage
@@ -11816,30 +11763,30 @@ const ModuleDetail = () => {
         return (
           <div id="topic-file-system" className="space-y-16">
             {/* Section 1: What is a File System? - Text Left + Image Right */}
-            <section className="container mx-auto px-4 pt-16">
-              <div className="grid lg:grid-cols-2 gap-10 items-center">
-                <div className="space-y-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">File Organization</p>
-                  <h2 className="text-3xl font-semibold text-foreground">What is a File System?</h2>
-                  <p className="text-foreground/80 leading-relaxed">
+            <section className="container mx-auto px-4 md:px-6 pt-8 md:pt-16">
+              <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-center">
+                <div className="space-y-4 md:space-y-5">
+                  <p className="text-xs md:text-xs uppercase tracking-[0.25em] text-primary mb-2 md:mb-2">File Organization</p>
+                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground">What is a File System?</h2>
+                  <p className="text-base md:text-base text-foreground/80 leading-relaxed md:leading-relaxed">
                     A file system is how your computer organizes and stores files. It uses folders (directories) to group related files together, making it easier to find and manage your data.
                   </p>
-                  <div className="space-y-3 pt-4">
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Organizes files into folders (directories)</p>
+                  <div className="space-y-3 md:space-y-3 pt-4">
+                    <div className="flex items-start gap-3 md:gap-3">
+                      <span className="text-primary font-semibold text-lg md:text-base">•</span>
+                      <p className="text-base md:text-sm text-foreground/80 leading-relaxed">Organizes files into folders (directories)</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Uses file paths to locate files precisely</p>
+                    <div className="flex items-start gap-3 md:gap-3">
+                      <span className="text-primary font-semibold text-lg md:text-base">•</span>
+                      <p className="text-base md:text-sm text-foreground/80 leading-relaxed">Uses file paths to locate files precisely</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Manages file storage and access permissions</p>
+                    <div className="flex items-start gap-3 md:gap-3">
+                      <span className="text-primary font-semibold text-lg md:text-base">•</span>
+                      <p className="text-base md:text-sm text-foreground/80 leading-relaxed">Manages file storage and access permissions</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Can hide system files for protection</p>
+                    <div className="flex items-start gap-3 md:gap-3">
+                      <span className="text-primary font-semibold text-lg md:text-base">•</span>
+                      <p className="text-base md:text-sm text-foreground/80 leading-relaxed">Can hide system files for protection</p>
                     </div>
                   </div>
                 </div>
@@ -11881,25 +11828,6 @@ const ModuleDetail = () => {
                     </Card>
                   ))}
                 </div>
-                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
-                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
-                    <img
-                      src={getImageUrl(pathsImage.fileName)}
-                      alt={pathsImage.alt}
-                      className="w-full h-full object-contain p-4"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${pathsImage.fileName}. ${pathsImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
               </div>
             </section>
 
