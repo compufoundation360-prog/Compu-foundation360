@@ -12028,11 +12028,11 @@ const ModuleDetail = () => {
                   ))}
                 </div>
                 <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
-                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                     <img
                       src={getImageUrl(imageImage.fileName)}
                       alt={imageImage.alt}
-                      className="w-full h-full object-contain p-4"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;
@@ -12245,11 +12245,11 @@ const ModuleDetail = () => {
                   ))}
                 </div>
                 <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
-                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                     <img
                       src={getImageUrl(copyMoveImage.fileName)}
                       alt={copyMoveImage.alt}
-                      className="w-full h-full object-contain p-4"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;
@@ -12459,18 +12459,18 @@ const ModuleDetail = () => {
                   ))}
                 </div>
                 <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
-                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                     <img
-                      src={getImageUrl(cpuRamStorageImage.fileName)}
-                      alt={cpuRamStorageImage.alt}
-                      className="w-full h-full object-contain p-4"
+                      src={getImageUrl(osVersionImage.fileName)}
+                      alt={osVersionImage.alt}
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;
                         if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${cpuRamStorageImage.fileName}. ${cpuRamStorageImage.brief}
+                              Add ${osVersionImage.fileName}. ${osVersionImage.brief}
                             </div>`;
                         }
                       }}
@@ -12669,18 +12669,18 @@ const ModuleDetail = () => {
                   ))}
                 </div>
                 <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
-                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                     <img
-                      src={getImageUrl(architectureImage.fileName)}
-                      alt={architectureImage.alt}
-                      className="w-full h-full object-contain p-4"
+                      src={getImageUrl(cpuGpuImage.fileName)}
+                      alt={cpuGpuImage.alt}
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;
                         if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${architectureImage.fileName}. ${architectureImage.brief}
+                              Add ${cpuGpuImage.fileName}. ${cpuGpuImage.brief}
                             </div>`;
                         }
                       }}
@@ -12696,8 +12696,8 @@ const ModuleDetail = () => {
                 <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
                   <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden flex items-center justify-center p-4">
                     <img
-                      src={getImageUrl(cpuGpuImage.fileName)}
-                      alt={cpuGpuImage.alt}
+                      src={getImageUrl(sensorsImage.fileName)}
+                      alt={sensorsImage.alt}
                       className="w-full h-full object-contain rounded-[28px]"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
@@ -12705,7 +12705,7 @@ const ModuleDetail = () => {
                         if (parent) {
                           parent.innerHTML =
                             `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${cpuGpuImage.fileName}. ${cpuGpuImage.brief}
+                              Add ${sensorsImage.fileName}. ${sensorsImage.brief}
                             </div>`;
                         }
                       }}
@@ -12879,12 +12879,12 @@ const ModuleDetail = () => {
                     </Card>
                   ))}
                 </div>
-                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6">
-                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 mt-6 max-w-3xl mx-auto">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                     <img
                       src={getImageUrl(gyroscopeImage.fileName)}
                       alt={gyroscopeImage.alt}
-                      className="w-full h-full object-contain p-4"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;

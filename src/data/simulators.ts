@@ -62,10 +62,12 @@ export const simulators: Simulator[] = [
   },
   {
     id: "file-system-storage",
-    name: "File System & Storage Simulator",
-    description: "Practice file management safely in a virtual environment. Learn to organize files, use the Recycle Bin, manage storage, and handle USB devices.",
+    name: "The File System Architect",
+    description: "Master the invisible world of Data Management. Visualize Fragmentation, perform Defrag, recover deleted files, and organize chaos.",
     moduleId: 3,
-    url: "#", // Placeholder - will be updated when simulator is deployed
+    previewImage: "module-media/file-system-architect-thumb.png", // Updated thumbnail
+    url: "#",
+    componentId: "file-system-architect",
   },
   {
     id: "networking-internet",

@@ -8,6 +8,8 @@ import { PCBuilderLoader } from './PCBuilder/PCBuilderLoader';
 const PCBuilderSim = lazy(() => import('./PCBuilder/PCBuilderSim'));
 const StorageSpeedSim = lazy(() => import('./StorageSpeed/StorageSpeedSim'));
 
+const FileSystemArchitectSim = lazy(() => import('./FileSystemArchitect/FileSystemArchitectSim'));
+
 // Add future sims here
 // const DiskPartitionSim = lazy(() => import('./DiskPartition/DiskPartitionSim'));
 
@@ -35,6 +37,9 @@ const SimulatorRegistry: React.FC<SimulatorRegistryProps> = ({ id, className }) 
 
             case 'ssd-installation':
                 return <StorageSpeedSim />;
+
+            case 'file-system-architect':
+                return <FileSystemArchitectSim />;
 
             // case 'disk-partition':
             //    return <DiskPartitionSim />;
