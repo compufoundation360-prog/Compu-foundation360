@@ -100,6 +100,15 @@ export const simulators: Simulator[] = [
     url: "#",
     componentId: "pc-builder",
   },
+  {
+    id: "disk-partition-manager",
+    name: "Virtual Disk Manager",
+    description: "Practice partitioning hard drives safely. Learn to create volumes, shrink partitions, and manage disk space without data loss.",
+    moduleId: 5,
+    previewImage: "module-media/m3-specs-storage.jpg",
+    url: "#",
+    componentId: "disk-partition-manager",
+  },
 ];
 
 /**

@@ -11,7 +11,7 @@ const StorageSpeedSim = lazy(() => import('./StorageSpeed/StorageSpeedSim'));
 const FileSystemArchitectSim = lazy(() => import('./FileSystemArchitect/FileSystemArchitectSim'));
 
 // Add future sims here
-// const DiskPartitionSim = lazy(() => import('./DiskPartition/DiskPartitionSim'));
+const DiskPartitionManagerSim = lazy(() => import('./DiskPartitionManager/DiskPartitionManagerSim'));
 
 interface SimulatorRegistryProps {
     id: string; // The ID of the simulator to load
@@ -41,8 +41,8 @@ const SimulatorRegistry: React.FC<SimulatorRegistryProps> = ({ id, className }) 
             case 'file-system-architect':
                 return <FileSystemArchitectSim />;
 
-            // case 'disk-partition':
-            //    return <DiskPartitionSim />;
+            case 'disk-partition-manager':
+                return <DiskPartitionManagerSim />;
 
             default:
                 return (

@@ -68,12 +68,19 @@ const FileSystemArchitectSim = () => {
     const [showLevelComplete, setShowLevelComplete] = useState<boolean>(false);
     const [isRenaming, setIsRenaming] = useState<string | null>(null);
     const [renameValue, setRenameValue] = useState('');
-    const [isGuidanceActive, setIsGuidanceActive] = useState<boolean>(false);
+
+    // Mobile State (Option A: FAB + Bottom Sheet)
+    const [showFabSheet, setShowFabSheet] = useState(false);
+    const [showPlacesDrawer, setShowPlacesDrawer] = useState(false);
+    const [isSelectionMode, setIsSelectionMode] = useState(false);
+    const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+
 
 
 
     // Drag and Drop State
     const [dragTargetId, setDragTargetId] = useState<string | null>(null);
+
 
     const [contextMenu, setContextMenu] = useState<{ x: number, y: number, type: 'item' | 'background', targetId?: string } | null>(null);
 
@@ -241,7 +248,7 @@ const FileSystemArchitectSim = () => {
             id: `file-${Date.now()}`,
             parentId: currentPathId,
             name,
-            type: FileType.TEXT, // Default to text
+            type: FileType.TEXT,
             size: '0 KB',
             dateModified: new Date().toLocaleDateString()
         };
@@ -297,12 +304,7 @@ const FileSystemArchitectSim = () => {
         setIsRenaming(null);
     };
 
-    // Spotlight Helper
-    const isStepHighlighting = (elementId: string) => {
-        if (levelState.currentLevel === 1 && levelState.currentStep === 0 && elementId === 'new-folder-btn') return true;
-        if (levelState.currentLevel === 3 && levelState.currentStep === 1 && elementId === 'search-bar') return true;
-        return false;
-    };
+
 
 
     const deleteItems = () => {
@@ -404,6 +406,53 @@ const FileSystemArchitectSim = () => {
         // for this sim, creating the zip is enough to trigger success
     };
 
+    const handleRenameAction = () => {
+        if (selectedItemIds.length === 1) {
+            const itemToRename = fileSystem.find(i => i.id === selectedItemIds[0]);
+            if (itemToRename) {
+                setIsRenaming(itemToRename.id);
+                setRenameValue(itemToRename.name);
+                // Focus hack
+                setTimeout(() => renameInputRef.current?.focus(), 50);
+            }
+        }
+    };
+
+    // Mobile Touch Handlers
+    const handleLongPressStart = (itemId: string) => {
+        const timer = setTimeout(() => {
+            setIsSelectionMode(true);
+            setSelectedItemIds([itemId]);
+        }, 500); // 500ms long press
+        setLongPressTimer(timer);
+    };
+
+    const handleLongPressEnd = () => {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            setLongPressTimer(null);
+        }
+    };
+
+    const handleMobileTap = (item: FileSystemItem) => {
+        if (isSelectionMode) {
+            // In selection mode: toggle selection
+            setSelectedItemIds(prev =>
+                prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+            );
+        } else {
+            // Normal mode: open folder or file
+            if (item.type === FileType.FOLDER) {
+                navigate(item.id);
+            }
+        }
+    };
+
+    const exitSelectionMode = () => {
+        setIsSelectionMode(false);
+        setSelectedItemIds([]);
+    };
+
     const getFileIcon = (item: FileSystemItem) => {
         return <Icon type={item.type} />;
     };
@@ -465,7 +514,7 @@ const FileSystemArchitectSim = () => {
     };
 
     return (
-        <div className="flex h-[85vh] w-full bg-background text-foreground overflow-hidden font-sans select-none border border-border rounded-xl shadow-2xl relative transition-colors duration-300">
+        <div className="flex h-full w-full bg-background text-foreground overflow-hidden font-sans select-none border border-border rounded-xl shadow-2xl relative transition-colors duration-300">
             <style>{`
                 ::-webkit-scrollbar { width: 6px; height: 6px; }
                 ::-webkit-scrollbar-track { background: transparent; }
@@ -477,6 +526,190 @@ const FileSystemArchitectSim = () => {
                 }
             `}</style>
 
+            {/* ====== MOBILE LAYOUT (md:hidden) - OPTION A ====== */}
+            <div className="md:hidden flex flex-col w-full h-full relative z-30 bg-background">
+                {/* Mobile Header */}
+                {/* Mobile Header */}
+                <div className="h-14 border-b border-border flex items-center px-4 gap-2 bg-card/50 backdrop-blur-md shrink-0">
+                    <button onClick={() => setShowPlacesDrawer(true)} className="p-2 -ml-2 rounded-full active:bg-accent shrink-0">
+                        <Menu size={20} />
+                    </button>
+                    <button
+                        onClick={navigateUp}
+                        disabled={!currentFolder?.parentId}
+                        className="p-2 rounded-full active:bg-accent disabled:opacity-30 disabled:pointer-events-none shrink-0 transition-opacity"
+                    >
+                        <ArrowLeft size={20} />
+                    </button>
+                    <div className="flex flex-col min-w-0 flex-1 pl-1">
+                        <h2 className="font-bold text-sm truncate leading-tight">{currentFolder?.name || 'File Explorer'}</h2>
+                        <p className="text-[10px] text-muted-foreground truncate opacity-70">{breadcrumbs.map(b => b.name).join(' / ')}</p>
+                    </div>
+                </div>
+
+                {/* Selection Mode Action Bar */}
+                {isSelectionMode && (
+                    <div className="h-14 border-b border-primary/20 bg-primary/10 flex items-center px-4 justify-between shrink-0 animate-in slide-in-from-top">
+                        <div className="flex items-center gap-2">
+                            <button onClick={exitSelectionMode} className="p-2 -ml-2 rounded-full active:bg-primary/20">
+                                <XCircle size={20} className="text-primary" />
+                            </button>
+                            <span className="font-bold text-sm text-primary">{selectedItemIds.length} Selected</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <button onClick={handleCopy} disabled={selectedItemIds.length === 0} className="p-2 rounded-full active:bg-primary/20 disabled:opacity-30">
+                                <Copy size={18} className="text-primary" />
+                            </button>
+                            <button onClick={handleRenameAction} disabled={selectedItemIds.length !== 1} className="p-2 rounded-full active:bg-primary/20 disabled:opacity-30">
+                                <Clipboard size={18} className="text-primary" />
+                            </button>
+                            <button onClick={deleteItems} disabled={selectedItemIds.length === 0} className="p-2 rounded-full active:bg-primary/20 disabled:opacity-30">
+                                <Trash2 size={18} className="text-destructive" />
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Files Grid - 2 Column */}
+                <div className="flex-1 overflow-y-auto bg-muted/30 p-3 pb-24">
+                    <div className="grid grid-cols-2 gap-3">
+                        {currentItems.map(item => (
+                            <div
+                                key={item.id}
+                                onTouchStart={() => handleLongPressStart(item.id)}
+                                onTouchEnd={handleLongPressEnd}
+                                onTouchMove={handleLongPressEnd}
+                                onClick={() => handleMobileTap(item)}
+                                className={`flex flex-col items-center gap-2 p-4 rounded-xl border aspect-square justify-center text-center transition-all relative ${isSelectionMode && selectedItemIds.includes(item.id)
+                                    ? 'bg-primary/20 border-primary ring-2 ring-primary'
+                                    : 'bg-card border-border shadow-sm active:scale-95'
+                                    }`}
+                            >
+                                {isSelectionMode && (
+                                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all"
+                                        style={{
+                                            borderColor: selectedItemIds.includes(item.id) ? 'hsl(var(--primary))' : 'hsl(var(--border))',
+                                            backgroundColor: selectedItemIds.includes(item.id) ? 'hsl(var(--primary))' : 'transparent'
+                                        }}
+                                    >
+                                        {selectedItemIds.includes(item.id) && <CheckCircle2 size={12} className="text-primary-foreground" />}
+                                    </div>
+                                )}
+                                <div className="w-12 h-12">
+                                    {getFileIcon(item)}
+                                </div>
+                                {isRenaming === item.id ? (
+                                    <input
+                                        ref={renameInputRef}
+                                        type="text"
+                                        className="w-full text-center text-xs bg-popover border border-primary rounded px-1 py-0.5 text-foreground focus:outline-none"
+                                        value={renameValue}
+                                        onChange={(e) => setRenameValue(e.target.value)}
+                                        onBlur={() => handleRename(item.id, renameValue)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') handleRename(item.id, renameValue);
+                                            if (e.key === 'Escape') setIsRenaming(null);
+                                        }}
+                                        onClick={(e) => e.stopPropagation()}
+                                    />
+                                ) : (
+                                    <span className="text-xs font-medium leading-tight line-clamp-2 w-full break-words">{item.name}</span>
+                                )}
+                            </div>
+                        ))}
+                        {currentItems.length === 0 && (
+                            <div className="col-span-2 flex flex-col items-center justify-center py-16 text-muted-foreground opacity-50">
+                                <Icon type={FileType.FOLDER} className="w-16 h-16 mb-3" />
+                                <p className="text-sm">Empty Folder</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* FAB (Floating Action Button) */}
+                <button
+                    onClick={() => setShowFabSheet(true)}
+                    className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-2xl flex items-center justify-center active:scale-95 transition-transform z-50"
+                >
+                    <Plus size={24} />
+                </button>
+
+                {/* FAB Bottom Sheet */}
+                {showFabSheet && (
+                    <div className="fixed inset-0 z-[100]">
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in" onClick={() => setShowFabSheet(false)} />
+                        <div className="absolute bottom-0 left-0 right-0 bg-card border-t border-border rounded-t-3xl p-6 space-y-3 animate-in slide-in-from-bottom duration-300 shadow-2xl">
+                            <div className="w-12 h-1.5 bg-muted rounded-full mx-auto mb-4" />
+                            <button
+                                onClick={() => { createFolder(); setShowFabSheet(false); }}
+                                disabled={currentPathId === RECYCLE_BIN_ID}
+                                className="w-full flex items-center gap-4 p-4 rounded-xl bg-background border border-border active:bg-accent transition-colors disabled:opacity-50"
+                            >
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <Icon type={FileType.FOLDER} className="w-5 h-5 text-primary" />
+                                </div>
+                                <div className="text-left">
+                                    <div className="font-semibold">New Folder</div>
+                                    <div className="text-xs text-muted-foreground">Create a new folder</div>
+                                </div>
+                            </button>
+                            <button
+                                onClick={() => { createFile(); setShowFabSheet(false); }}
+                                disabled={currentPathId === RECYCLE_BIN_ID}
+                                className="w-full flex items-center gap-4 p-4 rounded-xl bg-background border border-border active:bg-accent transition-colors disabled:opacity-50"
+                            >
+                                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
+                                    <FileText size={20} className="text-blue-500" />
+                                </div>
+                                <div className="text-left">
+                                    <div className="font-semibold">New File</div>
+                                    <div className="text-xs text-muted-foreground">Create a text document</div>
+                                </div>
+                            </button>
+                            <button
+                                onClick={() => setShowFabSheet(false)}
+                                className="w-full flex items-center justify-center p-3 rounded-xl text-muted-foreground active:bg-accent transition-colors"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Places Drawer */}
+                {showPlacesDrawer && (
+                    <div className="fixed inset-0 z-[100]">
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in" onClick={() => setShowPlacesDrawer(false)} />
+                        <div className="absolute top-0 bottom-0 left-0 w-80 bg-card border-r border-border p-6 space-y-4 animate-in slide-in-from-left duration-300 shadow-2xl">
+                            <div className="flex items-center justify-between mb-6">
+                                <h3 className="font-bold text-lg">Locations</h3>
+                                <button onClick={() => setShowPlacesDrawer(false)} className="p-2 -mr-2 rounded-full active:bg-accent">
+                                    <XCircle size={20} />
+                                </button>
+                            </div>
+                            <button onClick={() => { navigate(DESKTOP_ID); setShowPlacesDrawer(false); }} className={`w-full p-4 rounded-xl border flex items-center gap-4 ${currentPathId === DESKTOP_ID ? 'bg-primary/10 border-primary text-primary' : 'bg-background border-border'}`}>
+                                <Icon type={FileType.FOLDER} className="w-6 h-6" />
+                                <span className="font-semibold">Desktop</span>
+                            </button>
+                            <button onClick={() => { navigate(DOCUMENTS_ID); setShowPlacesDrawer(false); }} className={`w-full p-4 rounded-xl border flex items-center gap-4 ${currentPathId === DOCUMENTS_ID ? 'bg-primary/10 border-primary text-primary' : 'bg-background border-border'}`}>
+                                <Icon type={FileType.FOLDER} className="w-6 h-6" />
+                                <span className="font-semibold">Documents</span>
+                            </button>
+                            <button onClick={() => { navigate(ROOT_ID); setShowPlacesDrawer(false); }} className={`w-full p-4 rounded-xl border flex items-center gap-4 ${currentPathId === ROOT_ID ? 'bg-primary/10 border-primary text-primary' : 'bg-background border-border'}`}>
+                                <Icon type="drive" className="w-6 h-6" />
+                                <span className="font-semibold">Local Disk (C:)</span>
+                            </button>
+                            <button onClick={() => { navigate(RECYCLE_BIN_ID); setShowPlacesDrawer(false); }} className={`w-full p-4 rounded-xl border flex items-center gap-4 ${currentPathId === RECYCLE_BIN_ID ? 'bg-primary/10 border-primary text-primary' : 'bg-background border-border'}`}>
+                                <Icon type="trash" className="w-6 h-6" />
+                                <span className="font-semibold">Recycle Bin</span>
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+
+            {/* ====== DESKTOP LAYOUT (md:flex) ====== */}
             {/* --- Glass Sidebar --- */}
             <aside className="w-52 bg-sidebar-background/80 backdrop-blur-xl border-r border-border flex flex-col hidden md:flex transition-all z-20">
                 <div className="p-6 flex items-center space-x-3">
@@ -515,8 +748,8 @@ const FileSystemArchitectSim = () => {
                 </nav>
             </aside>
 
-            {/* --- Main Content Area --- */}
-            <main className="flex-1 flex flex-col min-w-0 relative z-10">
+            {/* --- Main Content Area (Desktop) --- */}
+            <main className="flex-1 flex-col min-w-0 relative z-10 hidden md:flex">
 
                 {/* Top Bar (Glass Header) */}
                 <header className="h-16 border-b border-border bg-card/60 backdrop-blur-md px-4 flex items-center justify-between shadow-sm">
@@ -546,7 +779,7 @@ const FileSystemArchitectSim = () => {
                     </div>
 
                     {/* Search Bar (Spotlight) */}
-                    <div className={`relative w-64 transition-all duration-300 ${isGuidanceActive && isStepHighlighting('search-bar') ? 'ring-4 ring-primary rounded-lg shadow-[0_0_30px_hsl(var(--primary)/0.3)] scale-105 z-50' : ''}`}>
+                    <div className="relative w-64 transition-all duration-300">
                         <Search className="absolute left-3 top-2.5 w-4 h-4 text-muted-foreground" />
                         <input
                             type="text"
@@ -562,13 +795,14 @@ const FileSystemArchitectSim = () => {
                 {/* Toolbar (Fixed Top Bar) */}
                 <div className="px-4 py-2 border-b border-border bg-card/40 backdrop-blur-sm flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                        <div className={(isGuidanceActive && isStepHighlighting('new-folder-btn')) ? 'ring-2 ring-primary rounded-lg animate-pulse bg-primary/20' : ''}>
-                            <ToolbarButton icon={<Plus size={16} />} label="New" onClick={createFolder} disabled={currentPathId === RECYCLE_BIN_ID || !!searchQuery} />
+                        <div className="">
+                            <ToolbarButton id="btn-new-folder" icon={<Plus size={16} />} label="New" onClick={createFolder} disabled={currentPathId === RECYCLE_BIN_ID || !!searchQuery} />
                         </div>
-                        <ToolbarButton icon={<FileText size={16} />} label="File" onClick={createFile} disabled={currentPathId === RECYCLE_BIN_ID || !!searchQuery} />
+                        <ToolbarButton id="btn-new-file" icon={<FileText size={16} />} label="File" onClick={createFile} disabled={currentPathId === RECYCLE_BIN_ID || !!searchQuery} />
 
                         <div className="w-px h-6 bg-border mx-2"></div>
 
+                        <ToolbarButton id="btn-rename" icon={<Clipboard size={16} />} label="Rename" onClick={handleRenameAction} disabled={selectedItemIds.length !== 1} />
                         <ToolbarButton icon={<Scissors size={16} />} label="Cut" onClick={handleCut} disabled={selectedItemIds.length === 0} />
                         <ToolbarButton icon={<Copy size={16} />} label="Copy" onClick={handleCopy} disabled={selectedItemIds.length === 0} />
                         <ToolbarButton icon={<Clipboard size={16} />} label="Paste" onClick={handlePaste} disabled={!clipboard} />
@@ -580,18 +814,7 @@ const FileSystemArchitectSim = () => {
                         )}
                     </div>
 
-                    {/* Help Toggle */}
-                    <button
-                        onClick={() => setIsGuidanceActive(prev => !prev)}
-                        className={`p-1.5 rounded-md transition-colors text-xs font-medium flex items-center gap-1.5 ${isGuidanceActive
-                                ? 'bg-primary/10 text-primary border border-primary/20'
-                                : 'text-muted-foreground hover:bg-muted'
-                            }`}
-                        title="Toggle Guide"
-                    >
-                        <span className="text-lg">💡</span>
-                        <span>{isGuidanceActive ? 'Guide On' : 'Guide Off'}</span>
-                    </button>
+
                 </div>
 
                 {/* File Area (List/Tile View) */}
@@ -703,93 +926,76 @@ const FileSystemArchitectSim = () => {
 
                 {/* --- AI Tutor Panel (Holographic Card) --- */}
                 {/* --- Guide Bar (Top Info Panel) --- */}
-                {isGuidanceActive && (
-                    <div className="bg-primary/5 border-b border-primary/20 px-4 py-2 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-                        <div className="bg-primary/20 p-1.5 rounded-full mt-0.5">
-                            <span className="text-primary font-bold text-xs">Ai</span>
-                        </div>
-                        <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                                <span className="text-xs font-bold text-primary uppercase tracking-wider">
-                                    Level {levelState.currentLevel} • Step {levelState.currentStep + 1}
-                                </span>
-                                <span className="text-xs text-muted-foreground">• {currentLevelConfig?.title}</span>
-                            </div>
-                            <p className="text-sm text-foreground/90 font-medium">
-                                {currentStepConfig?.instruction}
-                            </p>
-                        </div>
-                        <button
-                            onClick={() => setIsGuidanceActive(false)}
-                            className="text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <XCircle size={14} />
-                        </button>
-                    </div>
-                )}
+
             </main>
 
             {/* --- Overlays --- */}
             {/* Context Menu */}
-            {contextMenu && (
-                <ContextMenu
-                    x={contextMenu.x}
-                    y={contextMenu.y}
-                    type={contextMenu.type}
-                    onAction={(action) => {
-                        // Action Dispatcher
-                        if (action === 'NEW_FOLDER') createFolder();
-                        if (action === 'NEW_FILE') createFile();
-                        if (action === 'COPY') handleCopy();
-                        if (action === 'CUT') handleCut();
-                        if (action === 'PASTE') handlePaste();
-                        if (action === 'DELETE') deleteItems();
-                        if (action === 'RENAME' && contextMenu.targetId) {
-                            setIsRenaming(contextMenu.targetId);
-                            setRenameValue(fileSystem.find(i => i.id === contextMenu.targetId)?.name || '');
-                            setTimeout(() => renameInputRef.current?.focus(), 50);
-                        }
-                        if (action === 'OPEN' && contextMenu.targetId) {
-                            const item = fileSystem.find(i => i.id === contextMenu.targetId);
-                            if (item?.type === FileType.FOLDER) navigate(item.id);
-                        }
-                        setContextMenu(null);
-                    }}
-                    hasClipboard={!!clipboard}
-                />
-            )}
+            {
+                contextMenu && (
+                    <ContextMenu
+                        x={contextMenu.x}
+                        y={contextMenu.y}
+                        type={contextMenu.type}
+                        onAction={(action) => {
+                            // Action Dispatcher
+                            if (action === 'NEW_FOLDER') createFolder();
+                            if (action === 'NEW_FILE') createFile();
+                            if (action === 'COPY') handleCopy();
+                            if (action === 'CUT') handleCut();
+                            if (action === 'PASTE') handlePaste();
+                            if (action === 'DELETE') deleteItems();
+                            if (action === 'RENAME' && contextMenu.targetId) {
+                                setIsRenaming(contextMenu.targetId);
+                                setRenameValue(fileSystem.find(i => i.id === contextMenu.targetId)?.name || '');
+                                setTimeout(() => renameInputRef.current?.focus(), 50);
+                            }
+                            if (action === 'OPEN' && contextMenu.targetId) {
+                                const item = fileSystem.find(i => i.id === contextMenu.targetId);
+                                if (item?.type === FileType.FOLDER) navigate(item.id);
+                            }
+                            setContextMenu(null);
+                        }}
+                        hasClipboard={!!clipboard}
+                    />
+                )
+            }
 
             {/* Level Complete Badge */}
-            {showLevelComplete && (
-                <MasteryBadge
-                    title={currentLevelConfig?.title || 'File Management'}
-                    onDismiss={handleBadgeDismiss}
-                />
-            )}
+            {
+                showLevelComplete && (
+                    <MasteryBadge
+                        title={currentLevelConfig?.title || 'File Management'}
+                        onDismiss={handleBadgeDismiss}
+                    />
+                )
+            }
 
             {/* Modal */}
-            {showModal && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-                    <div className="bg-popover border border-border rounded-2xl shadow-2xl max-w-sm w-full p-6 animate-in zoom-in-95 duration-200">
-                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-5 mx-auto border-4 ${showModal.type === 'success' ? 'bg-success/20 border-success/50 text-success' :
-                            showModal.type === 'error' ? 'bg-destructive/20 border-destructive/50 text-destructive' :
-                                'bg-primary/20 border-primary/50 text-primary'
-                            }`}>
-                            {showModal.type === 'success' ? <CheckCircle2 size={32} /> :
-                                showModal.type === 'error' ? <XCircle size={32} /> : <CheckCircle2 size={32} />}
+            {
+                showModal && (
+                    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+                        <div className="bg-popover border border-border rounded-2xl shadow-2xl max-w-sm w-full p-6 animate-in zoom-in-95 duration-200">
+                            <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-5 mx-auto border-4 ${showModal.type === 'success' ? 'bg-success/20 border-success/50 text-success' :
+                                showModal.type === 'error' ? 'bg-destructive/20 border-destructive/50 text-destructive' :
+                                    'bg-primary/20 border-primary/50 text-primary'
+                                }`}>
+                                {showModal.type === 'success' ? <CheckCircle2 size={32} /> :
+                                    showModal.type === 'error' ? <XCircle size={32} /> : <CheckCircle2 size={32} />}
+                            </div>
+                            <h3 className="text-xl font-bold text-center mb-2 text-foreground">{showModal.title}</h3>
+                            <p className="text-muted-foreground text-center mb-6 text-sm">{showModal.message}</p>
+                            <button
+                                onClick={() => setShowModal(null)}
+                                className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-lg"
+                            >
+                                Got it
+                            </button>
                         </div>
-                        <h3 className="text-xl font-bold text-center mb-2 text-foreground">{showModal.title}</h3>
-                        <p className="text-muted-foreground text-center mb-6 text-sm">{showModal.message}</p>
-                        <button
-                            onClick={() => setShowModal(null)}
-                            className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-lg"
-                        >
-                            Got it
-                        </button>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 }
 
@@ -878,8 +1084,9 @@ const SidebarItem = ({ label, active, onClick, icon }: { label: string, active: 
     </button>
 );
 
-const ToolbarButton = ({ icon, label, onClick, disabled, danger, className }: { icon: React.ReactNode, label: string, onClick: () => void, disabled?: boolean, danger?: boolean, className?: string }) => (
+const ToolbarButton = ({ icon, label, onClick, disabled, danger, className, id }: { icon: React.ReactNode, label: string, onClick: () => void, disabled?: boolean, danger?: boolean, className?: string, id?: string }) => (
     <button
+        id={id}
         onClick={onClick}
         disabled={disabled}
         className={`flex flex-col items-center justify-center px-3 py-1.5 rounded-md min-w-[60px] transition-colors ${className || ''}
@@ -896,4 +1103,7 @@ const ToolbarButton = ({ icon, label, onClick, disabled, danger, className }: { 
     </button>
 );
 
+
+
 export default FileSystemArchitectSim;
+
