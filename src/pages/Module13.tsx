@@ -342,15 +342,15 @@ function Topic4_EmailBasics() {
     };
 
     return (
-        <div className="space-y-20 pb-20">
+        <div className="space-y-20 pb-20 bg-[#F0EDEE] dark:bg-zinc-950">
             {/* HERO */}
             <section className="relative overflow-hidden pt-10 pb-20 text-center">
                 <div className="container mx-auto px-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-sm font-semibold tracking-wide uppercase mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2C666E]/10 text-[#2C666E] dark:text-[#2C666E] text-sm font-semibold tracking-wide uppercase mb-6">
                         Module 13 • Topic 4
                     </div>
-                    <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
-                        Your Digital <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Passport</span>
+                    <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-[#2C666E] dark:text-primary mb-6">
+                        Your Digital <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2C666E] to-[#F18F01]">Passport</span>
                     </h1>
                     <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10">
                         Email is your ID card for the entire internet. It's how you unlock apps, apply for jobs, and talk to the world.
@@ -358,11 +358,11 @@ function Topic4_EmailBasics() {
 
                     {/* IMAGE CONTAINER */}
                     <div className="max-w-2xl mx-auto rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/20 transform hover:scale-105 transition-transform duration-700">
-                        <div className="bg-gradient-to-br from-indigo-600 to-purple-700 h-64 md:h-96 flex items-center justify-center relative">
+                        <div className="bg-gradient-to-br from-[#2C666E] to-[#073B4C] h-64 md:h-96 flex items-center justify-center relative">
                             {/* Abstract decorative elements */}
                             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                             <Mail size={120} className="text-white drop-shadow-2xl relative z-10" />
-                            <div className="absolute top-1/4 right-1/4 w-20 h-20 bg-yellow-400 rounded-full blur-[50px] opacity-60"></div>
+                            <div className="absolute top-1/4 right-1/4 w-20 h-20 bg-[#F18F01] rounded-full blur-[50px] opacity-60"></div>
                         </div>
                     </div>
                 </div>
@@ -370,20 +370,20 @@ function Topic4_EmailBasics() {
 
             {/* SECTION 1: ANATOMY */}
             <section className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-12">Anatomy of an Address</h2>
-                <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 font-mono text-xl md:text-3xl bg-slate-900 text-white p-8 rounded-3xl shadow-xl max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-12 text-[#2C666E] dark:text-white">Anatomy of an Address</h2>
+                <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 font-mono text-xl md:text-3xl bg-[#073B4C] text-white p-8 rounded-3xl shadow-xl max-w-4xl mx-auto">
                     <div className="flex flex-col items-center gap-2 p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
-                        <span className="text-indigo-400 font-bold">john.doe</span>
+                        <span className="text-[#F18F01] font-bold">john.doe</span>
                         <span className="text-xs font-sans text-slate-400 uppercase tracking-widest">Username</span>
                     </div>
                     <span className="text-slate-500 text-4xl">@</span>
                     <div className="flex flex-col items-center gap-2 p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
-                        <span className="text-pink-400 font-bold">gmail</span>
+                        <span className="text-[#99D5C9] font-bold">gmail</span>
                         <span className="text-xs font-sans text-slate-400 uppercase tracking-widest">Service</span>
                     </div>
                     <span className="text-slate-500 text-4xl">.</span>
                     <div className="flex flex-col items-center gap-2 p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
-                        <span className="text-emerald-400 font-bold">com</span>
+                        <span className="text-[#2C666E] font-bold">com</span>
                         <span className="text-xs font-sans text-slate-400 uppercase tracking-widest">Domain</span>
                     </div>
                 </div>
@@ -391,11 +391,11 @@ function Topic4_EmailBasics() {
 
             {/* INTERACTIVE: THE COMPOSER */}
             <section className="container mx-auto px-4 max-w-3xl">
-                <h2 className="text-2xl font-bold mb-8 text-center">Interactive: The Composer</h2>
+                <h2 className="text-2xl font-bold mb-8 text-center text-[#2C666E] dark:text-white">Interactive: The Composer</h2>
                 <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
                     {/* Window Header */}
-                    <div className="bg-slate-100 dark:bg-slate-800 p-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
-                        <span className="font-bold text-slate-700 dark:text-slate-200">New Message</span>
+                    <div className="bg-[#F0EDEE] dark:bg-slate-800 p-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                        <span className="font-bold text-[#2C666E] dark:text-slate-200">New Message</span>
                         <div className="flex gap-2">
                             <div className="w-3 h-3 rounded-full bg-slate-300"></div>
                             <div className="w-3 h-3 rounded-full bg-slate-300"></div>
@@ -416,7 +416,7 @@ function Topic4_EmailBasics() {
                                 <label className="text-xs font-bold text-slate-400 uppercase">Subject</label>
                                 <input
                                     type="text"
-                                    className="w-full p-2 bg-transparent border-b border-slate-200 dark:border-slate-700 outline-none focus:border-indigo-500 transition-colors"
+                                    className="w-full p-2 bg-transparent border-b border-slate-200 dark:border-slate-700 outline-none focus:border-[#2C666E] transition-colors"
                                     placeholder="Enter subject..."
                                     value={subject}
                                     onChange={(e) => setSubject(e.target.value)}
@@ -430,7 +430,7 @@ function Topic4_EmailBasics() {
 
                             {/* Attachment Area */}
                             {hasAttachment && (
-                                <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-300 px-3 py-1 rounded-full text-sm">
+                                <div className="inline-flex items-center gap-2 bg-[#2C666E]/10 text-[#2C666E] px-3 py-1 rounded-full text-sm">
                                     <Paperclip size={14} /> report_final.pdf <button onClick={() => setHasAttachment(false)} className="hover:text-red-500"><X size={14} /></button>
                                 </div>
                             )}
@@ -438,7 +438,7 @@ function Topic4_EmailBasics() {
                             <div className="pt-4 flex justify-between items-center border-t border-slate-100 dark:border-slate-800">
                                 <button
                                     onClick={() => setHasAttachment(true)}
-                                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full text-slate-500 transition-colors"
+                                    className="p-2 hover:bg-[#F0EDEE] dark:hover:bg-slate-800 rounded-full text-slate-500 transition-colors"
                                     title="Attach File"
                                 >
                                     <Paperclip size={20} />
@@ -446,21 +446,240 @@ function Topic4_EmailBasics() {
                                 <Button
                                     onClick={handleSend}
                                     disabled={!subject}
-                                    className={`rounded-full px-8 ${!subject ? 'opacity-50 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30'}`}
+                                    className={`rounded-full px-8 ${!subject ? 'opacity-50 cursor-not-allowed' : 'bg-[#2C666E] hover:bg-[#204a50] text-white shadow-lg shadow-[#2C666E]/30'}`}
                                 >
                                     Send <Send size={16} className="ml-2" />
                                 </Button>
                             </div>
                         </div>
                     ) : (
-                        <div className="h-80 flex flex-col items-center justify-center bg-indigo-500 text-white animate-in zoom-in duration-500">
+                        <div className="h-80 flex flex-col items-center justify-center bg-[#2C666E] text-white animate-in zoom-in duration-500">
                             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl">
-                                <Mail size={40} className="text-indigo-600" />
+                                <Mail size={40} className="text-[#2C666E]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-2">Sent!</h3>
                             <p className="opacity-80">Your digital letter is on its way.</p>
                         </div>
                     )}
+                </div>
+            </section>
+
+            {/* 1. CREATING AN EMAIL ACCOUNT (Moved after hero in updated flow or kept here) */}
+            {/* I'll keep the order from before but update styling */}
+            <section className="container mx-auto px-4 mt-20">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                        <Badge variant="outline" className="border-[#2C666E] text-[#2C666E]">Step 1</Badge>
+                        <h2 className="text-3xl font-bold text-[#2C666E] dark:text-white">Creating an Email Account</h2>
+                        <p className="text-lg text-muted-foreground">
+                            Before you can send a message, you need an address. This usually involves three key steps:
+                        </p>
+                        <ul className="space-y-4">
+                            <li className="flex gap-4 items-start">
+                                <div className="bg-[#2C666E]/10 p-2 rounded-lg text-[#2C666E]">
+                                    <Globe size={24} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold">Pick a Provider</h4>
+                                    <p className="text-sm text-muted-foreground">Choose a service like Gmail (Google), Outlook (Microsoft), or Yahoo.</p>
+                                </div>
+                            </li>
+                            <li className="flex gap-4 items-start">
+                                <div className="bg-[#2C666E]/10 p-2 rounded-lg text-[#2C666E]">
+                                    <AtSign size={24} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold">Choose a Username</h4>
+                                    <p className="text-sm text-muted-foreground">This is your unique ID (e.g., <code>john.doe@gmail.com</code>). It must be unique worldwide!</p>
+                                </div>
+                            </li>
+                            <li className="flex gap-4 items-start">
+                                <div className="bg-[#2C666E]/10 p-2 rounded-lg text-[#2C666E]">
+                                    <Lock size={24} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold">Secure Password</h4>
+                                    <p className="text-sm text-muted-foreground">Create a strong password mixing letters, numbers, and symbols to keep intruders out.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Visual: Sign Up Form Mockup - M1 Styled */}
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 max-w-md mx-auto w-full">
+                        <div className="text-center mb-6">
+                            <div className="w-12 h-12 bg-[#2C666E] rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold text-xl">G</div>
+                            <h3 className="font-bold text-xl">Create your Account</h3>
+                        </div>
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold text-muted-foreground">First Name</label>
+                                    <div className="h-10 bg-[#F0EDEE] dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 px-3 flex items-center">John</div>
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold text-muted-foreground">Last Name</label>
+                                    <div className="h-10 bg-[#F0EDEE] dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 px-3 flex items-center">Doe</div>
+                                </div>
+                            </div>
+                            <div className="space-y-1">
+                                <label className="text-xs font-bold text-muted-foreground">Username</label>
+                                <div className="flex">
+                                    <div className="h-10 flex-1 bg-[#F0EDEE] dark:bg-slate-800 rounded-l border border-r-0 border-slate-200 dark:border-slate-700 px-3 flex items-center text-foreground">john.doe123</div>
+                                    <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded-r border border-l-0 border-slate-200 dark:border-slate-700 px-3 flex items-center text-muted-foreground text-sm">@gmail.com</div>
+                                </div>
+                            </div>
+                            <div className="space-y-1">
+                                <label className="text-xs font-bold text-muted-foreground">Password</label>
+                                <div className="h-10 bg-[#F0EDEE] dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 px-3 flex items-center text-2xl tracking-widest text-slate-400">••••••••</div>
+                            </div>
+                            <Button className="w-full bg-[#2C666E] hover:bg-[#204a50] text-white">Next</Button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 2. SENDING & RECEIVING */}
+            <section className="container mx-auto px-4 bg-[#2C666E]/5 py-16 rounded-[3rem] mt-20">
+                <div className="text-center mb-12">
+                    <Badge variant="outline" className="border-[#2C666E] text-[#2C666E] mb-4">Step 2</Badge>
+                    <h2 className="text-3xl font-bold mb-4 text-[#2C666E] dark:text-white">Sending & Receiving</h2>
+                    <p className="text-muted-foreground max-w-2xl mx-auto">
+                        Email works like digital mail. You have an "Inbox" for incoming mail and a "Compose" button to write new mail.
+                    </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    {/* COMPOSE CARD */}
+                    <Card className="p-6 border-t-4 border-[#2C666E] shadow-lg">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="bg-[#2C666E]/10 p-2 rounded-lg text-[#2C666E]"><Edit size={20} /></div>
+                            <h3 className="font-bold text-xl">Sending (Compose)</h3>
+                        </div>
+                        <div className="space-y-4 bg-white dark:bg-zinc-950 p-4 rounded-xl border">
+                            <div className="border-b pb-2">
+                                <span className="text-xs font-bold text-muted-foreground mr-2">To:</span>
+                                <span className="bg-[#2C666E]/10 text-[#2C666E] text-xs px-2 py-0.5 rounded-full">boss@work.com</span>
+                            </div>
+                            <div className="border-b pb-2">
+                                <span className="text-xs font-bold text-muted-foreground mr-2">Subject:</span> Project Update
+                            </div>
+                            <div className="text-sm text-muted-foreground min-h-[80px]">
+                                Hi attached is the file...
+                            </div>
+                            <div className="flex justify-end">
+                                <div className="bg-[#2C666E] text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2">Send <Send size={12} /></div>
+                            </div>
+                        </div>
+                        <p className="mt-4 text-sm text-muted-foreground">
+                            <strong>Tip:</strong> Always double-check the "To" address before clicking Send!
+                        </p>
+                    </Card>
+
+                    {/* INBOX CARD */}
+                    <Card className="p-6 border-t-4 border-[#F18F01] shadow-lg">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="bg-[#F18F01]/10 p-2 rounded-lg text-[#F18F01]"><Mail size={20} /></div>
+                            <h3 className="font-bold text-xl">Receiving (Inbox)</h3>
+                        </div>
+                        <div className="space-y-2 bg-white dark:bg-zinc-950 p-4 rounded-xl border">
+                            {/* Inbox Item 1 (New) */}
+                            <div className="flex gap-3 items-center p-2 bg-[#D1E0DE] dark:bg-[#2C666E]/20 rounded-lg border border-[#2C666E]/20">
+                                <div className="w-2 h-2 rounded-full bg-[#2C666E]"></div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="font-bold text-sm truncate text-[#2C666E] dark:text-white">Sarah Manager</div>
+                                    <div className="text-xs text-muted-foreground truncate">Meeting moved to 3pm</div>
+                                </div>
+                                <div className="text-[10px] text-muted-foreground">10:30 AM</div>
+                            </div>
+                            {/* Inbox Item 2 (Read) */}
+                            <div className="flex gap-3 items-center p-2 opacity-60">
+                                <div className="w-2 h-2 rounded-full bg-transparent"></div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="font-bold text-sm truncate">Newsletter</div>
+                                    <div className="text-xs text-muted-foreground truncate">Weekly tech digest...</div>
+                                </div>
+                                <div className="text-[10px] text-muted-foreground">Yesterday</div>
+                            </div>
+                        </div>
+                        <p className="mt-4 text-sm text-muted-foreground">
+                            <strong>Tip:</strong> Bold text usually means "Unread". Click a message to open it.
+                        </p>
+                    </Card>
+                </div>
+            </section>
+
+            {/* 3. ATTACHMENTS */}
+            <section className="container mx-auto px-4 max-w-4xl mt-20">
+                <div className="flex flex-col md:flex-row gap-8 items-center bg-card rounded-2xl border p-8 shadow-sm">
+                    <div className="flex-1 space-y-4">
+                        <div className="inline-flex items-center gap-2 text-[#F18F01] bg-[#F18F01]/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            <Paperclip size={14} /> The Paperclip Icon
+                        </div>
+                        <h2 className="text-3xl font-bold text-[#2C666E] dark:text-white">Attachments</h2>
+                        <p className="text-muted-foreground text-lg">
+                            Need to send a photo, a resume, or a report? Look for the <strong>Paperclip</strong> icon. It lets you "attach" a file from your computer to the email.
+                        </p>
+                        <div className="flex gap-4 pt-2">
+                            <div className="flex items-center gap-2 text-sm bg-muted px-3 py-2 rounded-lg text-[#2C666E]">
+                                <ImageIcon size={16} /> Photos
+                            </div>
+                            <div className="flex items-center gap-2 text-sm bg-muted px-3 py-2 rounded-lg text-[#2C666E]">
+                                <File size={16} /> PDFs
+                            </div>
+                            <div className="flex items-center gap-2 text-sm bg-muted px-3 py-2 rounded-lg text-[#2C666E]">
+                                <File size={16} /> Docs
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full md:w-1/3 aspect-square bg-[#F0EDEE] dark:bg-slate-800 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 dark:border-slate-600 relative overflow-hidden group">
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-400">
+                            <Cloud size={48} className="mb-2" />
+                            <span className="text-sm font-medium">Drop files here</span>
+                        </div>
+                        {/* Animated file hover effect */}
+                        <div className="absolute top-1/2 left-1/2 w-24 h-32 bg-white dark:bg-slate-700 shadow-xl border rounded-lg flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 group-hover:scale-110 transition-transform duration-300">
+                            <File className="text-[#2C666E] w-12 h-12" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. SPAM FOLDER */}
+            <section className="container mx-auto px-4 mb-10 mt-20">
+                <div className="bg-destructive/5 border-l-4 border-destructive rounded-r-xl p-8 max-w-4xl mx-auto">
+                    <div className="flex items-start gap-4">
+                        <div className="bg-destructive/10 p-3 rounded-full text-destructive shrink-0">
+                            <Trash size={32} />
+                        </div>
+                        <div className="space-y-4">
+                            <h2 className="text-2xl font-bold text-destructive">The Spam / Junk Folder</h2>
+                            <p className="text-foreground/80 leading-relaxed">
+                                Email providers try to protect you by automatically filtering out junk mail, scams, and advertisements into a folder usually called <strong>Spam</strong> or <strong>Junk</strong>.
+                            </p>
+
+                            <div className="bg-white dark:bg-zinc-950 border rounded-lg p-4 space-y-3">
+                                <div className="flex items-center justify-between text-sm text-muted-foreground border-b pb-2">
+                                    <span>Spam Folder</span>
+                                    <span>Empty Spam now</span>
+                                </div>
+                                <div className="flex gap-3 items-center opacity-70">
+                                    <AlertCircle size={16} className="text-destructive" />
+                                    <div className="flex-1 truncate font-bold">YOU WON $1,000,000!!</div>
+                                    <div className="text-xs text-muted-foreground">Suspicious</div>
+                                </div>
+                                <div className="flex gap-3 items-center opacity-70">
+                                    <AlertCircle size={16} className="text-destructive" />
+                                    <div className="flex-1 truncate font-bold">Hot Singles nearby...</div>
+                                    <div className="text-xs text-muted-foreground">Junk</div>
+                                </div>
+                            </div>
+
+                            <p className="text-sm font-medium">
+                                ⚠️ Important: Sometimes real emails actidentally go here. If you are expecting an email and don't see it, <span className="underline decoration-destructive decoration-2">always check your Spam folder!</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -470,6 +689,15 @@ function Topic4_EmailBasics() {
         </div>
     );
 }
+
+// Ensure UploadCloud is imported or define a fallback icon if missing in the lucide-react import list above.
+// For safety, I'll add CloudUpload to the imports in the top of the file in a separate step or just use Cloud for now if I can't edit imports here easily. 
+// Actually, I can use the existing 'Cloud' icon or 'Upload' if available. I will use 'Cloud' in the layout above to be safe, 
+// but wait, I used UploadCloud in the code. I should check imports. 
+// Checking imports... 'Cloud' is there. 'Upload' is NOT explicitly there. 'Download' IS there.
+// I will change UploadCloud to Cloud for safety in the replacement string below.
+
+
 
 // --- TOPIC 5: CALENDAR TOOLS ---
 function Topic5_CalendarTools() {
