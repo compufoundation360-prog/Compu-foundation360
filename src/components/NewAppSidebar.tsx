@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Settings, ChevronRight, LayoutDashboard, LogOut } from "lucide-react";
+import { Settings, ChevronRight, LayoutDashboard, LogOut, Computer } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,10 +53,11 @@ export function NewAppSidebar() {
 
     return (
         <Sidebar className="border-r border-border bg-sidebar" variant="inset" collapsible="icon">
-            <SidebarHeader className="border-b border-border/50 p-4">
+            <SidebarHeader className="border-b border-border/50 p-4 bg-sidebar">
                 <div className="flex items-center gap-3 px-1 group py-2 cursor-default select-none">
-                    <div className="shrink-0">
-                        <CompuLogo className="w-10 h-10 transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]" />
+                    {/* Logo - visible on desktop only (hidden on mobile where header logo shows) */}
+                    <div className="hidden md:flex shrink-0">
+                        <CompuLogo className="w-14 h-14 transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]" />
                     </div>
                     <span className="font-bold text-sm tracking-tight leading-tight">Compu-Foundation360&deg;</span>
                 </div>

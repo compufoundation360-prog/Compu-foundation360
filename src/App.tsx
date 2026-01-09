@@ -23,6 +23,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { SimulatorProvider } from "@/context/SimulatorContext";
 import SimulatorModal from "@/components/SimulatorModal";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import GuestRoute from "@/components/GuestRoute";
 import { Loader2 } from "lucide-react"; // Import Loader
 
 const queryClient = new QueryClient();
@@ -46,10 +47,12 @@ const App = () => (
             <BrowserRouter>
               <Suspense fallback={<PageLoader />}>
                 <Routes>
-                  {/* Public Routes (Static for speed) */}
-                  <Route path="/" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
+                  {/* Public Routes (Guest Only - Redirects to Dashboard if Logged In) */}
+                  <Route element={<GuestRoute />}>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                  </Route>
 
                   {/* Protected Routes (Lazy Loaded) */}
                   <Route element={<ProtectedRoute />}>

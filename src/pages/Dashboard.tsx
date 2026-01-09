@@ -1,5 +1,6 @@
 import { Computer, Cpu, Settings as SettingsIcon, BookOpen, TrendingUp, AlertTriangle, CheckCircle2, Clock, Gamepad2, ArrowRight, Shield, Globe, UserCheck, Layers, Lock, Wifi, Database, LayoutTemplate, Cloud, Bot, Smartphone, Link, Rocket, FileSpreadsheet, Code, Briefcase } from "lucide-react";
 import { ModuleCard } from "@/components/ModuleCard";
+import { CompuLogo } from "@/components/CompuLogo";
 import { ProgressCircle } from "@/components/ProgressCircle";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -309,10 +310,11 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <SidebarTrigger className="-ml-1 hidden md:flex" />
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <Computer className="h-6 w-6 text-white" />
+              {/* Logo + Text - visible on mobile only (hidden on desktop where sidebar logo shows) */}
+              <div className="md:hidden shrink-0">
+                <CompuLogo className="w-14 h-14" />
               </div>
-              <div>
+              <div className="md:hidden">
                 <h1 className="text-xl font-bold text-foreground">Compu-Foundation 360°</h1>
                 <p className="text-xs text-muted-foreground">Basic Computer Fundamentals</p>
               </div>
