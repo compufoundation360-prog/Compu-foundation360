@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, ShieldAlert, Monitor, Router, CheckCircle2, XCircle } from "lucide-react";
+import { ShieldCheck, ShieldAlert, Monitor, Router, CheckCircle2, XCircle, ArrowRight, Activity, Terminal, Lock, Globe } from "lucide-react";
 import { TopicNavigation } from "@/components/TopicNavigation";
+import { cn, getImageUrl } from "@/lib/utils";
 
 export function FirewallTopic() {
     // Game State
@@ -13,11 +14,11 @@ export function FirewallTopic() {
     const [feedback, setFeedback] = useState<string | null>(null);
 
     const packets = [
-        { id: 1, name: "Google_Search.html", type: "safe" },
-        { id: 2, name: "Trojan_Installer.exe", type: "threat" },
-        { id: 3, name: "Bank_Login.https", type: "safe" },
-        { id: 4, name: "Free_Money_Script.js", type: "threat" },
-        { id: 5, name: "System_Update.msi", type: "safe" } // Debatable context, but let's say safe
+        { id: 1, name: "Google_Search.html", type: "safe", desc: "Standard web request for information." },
+        { id: 2, name: "Trojan_Installer.exe", type: "threat", desc: "Suspicious executable from unknown origin." },
+        { id: 3, name: "Bank_Login.https", type: "safe", desc: "Secure encrypted financial transaction." },
+        { id: 4, name: "Free_Money_Script.js", type: "threat", desc: "Injected script attempting to modify cookies." },
+        { id: 5, name: "System_Update.msi", type: "safe", desc: "Verified operating system patch." }
     ];
 
     const handleDecision = (decision: "allow" | "block") => {
@@ -25,10 +26,10 @@ export function FirewallTopic() {
         const isCorrect = (decision === "allow" && packet.type === "safe") || (decision === "block" && packet.type === "threat");
 
         if (isCorrect) {
-            setScore(s => s + 10);
-            setFeedback("Correct! Shield Holding Strong.");
+            setScore(s => s + 20);
+            setFeedback("PASS: SECURITY POLICIES COMPLIANT");
         } else {
-            setFeedback("Oops! Wrong decision.");
+            setFeedback("FAIL: UNAUTHORIZED DATA BREACH");
         }
 
         setTimeout(() => {
@@ -38,95 +39,154 @@ export function FirewallTopic() {
             } else {
                 setGameStatus("finished");
             }
-        }, 1000);
+        }, 1200);
     };
 
     return (
-        <div className="space-y-20 fade-in animate-in slide-in-from-bottom-4 duration-700">
+        <div className="space-y-24 pb-16 fade-in animate-in slide-in-from-bottom-4 duration-1000">
 
-            {/* 1. HERO */}
-            <section className="container mx-auto px-4 pt-10">
-                <div className="grid lg:grid-cols-2 gap-10 items-center mb-12">
-                    <div className="space-y-6 text-left">
-                        <Badge variant="outline" className="px-4 py-1 text-base border-primary/50 text-primary">MODULE 10: TOPIC 7</Badge>
-                        <h1 className="text-5xl font-black leading-tight bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
-                            Firewalls: The Digital Wall
+            {/* 1. HERO SECTION */}
+            <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className="space-y-8 text-left">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/50 text-orange-600 text-sm font-semibold tracking-wide uppercase">
+                            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                            Module 10: Topic 7
+                        </div>
+                        <h1 className="text-6xl lg:text-8xl font-bold tracking-tight leading-[0.9] text-foreground">
+                            Digital <span className="text-orange-600 italic font-black">Firewall</span>
                         </h1>
-                        <p className="text-xl text-muted-foreground">
-                            Your first line of defense. Blocking intruders while letting friends in.
+                        <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                            The silent guardian of your network. Analyzing every packet of data to ensure that only the trusted cross your border.
                         </p>
                     </div>
-                    {/* Hero Visual */}
-                    <Card className="p-2 rounded-[30px] border-2 border-orange-500/20 bg-background/50 rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl">
-                        <div className="aspect-video rounded-[24px] bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/40 dark:to-red-900/40 flex items-center justify-center">
-                            <ShieldAlert className="w-32 h-32 text-orange-500 drop-shadow-xl" />
-                        </div>
-                    </Card>
-                </div>
-            </section>
 
-            {/* 2. SPLIT LAYOUT (Concept) */}
-            <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-bold">The Gatekeeper</h2>
-                        <p className="text-lg leading-relaxed text-muted-foreground">
-                            Think of a firewall as a security guard standing at the front door of your computer.
-                            It checks every piece of data (packet) trying to enter or leave.
-                        </p>
-                        <ul className="space-y-3">
-                            <li className="flex items-center gap-3"><CheckCircle2 className="text-green-500" /> Allowed: Safe websites & apps</li>
-                            <li className="flex items-center gap-3"><XCircle className="text-red-500" /> Blocked: Hackers & Viruses</li>
-                        </ul>
-                    </div>
-                    {/* IMAGE PLACEHOLDER */}
-                    <div className="h-80 bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/20 dark:to-orange-800/20 rounded-2xl border-4 border-dashed border-orange-300 flex items-center justify-center relative overflow-hidden group">
-                        <div className="text-center p-6">
-                            <ShieldCheck className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-                            <p className="font-mono text-sm text-muted-foreground">[IMAGE PLACEHOLDER]</p>
-                            <p className="text-xs text-muted-foreground mt-2">Recommended: Visual of a brick wall blocking red arrows (viruses) while green arrows pass through.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 3. COMPARISON GRID (Types) */}
-            <section className="container mx-auto px-4 bg-secondary/20 py-16 rounded-3xl">
-                <h2 className="text-3xl font-bold text-center mb-10">Two Types of Shields</h2>
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <Card className="p-8 text-center hover:scale-105 transition-transform border-t-4 border-t-blue-500">
-                        <Router className="w-12 h-12 mx-auto text-blue-500 mb-4" />
-                        <h3 className="text-xl font-bold mb-2">Hardware Firewall</h3>
-                        <p className="text-muted-foreground">Built into your Router. Protects all devices in your home (Phones, PCs, TVs).</p>
-                    </Card>
-                    <Card className="p-8 text-center hover:scale-105 transition-transform border-t-4 border-t-green-500">
-                        <Monitor className="w-12 h-12 mx-auto text-green-500 mb-4" />
-                        <h3 className="text-xl font-bold mb-2">Software Firewall</h3>
-                        <p className="text-muted-foreground">Installed on your Laptop (like Windows Defender). Protects that specific device.</p>
-                    </Card>
-                </div>
-            </section>
-
-            {/* NEW: INBOUND VS OUTBOUND */}
-            <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center bg-orange-600 text-white p-10 rounded-[40px] shadow-xl">
-                    <div className="text-left space-y-4">
-                        <h3 className="text-3xl font-bold">Inbound vs. Outbound</h3>
-                        <p className="text-orange-100 leading-relaxed">
-                            A firewall is a two-way street. It doesn't just block people coming IN; it monitors what goes OUT.
-                        </p>
-                        <div className="mt-6 space-y-4">
-                            <div className="bg-white/10 p-4 rounded-xl border border-white/10">
-                                <span className="font-bold">⬅️ Inbound (The Guard):</span> Prevents hackers from "knocking" on your computer's ports or entering your network.
-                            </div>
-                            <div className="bg-white/10 p-4 rounded-xl border border-white/10">
-                                <span className="font-bold">➡️ Outbound (The Whistleblower):</span> Stops malware (like Spyware) on your PC from sending your private data back to the hacker.
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-orange-500/10 relative group shadow-2xl">
+                        <div className="relative w-full aspect-square bg-slate-950 overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15),transparent)]"></div>
+                            <img
+                                src={getImageUrl("module-media/firewall-hero.jpg")}
+                                alt="Network Firewall"
+                                className="w-full h-full object-cover mix-blend-overlay transition-transform duration-1000 group-hover:scale-110"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                }}
+                            />
+                            {/* Fallback */}
+                            <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
+                                <ShieldAlert className="w-32 h-32 mb-6 text-orange-500 animate-pulse" />
+                                <p className="font-bold text-4xl font-mono tracking-tighter text-orange-400">BORDER ACTIVE</p>
+                                <p className="text-slate-400 mt-2 italic text-sm">Real-time filtering enabled...</p>
                             </div>
                         </div>
+                    </Card>
+                </div>
+            </section>
+
+            {/* 2. THE CONCEPT (Gatekeeper) */}
+            <section className="container mx-auto px-4">
+                <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                    <Card className="p-2 rounded-[50px] bg-slate-100 dark:bg-slate-900 border-none shadow-2xl relative overflow-hidden aspect-square flex items-center justify-center group">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/10 to-transparent"></div>
+                        <div className="p-12 text-center space-y-6 relative z-10 transition-transform duration-500 group-hover:scale-105">
+                            <div className="w-48 h-48 bg-white dark:bg-black rounded-[40px] shadow-3xl mx-auto flex items-center justify-center border-2 border-orange-500/20">
+                                <p className="text-xs font-mono text-orange-500 font-bold uppercase tracking-tighter">
+                                    [ FIREWALL_VISUAL.JPG ]
+                                </p>
+                            </div>
+                            <div className="space-y-2">
+                                <p className="text-lg font-black uppercase text-orange-600 tracking-widest leading-none">The Invisible Guard</p>
+                                <p className="text-sm text-muted-foreground italic px-8 leading-relaxed">
+                                    "A firewall stands at the entry point of your network, scrutinizing every digital 'package' for hidden threats."
+                                </p>
+                            </div>
+                        </div>
+                    </Card>
+
+                    <div className="space-y-10">
+                        <div className="space-y-4">
+                            <Badge className="bg-orange-500/10 text-orange-600 border-none uppercase font-black px-3 py-1 text-[10px] tracking-widest">operational core</Badge>
+                            <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">The Digital Border</h2>
+                            <p className="text-xl text-muted-foreground leading-relaxed">
+                                Every time you browse a website or send an email, data is broken into small "packets." The firewall is the inspector that decides which packets are safe.
+                            </p>
+                        </div>
+
+                        <div className="space-y-4 pt-4">
+                            <div className="flex items-center gap-4 p-6 bg-emerald-500/5 rounded-3xl border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors">
+                                <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-600">
+                                    <CheckCircle2 className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-lg leading-none">Trusted Traffic</h4>
+                                    <p className="text-sm text-emerald-600/70 mt-1">Legitimate web requests and verified external services.</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4 p-6 bg-red-500/5 rounded-3xl border border-red-500/10 hover:bg-red-500/10 transition-colors">
+                                <div className="w-12 h-12 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-600">
+                                    <XCircle className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-lg leading-none">Blocked Threats</h4>
+                                    <p className="text-sm text-red-600/70 mt-1">Malicious software, hackers, and unauthorized access attempts.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex justify-center">
-                        <div className="w-48 h-48 rounded-full bg-white/10 border-8 border-white/20 flex items-center justify-center animate-pulse">
-                            <ShieldAlert className="w-20 h-20 text-white" />
+                </div>
+            </section>
+
+            {/* 3. TYPES COMPARISON */}
+            <section className="container mx-auto px-4">
+                <div className="bg-slate-900 text-white p-12 md:p-20 rounded-[60px] shadow-3xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 blur-[150px] rounded-full animate-pulse"></div>
+                    <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+                        <div className="space-y-12">
+                            <div className="space-y-4">
+                                <Badge className="bg-orange-500/20 text-orange-400 border-none uppercase font-black px-3 py-1 text-[10px] tracking-widest">dual defense</Badge>
+                                <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter italic">Two Forms of Protection</h2>
+                                <p className="text-xl text-slate-400 max-w-lg leading-relaxed">
+                                    Security is most effective when it is multilayered. You likely already use both types today.
+                                </p>
+                            </div>
+
+                            <div className="grid sm:grid-cols-2 gap-6">
+                                <Card className="p-8 bg-white/5 border-white/10 rounded-[32px] hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
+                                    <Router className="w-10 h-10 text-blue-400 mb-6" />
+                                    <h4 className="text-xl font-bold mb-3">Hardware</h4>
+                                    <p className="text-sm text-slate-400 leading-relaxed italic">
+                                        Protecting the Entire Network. Built into your home router.
+                                    </p>
+                                </Card>
+                                <Card className="p-8 bg-white/5 border-white/10 rounded-[32px] hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
+                                    <Monitor className="w-10 h-10 text-emerald-400 mb-6" />
+                                    <h4 className="text-xl font-bold mb-3">Software</h4>
+                                    <p className="text-sm text-slate-400 leading-relaxed italic">
+                                        Protecting the Device. Installed on your laptop or PC.
+                                    </p>
+                                </Card>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/5 border border-white/10 p-10 rounded-[40px] space-y-8">
+                            <h3 className="text-2xl font-black uppercase tracking-widest text-orange-400">The Traffic Flow</h3>
+                            <div className="space-y-6">
+                                <div className="p-6 bg-slate-800 rounded-3xl border-l-4 border-l-blue-500 group-hover:translate-x-2 transition-transform duration-500">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="font-bold text-blue-400">⬅️ Inbound</span>
+                                        <Lock className="w-4 h-4 text-slate-500" />
+                                    </div>
+                                    <p className="text-sm text-slate-300 italic leading-relaxed">Prevents hackers from "knocking" on your computer's virtual ports.</p>
+                                </div>
+                                <div className="p-6 bg-slate-800 rounded-3xl border-l-4 border-l-orange-500 group-hover:translate-x-2 transition-transform duration-700 delay-75">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="font-bold text-orange-400">➡️ Outbound</span>
+                                        <Activity className="w-4 h-4 text-slate-500 shadow-pulse" />
+                                    </div>
+                                    <p className="text-sm text-slate-300 italic leading-relaxed">Stops hidden spyware on your PC from sending your secrets to a hacker.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,31 +194,104 @@ export function FirewallTopic() {
 
             {/* 4. INTERACTIVE GAME */}
             <section className="container mx-auto px-4">
-                <div className="max-w-3xl mx-auto text-center space-y-6">
-                    <h2 className="text-3xl font-bold">Mini-Game: Packet Inspector</h2>
-                    <Card className="p-8 bg-black text-green-400 font-mono border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.1)]">
+                <div className="max-w-4xl mx-auto space-y-12">
+                    <div className="text-center space-y-4">
+                        <Badge variant="outline" className="border-orange-500/30 text-orange-600 px-4 py-1 font-black text-xs uppercase tracking-widest">interactive training</Badge>
+                        <h2 className="text-4xl font-black">Packet Inspector Simulator</h2>
+                        <p className="text-xl text-muted-foreground">You are the security engine. Analyze incoming requests and decide: Allow or Block?</p>
+                    </div>
+
+                    <Card className="p-0 overflow-hidden border-none shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] rounded-[50px] bg-slate-950 text-white min-h-[500px] relative">
                         {gameStatus === "playing" ? (
-                            <div className="space-y-8">
-                                <div className="text-sm text-gray-500">INCOMING PACKET #{currentPacket + 1}</div>
-                                <div className="text-3xl border p-4 rounded bg-black/50 animate-pulse">
-                                    {packets[currentPacket].name}
+                            <div className="flex flex-col h-full min-h-[500px]">
+                                <div className="p-6 bg-slate-900 flex items-center justify-between border-b border-white/5">
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex gap-1.5">
+                                            <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                                            <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                            <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                                        </div>
+                                        <span className="font-mono text-xs text-orange-400 uppercase tracking-widest flex items-center gap-2">
+                                            <Terminal className="w-3 h-3" /> kernel_security_log.sh
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[10px] font-black text-slate-500 uppercase">Detection Engine: Active</span>
+                                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-center gap-6">
-                                    <Button size="lg" className="bg-green-600 hover:bg-green-700 w-32" onClick={() => handleDecision("allow")}>
-                                        ALLOW
-                                    </Button>
-                                    <Button size="lg" className="bg-red-600 hover:bg-red-700 w-32" onClick={() => handleDecision("block")}>
-                                        BLOCK
-                                    </Button>
+
+                                <div className="flex-1 p-12 flex flex-col items-center justify-center space-y-10">
+                                    <div className="text-center space-y-4 w-full max-w-lg">
+                                        <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 uppercase tracking-[0.2em] mb-2 px-2">
+                                            <span>Analyzing Packet {currentPacket + 1}/{packets.length}</span>
+                                            <span>Threat Hash: {(Math.random() * 100000).toString(16).slice(0, 8)}</span>
+                                        </div>
+                                        <div className="p-10 bg-slate-900 border-2 border-orange-500/30 rounded-[40px] shadow-[inset_0_0_40px_rgba(249,115,22,0.1)] relative group overflow-hidden">
+                                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-scan" />
+                                            <h3 className="text-3xl md:text-4xl font-black font-mono text-orange-400 tracking-tighter mb-4 animate-in fade-in zoom-in duration-500">
+                                                {packets[currentPacket].name}
+                                            </h3>
+                                            <p className="text-slate-400 font-mono text-sm leading-relaxed mb-6">
+                                                {packets[currentPacket].desc}
+                                            </p>
+                                            <div className="flex justify-center gap-3">
+                                                <Badge className="bg-slate-800 text-slate-400 font-mono text-[10px]">SRC: 192.168.1.{Math.floor(Math.random() * 255)}</Badge>
+                                                <Badge className="bg-slate-800 text-slate-400 font-mono text-[10px]">PORT: {Math.floor(Math.random() * 65535)}</Badge>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-6 w-full max-w-lg">
+                                        <Button
+                                            size="lg"
+                                            className="h-20 flex-1 rounded-3xl bg-emerald-600 hover:bg-emerald-500 text-2xl font-black shadow-2xl transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
+                                            onClick={() => handleDecision("allow")}
+                                            disabled={!!feedback}
+                                        >
+                                            ALLOW
+                                        </Button>
+                                        <Button
+                                            size="lg"
+                                            className="h-20 flex-1 rounded-3xl bg-red-600 hover:bg-red-500 text-2xl font-black shadow-2xl transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
+                                            onClick={() => handleDecision("block")}
+                                            disabled={!!feedback}
+                                        >
+                                            BLOCK
+                                        </Button>
+                                    </div>
+
+                                    {feedback && (
+                                        <div className={cn(
+                                            "font-black text-xl italic tracking-widest animate-in slide-in-from-top-4 py-4 px-8 rounded-2xl border-2",
+                                            feedback.includes('PASS') ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' : 'text-red-400 border-red-500/30 bg-red-500/10'
+                                        )}>
+                                            {feedback}
+                                        </div>
+                                    )}
                                 </div>
-                                {feedback && <div className="text-xl font-bold text-yellow-400">{feedback}</div>}
+
+                                <div className="p-4 bg-slate-900/50 text-center font-mono text-[10px] text-slate-600 uppercase tracking-widest">
+                                    Adaptive filtering logic version 10.7.04_LTS
+                                </div>
                             </div>
                         ) : (
-                            <div className="space-y-6">
-                                <h3 className="text-4xl">SCAN COMPLETE</h3>
-                                <div className="text-2xl">Score: {score} / 50</div>
-                                <Button onClick={() => { setGameStatus("playing"); setCurrentPacket(0); setScore(0); }} variant="outline" className="border-green-500 text-green-400">
-                                    Reboot Firewall
+                            <div className="p-12 md:p-24 flex flex-col items-center justify-center text-center space-y-10 animate-in zoom-in duration-700">
+                                <div className="w-32 h-32 bg-emerald-500 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(16,185,129,0.5)] mb-4">
+                                    <ShieldCheck className="w-20 h-20 text-white" />
+                                </div>
+                                <div className="space-y-4">
+                                    <h3 className="text-5xl font-black italic tracking-tighter text-emerald-500">OPTIMIZED</h3>
+                                    <p className="text-xl text-slate-300 max-w-md mx-auto leading-relaxed italic">
+                                        Your efficiency rating: <span className="text-white font-black">{score}%</span>. Security protocols have been successfully consolidated.
+                                    </p>
+                                </div>
+                                <Button
+                                    onClick={() => { setGameStatus("playing"); setCurrentPacket(0); setScore(0); }}
+                                    className="h-16 px-12 rounded-2xl bg-white text-slate-950 hover:bg-slate-200 text-xl font-black shadow-2xl group transition-all"
+                                >
+                                    REBOOT ENGINE
+                                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </div>
                         )}
@@ -166,7 +299,11 @@ export function FirewallTopic() {
                 </div>
             </section>
 
-            <TopicNavigation currentModuleId={10} currentTopicId="m10-t7" />
+            {/* 6. NAVIGATION */}
+            <section className="container mx-auto px-4 pb-14">
+                <TopicNavigation currentModuleId={10} currentTopicId="m10-t7" />
+            </section>
+
         </div>
     );
 }

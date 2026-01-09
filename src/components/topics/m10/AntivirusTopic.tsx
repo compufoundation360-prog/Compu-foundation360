@@ -2,201 +2,308 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileSearch, Bug, Trash2, Check, ExternalLink } from "lucide-react";
+import { FileSearch, Bug, Trash2, Check, ExternalLink, ShieldCheck, Search, Activity, Cpu } from "lucide-react";
 import { TopicNavigation } from "@/components/TopicNavigation";
+import { cn, getImageUrl } from "@/lib/utils";
 
 export function AntivirusTopic() {
     // Simulator State
     const [scanning, setScanning] = useState(false);
     const [progress, setProgress] = useState(0);
     const [threatFound, setThreatFound] = useState(false);
+    const [scanPhase, setScanPhase] = useState("idle");
 
     const startScan = () => {
         setScanning(true);
         setProgress(0);
         setThreatFound(false);
+        setScanPhase("initializing");
     };
 
     useEffect(() => {
         if (scanning && progress < 100) {
             const timer = setTimeout(() => {
-                setProgress(p => p + 2);
-            }, 50);
+                setProgress(prev => {
+                    const next = prev + 1;
+                    if (next < 30) setScanPhase("scanning_memory");
+                    else if (next < 70) setScanPhase("verifying_signatures");
+                    else setScanPhase("heuristic_analysis");
+                    return next;
+                });
+            }, 30);
             return () => clearTimeout(timer);
         } else if (scanning && progress >= 100) {
             setScanning(false);
             setThreatFound(true);
+            setScanPhase("threat_detected");
         }
     }, [scanning, progress]);
 
     return (
-        <div className="space-y-20 fade-in animate-in slide-in-from-bottom-4 duration-700">
+        <div className="space-y-24 pb-16 fade-in animate-in slide-in-from-bottom-4 duration-1000">
 
-            {/* 1. HERO */}
-            <section className="container mx-auto px-4 pt-10">
-                <div className="grid lg:grid-cols-2 gap-10 items-center mb-12">
-                    <div className="space-y-6 text-left">
-                        <Badge variant="outline" className="px-4 py-1 text-base border-primary/50 text-primary">MODULE 10: TOPIC 8</Badge>
-                        <h1 className="text-5xl font-black leading-tight bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-                            Antivirus: The Immune System
+            {/* 1. HERO SECTION */}
+            <section className="container mx-auto px-4 pt-16">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className="space-y-8">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-600 text-sm font-semibold tracking-wide uppercase">
+                            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                            Module 10: Topic 8
+                        </div>
+                        <h1 className="text-6xl lg:text-8xl font-bold tracking-tight leading-[0.9] text-foreground">
+                            Digital <span className="text-blue-600">Immunity</span>
                         </h1>
-                        <p className="text-xl text-muted-foreground">
-                            Just like a doctor fights flu, Antivirus fights malware using deep scanning.
+                        <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                            An antivirus isn't just a software; it's the guardian of your digital life, constantly patrolling the borders of your data.
                         </p>
                     </div>
-                    {/* Hero Visual */}
-                    <Card className="p-2 rounded-[30px] border-2 border-blue-500/20 bg-background/50 -rotate-2 hover:rotate-0 transition-transform duration-500 shadow-2xl">
-                        <div className="aspect-video rounded-[24px] bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/40 dark:to-purple-900/40 flex items-center justify-center">
-                            <Check className="w-32 h-32 text-blue-500 drop-shadow-xl" />
+
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-blue-500/10 relative group shadow-2xl">
+                        <div className="relative w-full aspect-square bg-slate-950 overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent)]"></div>
+                            <img
+                                src={getImageUrl("module-media/antivirus-hero.jpg")}
+                                alt="Antivirus Defense"
+                                className="w-full h-full object-cover mix-blend-overlay transition-transform duration-1000 group-hover:scale-110"
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                }}
+                            />
+                            {/* Fallback */}
+                            <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
+                                <ShieldCheck className="w-32 h-32 mb-6 text-blue-500 animate-pulse" />
+                                <p className="font-bold text-4xl font-mono tracking-tighter text-blue-400">DEFENSE ACTIVE</p>
+                                <p className="text-slate-400 mt-2 italic text-sm">Deep System Integration...</p>
+                            </div>
                         </div>
                     </Card>
                 </div>
             </section>
 
-            {/* 2. CENTERED VISUAL (Top-Down) */}
+            {/* 2. THE CORE MECHANISM */}
             <section className="container mx-auto px-4">
-                <div className="max-w-5xl mx-auto space-y-8">
-                    {/* IMAGE PLACEHOLDER: WIDE */}
-                    <div className="w-full h-96 bg-gradient-to-b from-blue-900/10 to-purple-900/10 rounded-3xl border-2 border-dashed border-blue-300 flex flex-col items-center justify-center relative overflow-hidden">
-                        <FileSearch className="w-20 h-20 text-blue-500 mb-4 animate-bounce" />
-                        <p className="font-mono text-sm text-muted-foreground">[IMAGE PLACEHOLDER: WIDE BANNER]</p>
-                        <p className="text-xs text-muted-foreground mt-2 text-center max-w-md">Recommended: A futuristic scanner beam passing over file folders, turning red bugs into green checks.</p>
-                    </div>
-
-                    <div className="text-center max-w-3xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-4">Deep System Scanning</h2>
-                        <p className="text-lg text-muted-foreground">
-                            Antivirus software holds a massive database of "criminal fingerprints" (virus signatures).
-                            It constantly compares your files against this list to catch thieves before they steal.
-                        </p>
+                <div className="max-w-6xl mx-auto">
+                    <div className="bg-slate-950 text-white p-12 md:p-20 rounded-[50px] shadow-2xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full"></div>
+                        <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+                            <div className="space-y-8">
+                                <Badge className="bg-blue-500/20 text-blue-400 border-blue-400/30 px-4 py-1.5 font-black uppercase tracking-widest">HOW IT WORKS</Badge>
+                                <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">Database of Fingerprints</h2>
+                                <p className="text-xl text-slate-400 leading-relaxed italic">
+                                    "Antivirus software keeps a massive 'Most Wanted' list of malware signatures to identify threats instantly."
+                                </p>
+                                <div className="space-y-4 pt-4">
+                                    <div className="flex items-start gap-4 p-6 bg-white/5 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+                                        <Search className="w-8 h-8 text-blue-400 shrink-0" />
+                                        <div>
+                                            <h4 className="font-bold text-lg">Signature Matching</h4>
+                                            <p className="text-sm text-slate-400">Comparing your files against millions of unique hashes of known viruses.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-4 p-6 bg-white/5 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+                                        <Activity className="w-8 h-8 text-blue-400 shrink-0" />
+                                        <div>
+                                            <h4 className="font-bold text-lg">Behavioral Analysis</h4>
+                                            <p className="text-sm text-slate-400">Heuristics: Watching for "shady" behavior like a program trying to encrypt your files without permission.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex justify-center">
+                                <div className="relative w-full aspect-square max-w-sm flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-blue-500/20 blur-[100px] animate-pulse"></div>
+                                    <div className="w-full h-full rounded-[60px] border-2 border-white/10 flex items-center justify-center relative bg-slate-900 shadow-3xl overflow-hidden group-hover:rotate-3 transition-transform duration-700">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent"></div>
+                                        <img
+                                            src={getImageUrl("module-media/antivirus-scan-process.jpg")}
+                                            className="w-full h-full object-cover opacity-50 mix-blend-overlay"
+                                            alt="Scanning Process"
+                                        />
+                                        <FileSearch className="w-32 h-32 text-blue-500 drop-shadow-[0_0_20px_rgba(59,130,246,0.5)] z-10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* 3. TIMELINE (Process) */}
-            <section className="container mx-auto px-4 bg-muted/30 py-16">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">The Defense Cycle</h2>
-                    <div className="grid md:grid-cols-3 gap-8 text-center relative">
-                        {/* Connecting Line (Desktop) */}
-                        <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0"></div>
-
-                        <div className="relative bg-background p-6 rounded-xl border shadow-sm z-10">
-                            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-blue-600">1</div>
-                            <h3 className="font-bold text-lg">SCAN</h3>
-                            <p className="text-sm text-muted-foreground mt-2">Checks filesystem for odd patterns.</p>
-                        </div>
-                        <div className="relative bg-background p-6 rounded-xl border shadow-sm z-10">
-                            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-orange-600">2</div>
-                            <h3 className="font-bold text-lg">DETECT</h3>
-                            <p className="text-sm text-muted-foreground mt-2">Matches signature or suspicious behavior.</p>
-                        </div>
-                        <div className="relative bg-background p-6 rounded-xl border shadow-sm z-10">
-                            <div className="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-red-600">3</div>
-                            <h3 className="font-bold text-lg">QUARANTINE</h3>
-                            <p className="text-sm text-muted-foreground mt-2">Locks the virus so it can't run.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 4. SIMULATOR (Overlay) */}
+            {/* 3. THE DEFENSE CYCLE */}
             <section className="container mx-auto px-4">
-                <div className="max-w-2xl mx-auto text-center space-y-6">
-                    <h2 className="text-3xl font-bold">Interactive: System Scan</h2>
-                    <Card className="p-8 bg-slate-900 text-white shadow-2xl overflow-hidden relative">
-                        {/* Grid Background */}
-                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:20px_20px] opacity-10" />
-
-                        {!scanning && !threatFound && (
-                            <div className="relative z-10 py-10">
-                                <Button size="lg" className="w-48 h-16 text-xl rounded-full shadow-[0_0_40px_rgba(59,130,246,0.6)] animate-pulse" onClick={startScan}>
-                                    START SCAN
-                                </Button>
-                            </div>
-                        )}
-
-                        {scanning && (
-                            <div className="relative z-10 py-8 space-y-4">
-                                <FileSearch className="w-16 h-16 mx-auto animate-pulse text-blue-400" />
-                                <div className="text-xl font-mono">Scanning System Files...</div>
-                                <div className="h-4 bg-gray-700 rounded-full overflow-hidden">
-                                    <div className="h-full bg-blue-500 transition-all duration-75" style={{ width: `${progress}%` }}></div>
-                                </div>
-                                <div className="text-right font-mono text-blue-300">{progress}%</div>
-                            </div>
-                        )}
-
-                        {threatFound && (
-                            <div className="relative z-10 py-6 space-y-6">
-                                <div className="flex items-center justify-center gap-4 text-red-500">
-                                    <Bug className="w-16 h-16" />
-                                </div>
-                                <h3 className="text-2xl font-bold text-red-400">THREAT DETECTED!</h3>
-                                <div className="bg-red-500/20 border border-red-500/50 p-4 rounded text-left font-mono text-sm max-w-sm mx-auto">
-                                    File: unknown_miner.exe<br />
-                                    Type: Trojan.Generic<br />
-                                    Status: <span className="text-white bg-red-600 px-1">ACTIVE</span>
-                                </div>
-                                <Button size="lg" variant="destructive" className="w-full gap-2" onClick={() => { setThreatFound(false); setProgress(0); }}>
-                                    <Trash2 className="w-5 h-5" /> QUARANTINE & REMOVE
-                                </Button>
-                            </div>
-                        )}
-                    </Card>
+                <div className="text-center mb-16 space-y-4">
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-600 px-4 py-1">THE PROCESS</Badge>
+                    <h2 className="text-4xl font-bold">The Three Gates of Defense</h2>
+                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Your antivirus goes through these stages every time it encounters a new file.</p>
                 </div>
-            </section>
 
-            {/* NEW: HOW IT WORKS (INTELLECT) */}
-            <section className="container mx-auto px-4">
-                <div className="bg-blue-600 text-white p-12 rounded-[40px] shadow-2xl overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[120px]"></div>
-                    <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
-                        <div className="text-left">
-                            <Badge className="bg-white text-blue-600 hover:bg-white mb-4">DEEP DIVE</Badge>
-                            <h3 className="text-4xl font-bold mb-6">Signatures vs. Heuristics</h3>
-                            <p className="text-blue-100 text-lg leading-relaxed mb-6">
-                                How does an Antivirus catch a virus that was created just 5 minutes ago?
+                <div className="grid md:grid-cols-3 gap-8">
+                    {[
+                        { step: "1", title: "Scan", desc: "The software reads the file's code and compares it to known signatures.", icon: Search, color: "blue" },
+                        { step: "2", title: "Detect", desc: "Flags the file if it matches a threat or shows suspicious behavior.", icon: Bug, color: "orange" },
+                        { step: "3", title: "Quarantine", desc: "Isolates the file in a secure vault where it can't harm your system.", icon: Trash2, color: "red" }
+                    ].map((item, i) => (
+                        <Card key={i} className="p-10 rounded-[40px] border border-border/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
+                            <div className={`w-16 h-16 rounded-2xl bg-${item.color}-500/10 flex items-center justify-center mb-6 text-${item.color}-600 group-hover:scale-110 transition-transform`}>
+                                <item.icon className="w-8 h-8" />
+                            </div>
+                            <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                                <span className="text-sm font-black bg-muted px-2 py-0.5 rounded-lg">{item.step}</span>
+                                {item.title}
+                            </h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                {item.desc}
                             </p>
-                            <div className="space-y-4">
-                                <div className="p-4 bg-white/10 rounded-xl border border-white/20">
-                                    <h4 className="font-bold mb-1">Fingerprinting (Signatures)</h4>
-                                    <p className="text-sm">Matching a file against a list of known "criminals". This is 100% accurate but only works for old viruses.</p>
-                                </div>
-                                <div className="p-4 bg-white/10 rounded-xl border border-white/20">
-                                    <h4 className="font-bold mb-1">Behavior Analysis (Heuristics)</h4>
-                                    <p className="text-sm">Looking for "shady" behavior. If a file tries to delete your system logs and hide itself, the AV blocks it even if it has never seen that file before.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex justify-center">
-                            <div className="w-64 h-64 bg-white/5 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center">
-                                <Bug className="w-32 h-32 opacity-20 animate-bounce" />
-                            </div>
-                        </div>
-                    </div>
+                        </Card>
+                    ))}
                 </div>
             </section>
 
-            {/* 5. TOOLS LIST */}
+            {/* 4. INTERACTIVE SIMULATOR */}
             <section className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <Card className="p-6 border-l-4 border-l-blue-500">
-                        <h3 className="font-bold text-lg mb-2">Windows Defender</h3>
-                        <p className="text-sm text-muted-foreground">Built-in to Windows. Excellent for most users.</p>
-                    </Card>
-                    <Card className="p-6 border-l-4 border-l-purple-500">
-                        <h3 className="font-bold text-lg mb-2">Malwarebytes</h3>
-                        <p className="text-sm text-muted-foreground">Great for finding threats others miss. Good "Second Opinion".</p>
-                    </Card>
-                    <Card className="p-6 border-l-4 border-l-green-500">
-                        <h3 className="font-bold text-lg mb-2">Bitdefender</h3>
-                        <p className="text-sm text-muted-foreground">Top-tier paid protection if you need extra features.</p>
+                <div className="max-w-4xl mx-auto space-y-12">
+                    <div className="text-center space-y-4">
+                        <Badge className="bg-blue-500/10 text-blue-600 border-blue-200 uppercase font-black tracking-widest text-xs">interactive training</Badge>
+                        <h2 className="text-4xl font-black">Simulator: System Scrub</h2>
+                        <p className="text-xl text-muted-foreground">Run a deep-level scan to find and isolate hidden malware.</p>
+                    </div>
+
+                    <Card className="p-0 overflow-hidden border-none shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] rounded-[50px] bg-slate-950 text-white min-h-[450px] relative">
+                        {/* UI Header */}
+                        <div className="p-6 bg-slate-900 flex items-center justify-between border-b border-white/5">
+                            <div className="flex items-center gap-4">
+                                <div className="flex gap-1.5">
+                                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                                </div>
+                                <span className="font-mono text-xs text-blue-400 uppercase tracking-widest">defender_engine_x64.sys</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Activity className="w-4 h-4 text-blue-500 animate-pulse" />
+                                <span className="text-[10px] font-black text-slate-500 uppercase">System Integrity: {threatFound ? 'Compromised' : scanning ? 'Analyzing' : 'Ready'}</span>
+                            </div>
+                        </div>
+
+                        <div className="p-12 flex flex-col items-center justify-center h-full min-h-[400px]">
+                            {!scanning && !threatFound && (
+                                <div className="space-y-10 text-center animate-in fade-in duration-700">
+                                    <div className="w-32 h-32 bg-blue-500/10 rounded-full border-2 border-dashed border-blue-500/30 flex items-center justify-center mx-auto mb-8">
+                                        <ShieldCheck className="w-16 h-16 text-blue-500" />
+                                    </div>
+                                    <div className="space-y-4">
+                                        <h3 className="text-3xl font-black tracking-tight uppercase">System Idle</h3>
+                                        <p className="text-slate-400 max-w-md mx-auto italic">No active scan in progress. Regular scans keep your system's fingerprints updated.</p>
+                                    </div>
+                                    <Button
+                                        size="lg"
+                                        className="h-20 px-12 rounded-[24px] bg-blue-600 hover:bg-blue-500 text-2xl font-black shadow-2xl hover:scale-105 active:scale-95 transition-all"
+                                        onClick={startScan}
+                                    >
+                                        INITIATE DEEP SCAN
+                                    </Button>
+                                </div>
+                            )}
+
+                            {scanning && (
+                                <div className="w-full max-w-lg space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                    <div className="flex flex-col items-center gap-6">
+                                        <div className="relative">
+                                            <div className="absolute inset-0 bg-blue-500/20 blur-2xl animate-pulse"></div>
+                                            <div className="w-24 h-24 rounded-3xl bg-blue-500/10 border-2 border-blue-500/30 flex items-center justify-center animate-spin-slow">
+                                                <Cpu className="w-12 h-12 text-blue-400" />
+                                            </div>
+                                        </div>
+                                        <div className="text-center space-y-2">
+                                            <h3 className="text-2xl font-black tracking-widest text-blue-400 uppercase">
+                                                {scanPhase === "scanning_memory" && "Scanning RAM..."}
+                                                {scanPhase === "verifying_signatures" && "Signature Matching..."}
+                                                {scanPhase === "heuristic_analysis" && "Heuristic Engine..."}
+                                            </h3>
+                                            <p className="text-slate-500 font-mono text-xs">C:\Windows\System32\drivers\host_{progress}_x{progress}.dll</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <div className="h-4 bg-slate-900 rounded-full border border-white/5 p-1">
+                                            <div
+                                                className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full transition-all duration-300 relative shadow-[0_0_20px_rgba(59,130,246,0.5)]"
+                                                style={{ width: `${progress}%` }}
+                                            >
+                                                <div className="absolute top-0 right-0 h-full w-4 bg-white/20 blur-sm"></div>
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between items-center font-mono text-xs text-blue-300">
+                                            <span className="flex items-center gap-2">
+                                                <Activity className="w-3 h-3 animate-pulse" /> ENGINE ACTIVE
+                                            </span>
+                                            <span className="text-lg font-black">{progress}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {threatFound && (
+                                <div className="w-full max-w-md animate-in zoom-in duration-500">
+                                    <Card className="p-8 bg-black/40 border-2 border-red-500/30 rounded-[40px] shadow-[0_0_100px_rgba(239,68,68,0.2)] text-center space-y-8 relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 right-0 h-2 bg-red-600 animate-pulse"></div>
+                                        <div className="w-24 h-24 bg-red-600/10 border-2 border-red-600/30 rounded-full flex items-center justify-center mx-auto">
+                                            <Bug className="w-12 h-12 text-red-500 animate-bounce" />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <h3 className="text-3xl font-black text-red-500 tracking-tighter uppercase">Threat Neutralized?</h3>
+                                            <p className="text-slate-400 text-sm">Target: <span className="text-white font-mono bg-red-600 px-1 font-bold">Trojan.Win32.Miner.H</span></p>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <Button
+                                                variant="outline"
+                                                className="h-14 rounded-2xl border-white/10 hover:bg-white/5"
+                                                onClick={() => { setThreatFound(false); setProgress(0); }}
+                                            >
+                                                IGNORE
+                                            </Button>
+                                            <Button
+                                                className="h-14 rounded-2xl bg-red-600 hover:bg-red-500 font-bold"
+                                                onClick={() => { setThreatFound(false); setProgress(0); }}
+                                            >
+                                                QUARANTINE
+                                            </Button>
+                                        </div>
+                                    </Card>
+                                </div>
+                            )}
+                        </div>
                     </Card>
                 </div>
             </section>
 
-            <TopicNavigation currentModuleId={10} currentTopicId="m10-t8" />
+            {/* 5. TOP RECOMMENDATIONS */}
+            <section className="container mx-auto px-4 pb-14">
+                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    {[
+                        { title: "Windows Defender", desc: "Native, high-performance protection that's built directly into your OS.", badge: "Built-in" },
+                        { title: "Malwarebytes", desc: "Specializes in zero-day threats and sophisticated malware traditional AVs miss.", badge: "Specialist" },
+                        { title: "Bitdefender", desc: "Award-winning protection with advanced privacy and cloud scanning features.", badge: "Paid Elite" }
+                    ].map((tool, i) => (
+                        <div key={i} className="group p-8 rounded-[32px] bg-background border border-border/70 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl">
+                            <Badge className="mb-4 bg-muted text-muted-foreground group-hover:bg-blue-500 group-hover:text-white transition-colors">{tool.badge}</Badge>
+                            <h4 className="text-xl font-bold mb-3">{tool.title}</h4>
+                            <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                                {tool.desc}
+                            </p>
+                            <Button variant="ghost" className="w-full rounded-xl group-hover:bg-blue-500/10 group-hover:text-blue-600 border border-transparent group-hover:border-blue-500/20">
+                                Learn More <ExternalLink className="w-4 h-4 ml-2" />
+                            </Button>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 6. NAVIGATION */}
+            <section className="container mx-auto px-4 pb-14">
+                <TopicNavigation currentModuleId={10} currentTopicId="m10-t8" />
+            </section>
+
         </div>
     );
 }

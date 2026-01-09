@@ -5,7 +5,8 @@ import {
     AlignCenter, AlignRight, File, Folder, CheckCircle, ArrowRight,
     List, Hash, Calendar, Briefcase, Mail, FileCheck, ArrowLeft,
     Table, Grid3x3, BarChart3, Filter, TrendingUp, Minus,
-    DollarSign, Users, Presentation, Image, Sparkles, Play
+    DollarSign, Users, Presentation, Image, Sparkles, Play,
+    Target, BookOpen, GraduationCap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -2048,6 +2049,8 @@ function Topic10_PowerPointForWork() {
                         <p className="text-foreground/80 leading-relaxed">Create professional business presentations for meetings and reports.</p>
                         <div className="space-y-3 pt-4">
                             <div className="flex items-start gap-3"><span className="text-primary font-semibold">•</span><p className="text-sm text-foreground/80">Business presentations</p></div>
+                            <div className="flex items-start gap-3"><span className="text-primary font-semibold">•</span><p className="text-sm text-foreground/80">College presentations</p></div>
+                            <div className="flex items-start gap-3"><span className="text-primary font-semibold">•</span><p className="text-sm text-foreground/80">Professional templates</p></div>
                         </div>
                     </div>
                     <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
@@ -2095,6 +2098,214 @@ function Topic10_PowerPointForWork() {
                             </div>
                         </div>
                     </Card>
+                </div>
+            </section>
+
+            {/* SECTION 2: COLLEGE PRESENTATIONS */}
+            <section className="container mx-auto px-4">
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-12">
+                        <Badge variant="outline" className="mb-4 border-primary text-primary">College Presentations</Badge>
+                        <h2 className="text-4xl font-bold mb-4">College Presentations</h2>
+                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                            Academic talks given by students to share research, project findings, or course assignments.
+                        </p>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-8 mb-8">
+                        <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                            <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                                <img
+                                    src={getImageUrl("module-media/m16-t10-college-presentation.jpg")}
+                                    alt="Student giving a college presentation"
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).style.display = "none";
+                                        const parent = (e.target as HTMLImageElement).parentElement;
+                                        if (parent) {
+                                            parent.innerHTML =
+                                                `<div class="p-8 text-center text-sm text-muted-foreground">
+                                                    Add module-media/m16-t10-college-presentation.jpg. College presentation setting.
+                                                </div>`;
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </Card>
+                        <div className="space-y-4">
+                            <p className="text-foreground/80 leading-relaxed">
+                                College presentations focus on educational depth and demonstration of knowledge. They often involve sharing findings from original research or explaining complex concepts learned in class.
+                            </p>
+                            <div className="space-y-4 pt-2">
+                                <div className="flex gap-4 p-4 rounded-2xl bg-primary/5 border border-primary/10">
+                                    <Target className="w-6 h-6 text-primary shrink-0" />
+                                    <div>
+                                        <h4 className="font-bold text-sm">Purpose</h4>
+                                        <p className="text-xs text-muted-foreground">To demonstrate understanding of a subject and improve communication skills.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4 p-4 rounded-2xl bg-primary/5 border border-primary/10">
+                                    <Users className="w-6 h-6 text-primary shrink-0" />
+                                    <div>
+                                        <h4 className="font-bold text-sm">Audience</h4>
+                                        <p className="text-xs text-muted-foreground">Usually your professors and classmates in an academic environment.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4 p-4 rounded-2xl bg-primary/5 border border-primary/10">
+                                    <Sparkles className="w-6 h-6 text-primary shrink-0" />
+                                    <div>
+                                        <h4 className="font-bold text-sm">Style</h4>
+                                        <p className="text-xs text-muted-foreground">Often more creative or educational, focusing on learning and classroom discussion.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <Card className="p-6 border border-border/70">
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="space-y-3">
+                                <h4 className="font-bold flex items-center gap-2 text-primary">
+                                    <BookOpen className="w-5 h-5" /> Academic Content
+                                </h4>
+                                <p className="text-sm text-muted-foreground">Detailed explanations, diagrams, and specific data related to your syllabus and course requirements.</p>
+                            </div>
+                            <div className="space-y-2">
+                                <h4 className="font-bold flex items-center gap-2 text-primary">
+                                    <CheckCircle className="w-5 h-5" /> Academic Standards
+                                </h4>
+                                <ul className="space-y-1">
+                                    <li className="text-xs text-muted-foreground flex items-center gap-2">
+                                        <div className="w-1 h-1 rounded-full bg-primary" /> Citing sources (APA, MLA styles)
+                                    </li>
+                                    <li className="text-xs text-muted-foreground flex items-center gap-2">
+                                        <div className="w-1 h-1 rounded-full bg-primary" /> Encouraging classroom participation
+                                    </li>
+                                    <li className="text-xs text-muted-foreground flex items-center gap-2">
+                                        <div className="w-1 h-1 rounded-full bg-primary" /> Linking to course objectives
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </section>
+
+            {/* SECTION 3: PROFESSIONAL TEMPLATES */}
+            <section className="container mx-auto px-4">
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-12">
+                        <Badge variant="outline" className="mb-4 border-primary text-primary">Professional Templates</Badge>
+                        <h2 className="text-4xl font-bold mb-4">Professional Templates</h2>
+                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                            Pre-designed layouts used in business settings to ensure consistency, branding, and efficiency.
+                        </p>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-8 mb-8">
+                        <div className="space-y-4">
+                            <p className="text-foreground/80 leading-relaxed">
+                                Professional templates save time and maintain a high-quality, uniform look across an organization. They are the backbone of corporate communication.
+                            </p>
+                            <div className="grid gap-3">
+                                <div className="p-4 rounded-2xl border border-border/70 bg-card hover:bg-primary/5 transition-colors">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="p-2 rounded-lg bg-primary/10">
+                                            <Target className="w-4 h-4 text-primary" />
+                                        </div>
+                                        <h4 className="font-bold text-sm">Goal: Efficiency</h4>
+                                    </div>
+                                    <p className="text-xs text-muted-foreground font-medium">Purpose: To save time and maintain a high-quality, uniform look across a company.</p>
+                                </div>
+                                <div className="p-4 rounded-2xl border border-border/70 bg-card hover:bg-primary/5 transition-colors">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="p-2 rounded-lg bg-primary/10">
+                                            <Users className="w-4 h-4 text-primary" />
+                                        </div>
+                                        <h4 className="font-bold text-sm">Audience: Stakeholders</h4>
+                                    </div>
+                                    <p className="text-xs text-muted-foreground font-medium">Clients, stakeholders, managers, or potential investors who expect a professional look.</p>
+                                </div>
+                                <div className="p-4 rounded-2xl border border-border/70 bg-card hover:bg-primary/5 transition-colors">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="p-2 rounded-lg bg-primary/10">
+                                            <Sparkles className="w-4 h-4 text-primary" />
+                                        </div>
+                                        <h4 className="font-bold text-sm">Style: Corporate Brand</h4>
+                                    </div>
+                                    <p className="text-xs text-muted-foreground font-medium">Clean, minimal, and branded using specific company colors, fonts, and logos.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                            <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                                <img
+                                    src={getImageUrl("module-media/m16-t10-professional-templates.jpg")}
+                                    alt="Corporate PowerPoint templates"
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).style.display = "none";
+                                        const parent = (e.target as HTMLImageElement).parentElement;
+                                        if (parent) {
+                                            parent.innerHTML =
+                                                `<div class="p-8 text-center text-sm text-muted-foreground">
+                                                    Add module-media/m16-t10-professional-templates.jpg. Corporate slide templates.
+                                                </div>`;
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </Card>
+                    </div>
+
+                    <Card className="bg-primary/5 border-primary/20 p-8 rounded-[32px]">
+                        <div className="flex flex-col md:flex-row gap-8 items-center">
+                            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                                <Layout className="w-10 h-10 text-primary" />
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-bold mb-2">Practical Utility</h4>
+                                <p className="text-foreground/70 leading-relaxed">
+                                    Templates provide ready-made structures for reports, business proposals, and financial updates. You don't have to design from scratch, allowing you to focus entirely on the data and your message.
+                                </p>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </section>
+
+            {/* SECTION 4: COMPARISON */}
+            <section className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-10">
+                        <h3 className="text-2xl font-bold">Choosing the Right Path</h3>
+                        <p className="text-muted-foreground">A quick comparison between academic and business presentation styles.</p>
+                    </div>
+
+                    <div className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm">
+                        <div className="grid grid-cols-3 bg-primary/10 p-4 border-b border-border/70 text-sm font-bold">
+                            <div>Feature</div>
+                            <div>College Presentations</div>
+                            <div>Professional Templates</div>
+                        </div>
+                        <div className="divide-y divide-border/50">
+                            <div className="grid grid-cols-3 p-4 items-center text-sm">
+                                <div className="font-semibold text-primary">Goal</div>
+                                <div className="text-muted-foreground">To learn and show knowledge</div>
+                                <div className="text-muted-foreground font-medium text-foreground">To persuade or inform quickly</div>
+                            </div>
+                            <div className="grid grid-cols-3 p-4 items-center text-sm">
+                                <div className="font-semibold text-primary">Design</div>
+                                <div className="text-muted-foreground">Flexible and creative</div>
+                                <div className="text-muted-foreground font-medium text-foreground">Strict and branded</div>
+                            </div>
+                            <div className="grid grid-cols-3 p-4 items-center text-sm">
+                                <div className="font-semibold text-primary">Focus</div>
+                                <div className="text-muted-foreground">In-depth theory</div>
+                                <div className="text-muted-foreground font-medium text-foreground text-pretty">High-level results and "call to action"</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

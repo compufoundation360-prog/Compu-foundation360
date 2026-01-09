@@ -1,6 +1,6 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowDown, Cog, CheckCircle, Search, Target, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowDown, Cog, CheckCircle, Search, Target, Zap, ShieldCheck, LifeBuoy, Fish, Monitor, Router } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -24,7 +24,7 @@ import { BackupTopic } from "@/components/topics/m10/BackupTopic";
 import { ScamsTopic } from "@/components/topics/m10/ScamsTopic";
 import { CyberHygieneTopic } from "@/components/topics/m10/CyberHygieneTopic";
 import { TopicNavigation } from "@/components/TopicNavigation";
-import { IntroVideo as Module1IntroVideo } from "@/components/topics/m1/IntroVideo";
+import { IntroVideo } from "@/components/topics/m1/IntroVideo";
 const Module11 = React.lazy(() => import("@/pages/Module11"));
 const Module12 = React.lazy(() => import("@/pages/Module12"));
 const Module13 = React.lazy(() => import("@/pages/Module13"));
@@ -753,6 +753,34 @@ const ModuleDetail = () => {
             { id: "email", x: 50, y: 30, label: "Phishing Email", feedback: "⚠️ Risk Found! Don't open 'You Won $1M' emails." },
             { id: "av", x: 80, y: 70, label: "Antivirus Off", feedback: "⚠️ Risk Found! Always keep Antivirus enabled." }
           ]
+        },
+        protection: {
+          title: "Protection of Systems",
+          intro: "Cybersecurity is about building a multi-layered shield around hardware, software, and data to keep users safe.",
+          visualAsset: {
+            fileName: "module-media/m10-protection.jpg",
+            alt: "A layered cybersecurity shield protecting hardware and software",
+            brief: "Visual showing multi-layered protection: a core (data) surrounded by concentric rings labeled Hardware, Software, and Network. Clean glassmorphism style."
+          },
+          proactive: [
+            { title: "Firewalls", desc: "The filter." },
+            { title: "MFA", desc: "The second lock." },
+            { title: "Training", desc: "The smart user." }
+          ],
+          reactive: [
+            { title: "Backups", desc: "The safety net." },
+            { title: "Restore", desc: "The time machine." },
+            { title: "Resets", desc: "The clean slate." }
+          ]
+        },
+        attackReasons: {
+          title: "Why Attacks Happen",
+          intro: "Hackers look for cracks in software and human error to exploit for various motives.",
+          visualAsset: {
+            fileName: "module-media/m10-attack-reasons.jpg",
+            alt: "A hacker looking through digital cracks in a wall",
+            brief: "Visual showing a digital wall with glowing cracks and a hooded figure targeting weak points. Tech/hacker aesthetic."
+          }
         }
       },
       passwordSecurity: {
@@ -858,6 +886,31 @@ const ModuleDetail = () => {
           { title: "Smishing", desc: "SMS phishing. Text messages with malicious links (e.g., 'Delivery Failed').", icon: "📱" },
           { title: "Pretexting", desc: "Creating a fake scenario or identity (pretext) to get information from you.", icon: "🕵️" }
         ]
+      },
+      firewalls: {
+        windowsFirewall: {
+          title: "Windows Firewall",
+          intro: "Windows comes with a built-in 'Host-based' firewall that monitors every app's permission to use the internet.",
+          visualAsset: {
+            fileName: "module-media/m10-windows-firewall.jpg",
+            alt: "Windows Firewall settings interface",
+            brief: "Visual showing the Windows Defender Firewall settings screen with green checkmarks. Clean UI focus."
+          },
+          features: [
+            { name: "App Control", desc: "Choose which apps can talk to the internet." },
+            { name: "Network Profiles", desc: "Stricter rules for 'Public' Wi-Fi (Starbucks) vs 'Private' (Home)." },
+            { name: "Stealth Mode", desc: "Makes your PC invisible to hackers scanning the network." }
+          ]
+        },
+        networkFirewalls: {
+          title: "Network Firewalls",
+          intro: "A Network Firewall (often built into your router) acts as the main gate for your entire home or office.",
+          visualAsset: {
+            fileName: "module-media/m10-network-firewall.jpg",
+            alt: "Network firewall diagram",
+            brief: "Diagram showing a router/firewall sitting between the Internet (cloud) and multiple home devices (phone, PC, TV). Clean icon-based diagram."
+          }
+        }
       }
     };
   };
@@ -2022,6 +2075,9 @@ const ModuleDetail = () => {
   useEffect(() => {
     if (moduleId === 2 && !topicId && !partNumber && location.pathname === `/module/2`) {
       navigate("/module/2/topic/1", { replace: true });
+    }
+    if (moduleId === 10 && !topicId && !partNumber && location.pathname === `/module/10`) {
+      navigate("/module/10/topic/m10-intro", { replace: true });
     }
   }, [moduleId, topicId, partNumber, navigate, location.pathname]);
 
@@ -3256,6 +3312,11 @@ const ModuleDetail = () => {
             alt: "HDD use cases showing desktop computers, servers, external backup drives, NAS, and gaming consoles",
             brief: "Show HDDs in different applications: desktop computer, server rack, external backup drive, NAS device, gaming console. Arrange them in a flowing layout. Background: tech gradient."
           },
+          fragmentation: {
+            fileName: "module-media/m5-hdd-fragmentation.jpg",
+            alt: "HDD fragmentation visualization showing file pieces scattered across disk platters",
+            brief: "Create a visual showing file fragmentation: a large file broken into many small pieces scattered across different locations on the HDD platter. Show the read/write head having to jump between locations. Include labels showing 'File A' split into fragments. Educational diagram style."
+          },
           whyMatters: {
             fileName: "module-media/m5-hdd-why-matters.jpg",
             alt: "HDD vs SSD comparison for different use cases",
@@ -3305,7 +3366,19 @@ const ModuleDetail = () => {
           "External Backup Drives - Portable backup solutions",
           "Network Attached Storage (NAS) - Shared storage for networks",
           "Gaming Consoles - Storage for games and media"
-        ]
+        ],
+        fragmentation: {
+          title: "Fragmentation",
+          intro: "Fragmentation happens when a file is not stored in one continuous space on the hard disk but is split into many small pieces and saved in different locations. When the computer opens that file, it must find and join all the pieces, which takes more time and makes the system slower.",
+          simpleExample: {
+            title: "Simple Example",
+            description: "Imagine a notebook where one chapter is written on many random pages instead of one place. You'll waste time flipping pages before reading—this is exactly how fragmentation slows a computer."
+          },
+          realLifeExample: {
+            title: "Real-life Computer Example",
+            description: "If you delete old files and then save a large video or game, the disk uses leftover gaps, breaking the file into parts. This causes slow loading and lag."
+          }
+        }
       },
       ssdDeepDive: {
         title: "SSD - Solid State Drive",
@@ -4432,6 +4505,11 @@ const ModuleDetail = () => {
             description: "Another compression format. Often used for large files."
           },
           {
+            name: "7z Files",
+            icon: "📦",
+            description: "High compression format. Saves more space compared to ZIP and RAR."
+          },
+          {
             name: "Benefits",
             icon: "💾",
             description: "Saves storage space. Makes files faster to download and share."
@@ -4441,7 +4519,19 @@ const ModuleDetail = () => {
             icon: "📂",
             description: "Unzip files to use them. Restores files to original size."
           }
-        ]
+        ],
+        sevenzFormat: {
+          title: "7z Format",
+          intro: "7z is a file format used to compress files and folders to reduce their size. It saves more space compared to ZIP and RAR, making files easier to store and share.",
+          simpleExample: {
+            title: "Simple Example",
+            description: "Like squeezing air out of a bag to fit more clothes inside—files take less space but stay safe."
+          },
+          realLifeExample: {
+            title: "Real-life Computer Example",
+            description: "When archiving large project files or backups, using 7z format can reduce file size by 50-70% compared to ZIP, saving significant storage space and reducing upload/download times."
+          }
+        }
       },
       backupBasics: {
         title: "Backup Basics",
@@ -5595,9 +5685,19 @@ const ModuleDetail = () => {
             fileName: "module-media/m8-security-why-matters.jpg",
             alt: "Real-world security setup scenario",
             brief: "Show a real-world scenario: person configuring security settings. Clean, modern aesthetic."
+          },
+          pinDetail: {
+            fileName: "module-media/m8-pin-setup.jpg",
+            alt: "Windows Hello PIN Setup Screen",
+            brief: "Visual showing Windows 11 Sign-in options screen highlighting PIN and Password setup. Clean interface style."
           }
         },
         securityFeatures: [
+          {
+            name: "PIN & Password",
+            icon: "🔑",
+            description: "Set strong passwords and PIN codes. Protect your accounts and device access."
+          },
           {
             name: "Windows Defender",
             icon: "🛡️",
@@ -5619,7 +5719,7 @@ const ModuleDetail = () => {
             description: "Control data sharing. Limit what apps can access."
           },
           {
-            name: "Encryption",
+            name: "Device Encryption",
             icon: "🔐",
             description: "Scramble your data so only you can read it. Protects files if device is stolen."
           }
@@ -5648,6 +5748,11 @@ const ModuleDetail = () => {
             fileName: "module-media/m8-backup-why-matters.jpg",
             alt: "Real-world backup setup scenario",
             brief: "Show a real-world scenario: person setting up backups. Clean, modern aesthetic."
+          },
+          cloudBackup: {
+            fileName: "module-media/m8-cloud-backup.jpg",
+            alt: "Cloud Backup Sync Settings",
+            brief: "Visual showing OneDrive or Google Drive sync settings interface. Clean UI focus."
           }
         },
         backupMethods: [
@@ -5670,6 +5775,11 @@ const ModuleDetail = () => {
             name: "File History",
             icon: "📚",
             description: "Enable file history. Keeps versions of your files."
+          },
+          {
+            name: "Cloud Backup Settings",
+            icon: "⚙️",
+            description: "Configure cloud backup settings. Manage sync preferences and storage options."
           },
           {
             name: "System Image",
@@ -6542,8 +6652,8 @@ const ModuleDetail = () => {
     );
   }
 
-  // Module 1 Intro Video Renderer
-  if (moduleId === 1 && topicId === "m1-intro") {
+  // Module Intro Video Renderer
+  if ((moduleId === 1 && topicId === "m1-intro") || (moduleId === 10 && topicId === "m10-intro")) {
     return (
       <div className={`min-h-screen bg-background hide-scrollbar ${isTransitioning ? 'page-enter' : ''} ${isModule1Light ? 'module-1-light' : ''}`}
         style={isModule1Light ? {
@@ -6576,7 +6686,7 @@ const ModuleDetail = () => {
           </div>
         </header>
         <div className="container mx-auto px-4 py-12">
-          <Module1IntroVideo />
+          <IntroVideo moduleId={moduleId} />
         </div>
       </div>
     );
@@ -14686,6 +14796,7 @@ const ModuleDetail = () => {
           overview: overviewImage,
           internal: internalImage,
           useCases: useCasesImage,
+          fragmentation: fragmentationImage,
           whyMatters: whyMattersImage
         } = module5Sections.hddDeepDive.images;
 
@@ -14816,7 +14927,93 @@ const ModuleDetail = () => {
               </div>
             </section>
 
-            {/* Section 5: Full-Width Use Cases Banner */}
+            {/* Section 5: Fragmentation */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-6 mb-8">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">HDD Performance Issue</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">Understanding Fragmentation</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module5Sections.hddDeepDive.fragmentation.intro}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-10 items-start">
+                {/* Image Card - Left */}
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                  <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(fragmentationImage.fileName)}
+                      alt={fragmentationImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${fragmentationImage.fileName}. ${fragmentationImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+
+                {/* Text Content - Right */}
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">What Actually Happens Inside the HDD</h3>
+                    <ul className="space-y-2 text-foreground/80">
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-primary mt-1">•</span>
+                        <span>The file is broken into many blocks (fragments).</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-primary mt-1">•</span>
+                        <span>These blocks are saved in free gaps across the disk.</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-primary mt-1">•</span>
+                        <span>The read/write head must jump to many locations to open one file, which takes extra time.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Simple Example Card */}
+                  <Card className="p-6 border border-border/70 bg-primary/5">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">•</span>
+                      <h4 className="text-lg font-semibold text-foreground">{module5Sections.hddDeepDive.fragmentation.simpleExample.title}</h4>
+                    </div>
+                    <p className="text-sm text-foreground/80 leading-relaxed">
+                      {module5Sections.hddDeepDive.fragmentation.simpleExample.description}
+                    </p>
+                  </Card>
+
+                  {/* Real-life Example Card */}
+                  <Card className="p-6 border border-border/70 bg-muted/50">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">•</span>
+                      <h4 className="text-lg font-semibold text-foreground">{module5Sections.hddDeepDive.fragmentation.realLifeExample.title}</h4>
+                    </div>
+                    <p className="text-sm text-foreground/80 leading-relaxed">
+                      {module5Sections.hddDeepDive.fragmentation.realLifeExample.description}
+                    </p>
+                  </Card>
+
+                  {/* Additional Info Callout */}
+                  <div className="p-4 bg-muted/30 rounded-2xl border border-dashed border-border">
+                    <p className="text-xs text-foreground/70 leading-relaxed">
+                      <strong>Note:</strong> Fragmentation mainly affects HDDs (mechanical, moving head). More fragments = more head movement = slower access. Tools like defragmentation rearrange pieces to make files continuous again.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 6: Full-Width Use Cases Banner */}
             <section className="container mx-auto px-4">
               <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
                 <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
@@ -17906,6 +18103,67 @@ const ModuleDetail = () => {
                   />
                 </div>
               </Card>
+            </section>
+
+            {/* Section 3: 7z Format - Detailed Section */}
+            <section className="container mx-auto px-4">
+              <div className="space-y-8">
+                <div className="text-center max-w-2xl mx-auto">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">High Compression Format</p>
+                  <h2 className="text-3xl font-semibold text-foreground mb-3">What is 7z Format?</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    {module7Sections.compression.sevenzFormat.intro}
+                  </p>
+                </div>
+
+                <div className="grid lg:grid-cols-2 gap-10 items-start">
+                  {/* 7z Image */}
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(sevenzImage.fileName)}
+                        alt={sevenzImage.alt}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) {
+                            parent.innerHTML =
+                              `<div class="p-8 text-center text-sm text-muted-foreground">
+                                Add ${sevenzImage.fileName}. ${sevenzImage.brief}
+                              </div>`;
+                          }
+                        }}
+                      />
+                    </div>
+                  </Card>
+
+                  {/* Text Content - Right */}
+                  <div className="space-y-6">
+                    {/* Simple Example Card */}
+                    <Card className="p-6 border border-border/70 bg-primary/5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-2xl">•</span>
+                        <h4 className="text-lg font-semibold text-foreground">{module7Sections.compression.sevenzFormat.simpleExample.title}</h4>
+                      </div>
+                      <p className="text-sm text-foreground/80 leading-relaxed">
+                        {module7Sections.compression.sevenzFormat.simpleExample.description}
+                      </p>
+                    </Card>
+
+                    {/* Real-life Example Card */}
+                    <Card className="p-6 border border-border/70 bg-muted/50">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-2xl">•</span>
+                        <h4 className="text-lg font-semibold text-foreground">{module7Sections.compression.sevenzFormat.realLifeExample.title}</h4>
+                      </div>
+                      <p className="text-sm text-foreground/80 leading-relaxed">
+                        {module7Sections.compression.sevenzFormat.realLifeExample.description}
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              </div>
             </section>
 
             <section className="container mx-auto px-4">
@@ -21712,7 +21970,8 @@ const ModuleDetail = () => {
           hero: heroImage,
           overview: overviewImage,
           fullWidth: fullWidthImage,
-          whyMatters: whyMattersImage
+          whyMatters: whyMattersImage,
+          pinDetail: pinDetailImage
         } = module8Sections.settingUpSecurity.images;
 
         return (
@@ -21728,15 +21987,15 @@ const ModuleDetail = () => {
                   <div className="space-y-3 pt-4">
                     <div className="flex items-start gap-3">
                       <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Enable Windows Defender</p>
+                      <p className="text-sm text-foreground/80">PIN & password</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Configure firewall settings</p>
+                      <p className="text-sm text-foreground/80">Device encryption</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Set up automatic updates</p>
+                      <p className="text-sm text-foreground/80">Firewall basics</p>
                     </div>
                   </div>
                 </div>
@@ -21779,6 +22038,79 @@ const ModuleDetail = () => {
                       <p className="text-sm text-foreground/80 leading-relaxed">{feature.description}</p>
                     </Card>
                   ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(pinDetailImage.fileName)}
+                      alt={pinDetailImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${pinDetailImage.fileName}. ${pinDetailImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Security Protocols</p>
+                  <h2 className="text-3xl font-semibold text-foreground">PIN & Password Setup</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    A PIN (Personal Identification Number) is tied to your specific device, making it safer than a password for local sign-ins. Even if someone steals your PIN, they can't access your account from another computer.
+                  </p>
+                  <div className="space-y-4 pt-4 bg-muted/30 p-6 rounded-xl border border-border/50">
+                    <h4 className="font-medium text-foreground">How to Set Up:</h4>
+                    <ol className="space-y-2">
+                      <li className="flex items-center gap-3 text-sm text-foreground/80">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">1</span>
+                        <span>Go to <strong>Settings</strong> {">"} <strong>Accounts</strong></span>
+                      </li>
+                      <li className="flex items-center gap-3 text-sm text-foreground/80">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">2</span>
+                        <span>Select <strong>Sign-in Options</strong></span>
+                      </li>
+                      <li className="flex items-center gap-3 text-sm text-foreground/80">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">3</span>
+                        <span>Click <strong>PIN (Windows Hello)</strong> and follow the prompts</span>
+                      </li>
+                    </ol>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    <Card className="p-4 bg-primary/5 border-primary/20">
+                      <div className="flex items-center gap-2 mb-2 text-primary font-semibold">
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                        PIN (Recommended)
+                      </div>
+                      <ul className="text-xs space-y-2 text-foreground/80">
+                        <li>• Ties to <strong>this device</strong> only</li>
+                        <li>• Backed by hardware (TPM)</li>
+                        <li>• Safe even if seen by others</li>
+                      </ul>
+                    </Card>
+                    <Card className="p-4 bg-muted border-border/50">
+                      <div className="flex items-center gap-2 mb-2 text-foreground font-semibold">
+                        <div className="w-2 h-2 rounded-full bg-foreground/30" />
+                        Traditional Password
+                      </div>
+                      <ul className="text-xs space-y-2 text-foreground/80">
+                        <li>• Works on <strong>any device</strong></li>
+                        <li>• Stored on servers</li>
+                        <li>• Risk of being stolen online</li>
+                      </ul>
+                    </Card>
+                  </div>
                 </div>
               </div>
             </section>
@@ -21853,7 +22185,8 @@ const ModuleDetail = () => {
           hero: heroImage,
           overview: overviewImage,
           fullWidth: fullWidthImage,
-          whyMatters: whyMattersImage
+          whyMatters: whyMattersImage,
+          cloudBackup: cloudBackupImage
         } = module8Sections.backupSetup.images;
 
         return (
@@ -21888,15 +22221,15 @@ const ModuleDetail = () => {
                   <div className="space-y-3 pt-4">
                     <div className="flex items-start gap-3">
                       <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Backup to external drive or cloud</p>
+                      <p className="text-sm text-foreground/80">OneDrive/Google Drive sync</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Set up automatic backups</p>
+                      <p className="text-sm text-foreground/80">File History</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Create system restore points</p>
+                      <p className="text-sm text-foreground/80">Cloud backup settings</p>
                     </div>
                   </div>
                 </div>
@@ -21920,6 +22253,108 @@ const ModuleDetail = () => {
                       <p className="text-sm text-foreground/80 leading-relaxed">{method.description}</p>
                     </Card>
                   ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="container mx-auto px-4">
+              <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                    <img
+                      src={getImageUrl(cloudBackupImage.fileName)}
+                      alt={cloudBackupImage.alt}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                        const parent = (e.target as HTMLImageElement).parentElement;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${cloudBackupImage.fileName}. ${cloudBackupImage.brief}
+                            </div>`;
+                        }
+                      }}
+                    />
+                  </div>
+                </Card>
+                <div className="space-y-5 order-1 lg:order-2">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Cloud Integration</p>
+                  <h2 className="text-3xl font-semibold text-foreground">Cloud Backup Settings</h2>
+                  <p className="text-foreground/80 leading-relaxed">
+                    Cloud backup ensures your files are safe even if your computer breaks or gets stolen. Services like OneDrive and Google Drive automatically sync your documents, photos, and desktop files to the internet.
+                  </p>
+
+                  <div className="mt-6">
+                    <h4 className="font-medium text-foreground mb-3">Key Features:</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="p-3 bg-muted rounded-lg border border-border/50">
+                        <div className="flex items-center gap-2 mb-1 text-primary">
+                          <span className="text-lg">⚡</span>
+                          <span className="font-medium text-sm">Real-time Sync</span>
+                        </div>
+                        <p className="text-xs text-foreground/70">Files update instantly across all devices.</p>
+                      </div>
+                      <div className="p-3 bg-muted rounded-lg border border-border/50">
+                        <div className="flex items-center gap-2 mb-1 text-primary">
+                          <span className="text-lg">⏪</span>
+                          <span className="font-medium text-sm">Version History</span>
+                        </div>
+                        <p className="text-xs text-foreground/70">Restore accidental edits up to 30 days.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Comparison Section */}
+              <div className="mt-12 bg-card border border-border/70 rounded-2xl p-6 md:p-8">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-semibold text-foreground">Cloud vs. Local Backup</h3>
+                  <p className="text-foreground/80 mt-2">Which method is right for you?</p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 text-primary mb-2">
+                      <span className="text-2xl">☁️</span>
+                      <h4 className="text-lg font-medium">Cloud Backup</h4>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-green-500 font-bold">✓</span> Access files from phone, tablet, or web
+                      </li>
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-green-500 font-bold">✓</span> Automatic & worry-free
+                      </li>
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-red-500 font-bold">✗</span> Requires internet connection
+                      </li>
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-red-500 font-bold">✗</span> Limited free storage (5GB - 15GB)
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-4 md:border-l border-border/50 md:pl-8">
+                    <div className="flex items-center gap-3 text-secondary-foreground mb-2">
+                      <span className="text-2xl">💾</span>
+                      <h4 className="text-lg font-medium">Local Backup (HDD)</h4>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-green-500 font-bold">✓</span> One-time cost, no subscription
+                      </li>
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-green-500 font-bold">✓</span> Works without internet
+                      </li>
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-red-500 font-bold">✗</span> Can be lost/damaged with PC
+                      </li>
+                      <li className="flex gap-2 text-sm text-foreground/80">
+                        <span className="text-red-500 font-bold">✗</span> Manual process (unless scheduled)
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </section>
@@ -21984,238 +22419,61 @@ const ModuleDetail = () => {
                 <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/17")}>Next Topic: System Restore & Recovery →</Button>
               </div>
             </section>
-          </div>
+          </div >
         );
       })()}
 
       {/* Module 8 Topic 17: System Restore & Recovery - Text Left + Image Right, Step Cards (horizontal), Full-Width Image, Why It Matters, Image Left + Text Right */}
-      {moduleId === 8 && module8Sections && topicId === "17" && (() => {
-        const {
-          hero: heroImage,
-          overview: overviewImage,
-          fullWidth: fullWidthImage,
-          whyMatters: whyMattersImage,
-          recovery: recoveryImage
-        } = module8Sections.systemRestoreRecovery.images;
+      {
+        moduleId === 8 && module8Sections && topicId === "17" && (() => {
+          const {
+            hero: heroImage,
+            overview: overviewImage,
+            fullWidth: fullWidthImage,
+            whyMatters: whyMattersImage,
+            recovery: recoveryImage
+          } = module8Sections.systemRestoreRecovery.images;
 
-        return (
-          <div id="topic-system-restore-recovery" className="space-y-16">
-            <section className="container mx-auto px-4 pt-16">
-              <div className="grid lg:grid-cols-2 gap-10 items-center">
-                <div className="space-y-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Recovery</p>
-                  <h2 className="text-3xl font-semibold text-foreground">System Restore & Recovery</h2>
-                  <p className="text-foreground/80 leading-relaxed">
-                    {module8Sections.systemRestoreRecovery.intro}
-                  </p>
-                  <div className="space-y-3 pt-4">
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Use restore points to undo changes</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Reset PC to factory settings</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Recover from serious problems</p>
-                    </div>
-                  </div>
-                </div>
-                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                    <img
-                      src={getImageUrl(heroImage.fileName)}
-                      alt={heroImage.alt}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${heroImage.fileName}. ${heroImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-              </div>
-            </section>
-
-            <section className="container mx-auto px-4">
-              <div className="space-y-6">
-                <div className="text-center max-w-2xl mx-auto">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recovery Options</p>
-                  <h2 className="text-3xl font-semibold text-foreground mb-3">Recovery Methods</h2>
-                  <p className="text-foreground/80">
-                    Use these recovery options to fix system problems.
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {module8Sections.systemRestoreRecovery.recoveryOptions.map((option, index) => (
-                    <Card key={index} className="p-6 border border-border/70 relative">
-                      <div className="flex flex-col items-center text-center">
-                        <div className="text-5xl mb-4">{option.icon}</div>
-                        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="text-sm font-semibold text-primary">{index + 1}</span>
-                        </div>
-                        <h3 className="text-xl font-semibold text-primary mb-3">{option.name}</h3>
-                        <p className="text-sm text-foreground/80 leading-relaxed">{option.description}</p>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            <section className="container mx-auto px-4">
-              <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
-                  <img
-                    src={getImageUrl(fullWidthImage.fileName)}
-                    alt={fullWidthImage.alt}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                      const parent = (e.target as HTMLImageElement).parentElement;
-                      if (parent) {
-                        parent.innerHTML =
-                          `<div class="p-8 text-center text-sm text-muted-foreground">
-                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
-                          </div>`;
-                      }
-                    }}
-                  />
-                </div>
-              </Card>
-            </section>
-
-            <section className="container mx-auto px-4">
-              <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
-                <div className="text-center space-y-2">
-                  <div className="text-5xl mb-4">↩️</div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding System Restore</p>
-                  <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
-                </div>
-                <p className="text-foreground/80 leading-relaxed text-center">
-                  System restore and recovery options let you fix problems and restore your computer to a working state. This knowledge is essential for troubleshooting and recovering from serious issues.
-                </p>
-                <Card className="p-0 overflow-hidden border border-border/60 mt-6">
-                  <div className="relative w-full h-full min-h-[260px] bg-muted">
-                    <img
-                      src={getImageUrl(whyMattersImage.fileName)}
-                      alt={whyMattersImage.alt}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-              </Card>
-            </section>
-
-            <section className="container mx-auto px-4">
-              <div className="grid lg:grid-cols-2 gap-10 items-center">
-                <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
-                  <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                    <img
-                      src={getImageUrl(recoveryImage.fileName)}
-                      alt={recoveryImage.alt}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                        const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) {
-                          parent.innerHTML =
-                            `<div class="p-8 text-center text-sm text-muted-foreground">
-                              Add ${recoveryImage.fileName}. ${recoveryImage.brief}
-                            </div>`;
-                        }
-                      }}
-                    />
-                  </div>
-                </Card>
-                <div className="space-y-5 order-1 lg:order-2">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recovery Tips</p>
-                  <h2 className="text-3xl font-semibold text-foreground">When to Use Recovery</h2>
-                  <p className="text-foreground/80 leading-relaxed">
-                    Use system restore when your computer has problems after installing software or updates. Use reset PC when you want to start fresh but keep your files.
-                  </p>
-                  <div className="space-y-3 pt-4">
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Restore point before major changes</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Reset when system is very slow</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="text-primary font-semibold">•</span>
-                      <p className="text-sm text-foreground/80">Recovery drive for serious problems</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="container mx-auto px-4 pb-14">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/16")}>← Previous Topic</Button>
-                <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
-              </div>
-            </section>
-          </div>
-        );
-      })()}
-
-      {/* Module 9: Networking Fundamentals */}
-      {moduleId === 9 && (() => {
-        const sections = getModule9Sections();
-
-        // Topic 1: What is a Network?
-        if (topicId === "1") {
-          const { networking } = sections;
-          const { hero, diagram } = networking.images;
           return (
-            <div id="topic-what-is-network" className="space-y-16">
-              {/* Section 1: Hero */}
+            <div id="topic-system-restore-recovery" className="space-y-16">
               <section className="container mx-auto px-4 pt-16">
                 <div className="grid lg:grid-cols-2 gap-10 items-center">
                   <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-3xl font-semibold text-foreground">What is a Network?</h2>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">System Recovery</p>
+                    <h2 className="text-3xl font-semibold text-foreground">System Restore & Recovery</h2>
                     <p className="text-foreground/80 leading-relaxed">
-                      {networking.intro}
+                      {module8Sections.systemRestoreRecovery.intro}
                     </p>
-                    <Button
-                      className="mt-4 gap-2"
-                      onClick={() => navigate('/simulator/networking-internet')}
-                    >
-                      Try Networking Simulator <span className="text-lg">🌐</span>
-                    </Button>
+                    <div className="space-y-3 pt-4">
+                      <div className="flex items-start gap-3">
+                        <span className="text-primary font-semibold">•</span>
+                        <p className="text-sm text-foreground/80">Use restore points to undo changes</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="text-primary font-semibold">•</span>
+                        <p className="text-sm text-foreground/80">Reset PC to factory settings</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="text-primary font-semibold">•</span>
+                        <p className="text-sm text-foreground/80">Recover from serious problems</p>
+                      </div>
+                    </div>
                   </div>
                   <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
                     <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                       <img
-                        src={getImageUrl(hero.fileName)}
-                        alt={hero.alt}
+                        src={getImageUrl(heroImage.fileName)}
+                        alt={heroImage.alt}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           (e.target as HTMLImageElement).style.display = "none";
                           const parent = (e.target as HTMLImageElement).parentElement;
-                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${hero.fileName}. ${hero.brief}</div>`;
+                          if (parent) {
+                            parent.innerHTML =
+                              `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${heroImage.fileName}. ${heroImage.brief}
+                            </div>`;
+                          }
                         }}
                       />
                     </div>
@@ -22223,1851 +22481,2032 @@ const ModuleDetail = () => {
                 </div>
               </section>
 
-              {/* Section 2: Types of Networks */}
               <section className="container mx-auto px-4">
-                <div className="text-center max-w-2xl mx-auto mb-10">
-                  <h2 className="text-3xl font-semibold text-foreground mb-3">Types of Networks</h2>
-                  <p className="text-foreground/80">Networks vary in size, from a few meters to the entire globe.</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {networking.types.map((type, index) => (
-                    <Card key={index} className="p-6 text-center border border-border/70 group hover:border-primary/50 transition-colors">
-                      <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{type.icon}</div>
-                      <h3 className="text-xl font-bold text-foreground mb-1">{type.name}</h3>
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">{type.full}</p>
-                      <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
-                    </Card>
-                  ))}
+                <div className="space-y-6">
+                  <div className="text-center max-w-2xl mx-auto">
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recovery Options</p>
+                    <h2 className="text-3xl font-semibold text-foreground mb-3">Recovery Methods</h2>
+                    <p className="text-foreground/80">
+                      Use these recovery options to fix system problems.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {module8Sections.systemRestoreRecovery.recoveryOptions.map((option, index) => (
+                      <Card key={index} className="p-6 border border-border/70 relative">
+                        <div className="flex flex-col items-center text-center">
+                          <div className="text-5xl mb-4">{option.icon}</div>
+                          <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-sm font-semibold text-primary">{index + 1}</span>
+                          </div>
+                          <h3 className="text-xl font-semibold text-primary mb-3">{option.name}</h3>
+                          <p className="text-sm text-foreground/80 leading-relaxed">{option.description}</p>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </section>
 
-              {/* Section 3: Diagram */}
               <section className="container mx-auto px-4">
                 <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
                   <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
                     <img
-                      src={getImageUrl(diagram.fileName)}
-                      alt={diagram.alt}
+                      src={getImageUrl(fullWidthImage.fileName)}
+                      alt={fullWidthImage.alt}
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
                         const parent = (e.target as HTMLImageElement).parentElement;
-                        if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${diagram.fileName}. ${diagram.brief}</div>`;
+                        if (parent) {
+                          parent.innerHTML =
+                            `<div class="p-8 text-center text-sm text-muted-foreground">
+                            Add ${fullWidthImage.fileName}. ${fullWidthImage.brief}
+                          </div>`;
+                        }
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
-                      <div className="p-8 text-white">
-                        <h3 className="text-3xl font-semibold mb-2">LAN vs WAN</h3>
-                        <p className="text-lg text-white/90">
-                          Understanding the difference between your local home network (LAN) and the global internet (WAN).
-                        </p>
-                      </div>
-                    </div>
                   </div>
                 </Card>
               </section>
 
-              {/* Section 4: Network Architecture */}
               <section className="container mx-auto px-4">
-                <div className="text-center max-w-2xl mx-auto mb-10">
-                  <h2 className="text-3xl font-semibold text-foreground mb-3">{networking.architecture.title}</h2>
-                  <p className="text-foreground/80">{networking.architecture.intro}</p>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 flex flex-col">
-                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
-                      <img
-                        src={getImageUrl(networking.architecture.clientServer.fileName)}
-                        alt="Client Server Architecture"
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = "none";
-                          const parent = (e.target as HTMLImageElement).parentElement;
-                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${networking.architecture.clientServer.fileName}</div>`;
-                        }}
-                      />
-                    </div>
-                    <div className="p-8 flex-1">
-                      <h3 className="text-2xl font-bold mb-3">{networking.architecture.clientServer.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{networking.architecture.clientServer.description}</p>
-                    </div>
-                  </Card>
-
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 flex flex-col">
-                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
-                      <img
-                        src={getImageUrl(networking.architecture.p2p.fileName)}
-                        alt="P2P Architecture"
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = "none";
-                          const parent = (e.target as HTMLImageElement).parentElement;
-                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${networking.architecture.p2p.fileName}</div>`;
-                        }}
-                      />
-                    </div>
-                    <div className="p-8 flex-1">
-                      <h3 className="text-2xl font-bold mb-3">{networking.architecture.p2p.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{networking.architecture.p2p.description}</p>
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-
-
-              {/* New Section: Scale of Network */}
-              <section className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-10 text-center">The Scale of Networks</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {networking.scaleDeepDive?.map((item: any, i: number) => (
-                    <Card key={i} className="p-6 border-l-4 border-l-primary flex items-start gap-4 hover:shadow-lg transition-shadow">
-                      <div className="text-4xl bg-secondary/20 p-3 rounded-xl">{item.icon}</div>
-                      <div>
-                        <h3 className="text-xl font-bold text-primary">{item.type} <span className="text-sm font-normal text-muted-foreground">({item.full})</span></h3>
-                        <p className="text-sm font-semibold mt-1">Range: {item.range}</p>
-                        <p className="text-muted-foreground mt-2">{item.example}</p>
-                        <span className="inline-block mt-3 text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded-md font-medium">Analogy: {item.analogy}</span>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* New Section: History Timeline */}
-              <section className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto bg-muted/30 p-8 rounded-3xl">
-                  <h2 className="text-3xl font-bold mb-8 text-center">{networking.history?.title}</h2>
-                  <div className="space-y-0">
-                    {networking.history?.milestones.map((m: any, i: number) => (
-                      <div key={i} className="flex gap-6 items-start group">
-                        <div className="flex-none w-24 pt-1 font-bold text-right text-primary text-xl group-hover:scale-110 transition-transform">{m.year}</div>
-                        <div className="relative flex-none w-8 flex flex-col items-center self-stretch">
-                          <div className="w-4 h-4 rounded-full bg-primary z-10 border-4 border-background shadow-sm"></div>
-                          {i < networking.history.milestones.length - 1 && <div className="flex-1 w-0.5 bg-border my-1"></div>}
-                        </div>
-                        <Card className="flex-1 p-6 mb-8 relative hover:-translate-y-1 transition-transform">
-                          <h3 className="font-bold text-lg mb-2 text-foreground">{m.event}</h3>
-                          <p className="text-muted-foreground leading-relaxed">{m.desc}</p>
-                        </Card>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-
-              {/* Section 5: Why it Matters */}
-              <section className="container mx-auto px-4">
-                <Card className="p-8 md:p-12 rounded-[32px] bg-secondary/10 border-none space-y-6">
+                <Card className="p-8 rounded-[32px] border border-border/70 space-y-6 max-w-3xl mx-auto">
                   <div className="text-center space-y-2">
-                    <span className="text-5xl">🌐</span>
-                    <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground pt-2">Big Picture</p>
-                    <h2 className="text-3xl font-bold text-foreground">{networking.whyMatters.title}</h2>
+                    <div className="text-5xl mb-4">↩️</div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Understanding System Restore</p>
+                    <h2 className="text-3xl font-semibold text-foreground">Why It Matters</h2>
                   </div>
-                  <p className="text-lg text-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
-                    {networking.whyMatters.text}
+                  <p className="text-foreground/80 leading-relaxed text-center">
+                    System restore and recovery options let you fix problems and restore your computer to a working state. This knowledge is essential for troubleshooting and recovering from serious issues.
                   </p>
+                  <Card className="p-0 overflow-hidden border border-border/60 mt-6">
+                    <div className="relative w-full h-full min-h-[260px] bg-muted">
+                      <img
+                        src={getImageUrl(whyMattersImage.fileName)}
+                        alt={whyMattersImage.alt}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) {
+                            parent.innerHTML =
+                              `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${whyMattersImage.fileName}. ${whyMattersImage.brief}
+                            </div>`;
+                          }
+                        }}
+                      />
+                    </div>
+                  </Card>
                 </Card>
               </section>
 
-              {/* Section 6: Navigation */}
+              <section className="container mx-auto px-4">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(recoveryImage.fileName)}
+                        alt={recoveryImage.alt}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) {
+                            parent.innerHTML =
+                              `<div class="p-8 text-center text-sm text-muted-foreground">
+                              Add ${recoveryImage.fileName}. ${recoveryImage.brief}
+                            </div>`;
+                          }
+                        }}
+                      />
+                    </div>
+                  </Card>
+                  <div className="space-y-5 order-1 lg:order-2">
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Recovery Tips</p>
+                    <h2 className="text-3xl font-semibold text-foreground">When to Use Recovery</h2>
+                    <p className="text-foreground/80 leading-relaxed">
+                      Use system restore when your computer has problems after installing software or updates. Use reset PC when you want to start fresh but keep your files.
+                    </p>
+                    <div className="space-y-3 pt-4">
+                      <div className="flex items-start gap-3">
+                        <span className="text-primary font-semibold">•</span>
+                        <p className="text-sm text-foreground/80">Restore point before major changes</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="text-primary font-semibold">•</span>
+                        <p className="text-sm text-foreground/80">Reset when system is very slow</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <span className="text-primary font-semibold">•</span>
+                        <p className="text-sm text-foreground/80">Recovery drive for serious problems</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               <section className="container mx-auto px-4 pb-14">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/2")}>Next Topic: Network Devices →</Button>
+                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/8/topic/16")}>← Previous Topic</Button>
+                  <Button size="lg" className="w-full md:w-auto" disabled>Last Topic</Button>
                 </div>
               </section>
             </div>
           );
-        }
+        })()
+      }
 
-        // Topic 2: Network Devices
-        if (topicId === "2") {
-          const { devices } = sections;
-          return (
-            <div id="topic-network-devices" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-3xl font-semibold text-foreground">Network Devices</h2>
-                    <p className="text-lg text-muted-foreground">{devices.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(devices.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
+      {/* Module 9: Networking Fundamentals */}
+      {
+        moduleId === 9 && (() => {
+          const sections = getModule9Sections();
 
-              {/* 2. Device List Grid */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {devices.list.map((dev, i) => (
-                    <Card key={i} className="p-8 border border-border/70 hover:border-primary/50 transition-colors">
-                      <div className="flex items-start gap-6">
-                        <span className="text-5xl bg-muted p-2 rounded-xl">{dev.icon}</span>
-                        <div className="space-y-2">
-                          <h3 className="text-xl font-bold text-foreground">{dev.name}</h3>
-                          <p className="text-xs font-bold text-primary uppercase tracking-wider">{dev.role}</p>
-                          <p className="text-foreground/80 leading-relaxed">{dev.description}</p>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* 3. Hub vs Switch */}
-              <section className="container mx-auto px-4">
-                <div className="bg-secondary/10 rounded-3xl p-8 md:p-12">
-                  <div className="text-center max-w-2xl mx-auto mb-10">
-                    <h3 className="text-3xl font-bold mb-4">Hub vs. Switch</h3>
-                    <p className="text-lg text-muted-foreground">Why a Switch is smarter than a Hub.</p>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-10 items-center">
-                    <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl">
-                      <div className="relative aspect-video">
-                        <img src={getImageUrl(devices.images.comparison.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                      </div>
-                    </Card>
-                    <div className="space-y-6">
-                      <div className="bg-background rounded-xl p-6 border border-border">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-2xl">{devices.hubVsSwitchDeepDive?.hub.icon}</span>
-                          <h4 className="font-bold text-red-500">{devices.hubVsSwitchDeepDive?.hub.name}</h4>
-                        </div>
-                        <p className="text-sm">{devices.hubVsSwitchDeepDive?.hub.desc}</p>
-                      </div>
-                      <div className="bg-background rounded-xl p-6 border border-border">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-2xl">{devices.hubVsSwitchDeepDive?.switch.icon}</span>
-                          <h4 className="font-bold text-green-500">{devices.hubVsSwitchDeepDive?.switch.name}</h4>
-                        </div>
-                        <p className="text-sm">{devices.hubVsSwitchDeepDive?.switch.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* 4. NIC and WAP */}
-              < section className="container mx-auto px-4" >
-                <div className="space-y-16">
-                  {/* NIC: Image Right, Text Left */}
-                  <div className="grid md:grid-cols-2 gap-10 items-center">
-                    <div className="space-y-5 order-2 md:order-1">
-                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-2">
-                        <span className="text-2xl">💳</span>
-                      </div>
-                      <h3 className="text-3xl font-bold text-foreground">{devices.nic.title}</h3>
-                      <p className="text-lg text-foreground/80 leading-relaxed">
-                        {devices.nic.description}
-                      </p>
-                    </div>
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg group hover:shadow-xl transition-shadow duration-300">
-                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                        <img
-                          src={getImageUrl(devices.nic.fileName)}
-                          alt="NIC Card"
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = "none";
-                          }}
-                        />
-                      </div>
-                    </Card>
-                  </div>
-
-                  {/* WAP: Image Left, Text Right */}
-                  <div className="grid md:grid-cols-2 gap-10 items-center">
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg group hover:shadow-xl transition-shadow duration-300">
-                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                        <img
-                          src={getImageUrl(devices.wap.fileName)}
-                          alt="Wireless Access Point"
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = "none";
-                          }}
-                        />
-                      </div>
-                    </Card>
-                    <div className="space-y-5">
-                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-2">
-                        <span className="text-2xl">📡</span>
-                      </div>
-                      <h3 className="text-3xl font-bold text-foreground">{devices.wap.title}</h3>
-                      <p className="text-lg text-foreground/80 leading-relaxed">
-                        {devices.wap.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section >
-
-              {/* New: Router Anatomy */}
-              < section className="container mx-auto px-4" >
-                <div className="bg-muted/30 rounded-[32px] p-8 md:p-12 border border-border/50">
-                  <div className="text-center max-w-2xl mx-auto mb-10">
-                    <h2 className="text-3xl font-bold mb-4">{devices.routerAnatomy?.title}</h2>
-                    <p className="text-lg text-muted-foreground">{devices.routerAnatomy?.text}</p>
-                  </div>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {devices.routerAnatomy?.parts.map((p: any, i: number) => (
-                      <Card key={i} className="p-6 text-center hover:scale-105 transition-transform border-primary/20">
-                        <div className="text-primary font-bold text-lg mb-2">{p.part}</div>
-                        <p className="text-sm text-foreground/70">{p.role}</p>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </section >
-
-              {/* Section 5: Navigation */}
-              < section className="container mx-auto px-4 pb-14" >
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/1")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/3")}>Next Topic: IP Addressing →</Button>
-                </div>
-              </section >
-            </div >
-          );
-        }
-
-        // Topic 3: IP Addressing
-        if (topicId === "3") {
-          const { ipAddressing } = sections;
-          return (
-            <div id="topic-ip-addressing" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">IP Addressing</h2>
-                    <p className="text-lg text-muted-foreground">{ipAddressing.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(ipAddressing.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Public vs Private */}
-              <section className="container mx-auto px-4">
-                <div className="bg-secondary/10 rounded-[32px] p-8 md:p-12">
-                  <h3 className="text-2xl font-bold text-center mb-8">{ipAddressing.publicVsPrivate.title}</h3>
-                  <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-4">
-                      <p className="text-lg">{ipAddressing.publicVsPrivate.description}</p>
-                      <div className="flex flex-col gap-3">
-                        <div className="bg-background p-4 rounded-xl border border-border">
-                          <span className="font-bold text-blue-500">Private IP</span>
-                          <p className="text-sm">192.168.1.5 (Only works at home)</p>
-                        </div>
-                        <div className="bg-background p-4 rounded-xl border border-border">
-                          <span className="font-bold text-green-500">Public IP</span>
-                          <p className="text-sm">173.24.11.9 (Address on the Internet)</p>
-                        </div>
-                      </div>
-                    </div>
-                    <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-lg">
-                      <div className="relative aspect-video">
-                        <img
-                          src={getImageUrl(ipAddressing.images.analogy.fileName)}
-                          className="w-full h-full object-cover"
-                          alt="Public vs Private IP Analogy"
-                          onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
-                        />
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-              </section>
-
-              {/* New: NAT Explanation */}
-              <section className="container mx-auto px-4">
-                <div className="bg-orange-50 dark:bg-orange-950/10 rounded-[32px] p-8 md:p-12 border border-orange-200/50">
-                  <h3 className="text-2xl font-bold text-center mb-6 text-orange-700 dark:text-orange-400">{ipAddressing.natExplained?.title}</h3>
-                  <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-4">
-                      <p className="text-lg font-medium">{ipAddressing.natExplained?.publicIp}</p>
-                      <div className="h-px bg-orange-200 dark:bg-orange-800 my-4"></div>
-                      <p className="text-lg font-medium text-foreground/80">{ipAddressing.natExplained?.privateIp}</p>
-                    </div>
-                    <div className="bg-background p-6 rounded-2xl border border-orange-100 dark:border-orange-900 shadow-sm">
-                      <h4 className="font-bold mb-2">Analogy: {ipAddressing.natExplained?.analogyTitle}</h4>
-                      <p className="text-sm leading-relaxed">{ipAddressing.natExplained?.role}</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* 3. IPv4 vs IPv6 */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {ipAddressing.types.map((type, i) => (
-                    <Card key={i} className="p-8 border border-border/70">
-                      <div className="text-4xl mb-4">{type.icon}</div>
-                      <h3 className="text-xl font-bold mb-1">{type.name}</h3>
-                      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">{type.full}</p>
-                      <p className="text-foreground/80">{type.description}</p>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* DHCP (Static vs Dynamic) Section - New Subtopic */}
-              <section className="container mx-auto px-4">
-                <div className="space-y-12">
-                  <div className="text-center max-w-3xl mx-auto space-y-4">
-                    <Badge variant="outline" className="border-primary text-primary mb-2">IP Configuration</Badge>
-                    <h2 className="text-3xl font-semibold text-foreground">Static vs. Dynamic IP (DHCP)</h2>
-                    <p className="text-foreground/80 leading-relaxed">
-                      {sections.dhcp.intro}
-                    </p>
-                  </div>
-
-                  <div className="grid lg:grid-cols-2 gap-8">
-                    {/* Static IP Card */}
-                    <Card className="p-6 border border-blue-500/20 bg-blue-50/5 dark:bg-blue-900/10">
-                      <div className="flex items-start gap-4 h-full">
-                        <div className="text-4xl bg-blue-100 dark:bg-blue-900/30 p-3 rounded-2xl">{sections.dhcp.comparison.static.icon}</div>
-                        <div className="space-y-3">
-                          <h3 className="text-xl font-semibold text-foreground">{sections.dhcp.comparison.static.name}</h3>
-                          <p className="text-sm text-foreground/80">{sections.dhcp.comparison.static.desc}</p>
-                          <div className="pt-2">
-                            <span className="text-xs font-semibold uppercase text-blue-600 dark:text-blue-400">Best For:</span>
-                            <p className="text-sm text-foreground/70">{sections.dhcp.comparison.static.bestFor}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-
-                    {/* Dynamic IP Card */}
-                    <Card className="p-6 border border-green-500/20 bg-green-50/5 dark:bg-green-900/10">
-                      <div className="flex items-start gap-4 h-full">
-                        <div className="text-4xl bg-green-100 dark:bg-green-900/30 p-3 rounded-2xl">{sections.dhcp.comparison.dynamic.icon}</div>
-                        <div className="space-y-3">
-                          <h3 className="text-xl font-semibold text-foreground">{sections.dhcp.comparison.dynamic.name}</h3>
-                          <p className="text-sm text-foreground/80">{sections.dhcp.comparison.dynamic.desc}</p>
-                          <div className="pt-2">
-                            <span className="text-xs font-semibold uppercase text-green-600 dark:text-green-400">Best For:</span>
-                            <p className="text-sm text-foreground/70">{sections.dhcp.comparison.dynamic.bestFor}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-
+          // Topic 1: What is a Network?
+          if (topicId === "1") {
+            const { networking } = sections;
+            const { hero, diagram } = networking.images;
+            return (
+              <div id="topic-what-is-network" className="space-y-16">
+                {/* Section 1: Hero */}
+                <section className="container mx-auto px-4 pt-16">
                   <div className="grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="space-y-6">
-                      <h3 className="text-2xl font-semibold text-foreground">{sections.dhcp.process.title}</h3>
-                      <div className="grid gap-4">
-                        {sections.dhcp.process.steps.map((step, index) => (
-                          <div key={index} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors">
-                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
-                              {step.step}
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground mb-1">{step.name}</h4>
-                              <p className="text-sm text-muted-foreground">{step.desc}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-3xl font-semibold text-foreground">What is a Network?</h2>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {networking.intro}
+                      </p>
+                      <Button
+                        className="mt-4 gap-2"
+                        onClick={() => navigate('/simulator/networking-internet')}
+                      >
+                        Try Networking Simulator <span className="text-lg">🌐</span>
+                      </Button>
                     </div>
                     <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
                       <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                         <img
-                          src={getImageUrl(sections.dhcp.images.handshake.fileName)}
-                          alt={sections.dhcp.images.handshake.alt}
+                          src={getImageUrl(hero.fileName)}
+                          alt={hero.alt}
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = "none";
                             const parent = (e.target as HTMLImageElement).parentElement;
-                            if (parent) {
-                              parent.innerHTML =
-                                `<div class="p-8 text-center text-sm text-muted-foreground">
-                                   Add ${sections.dhcp.images.handshake.fileName}. ${sections.dhcp.images.handshake.brief}
-                                 </div>`;
-                            }
+                            if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${hero.fileName}. ${hero.brief}</div>`;
                           }}
                         />
                       </div>
                     </Card>
                   </div>
+                </section>
 
-                  <Card className="p-8 rounded-[24px] bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
-                    <div className="flex flex-col md:flex-row gap-6 items-center">
-                      <div className="text-5xl">🅿️</div>
-                      <div className="space-y-2 text-center md:text-left">
-                        <h3 className="text-xl font-bold text-foreground">{sections.dhcp.analogy.title}</h3>
-                        <p className="text-foreground/80 leading-relaxed text-lg">
-                          {sections.dhcp.analogy.text}
+                {/* Section 2: Types of Networks */}
+                <section className="container mx-auto px-4">
+                  <div className="text-center max-w-2xl mx-auto mb-10">
+                    <h2 className="text-3xl font-semibold text-foreground mb-3">Types of Networks</h2>
+                    <p className="text-foreground/80">Networks vary in size, from a few meters to the entire globe.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {networking.types.map((type, index) => (
+                      <Card key={index} className="p-6 text-center border border-border/70 group hover:border-primary/50 transition-colors">
+                        <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{type.icon}</div>
+                        <h3 className="text-xl font-bold text-foreground mb-1">{type.name}</h3>
+                        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">{type.full}</p>
+                        <p className="text-sm text-foreground/80 leading-relaxed">{type.description}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Section 3: Diagram */}
+                <section className="container mx-auto px-4">
+                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                    <div className="relative w-full aspect-[16/9] bg-muted overflow-hidden">
+                      <img
+                        src={getImageUrl(diagram.fileName)}
+                        alt={diagram.alt}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                          const parent = (e.target as HTMLImageElement).parentElement;
+                          if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${diagram.fileName}. ${diagram.brief}</div>`;
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
+                        <div className="p-8 text-white">
+                          <h3 className="text-3xl font-semibold mb-2">LAN vs WAN</h3>
+                          <p className="text-lg text-white/90">
+                            Understanding the difference between your local home network (LAN) and the global internet (WAN).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </section>
+
+                {/* Section 4: Network Architecture */}
+                <section className="container mx-auto px-4">
+                  <div className="text-center max-w-2xl mx-auto mb-10">
+                    <h2 className="text-3xl font-semibold text-foreground mb-3">{networking.architecture.title}</h2>
+                    <p className="text-foreground/80">{networking.architecture.intro}</p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 flex flex-col">
+                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(networking.architecture.clientServer.fileName)}
+                          alt="Client Server Architecture"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${networking.architecture.clientServer.fileName}</div>`;
+                          }}
+                        />
+                      </div>
+                      <div className="p-8 flex-1">
+                        <h3 className="text-2xl font-bold mb-3">{networking.architecture.clientServer.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{networking.architecture.clientServer.description}</p>
+                      </div>
+                    </Card>
+
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 flex flex-col">
+                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(networking.architecture.p2p.fileName)}
+                          alt="P2P Architecture"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) parent.innerHTML = `<div class="p-8 text-center text-sm text-muted-foreground">Add ${networking.architecture.p2p.fileName}</div>`;
+                          }}
+                        />
+                      </div>
+                      <div className="p-8 flex-1">
+                        <h3 className="text-2xl font-bold mb-3">{networking.architecture.p2p.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{networking.architecture.p2p.description}</p>
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+
+
+                {/* New Section: Scale of Network */}
+                <section className="container mx-auto px-4">
+                  <h2 className="text-3xl font-bold mb-10 text-center">The Scale of Networks</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {networking.scaleDeepDive?.map((item: any, i: number) => (
+                      <Card key={i} className="p-6 border-l-4 border-l-primary flex items-start gap-4 hover:shadow-lg transition-shadow">
+                        <div className="text-4xl bg-secondary/20 p-3 rounded-xl">{item.icon}</div>
+                        <div>
+                          <h3 className="text-xl font-bold text-primary">{item.type} <span className="text-sm font-normal text-muted-foreground">({item.full})</span></h3>
+                          <p className="text-sm font-semibold mt-1">Range: {item.range}</p>
+                          <p className="text-muted-foreground mt-2">{item.example}</p>
+                          <span className="inline-block mt-3 text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded-md font-medium">Analogy: {item.analogy}</span>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* New Section: History Timeline */}
+                <section className="container mx-auto px-4">
+                  <div className="max-w-4xl mx-auto bg-muted/30 p-8 rounded-3xl">
+                    <h2 className="text-3xl font-bold mb-8 text-center">{networking.history?.title}</h2>
+                    <div className="space-y-0">
+                      {networking.history?.milestones.map((m: any, i: number) => (
+                        <div key={i} className="flex gap-6 items-start group">
+                          <div className="flex-none w-24 pt-1 font-bold text-right text-primary text-xl group-hover:scale-110 transition-transform">{m.year}</div>
+                          <div className="relative flex-none w-8 flex flex-col items-center self-stretch">
+                            <div className="w-4 h-4 rounded-full bg-primary z-10 border-4 border-background shadow-sm"></div>
+                            {i < networking.history.milestones.length - 1 && <div className="flex-1 w-0.5 bg-border my-1"></div>}
+                          </div>
+                          <Card className="flex-1 p-6 mb-8 relative hover:-translate-y-1 transition-transform">
+                            <h3 className="font-bold text-lg mb-2 text-foreground">{m.event}</h3>
+                            <p className="text-muted-foreground leading-relaxed">{m.desc}</p>
+                          </Card>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* Section 5: Why it Matters */}
+                <section className="container mx-auto px-4">
+                  <Card className="p-8 md:p-12 rounded-[32px] bg-secondary/10 border-none space-y-6">
+                    <div className="text-center space-y-2">
+                      <span className="text-5xl">🌐</span>
+                      <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground pt-2">Big Picture</p>
+                      <h2 className="text-3xl font-bold text-foreground">{networking.whyMatters.title}</h2>
+                    </div>
+                    <p className="text-lg text-foreground/80 leading-relaxed text-center max-w-4xl mx-auto">
+                      {networking.whyMatters.text}
+                    </p>
+                  </Card>
+                </section>
+
+                {/* Section 6: Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" disabled>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/2")}>Next Topic: Network Devices →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 2: Network Devices
+          if (topicId === "2") {
+            const { devices } = sections;
+            return (
+              <div id="topic-network-devices" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-3xl font-semibold text-foreground">Network Devices</h2>
+                      <p className="text-lg text-muted-foreground">{devices.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(devices.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. Device List Grid */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {devices.list.map((dev, i) => (
+                      <Card key={i} className="p-8 border border-border/70 hover:border-primary/50 transition-colors">
+                        <div className="flex items-start gap-6">
+                          <span className="text-5xl bg-muted p-2 rounded-xl">{dev.icon}</span>
+                          <div className="space-y-2">
+                            <h3 className="text-xl font-bold text-foreground">{dev.name}</h3>
+                            <p className="text-xs font-bold text-primary uppercase tracking-wider">{dev.role}</p>
+                            <p className="text-foreground/80 leading-relaxed">{dev.description}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 3. Hub vs Switch */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-secondary/10 rounded-3xl p-8 md:p-12">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
+                      <h3 className="text-3xl font-bold mb-4">Hub vs. Switch</h3>
+                      <p className="text-lg text-muted-foreground">Why a Switch is smarter than a Hub.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-10 items-center">
+                      <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl">
+                        <div className="relative aspect-video">
+                          <img src={getImageUrl(devices.images.comparison.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        </div>
+                      </Card>
+                      <div className="space-y-6">
+                        <div className="bg-background rounded-xl p-6 border border-border">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-2xl">{devices.hubVsSwitchDeepDive?.hub.icon}</span>
+                            <h4 className="font-bold text-red-500">{devices.hubVsSwitchDeepDive?.hub.name}</h4>
+                          </div>
+                          <p className="text-sm">{devices.hubVsSwitchDeepDive?.hub.desc}</p>
+                        </div>
+                        <div className="bg-background rounded-xl p-6 border border-border">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-2xl">{devices.hubVsSwitchDeepDive?.switch.icon}</span>
+                            <h4 className="font-bold text-green-500">{devices.hubVsSwitchDeepDive?.switch.name}</h4>
+                          </div>
+                          <p className="text-sm">{devices.hubVsSwitchDeepDive?.switch.desc}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* 4. NIC and WAP */}
+                < section className="container mx-auto px-4" >
+                  <div className="space-y-16">
+                    {/* NIC: Image Right, Text Left */}
+                    <div className="grid md:grid-cols-2 gap-10 items-center">
+                      <div className="space-y-5 order-2 md:order-1">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-2">
+                          <span className="text-2xl">💳</span>
+                        </div>
+                        <h3 className="text-3xl font-bold text-foreground">{devices.nic.title}</h3>
+                        <p className="text-lg text-foreground/80 leading-relaxed">
+                          {devices.nic.description}
+                        </p>
+                      </div>
+                      <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                        <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                          <img
+                            src={getImageUrl(devices.nic.fileName)}
+                            alt="NIC Card"
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = "none";
+                            }}
+                          />
+                        </div>
+                      </Card>
+                    </div>
+
+                    {/* WAP: Image Left, Text Right */}
+                    <div className="grid md:grid-cols-2 gap-10 items-center">
+                      <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                        <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                          <img
+                            src={getImageUrl(devices.wap.fileName)}
+                            alt="Wireless Access Point"
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = "none";
+                            }}
+                          />
+                        </div>
+                      </Card>
+                      <div className="space-y-5">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-2">
+                          <span className="text-2xl">📡</span>
+                        </div>
+                        <h3 className="text-3xl font-bold text-foreground">{devices.wap.title}</h3>
+                        <p className="text-lg text-foreground/80 leading-relaxed">
+                          {devices.wap.description}
                         </p>
                       </div>
                     </div>
-                  </Card>
-
-                </div>
-              </section>
-
-              {/* 4. Why it Matters */}
-              <section className="container mx-auto px-4">
-                <div className="text-center max-w-3xl mx-auto space-y-4">
-                  <h3 className="text-2xl font-bold">{ipAddressing.whyMatters.title}</h3>
-                  <p className="text-lg text-foreground/80 leading-relaxed">
-                    {ipAddressing.whyMatters.text}
-                  </p>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/2")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/4")}>Next Topic: MAC Address →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 4: MAC Address
-        if (topicId === "4") {
-          const { macAddress } = sections;
-          return (
-            <div id="topic-mac-address" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">MAC Address</h2>
-                    <p className="text-lg text-muted-foreground">{macAddress.intro}</p>
                   </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(macAddress.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                </section >
+
+                {/* New: Router Anatomy */}
+                < section className="container mx-auto px-4" >
+                  <div className="bg-muted/30 rounded-[32px] p-8 md:p-12 border border-border/50">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
+                      <h2 className="text-3xl font-bold mb-4">{devices.routerAnatomy?.title}</h2>
+                      <p className="text-lg text-muted-foreground">{devices.routerAnatomy?.text}</p>
                     </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Analogy */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center">
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(macAddress.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold">The VIN Number Analogy</h3>
-                    <p className="text-muted-foreground text-lg">Think of a car:</p>
-                    <div className="space-y-4">
-                      <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
-                        <p className="font-bold text-primary">License Plate (IP Address)</p>
-                        <p className="text-sm">Changes if you move to a new state. Used to locate the car.</p>
-                      </div>
-                      <div className="bg-secondary/10 p-4 rounded-xl border border-secondary/20">
-                        <p className="font-bold text-foreground">VIN Number (MAC Address)</p>
-                        <p className="text-sm">Stamped on the engine at the factory. NEVER changes, no matter where you go.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* 3. Anatomy */}
-              <section className="container mx-auto px-4 text-center">
-                <h3 className="text-2xl font-bold mb-8">{macAddress.anatomy.title}</h3>
-                <div className="inline-flex flex-col md:flex-row gap-2 md:gap-0 font-mono text-3xl md:text-5xl font-bold bg-black text-green-400 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-[url('https://media.istockphoto.com/id/1136592956/vector/matrix-background-streaming-binary-code-poster-matrix.jpg?s=612x612&w=0&k=20&c=XShUdbvOQp0B0j8b5k0g4f0q8y3o7x0p7z8n8m9l0k=')] opacity-10 mix-blend-overlay"></div>
-                  <div className="relative z-10 flex flex-col items-center p-4 border-2 border-transparent hover:border-green-500/50 rounded-xl transition-colors">
-                    <span>00:1A:2B</span>
-                    <span className="text-sm font-sans font-normal text-muted-foreground mt-2">{macAddress.anatomy.oui}</span>
-                  </div>
-                  <span className="hidden md:block py-4 text-white/20">:</span>
-                  <div className="relative z-10 flex flex-col items-center p-4 border-2 border-transparent hover:border-green-500/50 rounded-xl transition-colors">
-                    <span>3C:4D:5E</span>
-                    <span className="text-sm font-sans font-normal text-muted-foreground mt-2">{macAddress.anatomy.uaa}</span>
-                  </div>
-                </div>
-              </section>
-
-              {/* 4. Comparison Table */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6 text-center">{macAddress.comparison.title}</h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full max-w-4xl mx-auto border-collapse">
-                    <thead>
-                      <tr className="bg-muted">
-                        <th className="p-4 text-left rounded-tl-xl">Feature</th>
-                        <th className="p-4 text-left">IP Address</th>
-                        <th className="p-4 text-left rounded-tr-xl">MAC Address</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {macAddress.comparison.items.map((row, i) => (
-                        <tr key={i} className="border-b border-border/50 hover:bg-muted/30">
-                          <td className="p-4 font-semibold">{row.label}</td>
-                          <td className="p-4 text-muted-foreground">{row.ip}</td>
-                          <td className="p-4 text-muted-foreground">{row.mac}</td>
-                        </tr>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                      {devices.routerAnatomy?.parts.map((p: any, i: number) => (
+                        <Card key={i} className="p-6 text-center hover:scale-105 transition-transform border-primary/20">
+                          <div className="text-primary font-bold text-lg mb-2">{p.part}</div>
+                          <p className="text-sm text-foreground/70">{p.role}</p>
+                        </Card>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              {/* New: MAC Spoofing */}
-              <section className="container mx-auto px-4">
-                <div className="bg-red-50 dark:bg-red-950/10 p-8 rounded-3xl border border-red-100">
-                  <h3 className="text-2xl font-bold text-red-600 mb-4">{macAddress.macSpoofing?.title}</h3>
-                  <p className="text-lg mb-4">{macAddress.macSpoofing?.text}</p>
-                  <div className="flex items-start gap-4 bg-background p-4 rounded-xl">
-                    <span className="text-3xl">📱</span>
-                    <p className="text-sm text-foreground/80"><strong>Privacy Feature:</strong> {macAddress.macSpoofing?.privacy}</p>
-                  </div>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/3")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/5")}>Next Topic: Wi-Fi Basics →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 5: Wi-Fi Basics
-        if (topicId === "5") {
-          const { wifi } = sections;
-          return (
-            <div id="topic-wifi" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">Wi-Fi Basics</h2>
-                    <p className="text-lg text-muted-foreground">{wifi.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(wifi.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Analogy */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center">
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg order-2 md:order-1">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(wifi.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                  <div className="space-y-4 order-1 md:order-2">
-                    <h3 className="text-2xl font-bold">The Radio Station Analogy</h3>
-                    <p className="text-muted-foreground text-lg">Wi-Fi is just a two-way radio.</p>
-                    <div className="bg-secondary/10 p-6 rounded-2xl border border-secondary/20">
-                      <p className="italic mb-2">"Your router is a radio station antenna. Your laptop is the radio. If you get too far away, the music (internet) gets static and stops."</p>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section >
 
-              {/* 3. Frequency Bands */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6 text-center">Frequency Bands: 2.4 vs 5 GHz</h3>
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  {/* 2.4 GHz */}
-                  <Card className="p-8 border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
-                    <h4 className="text-2xl font-bold text-orange-600 mb-2">{wifi.bands.band24.name}</h4>
-                    <p className="font-bold text-foreground/80 mb-4">{wifi.bands.band24.title}</p>
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span>Range (Distance)</span>
-                          <span className="font-bold">Long</span>
-                        </div>
-                        <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
-                          <div className="h-full bg-orange-500 w-[90%]"></div>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span>Speed</span>
-                          <span className="font-bold">Slower</span>
-                        </div>
-                        <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
-                          <div className="h-full bg-orange-500 w-[40%]"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-muted-foreground">{wifi.bands.band24.desc}</p>
-                  </Card>
-
-                  {/* 5 GHz */}
-                  <Card className="p-8 border-2 border-blue-200 bg-blue-50/50 dark:bg-blue-950/10">
-                    <h4 className="text-2xl font-bold text-blue-600 mb-2">{wifi.bands.band5.name}</h4>
-                    <p className="font-bold text-foreground/80 mb-4">{wifi.bands.band5.title}</p>
-                    <div className="space-y-4">
-                      <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span>Range (Distance)</span>
-                          <span className="font-bold">Short</span>
-                        </div>
-                        <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
-                          <div className="h-full bg-blue-500 w-[40%]"></div>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span>Speed</span>
-                          <span className="font-bold">Fast!</span>
-                        </div>
-                        <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
-                          <div className="h-full bg-blue-500 w-[95%]"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm text-muted-foreground">{wifi.bands.band5.desc}</p>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 4. Killers */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6 text-center">Wi-Fi Killers</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {wifi.killers.map((k, i) => (
-                    <Card key={i} className="p-6 text-center border border-red-200/50 hover:border-red-500/50 transition-colors">
-                      <div className="text-4xl mb-3 grayscale group-hover:grayscale-0">{k.icon}</div>
-                      <h4 className="font-bold text-foreground mb-1">{k.name}</h4>
-                      <p className="text-sm text-muted-foreground">{k.desc}</p>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* 5. Wi-Fi Generations (New Subtopic) */}
-              <section className="container mx-auto px-4">
-                <div className="text-center max-w-3xl mx-auto mb-10 space-y-4">
-                  <Badge variant="outline" className="border-primary text-primary mb-2">Wireless Standards</Badge>
-                  <h2 className="text-3xl font-semibold text-foreground">Wi-Fi Generations (4, 5, 6)</h2>
-                  <p className="text-foreground/80 leading-relaxed">
-                    Just like phones have 3G, 4G, and 5G, Wi-Fi has generations. Each new version brings faster speeds and better connections.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-                  {/* Connector Line (Hidden on Mobile) */}
-                  <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-muted via-primary/50 to-primary -z-10 transform -translate-y-1/2"></div>
-
-                  {wifi.generations.map((gen, index) => (
-                    <Card key={index} className={`p-6 border-2 flex flex-col items-center text-center relative bg-card ${index === 2 ? 'border-primary shadow-[0_0_20px_rgba(var(--primary),0.3)]' : 'border-border'}`}>
-                      {index === 2 && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">LATEST</Badge>}
-
-                      <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center text-4xl mb-4 border-4 border-card z-10">
-                        {gen.icon}
-                      </div>
-
-                      <h3 className="text-2xl font-bold text-foreground mb-1">{gen.name}</h3>
-                      <p className="text-xs font-mono text-muted-foreground mb-4">{gen.tech}</p>
-
-                      <div className="space-y-2 w-full">
-                        <div className="flex justify-between text-sm border-b border-border/50 pb-2">
-                          <span className="text-muted-foreground">Year</span>
-                          <span className="font-semibold">{gen.year}</span>
-                        </div>
-                        <div className="flex justify-between text-sm border-b border-border/50 pb-2">
-                          <span className="text-muted-foreground">Speed</span>
-                          <span className="font-bold text-primary">{gen.speed}</span>
-                        </div>
-                      </div>
-
-                      <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
-                        {gen.desc}
-                      </p>
-                    </Card>
-                  ))}
-                </div>
-
-                <div className="mt-12 bg-secondary/10 rounded-2xl p-8 border border-secondary/20 flex flex-col md:flex-row items-center gap-6">
-                  <div className="text-5xl">🛣️</div>
-                  <div className="space-y-2 text-center md:text-left">
-                    <h3 className="text-xl font-bold text-foreground">{wifi.evolution.title}</h3>
-                    <p className="text-foreground/80">
-                      {wifi.evolution.analogy}
-                    </p>
+                {/* Section 5: Navigation */}
+                < section className="container mx-auto px-4 pb-14" >
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/1")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/3")}>Next Topic: IP Addressing →</Button>
                   </div>
-                </div>
-              </section>
+                </section >
+              </div >
+            );
+          }
 
-              {/* New: Mesh vs Extender */}
-              <section className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-10 text-center">{wifi.meshVsExtender?.title}</h2>
-                <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">{wifi.meshVsExtender?.intro}</p>
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Extender */}
-                  <Card className="p-8 border-2 border-red-100 bg-red-50/10 dark:bg-red-900/10">
-                    <div className="flex items-center gap-4 mb-6">
-                      <span className="text-4xl">{wifi.meshVsExtender?.extender.icon}</span>
-                      <h3 className="text-2xl font-bold text-red-600">{wifi.meshVsExtender?.extender.name}</h3>
+          // Topic 3: IP Addressing
+          if (topicId === "3") {
+            const { ipAddressing } = sections;
+            return (
+              <div id="topic-ip-addressing" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">IP Addressing</h2>
+                      <p className="text-lg text-muted-foreground">{ipAddressing.intro}</p>
                     </div>
-                    <div className="space-y-4">
-                      <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Pros</span> <span className="font-semibold">{wifi.meshVsExtender?.extender.pros}</span></div>
-                      <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Cons</span> <span className="font-semibold text-right max-w-[200px] text-xs md:text-sm">{wifi.meshVsExtender?.extender.cons}</span></div>
-                      <div className="mt-4 pt-4 border-t border-red-200">
-                        <span className="block text-xs uppercase font-bold text-red-400 mb-1">Verdict</span>
-                        <span className="text-lg font-bold">{wifi.meshVsExtender?.extender.verdict}</span>
-                      </div>
-                    </div>
-                  </Card>
-                  {/* Mesh */}
-                  <Card className="p-8 border-2 border-green-100 bg-green-50/10 dark:bg-green-900/10">
-                    <div className="flex items-center gap-4 mb-6">
-                      <span className="text-4xl">{wifi.meshVsExtender?.mesh.icon}</span>
-                      <h3 className="text-2xl font-bold text-green-600">{wifi.meshVsExtender?.mesh.name}</h3>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Pros</span> <span className="font-semibold text-right max-w-[200px] text-xs md:text-sm">{wifi.meshVsExtender?.mesh.pros}</span></div>
-                      <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Cons</span> <span className="font-semibold">{wifi.meshVsExtender?.mesh.cons}</span></div>
-                      <div className="mt-4 pt-4 border-t border-green-200">
-                        <span className="block text-xs uppercase font-bold text-green-400 mb-1">Verdict</span>
-                        <span className="text-lg font-bold">{wifi.meshVsExtender?.mesh.verdict}</span>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/4")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/6")}>Next Topic: Network Cables →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 6: Network Cables
-        if (topicId === "6") {
-          const { cables } = sections;
-          return (
-            <div id="topic-cables" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">Network Cables</h2>
-                    <p className="text-lg text-muted-foreground">{cables.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(cables.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Visuals - Connectors & Inside */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10">
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold">RJ45 Connector</h3>
-                    <p className="text-muted-foreground">The "Phone jack on steroids". This is the plug at the end of every Ethernet cable.</p>
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
-                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
-                        <img src={getImageUrl(cables.images.rj45.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(ipAddressing.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
                       </div>
                     </Card>
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-2xl font-bold">Twisted Pairs</h3>
-                      <div className="flex gap-4 pt-4">
-                        <div className="h-12 w-12 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 font-bold border border-orange-500/20">1</div>
-                        <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center text-green-600 font-bold border border-green-500/20">2</div>
-                        <div className="h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 font-bold border border-blue-500/20">3</div>
-                        <div className="h-12 w-12 rounded-full bg-amber-900/10 flex items-center justify-center text-amber-900 font-bold border border-amber-900/20">4</div>
-                      </div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider">4 Pairs = 8 Wires</p>
-                    </div>
-                    <Card className="p-0 overflow-hidden rotate-1 group-hover:rotate-0 transition-transform duration-700 shadow-2xl border-4 border-background">
-                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
-                        <img src={getImageUrl(cables.images.twisted.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                      </div>
-                    </Card>
-                    <div className="bg-orange-50 dark:bg-orange-950/10 p-4 rounded-xl border border-orange-100 mt-4">
-                      <h4 className="font-bold text-orange-700 dark:text-orange-400 mb-1">{cables.twistedPhysics?.title}</h4>
-                      <p className="text-sm">{cables.twistedPhysics?.text}</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                </section>
 
-              {/* Speed Race (Comparison) */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-3xl font-bold text-center mb-10">The Speed Race: Cable Categories</h3>
-                <div className="space-y-6">
-                  {cables.categories.map((cat, idx) => (
-                    <div key={idx} className="group relative bg-card hover:bg-muted/50 border border-border rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-md">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                        <div>
-                          <h4 className="text-2xl font-bold text-primary">{cat.name}</h4>
-                          <p className="text-sm text-foreground/70">{cat.desc}</p>
-                        </div>
-                        <div className="text-right">
-                          <span className="text-3xl font-bold">{cat.speed}</span>
-                          <p className="text-xs text-muted-foreground">{cat.freq} Bandwidth</p>
-                        </div>
-                      </div>
-                      {/* Progress Bar Visualization */}
-                      <div className="h-4 bg-secondary/20 rounded-full overflow-hidden relative">
-                        <div
-                          className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-                          style={{ width: idx === 0 ? '5%' : idx === 1 ? '25%' : '100%' }}
-                        ></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* New: Fiber Optics */}
-              <section className="container mx-auto px-4">
-                <div className="bg-slate-950 text-white rounded-[32px] p-8 md:p-12 overflow-hidden relative border border-slate-800">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950"></div>
-                  <div className="relative z-10 text-center max-w-2xl mx-auto space-y-6">
-                    <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">{cables.fiberOptics?.title}</h2>
-                    <p className="text-lg text-slate-300">{cables.fiberOptics?.text}</p>
-                    <div className="inline-block px-6 py-3 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-sm">
-                      <span className="font-mono text-cyan-300 text-sm md:text-base">{cables.fiberOptics?.comparison}</span>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/5")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/7")}>Next Topic: DNS Basics →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 7: DNS Basics
-        if (topicId === "7") {
-          const { dns } = sections as any;
-          return (
-            <div id="topic-dns" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">DNS: The Phonebook</h2>
-                    <p className="text-lg text-muted-foreground">{dns.intro}</p>
-                    <div className="flex items-center gap-2 text-sm font-mono bg-muted px-4 py-2 rounded-lg w-fit">
-                      <span className="text-primary">google.com</span>
-                      <span>→</span>
-                      <span className="text-foreground">142.250.190.46</span>
-                    </div>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(dns.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. The Analogy */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center">
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(dns.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold">Why do we need it?</h3>
-                    <p className="text-muted-foreground text-lg">Imagine if you had to memorize the phone number of every friend you wanted to call. Impossible, right?</p>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-3">
-                        <div className="bg-primary/10 p-2 rounded-full">📱</div>
-                        <div>
-                          <p className="font-semibold">Contact List</p>
-                          <p className="text-sm text-muted-foreground">You tap "Mom", phone dials "+1-555-0199".</p>
-                        </div>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="bg-primary/10 p-2 rounded-full">🌐</div>
-                        <div>
-                          <p className="font-semibold">DNS Server</p>
-                          <p className="text-sm text-muted-foreground">You type "youtube.com", browser goes to "208.65.153.238".</p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* 3. Visual Flow (Updated: Dynamic) */}
-              <section className="container mx-auto px-4 bg-secondary/5 rounded-3xl p-8 md:p-12">
-                <h3 className="text-2xl font-bold text-center mb-8">{dns.dnsCycles?.title}</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center relative z-10">
-                  {dns.dnsCycles?.steps.map((step: string, i: number) => (
-                    <div key={i} className="bg-background p-4 rounded-xl border border-border/50 shadow-sm relative group hover:border-primary transition-colors">
-                      <div className="text-2xl mb-2 opacity-50 group-hover:opacity-100 transition-opacity font-bold text-primary">{i + 1}</div>
-                      <p className="text-[10px] md:text-xs font-bold leading-tight">{step}</p>
-                      {i < 5 && <div className="hidden lg:block absolute top-1/2 -right-4 text-xl text-muted-foreground/30">→</div>}
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* 4. Interactive Lookup (Simulation) */}
-              <section className="container mx-auto px-4">
-                <Card className="max-w-xl mx-auto p-8 border-2 border-primary/20 hover:border-primary/50 transition-colors">
-                  <h3 className="text-xl font-bold mb-4 text-center">Try the Translator</h3>
-                  <div className="flex gap-2 mb-4">
-                    <div className="flex-1 bg-muted rounded-md px-4 py-2 text-sm font-mono flex items-center border border-border focus-within:border-primary transition-colors">
-                      <span className="text-muted-foreground select-none">https://</span>
-                      <input
-                        className="bg-transparent border-none outline-none text-foreground ml-1 w-full"
-                        value={dnsInput}
-                        onChange={(e) => setDnsInput(e.target.value)}
-                        placeholder="example.com"
-                        onKeyDown={(e) => e.key === "Enter" && handleDnsResolve()}
-                      />
-                    </div>
-                    <Button onClick={handleDnsResolve} disabled={isResolvingDns}>
-                      {isResolvingDns ? "Resolving..." : "Resolve"}
-                    </Button>
-                  </div>
-                  <div className="bg-black/90 p-4 rounded-lg font-mono text-xs md:text-sm text-green-400 min-h-[100px]">
-                    {isResolvingDns ? (
-                      <div className="space-y-1">
-                        <p className="animate-pulse">&gt; Looking up {dnsInput}...</p>
-                        <p className="animate-pulse delay-75">&gt; Contacting Root Servers...</p>
-                        <p className="animate-pulse delay-150">&gt; Querying TLD Nameservers...</p>
-                      </div>
-                    ) : dnsResult ? (
-                      <div className="space-y-1">
-                        <p>&gt; Lookup complete for {dnsInput}</p>
-                        <p>&gt; Success: Answer found in 42ms</p>
-                        <p>&gt; IP Found: <span className="text-white bg-green-900/50 px-2 rounded">{dnsResult}</span></p>
-                      </div>
-                    ) : (
-                      <p className="text-muted-foreground opacity-50">&gt; Waiting for input...</p>
-                    )}
-                    <p className="animate-pulse mt-2">_</p>
-                  </div>
-                </Card>
-              </section>
-
-              {/* 5. DNS Records */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6">Common DNS Records</h3>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {dns.records.map((rec: any, i: number) => (
-                    <Card key={i} className="p-6 border border-border/60 hover:bg-muted/50">
-                      <div className="text-primary font-bold text-lg mb-1">{rec.type}</div>
-                      <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">{rec.title}</p>
-                      <p className="text-sm leading-relaxed">{rec.desc}</p>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* New: DNS Privacy */}
-              <section className="container mx-auto px-4">
-                <div className="bg-blue-50 dark:bg-blue-900/10 p-8 rounded-[32px] border border-blue-100 flex flex-col md:flex-row items-center gap-8">
-                  <div className="text-6xl">🔒</div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-300 mb-2">{dns.dnsPrivacy?.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{dns.dnsPrivacy?.text}</p>
-                    <div className="flex gap-4 mt-5">
-                      <Badge variant="secondary" className="bg-blue-200/50 text-blue-800 dark:text-blue-100">Cloudflare: 1.1.1.1</Badge>
-                      <Badge variant="secondary" className="bg-blue-200/50 text-blue-800 dark:text-blue-100">Google: 8.8.8.8</Badge>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/6")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/8")}>Next Topic: Ping & Speed →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-
-        // Topic 8: Ping & Speed
-        if (topicId === "8") {
-          const { ping } = sections as any;
-          return (
-            <div id="topic-ping" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">Ping & Speed</h2>
-                    <p className="text-lg text-muted-foreground">{ping.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(ping.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Water Pipe Analogy */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold">Bandwidth vs Latency</h3>
-                    <p className="text-muted-foreground text-lg">Think of your internet connection like a water pipe.</p>
-                    <div className="space-y-4 pt-2">
-                      <div className="p-5 bg-blue-50/50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-                        <h4 className="font-bold text-blue-700 dark:text-blue-400 text-lg mb-1">{ping.bandwidthVsLatency?.bandwidth.title}</h4>
-                        <p className="text-sm leading-relaxed">{ping.bandwidthVsLatency?.bandwidth.desc}</p>
-                      </div>
-                      <div className="p-5 bg-orange-50/50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 shadow-sm hover:shadow-md transition-shadow">
-                        <h4 className="font-bold text-orange-700 dark:text-orange-400 text-lg mb-1">{ping.bandwidthVsLatency?.latency.title}</h4>
-                        <p className="text-sm leading-relaxed">{ping.bandwidthVsLatency?.latency.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(ping.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 3. Interactive Ping Simulation */}
-              <section className="container mx-auto px-4 text-center">
-                <h3 className="text-2xl font-bold mb-8">Visualizing Ping</h3>
-                <div className="relative h-32 bg-secondary/10 rounded-full border border-border overflow-hidden max-w-3xl mx-auto flex items-center justify-between px-8">
-                  <div className="text-4xl">💻</div>
-                  <div className="relative flex-1 h-1 bg-border/50 mx-4">
-                    <div className="absolute top-1/2 -translate-y-1/2 h-3 w-3 bg-primary rounded-full animate-ping-move-horizontal"></div>
-                  </div>
-                  <div className="text-4xl">server</div>
-                </div>
-                <p className="text-xs text-muted-foreground mt-4">Low Ping = Fast travel time. High Ping = Lag.</p>
-              </section>
-
-              {/* 4. Key Metrics Grid */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6 text-center">Understanding Speed Test Results</h3>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {ping.metrics.map((m: any, i: number) => (
-                    <Card key={i} className="p-6 text-center border border-border/60 hover:shadow-lg transition-shadow">
-                      <div className="text-3xl font-black text-primary mb-1">{m.name}</div>
-                      <p className="font-mono text-sm text-muted-foreground mb-4">Measured in {m.unit}</p>
-                      <div className="bg-secondary/20 p-2 rounded mb-4">
-                        <span className="text-xs font-bold uppercase text-foreground/70">Ideal: {m.ideal}</span>
-                      </div>
-                      <p className="text-sm">{m.desc}</p>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* 5. Packet Loss */}
-              <section className="container mx-auto px-4">
-                <div className="bg-red-500/5 rounded-3xl p-8 border border-red-500/10 grid md:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold text-red-600 mb-2">Whatever happened to Packet Loss?</h3>
-                    <p className="text-foreground/80 mb-4">If Bandwidth is width, and Latency is speed, then <strong>Packet Loss</strong> is like a leak in the pipe.</p>
-                    <p className="text-sm text-muted-foreground">When packets (data chunks) get lost on the way, you see:</p>
-                    <ul className="list-disc list-inside text-sm mt-2 space-y-1 opacity-80">
-                      <li>Teleporting players in games</li>
-                      <li>Robotic voice in calls</li>
-                      <li>Video buffering</li>
-                    </ul>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-xl border border-red-200/20 shadow-sm opacity-90 grayscale hover:grayscale-0 transition-all">
-                    <div className="relative w-full aspect-video bg-black overflow-hidden group">
-                      <img src={getImageUrl(ping.images.loss.fileName)} className="w-full h-full object-cover opacity-60" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white font-mono bg-red-600 px-3 py-1 text-xs">CONNECTION UNSTABLE</span>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/7")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/9")}>Next Topic: Hotspot & Tethering →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 9: Hotspot & Tethering
-        if (topicId === "9") {
-          const { hotspot } = sections as any;
-          return (
-            <div id="topic-hotspot" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">Hotspot & Tethering</h2>
-                    <p className="text-lg text-muted-foreground">{hotspot.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(hotspot.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Analogy */}
-              <section className="container mx-auto px-4">
-                <div className="bg-secondary/10 rounded-3xl p-8 md:p-12 text-center">
-                  <h3 className="text-2xl font-bold mb-6">The Data Bridge</h3>
-                  <div className="relative max-w-2xl mx-auto aspect-video rounded-xl overflow-hidden mb-6 border border-border/50 shadow-lg">
-                    <img src={getImageUrl(hotspot.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                      <p className="text-white font-bold text-xl px-4">Cell Tower ↔️ Phone ↔️ Laptop</p>
-                    </div>
-                  </div>
-                  <p className="text-lg text-muted-foreground">Your phone takes the 4G signal from the air and re-broadcasts it as a Wi-Fi signal for your devices.</p>
-                </div>
-              </section>
-
-              {/* 3. Comparison */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center">When to use it?</h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card className="p-6 border-l-4 border-l-blue-500">
-                    <h4 className="text-xl font-bold mb-4 flex items-center gap-2">🏠 Home Wi-Fi</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex justify-between"><span>Speed:</span> <span className="font-bold">{hotspot.comparison.wifi.speed}</span></li>
-                      <li className="flex justify-between"><span>Stability:</span> <span className="font-bold">{hotspot.comparison.wifi.stability}</span></li>
-                      <li className="flex justify-between"><span>Battery:</span> <span className="font-bold">{hotspot.comparison.wifi.battery}</span></li>
-                    </ul>
-                  </Card>
-                  <Card className="p-6 border-l-4 border-l-orange-500">
-                    <h4 className="text-xl font-bold mb-4 flex items-center gap-2">📱 Mobile Hotspot</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex justify-between"><span>Speed:</span> <span className="font-bold">{hotspot.comparison.hotspot.speed}</span></li>
-                      <li className="flex justify-between"><span>Stability:</span> <span className="font-bold">{hotspot.comparison.hotspot.stability}</span></li>
-                      <li className="flex justify-between"><span>Battery:</span> <span className="font-bold">{hotspot.comparison.hotspot.battery}</span></li>
-                    </ul>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 4. Setup Steps */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8">How to Set it Up</h3>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {hotspot.steps.map((step: any, i: number) => (
-                    <div key={i} className="bg-secondary/10 p-6 rounded-2xl border border-secondary/20 relative">
-                      <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</div>
-                      <h4 className="font-bold text-lg mb-2 mt-2">{step.title}</h4>
-                      <p className="text-sm text-foreground/80">{step.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* 5. Simulation Mockup */}
-              <section className="container mx-auto px-4">
-                <Card className="max-w-md mx-auto p-8 bg-black/90 text-white border-4 border-gray-800 rounded-[30px] shadow-2xl">
-                  <div className="flex items-center justify-between mb-8 border-b border-gray-700 pb-4">
-                    <span className="font-bold text-lg">Settings</span>
-                    <div className="w-8 h-8 bg-gray-700 rounded-full"></div>
-                  </div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span>{hotspot.simulation.toggleLabel}</span>
-                    <div
-                      className={`w-14 h-8 rounded-full relative cursor-pointer transition-colors duration-300 ${isHotspotOn ? 'bg-green-500' : 'bg-gray-600'}`}
-                      onClick={() => setIsHotspotOn(!isHotspotOn)}
-                    >
-                      <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${isHotspotOn ? 'translate-x-7' : 'translate-x-1'}`}></div>
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-400 mb-6">{hotspot.simulation.desc}</p>
-                  {isHotspotOn ? (
-                    <div className="bg-gray-800 rounded-lg p-3 text-xs text-green-400 font-mono animate-pulse">
-                      {hotspot.simulation.connectedMsg}
-                    </div>
-                  ) : (
-                    <div className="bg-gray-800 rounded-lg p-3 text-xs text-gray-500 font-mono">
-                      Hotspot Disabled
-                    </div>
-                  )}
-                </Card>
-              </section>
-
-              {/* 6. Warnings */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center">
-                  <Card className="p-8 border-2 border-yellow-500/20 bg-yellow-500/5">
-                    <h3 className="text-xl font-bold text-yellow-600 mb-4">⚠️ Important Warnings</h3>
-                    <ul className="space-y-3">
-                      {hotspot.warnings.map((w: string, i: number) => (
-                        <li key={i} className="flex items-center gap-3">
-                          <span className="text-yellow-600">⚠️</span>
-                          <span>{w}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
-                      <img src={getImageUrl(hotspot.images.security.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* New: Evil Twin Security Warning */}
-              <section className="container mx-auto px-4">
-                <div className="bg-red-950 text-white p-8 md:p-12 rounded-[40px] border-4 border-red-500/30 overflow-hidden relative">
-                  <div className="absolute top-0 right-0 p-4 font-black text-red-500/20 text-8xl select-none uppercase -rotate-12">HACKER</div>
-                  <div className="relative z-10 max-w-2xl">
-                    <h3 className="text-3xl font-bold text-red-400 mb-4">{hotspot.evilTwin?.title}</h3>
-                    <p className="text-lg text-red-100/90 mb-6">{hotspot.evilTwin?.scenario}</p>
-                    <div className="flex bg-red-900/50 p-4 rounded-xl border border-red-500/30 items-center gap-4">
-                      <span className="text-4xl">🛑</span>
-                      <p className="font-bold">{hotspot.evilTwin?.prevention}</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/8")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/10")}>Next Topic: Troubleshooting →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 10: Mobile Data Networks
-        if (topicId === "10") {
-          const { mobileData } = sections as any;
-          return (
-            <div id="topic-mobile-data" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">Mobile Data Networks</h2>
-                    <p className="text-lg text-muted-foreground">{mobileData.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(mobileData.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. 4G vs 5G Comparison */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center">The Speed Evolution</h3>
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  {/* 4G */}
-                  <Card className="p-8 border-2 border-slate-200 bg-slate-50/50 dark:bg-slate-900/50">
-                    <div className="text-6xl mb-4">{mobileData.generations.g4.icon}</div>
-                    <h4 className="text-2xl font-bold mb-2">{mobileData.generations.g4.name}</h4>
-                    <div className="space-y-2 text-sm">
-                      <p className="flex justify-between"><span>Speed:</span> <span className="font-bold">{mobileData.generations.g4.speed}</span></p>
-                      <p className="flex justify-between"><span>Latency:</span> <span className="font-bold">{mobileData.generations.g4.latency}</span></p>
-                      <p className="pt-2 text-muted-foreground">Best for: {mobileData.generations.g4.use}</p>
-                    </div>
-                  </Card>
-
-                  {/* 5G */}
-                  <Card className="p-8 border-2 border-primary bg-primary/5 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold rounded-bl-xl">NEW STANDARD</div>
-                    <div className="text-6xl mb-4 animate-bounce">{mobileData.generations.g5.icon}</div>
-                    <h4 className="text-2xl font-bold mb-2 text-primary">{mobileData.generations.g5.name}</h4>
-                    <div className="space-y-2 text-sm">
-                      <p className="flex justify-between"><span>Speed:</span> <span className="font-bold">{mobileData.generations.g5.speed}</span></p>
-                      <p className="flex justify-between"><span>Latency:</span> <span className="font-bold">{mobileData.generations.g5.latency}</span></p>
-                      <p className="pt-2 text-muted-foreground">Best for: {mobileData.generations.g5.use}</p>
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 3. Data Bucket Analogy */}
-              <section className="container mx-auto px-4">
-                <div className="bg-secondary/10 rounded-[32px] p-8 md:p-12">
-                  <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6">
-                      <h3 className="text-2xl font-bold">Data Limits & The "Bucket"</h3>
-                      <p className="text-lg">Unlike Wi-Fi, Mobile Data is often limited. Apps are "vampires" that suck data from your bucket.</p>
-
+                {/* 2. Public vs Private */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-secondary/10 rounded-[32px] p-8 md:p-12">
+                    <h3 className="text-2xl font-bold text-center mb-8">{ipAddressing.publicVsPrivate.title}</h3>
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
                       <div className="space-y-4">
-                        {mobileData.dataConsumption.map((item: any, i: number) => (
-                          <div key={i}>
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="font-bold">{item.activity}</span>
-                              <span className="text-muted-foreground">{item.usage}</span>
-                            </div>
-                            <div className="h-3 bg-white rounded-full overflow-hidden border border-black/10">
-                              <div className={`h-full ${item.color}`} style={{ width: item.width }}></div>
+                        <p className="text-lg">{ipAddressing.publicVsPrivate.description}</p>
+                        <div className="flex flex-col gap-3">
+                          <div className="bg-background p-4 rounded-xl border border-border">
+                            <span className="font-bold text-blue-500">Private IP</span>
+                            <p className="text-sm">192.168.1.5 (Only works at home)</p>
+                          </div>
+                          <div className="bg-background p-4 rounded-xl border border-border">
+                            <span className="font-bold text-green-500">Public IP</span>
+                            <p className="text-sm">173.24.11.9 (Address on the Internet)</p>
+                          </div>
+                        </div>
+                      </div>
+                      <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-lg">
+                        <div className="relative aspect-video">
+                          <img
+                            src={getImageUrl(ipAddressing.images.analogy.fileName)}
+                            className="w-full h-full object-cover"
+                            alt="Public vs Private IP Analogy"
+                            onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
+                          />
+                        </div>
+                      </Card>
+                    </div>
+                  </div>
+                </section>
+
+                {/* New: NAT Explanation */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-orange-50 dark:bg-orange-950/10 rounded-[32px] p-8 md:p-12 border border-orange-200/50">
+                    <h3 className="text-2xl font-bold text-center mb-6 text-orange-700 dark:text-orange-400">{ipAddressing.natExplained?.title}</h3>
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
+                      <div className="space-y-4">
+                        <p className="text-lg font-medium">{ipAddressing.natExplained?.publicIp}</p>
+                        <div className="h-px bg-orange-200 dark:bg-orange-800 my-4"></div>
+                        <p className="text-lg font-medium text-foreground/80">{ipAddressing.natExplained?.privateIp}</p>
+                      </div>
+                      <div className="bg-background p-6 rounded-2xl border border-orange-100 dark:border-orange-900 shadow-sm">
+                        <h4 className="font-bold mb-2">Analogy: {ipAddressing.natExplained?.analogyTitle}</h4>
+                        <p className="text-sm leading-relaxed">{ipAddressing.natExplained?.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* 3. IPv4 vs IPv6 */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {ipAddressing.types.map((type, i) => (
+                      <Card key={i} className="p-8 border border-border/70">
+                        <div className="text-4xl mb-4">{type.icon}</div>
+                        <h3 className="text-xl font-bold mb-1">{type.name}</h3>
+                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">{type.full}</p>
+                        <p className="text-foreground/80">{type.description}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* DHCP (Static vs Dynamic) Section - New Subtopic */}
+                <section className="container mx-auto px-4">
+                  <div className="space-y-12">
+                    <div className="text-center max-w-3xl mx-auto space-y-4">
+                      <Badge variant="outline" className="border-primary text-primary mb-2">IP Configuration</Badge>
+                      <h2 className="text-3xl font-semibold text-foreground">Static vs. Dynamic IP (DHCP)</h2>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {sections.dhcp.intro}
+                      </p>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-8">
+                      {/* Static IP Card */}
+                      <Card className="p-6 border border-blue-500/20 bg-blue-50/5 dark:bg-blue-900/10">
+                        <div className="flex items-start gap-4 h-full">
+                          <div className="text-4xl bg-blue-100 dark:bg-blue-900/30 p-3 rounded-2xl">{sections.dhcp.comparison.static.icon}</div>
+                          <div className="space-y-3">
+                            <h3 className="text-xl font-semibold text-foreground">{sections.dhcp.comparison.static.name}</h3>
+                            <p className="text-sm text-foreground/80">{sections.dhcp.comparison.static.desc}</p>
+                            <div className="pt-2">
+                              <span className="text-xs font-semibold uppercase text-blue-600 dark:text-blue-400">Best For:</span>
+                              <p className="text-sm text-foreground/70">{sections.dhcp.comparison.static.bestFor}</p>
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      </Card>
 
-                      <Card className="bg-background border-l-4 border-l-yellow-500 p-4">
-                        <p className="text-sm font-bold text-yellow-600 mb-1">⚠️ Background Data Warning</p>
-                        <p className="text-xs text-muted-foreground">Apps can drain your bucket even when your phone is in your pocket!</p>
+                      {/* Dynamic IP Card */}
+                      <Card className="p-6 border border-green-500/20 bg-green-50/5 dark:bg-green-900/10">
+                        <div className="flex items-start gap-4 h-full">
+                          <div className="text-4xl bg-green-100 dark:bg-green-900/30 p-3 rounded-2xl">{sections.dhcp.comparison.dynamic.icon}</div>
+                          <div className="space-y-3">
+                            <h3 className="text-xl font-semibold text-foreground">{sections.dhcp.comparison.dynamic.name}</h3>
+                            <p className="text-sm text-foreground/80">{sections.dhcp.comparison.dynamic.desc}</p>
+                            <div className="pt-2">
+                              <span className="text-xs font-semibold uppercase text-green-600 dark:text-green-400">Best For:</span>
+                              <p className="text-sm text-foreground/70">{sections.dhcp.comparison.dynamic.bestFor}</p>
+                            </div>
+                          </div>
+                        </div>
                       </Card>
                     </div>
 
-                    <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl bg-blue-500/20">
-                      <div className="relative aspect-[4/5] md:aspect-square flex items-center justify-center">
-                        <div className="text-[10rem]">🪣</div>
-                        <div className="absolute bottom-10 text-center">
-                          <p className="font-bold text-blue-900 dark:text-blue-100 text-xl">Your Monthly Data</p>
+                    <div className="grid lg:grid-cols-2 gap-10 items-center">
+                      <div className="space-y-6">
+                        <h3 className="text-2xl font-semibold text-foreground">{sections.dhcp.process.title}</h3>
+                        <div className="grid gap-4">
+                          {sections.dhcp.process.steps.map((step, index) => (
+                            <div key={index} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors">
+                              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
+                                {step.step}
+                              </div>
+                              <div>
+                                <h4 className="font-semibold text-foreground mb-1">{step.name}</h4>
+                                <p className="text-sm text-muted-foreground">{step.desc}</p>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                    </Card>
-                  </div>
-                </div>
-              </section>
-
-
-
-              {/* 3.1 History: 1G to 5G */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center">Evolution from 1G to 5G</h3>
-                <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
-                  {mobileData.history.map((h: any, i: number) => (
-                    <Card key={i} className={`p-6 border-l-4 border-l-primary/50 hover:border-l-primary transition-all ${i < 3 ? 'md:col-span-2' : 'md:col-span-3'}`}>
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="text-4xl">{h.icon}</span>
-                        <Badge variant="secondary" className="font-mono text-xs">{h.era}</Badge>
-                      </div>
-                      <h4 className="text-xl font-bold mb-1">{h.name}</h4>
-                      <p className="text-xs font-bold text-primary mb-3 uppercase tracking-wide">{h.feature}</p>
-
-                      <p className="text-sm text-muted-foreground mb-4 h-14 overflow-hidden">{h.desc}</p>
-
-                      <div className="pt-4 border-t border-border/50 flex items-center justify-between text-xs font-mono">
-                        <span className="text-muted-foreground">Speed:</span>
-                        <span className="font-bold">{h.speed}</span>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* 4. Settings Simulation */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center">Settings Simulator</h3>
-                <Card className="max-w-md mx-auto p-4 bg-black border-4 border-gray-800 rounded-[30px] shadow-2xl overflow-hidden">
-                  <div className="bg-gray-900 text-white p-4 mb-4 rounded-xl flex items-center gap-4">
-                    <span>⬅️</span>
-                    <span className="font-bold">Network & Internet</span>
-                  </div>
-
-                  <div className="space-y-4 font-sans">
-                    {/* Mobile Data Toggle */}
-                    <div className="bg-gray-800 p-4 rounded-xl flex items-center justify-between">
-                      <div>
-                        <p className="text-white font-bold">Mobile Data</p>
-                        <p className="text-gray-400 text-xs">{mobileData.simSettings.data}</p>
-                      </div>
-                      <Switch
-                        checked={isMobileDataOn}
-                        onCheckedChange={setIsMobileDataOn}
-                        className="data-[state=checked]:bg-green-500"
-                      />
-                    </div>
-
-                    {/* Roaming Toggle */}
-                    <div className={`bg-gray-800 p-4 rounded-xl flex items-center justify-between border ${isRoamingOn ? 'border-red-500' : 'border-red-500/30'}`}>
-                      <div>
-                        <p className="text-white font-bold">Roaming</p>
-                        <p className="text-gray-400 text-xs">{mobileData.simSettings.roaming}</p>
-                      </div>
-                      <Switch
-                        checked={isRoamingOn}
-                        onCheckedChange={setIsRoamingOn}
-                        className="data-[state=checked]:bg-green-500"
-                      />
-                    </div>
-
-                    {/* Network Type */}
-                    <div className="bg-gray-800 p-4 rounded-xl">
-                      <p className="text-white font-bold mb-1">Preferred Network Type</p>
-                      <div className="text-green-400 text-sm font-mono flex items-center justify-between bg-black/50 p-2 rounded">
-                        <span>5G (Recommended)</span>
-                        <span>▼</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 p-3 bg-yellow-900/50 rounded-lg border border-yellow-500/50">
-                    <p className="text-yellow-400 text-xs text-center font-bold">⚠️ {mobileData.simSettings.warning}</p>
-                  </div>
-                </Card>
-              </section>
-
-              {/* 5. SIM Types */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6 text-center">SIM Card Evolution</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {mobileData.simTypes.map((sim: any, i: number) => (
-                    <Card key={i} className="p-4 text-center hover:border-primary transition-colors">
-                      <div className="h-16 flex items-center justify-center mb-2">
-                        <div className={`bg-yellow-400 rounded border-2 border-yellow-600 shadow-sm ${i === 0 ? 'w-16 h-10' : i === 1 ? 'w-10 h-8' : i === 2 ? 'w-6 h-5' : 'w-0 h-0 hidden'}`}></div>
-                        {i === 3 && <span className="text-4xl">📲</span>}
-                      </div>
-                      <h4 className="font-bold">{sim.name}</h4>
-                      <p className="text-xs text-muted-foreground">{sim.desc}</p>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/9")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/11")}>Next Topic: Common Problems →</Button>
-                </div>
-              </section>
-            </div >
-          );
-        }
-
-        // Topic 11: Common Network Problems (Formerly Troubleshooting)
-        if (topicId === "11") {
-          const { troubleshooting } = sections as any;
-          return (
-            <div id="topic-troubleshooting" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">Common Network Problems</h2>
-                    <p className="text-lg text-muted-foreground">{troubleshooting.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(troubleshooting.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. Chain of Connection */}
-              <section className="container mx-auto px-4 text-center">
-                <h3 className="text-2xl font-bold mb-8">The Chain of Connection</h3>
-                <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-bold md:gap-8">
-                  {troubleshooting.chain.map((link: string, i: number) => (
-                    <div key={i} className="flex items-center gap-4">
-                      <div className="px-6 py-3 bg-secondary rounded-full">{link}</div>
-                      {i < troubleshooting.chain.length - 1 && <span className="text-muted-foreground text-xl">→</span>}
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* 2.1 Decoding Icons (New) */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center text-primary">Decoding Network Icons</h3>
-                <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">Your computer talks in symbols. Here is your translator for those annoying little icons.</p>
-
-                <div className="grid md:grid-cols-3 gap-6 mb-16">
-                  {troubleshooting.errorIcons?.map((icon: any, i: number) => (
-                    <Card key={i} className="p-6 text-center border-t-4 border-t-primary shadow-lg hover:-translate-y-1 transition-transform">
-                      <div className="text-6xl mb-4">{icon.icon}</div>
-                      <h4 className={`text-xl font-bold mb-2 ${icon.color}`}>{icon.name}</h4>
-                      <p className="text-sm font-bold mb-4 bg-secondary/20 py-1 rounded">FIX: {icon.fix}</p>
-                      <p className="text-sm text-muted-foreground">{icon.meaning}</p>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* Scenarios */}
-                <div className="bg-secondary/10 rounded-2xl p-8 border border-secondary/20">
-                  <h4 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span className="text-2xl">🕵️‍♂️</span> Troubleshooting Scenarios
-                  </h4>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {troubleshooting.scenarios?.map((s: any, i: number) => (
-                      <div key={i} className="bg-background p-4 rounded-xl border border-border">
-                        <p className="font-bold text-red-500 mb-1">Problem: "{s.title}"</p>
-                        <div className="text-sm space-y-1">
-                          <p><span className="font-semibold">Cause:</span> {s.cause}</p>
-                          <p><span className="font-semibold text-green-600">Fix:</span> {s.fix}</p>
+                      <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                        <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                          <img
+                            src={getImageUrl(sections.dhcp.images.handshake.fileName)}
+                            alt={sections.dhcp.images.handshake.alt}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).style.display = "none";
+                              const parent = (e.target as HTMLImageElement).parentElement;
+                              if (parent) {
+                                parent.innerHTML =
+                                  `<div class="p-8 text-center text-sm text-muted-foreground">
+                                   Add ${sections.dhcp.images.handshake.fileName}. ${sections.dhcp.images.handshake.brief}
+                                 </div>`;
+                              }
+                            }}
+                          />
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-
-              {/* 3. Flowchart */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8 text-center">The Fix-It Flowchart</h3>
-                <div className="space-y-6 max-w-3xl mx-auto">
-                  {troubleshooting.steps.map((step: any, i: number) => (
-                    <div key={i} className="flex gap-6 items-start group">
-                      <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-110 transition-transform">{step.step}</div>
-                        {i < troubleshooting.steps.length - 1 && <div className="w-1 h-16 bg-border my-2"></div>}
-                      </div>
-                      <Card className="flex-1 p-6 hover:border-primary/50 transition-colors">
-                        <h4 className="text-xl font-bold mb-1">{step.title}</h4>
-                        <p className="text-muted-foreground">{step.desc}</p>
                       </Card>
                     </div>
-                  ))}
-                </div>
-              </section>
 
-              {/* 4. Restart Ritual */}
-              <section className="container mx-auto px-4">
-                <div className="bg-secondary/10 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-4">When in doubt...</h3>
-                    <p className="text-lg">Unplug the router. Count to 10. Plug it back in.</p>
-                    <p className="text-sm text-muted-foreground mt-2">It sounds like a joke, but it clears the router's short-term memory (RAM) and fixes 99% of glitches.</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-xl border border-border/50 w-full md:w-64">
-                    <div className="aspect-square bg-muted">
-                      <img src={getImageUrl(troubleshooting.images.restart.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 5. Command Tools: Interactive Terminal */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-8">Hands-on: The Terminal Simulator</h3>
-                <Card className="max-w-3xl mx-auto bg-black border-4 border-gray-700 rounded-xl shadow-2xl overflow-hidden">
-                  {/* Terminal Header */}
-                  <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
-                    <div className="flex gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    </div>
-                    <span className="text-xs text-gray-400 font-mono italic">Command Prompt - Student@Network</span>
-                  </div>
-
-                  {/* Terminal Content */}
-                  <div className="p-6 h-64 overflow-y-auto font-mono text-sm text-green-400 space-y-1 scrollbar-hide">
-                    {terminalLines.map((line, i) => (
-                      <p key={i}>{line}</p>
-                    ))}
-                    <form onSubmit={handleTerminalSubmit} className="flex items-center gap-2">
-                      <span className="text-blue-400">C:\Users\Student&gt;</span>
-                      <input
-                        className="bg-transparent border-none outline-none text-white flex-1"
-                        autoFocus
-                        value={terminalInput}
-                        onChange={(e) => setTerminalInput(e.target.value)}
-                      />
-                    </form>
-                  </div>
-                </Card>
-                <div className="mt-6 flex flex-wrap justify-center gap-4">
-                  <Badge variant="outline" className="cursor-help" title="Try typing: ping google.com">💡 Tip: Try "ping google.com"</Badge>
-                  <Badge variant="outline" className="cursor-help" title="Try typing: ipconfig">💡 Tip: Try "ipconfig"</Badge>
-                  <Badge variant="outline" className="cursor-help" title="Try typing: cls">💡 Tip: Try "cls" to clear</Badge>
-                </div>
-              </section>
-
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/10")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/12")}>Next Topic: How Internet Works →</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
-
-        // Topic 12: How the Internet Works
-        if (topicId === "12") {
-          const { internetWorks } = sections;
-          return (
-            <div id="topic-internet-works" className="space-y-16">
-              {/* 1. Hero */}
-              <section className="container mx-auto px-4 pt-16">
-                <div className="grid lg:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
-                    <h2 className="text-4xl font-bold">How the Internet Works</h2>
-                    <p className="text-lg text-muted-foreground">{internetWorks.intro}</p>
-                  </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                    <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                      <img src={getImageUrl(internetWorks.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
-                    </div>
-                  </Card>
-                </div>
-              </section>
-
-              {/* 2. The Cycle (Steps) */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-10 text-center">{internetWorks.cycle.title}</h3>
-                <div className="grid md:grid-cols-4 gap-6 relative">
-                  {/* Connector Line */}
-                  <div className="hidden md:block absolute top-[2.5rem] left-[10%] w-[80%] h-1 bg-border -z-10"></div>
-
-                  {internetWorks.cycle.steps.map((step, i) => (
-                    <div key={i} className="flex flex-col items-center text-center group">
-                      <div className="w-20 h-20 rounded-full bg-background border-4 border-primary flex items-center justify-center text-3xl mb-4 z-10 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        {step.icon}
+                    <Card className="p-8 rounded-[24px] bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
+                      <div className="flex flex-col md:flex-row gap-6 items-center">
+                        <div className="text-5xl">🅿️</div>
+                        <div className="space-y-2 text-center md:text-left">
+                          <h3 className="text-xl font-bold text-foreground">{sections.dhcp.analogy.title}</h3>
+                          <p className="text-foreground/80 leading-relaxed text-lg">
+                            {sections.dhcp.analogy.text}
+                          </p>
+                        </div>
                       </div>
-                      <h4 className="text-lg font-bold mb-2">{step.name}</h4>
-                      <p className="text-sm text-muted-foreground">{step.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
+                    </Card>
 
-              {/* 3. The Analogy (Restaurant) */}
-              <section className="container mx-auto px-4">
-                <div className="bg-secondary/10 rounded-[40px] p-8 md:p-14">
-                  <div className="text-center max-w-3xl mx-auto mb-12">
-                    <h3 className="text-3xl font-bold mb-4">The Restaurant Analogy</h3>
-                    <p className="text-lg text-muted-foreground">Understanding Client-Server architecture is easy if you've ever eaten dinner out.</p>
                   </div>
+                </section>
 
-                  <div className="grid md:grid-cols-2 gap-10 items-center">
-                    <Card className="p-0 overflow-hidden rounded-3xl border-none shadow-xl rotate-2 hover:rotate-0 transition-transform duration-500">
+                {/* 4. Why it Matters */}
+                <section className="container mx-auto px-4">
+                  <div className="text-center max-w-3xl mx-auto space-y-4">
+                    <h3 className="text-2xl font-bold">{ipAddressing.whyMatters.title}</h3>
+                    <p className="text-lg text-foreground/80 leading-relaxed">
+                      {ipAddressing.whyMatters.text}
+                    </p>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/2")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/4")}>Next Topic: MAC Address →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 4: MAC Address
+          if (topicId === "4") {
+            const { macAddress } = sections;
+            return (
+              <div id="topic-mac-address" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">MAC Address</h2>
+                      <p className="text-lg text-muted-foreground">{macAddress.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
                       <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
-                        <img src={getImageUrl(internetWorks.images.restaurant.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        <img src={getImageUrl(macAddress.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. Analogy */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(macAddress.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
                       </div>
                     </Card>
                     <div className="space-y-6">
-                      <div className="flex bg-background p-4 rounded-xl items-start gap-4 shadow-sm border border-border/50">
-                        <div className="text-3xl">😋</div>
-                        <div>
-                          <h4 className="font-bold text-primary">The Client (You)</h4>
-                          <p className="text-sm">You want food (a webpage). You check the menu and make a request.</p>
+                      <h3 className="text-2xl font-bold">The VIN Number Analogy</h3>
+                      <p className="text-muted-foreground text-lg">Think of a car:</p>
+                      <div className="space-y-4">
+                        <div className="bg-primary/5 p-4 rounded-xl border border-primary/10">
+                          <p className="font-bold text-primary">License Plate (IP Address)</p>
+                          <p className="text-sm">Changes if you move to a new state. Used to locate the car.</p>
                         </div>
-                      </div>
-                      <div className="flex bg-background p-4 rounded-xl items-start gap-4 shadow-sm border border-border/50">
-                        <div className="text-3xl">👨‍🍳</div>
-                        <div>
-                          <h4 className="font-bold text-primary">The Server (Kitchen)</h4>
-                          <p className="text-sm">They have the ingredients (files/database). They cook the meal and plate it.</p>
-                        </div>
-                      </div>
-                      <div className="flex bg-background p-4 rounded-xl items-start gap-4 shadow-sm border border-border/50">
-                        <div className="text-3xl">🤵</div>
-                        <div>
-                          <h4 className="font-bold text-primary">The Network (Waiter)</h4>
-                          <p className="text-sm">Runs back and forth. Takes your request to the kitchen and brings the food back.</p>
+                        <div className="bg-secondary/10 p-4 rounded-xl border border-secondary/20">
+                          <p className="font-bold text-foreground">VIN Number (MAC Address)</p>
+                          <p className="text-sm">Stamped on the engine at the factory. NEVER changes, no matter where you go.</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
 
-              {/* 4. Physical World (Cables) */}
-              <section className="container mx-auto px-4">
-                <div className="grid md:grid-cols-2 gap-10 items-center">
-                  <div className="space-y-5">
-                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">{internetWorks.underseaCables?.title}</h3>
-                    <p className="text-lg text-muted-foreground">{internetWorks.underseaCables?.fact}</p>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 bg-secondary/30 p-3 rounded-lg">
-                        <span className="text-xl">🗺️</span>
-                        <p className="text-sm font-medium">{internetWorks.underseaCables?.map}</p>
+                {/* 3. Anatomy */}
+                <section className="container mx-auto px-4 text-center">
+                  <h3 className="text-2xl font-bold mb-8">{macAddress.anatomy.title}</h3>
+                  <div className="inline-flex flex-col md:flex-row gap-2 md:gap-0 font-mono text-3xl md:text-5xl font-bold bg-black text-green-400 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-[url('https://media.istockphoto.com/id/1136592956/vector/matrix-background-streaming-binary-code-poster-matrix.jpg?s=612x612&w=0&k=20&c=XShUdbvOQp0B0j8b5k0g4f0q8y3o7x0p7z8n8m9l0k=')] opacity-10 mix-blend-overlay"></div>
+                    <div className="relative z-10 flex flex-col items-center p-4 border-2 border-transparent hover:border-green-500/50 rounded-xl transition-colors">
+                      <span>00:1A:2B</span>
+                      <span className="text-sm font-sans font-normal text-muted-foreground mt-2">{macAddress.anatomy.oui}</span>
+                    </div>
+                    <span className="hidden md:block py-4 text-white/20">:</span>
+                    <div className="relative z-10 flex flex-col items-center p-4 border-2 border-transparent hover:border-green-500/50 rounded-xl transition-colors">
+                      <span>3C:4D:5E</span>
+                      <span className="text-sm font-sans font-normal text-muted-foreground mt-2">{macAddress.anatomy.uaa}</span>
+                    </div>
+                  </div>
+                </section>
+
+                {/* 4. Comparison Table */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6 text-center">{macAddress.comparison.title}</h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full max-w-4xl mx-auto border-collapse">
+                      <thead>
+                        <tr className="bg-muted">
+                          <th className="p-4 text-left rounded-tl-xl">Feature</th>
+                          <th className="p-4 text-left">IP Address</th>
+                          <th className="p-4 text-left rounded-tr-xl">MAC Address</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {macAddress.comparison.items.map((row, i) => (
+                          <tr key={i} className="border-b border-border/50 hover:bg-muted/30">
+                            <td className="p-4 font-semibold">{row.label}</td>
+                            <td className="p-4 text-muted-foreground">{row.ip}</td>
+                            <td className="p-4 text-muted-foreground">{row.mac}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                {/* New: MAC Spoofing */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-red-50 dark:bg-red-950/10 p-8 rounded-3xl border border-red-100">
+                    <h3 className="text-2xl font-bold text-red-600 mb-4">{macAddress.macSpoofing?.title}</h3>
+                    <p className="text-lg mb-4">{macAddress.macSpoofing?.text}</p>
+                    <div className="flex items-start gap-4 bg-background p-4 rounded-xl">
+                      <span className="text-3xl">📱</span>
+                      <p className="text-sm text-foreground/80"><strong>Privacy Feature:</strong> {macAddress.macSpoofing?.privacy}</p>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/3")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/5")}>Next Topic: Wi-Fi Basics →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 5: Wi-Fi Basics
+          if (topicId === "5") {
+            const { wifi } = sections;
+            return (
+              <div id="topic-wifi" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">Wi-Fi Basics</h2>
+                      <p className="text-lg text-muted-foreground">{wifi.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(wifi.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
                       </div>
-                      <div className="flex items-center gap-3 bg-secondary/30 p-3 rounded-lg">
-                        <span className="text-xl">🦈</span>
-                        <p className="text-sm font-medium">{internetWorks.underseaCables?.shark}</p>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. Analogy */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg order-2 md:order-1">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(wifi.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                    <div className="space-y-4 order-1 md:order-2">
+                      <h3 className="text-2xl font-bold">The Radio Station Analogy</h3>
+                      <p className="text-muted-foreground text-lg">Wi-Fi is just a two-way radio.</p>
+                      <div className="bg-secondary/10 p-6 rounded-2xl border border-secondary/20">
+                        <p className="italic mb-2">"Your router is a radio station antenna. Your laptop is the radio. If you get too far away, the music (internet) gets static and stops."</p>
                       </div>
                     </div>
                   </div>
-                  <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
-                    <div className="relative w-full aspect-video bg-muted overflow-hidden">
-                      <img src={getImageUrl(internetWorks.images.cables.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                </section>
+
+                {/* 3. Frequency Bands */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6 text-center">Frequency Bands: 2.4 vs 5 GHz</h3>
+                  <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    {/* 2.4 GHz */}
+                    <Card className="p-8 border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
+                      <h4 className="text-2xl font-bold text-orange-600 mb-2">{wifi.bands.band24.name}</h4>
+                      <p className="font-bold text-foreground/80 mb-4">{wifi.bands.band24.title}</p>
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>Range (Distance)</span>
+                            <span className="font-bold">Long</span>
+                          </div>
+                          <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-orange-500 w-[90%]"></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>Speed</span>
+                            <span className="font-bold">Slower</span>
+                          </div>
+                          <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-orange-500 w-[40%]"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="mt-4 text-sm text-muted-foreground">{wifi.bands.band24.desc}</p>
+                    </Card>
+
+                    {/* 5 GHz */}
+                    <Card className="p-8 border-2 border-blue-200 bg-blue-50/50 dark:bg-blue-950/10">
+                      <h4 className="text-2xl font-bold text-blue-600 mb-2">{wifi.bands.band5.name}</h4>
+                      <p className="font-bold text-foreground/80 mb-4">{wifi.bands.band5.title}</p>
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>Range (Distance)</span>
+                            <span className="font-bold">Short</span>
+                          </div>
+                          <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-500 w-[40%]"></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>Speed</span>
+                            <span className="font-bold">Fast!</span>
+                          </div>
+                          <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-500 w-[95%]"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="mt-4 text-sm text-muted-foreground">{wifi.bands.band5.desc}</p>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 4. Killers */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6 text-center">Wi-Fi Killers</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {wifi.killers.map((k, i) => (
+                      <Card key={i} className="p-6 text-center border border-red-200/50 hover:border-red-500/50 transition-colors">
+                        <div className="text-4xl mb-3 grayscale group-hover:grayscale-0">{k.icon}</div>
+                        <h4 className="font-bold text-foreground mb-1">{k.name}</h4>
+                        <p className="text-sm text-muted-foreground">{k.desc}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 5. Wi-Fi Generations (New Subtopic) */}
+                <section className="container mx-auto px-4">
+                  <div className="text-center max-w-3xl mx-auto mb-10 space-y-4">
+                    <Badge variant="outline" className="border-primary text-primary mb-2">Wireless Standards</Badge>
+                    <h2 className="text-3xl font-semibold text-foreground">Wi-Fi Generations (4, 5, 6)</h2>
+                    <p className="text-foreground/80 leading-relaxed">
+                      Just like phones have 3G, 4G, and 5G, Wi-Fi has generations. Each new version brings faster speeds and better connections.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                    {/* Connector Line (Hidden on Mobile) */}
+                    <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-muted via-primary/50 to-primary -z-10 transform -translate-y-1/2"></div>
+
+                    {wifi.generations.map((gen, index) => (
+                      <Card key={index} className={`p-6 border-2 flex flex-col items-center text-center relative bg-card ${index === 2 ? 'border-primary shadow-[0_0_20px_rgba(var(--primary),0.3)]' : 'border-border'}`}>
+                        {index === 2 && <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">LATEST</Badge>}
+
+                        <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center text-4xl mb-4 border-4 border-card z-10">
+                          {gen.icon}
+                        </div>
+
+                        <h3 className="text-2xl font-bold text-foreground mb-1">{gen.name}</h3>
+                        <p className="text-xs font-mono text-muted-foreground mb-4">{gen.tech}</p>
+
+                        <div className="space-y-2 w-full">
+                          <div className="flex justify-between text-sm border-b border-border/50 pb-2">
+                            <span className="text-muted-foreground">Year</span>
+                            <span className="font-semibold">{gen.year}</span>
+                          </div>
+                          <div className="flex justify-between text-sm border-b border-border/50 pb-2">
+                            <span className="text-muted-foreground">Speed</span>
+                            <span className="font-bold text-primary">{gen.speed}</span>
+                          </div>
+                        </div>
+
+                        <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
+                          {gen.desc}
+                        </p>
+                      </Card>
+                    ))}
+                  </div>
+
+                  <div className="mt-12 bg-secondary/10 rounded-2xl p-8 border border-secondary/20 flex flex-col md:flex-row items-center gap-6">
+                    <div className="text-5xl">🛣️</div>
+                    <div className="space-y-2 text-center md:text-left">
+                      <h3 className="text-xl font-bold text-foreground">{wifi.evolution.title}</h3>
+                      <p className="text-foreground/80">
+                        {wifi.evolution.analogy}
+                      </p>
+                    </div>
+                  </div>
+                </section>
+
+                {/* New: Mesh vs Extender */}
+                <section className="container mx-auto px-4">
+                  <h2 className="text-3xl font-bold mb-10 text-center">{wifi.meshVsExtender?.title}</h2>
+                  <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">{wifi.meshVsExtender?.intro}</p>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Extender */}
+                    <Card className="p-8 border-2 border-red-100 bg-red-50/10 dark:bg-red-900/10">
+                      <div className="flex items-center gap-4 mb-6">
+                        <span className="text-4xl">{wifi.meshVsExtender?.extender.icon}</span>
+                        <h3 className="text-2xl font-bold text-red-600">{wifi.meshVsExtender?.extender.name}</h3>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Pros</span> <span className="font-semibold">{wifi.meshVsExtender?.extender.pros}</span></div>
+                        <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Cons</span> <span className="font-semibold text-right max-w-[200px] text-xs md:text-sm">{wifi.meshVsExtender?.extender.cons}</span></div>
+                        <div className="mt-4 pt-4 border-t border-red-200">
+                          <span className="block text-xs uppercase font-bold text-red-400 mb-1">Verdict</span>
+                          <span className="text-lg font-bold">{wifi.meshVsExtender?.extender.verdict}</span>
+                        </div>
+                      </div>
+                    </Card>
+                    {/* Mesh */}
+                    <Card className="p-8 border-2 border-green-100 bg-green-50/10 dark:bg-green-900/10">
+                      <div className="flex items-center gap-4 mb-6">
+                        <span className="text-4xl">{wifi.meshVsExtender?.mesh.icon}</span>
+                        <h3 className="text-2xl font-bold text-green-600">{wifi.meshVsExtender?.mesh.name}</h3>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Pros</span> <span className="font-semibold text-right max-w-[200px] text-xs md:text-sm">{wifi.meshVsExtender?.mesh.pros}</span></div>
+                        <div className="flex justify-between border-b pb-2"><span className="text-muted-foreground">Cons</span> <span className="font-semibold">{wifi.meshVsExtender?.mesh.cons}</span></div>
+                        <div className="mt-4 pt-4 border-t border-green-200">
+                          <span className="block text-xs uppercase font-bold text-green-400 mb-1">Verdict</span>
+                          <span className="text-lg font-bold">{wifi.meshVsExtender?.mesh.verdict}</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/4")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/6")}>Next Topic: Network Cables →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 6: Network Cables
+          if (topicId === "6") {
+            const { cables } = sections;
+            return (
+              <div id="topic-cables" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">Network Cables</h2>
+                      <p className="text-lg text-muted-foreground">{cables.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(cables.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. Visuals - Connectors & Inside */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10">
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold">RJ45 Connector</h3>
+                      <p className="text-muted-foreground">The "Phone jack on steroids". This is the plug at the end of every Ethernet cable.</p>
+                      <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                        <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                          <img src={getImageUrl(cables.images.rj45.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        </div>
+                      </Card>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-2xl font-bold">Twisted Pairs</h3>
+                        <div className="flex gap-4 pt-4">
+                          <div className="h-12 w-12 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 font-bold border border-orange-500/20">1</div>
+                          <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center text-green-600 font-bold border border-green-500/20">2</div>
+                          <div className="h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 font-bold border border-blue-500/20">3</div>
+                          <div className="h-12 w-12 rounded-full bg-amber-900/10 flex items-center justify-center text-amber-900 font-bold border border-amber-900/20">4</div>
+                        </div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">4 Pairs = 8 Wires</p>
+                      </div>
+                      <Card className="p-0 overflow-hidden rotate-1 group-hover:rotate-0 transition-transform duration-700 shadow-2xl border-4 border-background">
+                        <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                          <img src={getImageUrl(cables.images.twisted.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        </div>
+                      </Card>
+                      <div className="bg-orange-50 dark:bg-orange-950/10 p-4 rounded-xl border border-orange-100 mt-4">
+                        <h4 className="font-bold text-orange-700 dark:text-orange-400 mb-1">{cables.twistedPhysics?.title}</h4>
+                        <p className="text-sm">{cables.twistedPhysics?.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Speed Race (Comparison) */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-3xl font-bold text-center mb-10">The Speed Race: Cable Categories</h3>
+                  <div className="space-y-6">
+                    {cables.categories.map((cat, idx) => (
+                      <div key={idx} className="group relative bg-card hover:bg-muted/50 border border-border rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-md">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                          <div>
+                            <h4 className="text-2xl font-bold text-primary">{cat.name}</h4>
+                            <p className="text-sm text-foreground/70">{cat.desc}</p>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-3xl font-bold">{cat.speed}</span>
+                            <p className="text-xs text-muted-foreground">{cat.freq} Bandwidth</p>
+                          </div>
+                        </div>
+                        {/* Progress Bar Visualization */}
+                        <div className="h-4 bg-secondary/20 rounded-full overflow-hidden relative">
+                          <div
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                            style={{ width: idx === 0 ? '5%' : idx === 1 ? '25%' : '100%' }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* New: Fiber Optics */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-slate-950 text-white rounded-[32px] p-8 md:p-12 overflow-hidden relative border border-slate-800">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/40 via-slate-950 to-slate-950"></div>
+                    <div className="relative z-10 text-center max-w-2xl mx-auto space-y-6">
+                      <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">{cables.fiberOptics?.title}</h2>
+                      <p className="text-lg text-slate-300">{cables.fiberOptics?.text}</p>
+                      <div className="inline-block px-6 py-3 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-sm">
+                        <span className="font-mono text-cyan-300 text-sm md:text-base">{cables.fiberOptics?.comparison}</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/5")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/7")}>Next Topic: DNS Basics →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 7: DNS Basics
+          if (topicId === "7") {
+            const { dns } = sections as any;
+            return (
+              <div id="topic-dns" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">DNS: The Phonebook</h2>
+                      <p className="text-lg text-muted-foreground">{dns.intro}</p>
+                      <div className="flex items-center gap-2 text-sm font-mono bg-muted px-4 py-2 rounded-lg w-fit">
+                        <span className="text-primary">google.com</span>
+                        <span>→</span>
+                        <span className="text-foreground">142.250.190.46</span>
+                      </div>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(dns.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. The Analogy */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(dns.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold">Why do we need it?</h3>
+                      <p className="text-muted-foreground text-lg">Imagine if you had to memorize the phone number of every friend you wanted to call. Impossible, right?</p>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-3">
+                          <div className="bg-primary/10 p-2 rounded-full">📱</div>
+                          <div>
+                            <p className="font-semibold">Contact List</p>
+                            <p className="text-sm text-muted-foreground">You tap "Mom", phone dials "+1-555-0199".</p>
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="bg-primary/10 p-2 rounded-full">🌐</div>
+                          <div>
+                            <p className="font-semibold">DNS Server</p>
+                            <p className="text-sm text-muted-foreground">You type "youtube.com", browser goes to "208.65.153.238".</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                {/* 3. Visual Flow (Updated: Dynamic) */}
+                <section className="container mx-auto px-4 bg-secondary/5 rounded-3xl p-8 md:p-12">
+                  <h3 className="text-2xl font-bold text-center mb-8">{dns.dnsCycles?.title}</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center relative z-10">
+                    {dns.dnsCycles?.steps.map((step: string, i: number) => (
+                      <div key={i} className="bg-background p-4 rounded-xl border border-border/50 shadow-sm relative group hover:border-primary transition-colors">
+                        <div className="text-2xl mb-2 opacity-50 group-hover:opacity-100 transition-opacity font-bold text-primary">{i + 1}</div>
+                        <p className="text-[10px] md:text-xs font-bold leading-tight">{step}</p>
+                        {i < 5 && <div className="hidden lg:block absolute top-1/2 -right-4 text-xl text-muted-foreground/30">→</div>}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 4. Interactive Lookup (Simulation) */}
+                <section className="container mx-auto px-4">
+                  <Card className="max-w-xl mx-auto p-8 border-2 border-primary/20 hover:border-primary/50 transition-colors">
+                    <h3 className="text-xl font-bold mb-4 text-center">Try the Translator</h3>
+                    <div className="flex gap-2 mb-4">
+                      <div className="flex-1 bg-muted rounded-md px-4 py-2 text-sm font-mono flex items-center border border-border focus-within:border-primary transition-colors">
+                        <span className="text-muted-foreground select-none">https://</span>
+                        <input
+                          className="bg-transparent border-none outline-none text-foreground ml-1 w-full"
+                          value={dnsInput}
+                          onChange={(e) => setDnsInput(e.target.value)}
+                          placeholder="example.com"
+                          onKeyDown={(e) => e.key === "Enter" && handleDnsResolve()}
+                        />
+                      </div>
+                      <Button onClick={handleDnsResolve} disabled={isResolvingDns}>
+                        {isResolvingDns ? "Resolving..." : "Resolve"}
+                      </Button>
+                    </div>
+                    <div className="bg-black/90 p-4 rounded-lg font-mono text-xs md:text-sm text-green-400 min-h-[100px]">
+                      {isResolvingDns ? (
+                        <div className="space-y-1">
+                          <p className="animate-pulse">&gt; Looking up {dnsInput}...</p>
+                          <p className="animate-pulse delay-75">&gt; Contacting Root Servers...</p>
+                          <p className="animate-pulse delay-150">&gt; Querying TLD Nameservers...</p>
+                        </div>
+                      ) : dnsResult ? (
+                        <div className="space-y-1">
+                          <p>&gt; Lookup complete for {dnsInput}</p>
+                          <p>&gt; Success: Answer found in 42ms</p>
+                          <p>&gt; IP Found: <span className="text-white bg-green-900/50 px-2 rounded">{dnsResult}</span></p>
+                        </div>
+                      ) : (
+                        <p className="text-muted-foreground opacity-50">&gt; Waiting for input...</p>
+                      )}
+                      <p className="animate-pulse mt-2">_</p>
                     </div>
                   </Card>
-                </div>
-              </section>
+                </section>
 
-              {/* 5. Web Types */}
-              <section className="container mx-auto px-4">
-                <h3 className="text-2xl font-bold mb-6 text-center">Types of Web Experiences</h3>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {internetWorks.webTypes.map((type, i) => (
-                    <Card key={i} className="p-6 text-center hover:border-primary transition-colors">
-                      <div className="text-4xl mb-3">{type.icon}</div>
-                      <h4 className="font-bold mb-2">{type.name}</h4>
-                      <p className="text-sm text-muted-foreground">{type.desc}</p>
+                {/* 5. DNS Records */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6">Common DNS Records</h3>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {dns.records.map((rec: any, i: number) => (
+                      <Card key={i} className="p-6 border border-border/60 hover:bg-muted/50">
+                        <div className="text-primary font-bold text-lg mb-1">{rec.type}</div>
+                        <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">{rec.title}</p>
+                        <p className="text-sm leading-relaxed">{rec.desc}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* New: DNS Privacy */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-blue-50 dark:bg-blue-900/10 p-8 rounded-[32px] border border-blue-100 flex flex-col md:flex-row items-center gap-8">
+                    <div className="text-6xl">🔒</div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-300 mb-2">{dns.dnsPrivacy?.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{dns.dnsPrivacy?.text}</p>
+                      <div className="flex gap-4 mt-5">
+                        <Badge variant="secondary" className="bg-blue-200/50 text-blue-800 dark:text-blue-100">Cloudflare: 1.1.1.1</Badge>
+                        <Badge variant="secondary" className="bg-blue-200/50 text-blue-800 dark:text-blue-100">Google: 8.8.8.8</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/6")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/8")}>Next Topic: Ping & Speed →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+
+          // Topic 8: Ping & Speed
+          if (topicId === "8") {
+            const { ping } = sections as any;
+            return (
+              <div id="topic-ping" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">Ping & Speed</h2>
+                      <p className="text-lg text-muted-foreground">{ping.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(ping.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
                     </Card>
-                  ))}
-                </div>
-              </section>
+                  </div>
+                </section>
 
-              {/* Navigation */}
-              <section className="container mx-auto px-4 pb-14">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
-                  <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/11")}>← Previous Topic</Button>
-                  <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/modules")}>Finish Module 9 🎉</Button>
-                </div>
-              </section>
-            </div>
-          );
-        }
+                {/* 2. Water Pipe Analogy */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold">Bandwidth vs Latency</h3>
+                      <p className="text-muted-foreground text-lg">Think of your internet connection like a water pipe.</p>
+                      <div className="space-y-4 pt-2">
+                        <div className="p-5 bg-blue-50/50 dark:bg-blue-900/20 rounded-2xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
+                          <h4 className="font-bold text-blue-700 dark:text-blue-400 text-lg mb-1">{ping.bandwidthVsLatency?.bandwidth.title}</h4>
+                          <p className="text-sm leading-relaxed">{ping.bandwidthVsLatency?.bandwidth.desc}</p>
+                        </div>
+                        <div className="p-5 bg-orange-50/50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 shadow-sm hover:shadow-md transition-shadow">
+                          <h4 className="font-bold text-orange-700 dark:text-orange-400 text-lg mb-1">{ping.bandwidthVsLatency?.latency.title}</h4>
+                          <p className="text-sm leading-relaxed">{ping.bandwidthVsLatency?.latency.desc}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(ping.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
 
-      })()}
+                {/* 3. Interactive Ping Simulation */}
+                <section className="container mx-auto px-4 text-center">
+                  <h3 className="text-2xl font-bold mb-8">Visualizing Ping</h3>
+                  <div className="relative h-32 bg-secondary/10 rounded-full border border-border overflow-hidden max-w-3xl mx-auto flex items-center justify-between px-8">
+                    <div className="text-4xl">💻</div>
+                    <div className="relative flex-1 h-1 bg-border/50 mx-4">
+                      <div className="absolute top-1/2 -translate-y-1/2 h-3 w-3 bg-primary rounded-full animate-ping-move-horizontal"></div>
+                    </div>
+                    <div className="text-4xl">server</div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-4">Low Ping = Fast travel time. High Ping = Lag.</p>
+                </section>
+
+                {/* 4. Key Metrics Grid */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6 text-center">Understanding Speed Test Results</h3>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {ping.metrics.map((m: any, i: number) => (
+                      <Card key={i} className="p-6 text-center border border-border/60 hover:shadow-lg transition-shadow">
+                        <div className="text-3xl font-black text-primary mb-1">{m.name}</div>
+                        <p className="font-mono text-sm text-muted-foreground mb-4">Measured in {m.unit}</p>
+                        <div className="bg-secondary/20 p-2 rounded mb-4">
+                          <span className="text-xs font-bold uppercase text-foreground/70">Ideal: {m.ideal}</span>
+                        </div>
+                        <p className="text-sm">{m.desc}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 5. Packet Loss */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-red-500/5 rounded-3xl p-8 border border-red-500/10 grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <h3 className="text-2xl font-bold text-red-600 mb-2">Whatever happened to Packet Loss?</h3>
+                      <p className="text-foreground/80 mb-4">If Bandwidth is width, and Latency is speed, then <strong>Packet Loss</strong> is like a leak in the pipe.</p>
+                      <p className="text-sm text-muted-foreground">When packets (data chunks) get lost on the way, you see:</p>
+                      <ul className="list-disc list-inside text-sm mt-2 space-y-1 opacity-80">
+                        <li>Teleporting players in games</li>
+                        <li>Robotic voice in calls</li>
+                        <li>Video buffering</li>
+                      </ul>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-xl border border-red-200/20 shadow-sm opacity-90 grayscale hover:grayscale-0 transition-all">
+                      <div className="relative w-full aspect-video bg-black overflow-hidden group">
+                        <img src={getImageUrl(ping.images.loss.fileName)} className="w-full h-full object-cover opacity-60" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-white font-mono bg-red-600 px-3 py-1 text-xs">CONNECTION UNSTABLE</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/7")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/9")}>Next Topic: Hotspot & Tethering →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 9: Hotspot & Tethering
+          if (topicId === "9") {
+            const { hotspot } = sections as any;
+            return (
+              <div id="topic-hotspot" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">Hotspot & Tethering</h2>
+                      <p className="text-lg text-muted-foreground">{hotspot.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(hotspot.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. Analogy */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-secondary/10 rounded-3xl p-8 md:p-12 text-center">
+                    <h3 className="text-2xl font-bold mb-6">The Data Bridge</h3>
+                    <div className="relative max-w-2xl mx-auto aspect-video rounded-xl overflow-hidden mb-6 border border-border/50 shadow-lg">
+                      <img src={getImageUrl(hotspot.images.analogy.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <p className="text-white font-bold text-xl px-4">Cell Tower ↔️ Phone ↔️ Laptop</p>
+                      </div>
+                    </div>
+                    <p className="text-lg text-muted-foreground">Your phone takes the 4G signal from the air and re-broadcasts it as a Wi-Fi signal for your devices.</p>
+                  </div>
+                </section>
+
+                {/* 3. Comparison */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8 text-center">When to use it?</h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="p-6 border-l-4 border-l-blue-500">
+                      <h4 className="text-xl font-bold mb-4 flex items-center gap-2">🏠 Home Wi-Fi</h4>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex justify-between"><span>Speed:</span> <span className="font-bold">{hotspot.comparison.wifi.speed}</span></li>
+                        <li className="flex justify-between"><span>Stability:</span> <span className="font-bold">{hotspot.comparison.wifi.stability}</span></li>
+                        <li className="flex justify-between"><span>Battery:</span> <span className="font-bold">{hotspot.comparison.wifi.battery}</span></li>
+                      </ul>
+                    </Card>
+                    <Card className="p-6 border-l-4 border-l-orange-500">
+                      <h4 className="text-xl font-bold mb-4 flex items-center gap-2">📱 Mobile Hotspot</h4>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex justify-between"><span>Speed:</span> <span className="font-bold">{hotspot.comparison.hotspot.speed}</span></li>
+                        <li className="flex justify-between"><span>Stability:</span> <span className="font-bold">{hotspot.comparison.hotspot.stability}</span></li>
+                        <li className="flex justify-between"><span>Battery:</span> <span className="font-bold">{hotspot.comparison.hotspot.battery}</span></li>
+                      </ul>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 4. Setup Steps */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8">How to Set it Up</h3>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {hotspot.steps.map((step: any, i: number) => (
+                      <div key={i} className="bg-secondary/10 p-6 rounded-2xl border border-secondary/20 relative">
+                        <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</div>
+                        <h4 className="font-bold text-lg mb-2 mt-2">{step.title}</h4>
+                        <p className="text-sm text-foreground/80">{step.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 5. Simulation Mockup */}
+                <section className="container mx-auto px-4">
+                  <Card className="max-w-md mx-auto p-8 bg-black/90 text-white border-4 border-gray-800 rounded-[30px] shadow-2xl">
+                    <div className="flex items-center justify-between mb-8 border-b border-gray-700 pb-4">
+                      <span className="font-bold text-lg">Settings</span>
+                      <div className="w-8 h-8 bg-gray-700 rounded-full"></div>
+                    </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span>{hotspot.simulation.toggleLabel}</span>
+                      <div
+                        className={`w-14 h-8 rounded-full relative cursor-pointer transition-colors duration-300 ${isHotspotOn ? 'bg-green-500' : 'bg-gray-600'}`}
+                        onClick={() => setIsHotspotOn(!isHotspotOn)}
+                      >
+                        <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${isHotspotOn ? 'translate-x-7' : 'translate-x-1'}`}></div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-6">{hotspot.simulation.desc}</p>
+                    {isHotspotOn ? (
+                      <div className="bg-gray-800 rounded-lg p-3 text-xs text-green-400 font-mono animate-pulse">
+                        {hotspot.simulation.connectedMsg}
+                      </div>
+                    ) : (
+                      <div className="bg-gray-800 rounded-lg p-3 text-xs text-gray-500 font-mono">
+                        Hotspot Disabled
+                      </div>
+                    )}
+                  </Card>
+                </section>
+
+                {/* 6. Warnings */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <Card className="p-8 border-2 border-yellow-500/20 bg-yellow-500/5">
+                      <h3 className="text-xl font-bold text-yellow-600 mb-4">⚠️ Important Warnings</h3>
+                      <ul className="space-y-3">
+                        {hotspot.warnings.map((w: string, i: number) => (
+                          <li key={i} className="flex items-center gap-3">
+                            <span className="text-yellow-600">⚠️</span>
+                            <span>{w}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                        <img src={getImageUrl(hotspot.images.security.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* New: Evil Twin Security Warning */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-red-950 text-white p-8 md:p-12 rounded-[40px] border-4 border-red-500/30 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 p-4 font-black text-red-500/20 text-8xl select-none uppercase -rotate-12">HACKER</div>
+                    <div className="relative z-10 max-w-2xl">
+                      <h3 className="text-3xl font-bold text-red-400 mb-4">{hotspot.evilTwin?.title}</h3>
+                      <p className="text-lg text-red-100/90 mb-6">{hotspot.evilTwin?.scenario}</p>
+                      <div className="flex bg-red-900/50 p-4 rounded-xl border border-red-500/30 items-center gap-4">
+                        <span className="text-4xl">🛑</span>
+                        <p className="font-bold">{hotspot.evilTwin?.prevention}</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/8")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/10")}>Next Topic: Troubleshooting →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 10: Mobile Data Networks
+          if (topicId === "10") {
+            const { mobileData } = sections as any;
+            return (
+              <div id="topic-mobile-data" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">Mobile Data Networks</h2>
+                      <p className="text-lg text-muted-foreground">{mobileData.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(mobileData.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. 4G vs 5G Comparison */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8 text-center">The Speed Evolution</h3>
+                  <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    {/* 4G */}
+                    <Card className="p-8 border-2 border-slate-200 bg-slate-50/50 dark:bg-slate-900/50">
+                      <div className="text-6xl mb-4">{mobileData.generations.g4.icon}</div>
+                      <h4 className="text-2xl font-bold mb-2">{mobileData.generations.g4.name}</h4>
+                      <div className="space-y-2 text-sm">
+                        <p className="flex justify-between"><span>Speed:</span> <span className="font-bold">{mobileData.generations.g4.speed}</span></p>
+                        <p className="flex justify-between"><span>Latency:</span> <span className="font-bold">{mobileData.generations.g4.latency}</span></p>
+                        <p className="pt-2 text-muted-foreground">Best for: {mobileData.generations.g4.use}</p>
+                      </div>
+                    </Card>
+
+                    {/* 5G */}
+                    <Card className="p-8 border-2 border-primary bg-primary/5 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold rounded-bl-xl">NEW STANDARD</div>
+                      <div className="text-6xl mb-4 animate-bounce">{mobileData.generations.g5.icon}</div>
+                      <h4 className="text-2xl font-bold mb-2 text-primary">{mobileData.generations.g5.name}</h4>
+                      <div className="space-y-2 text-sm">
+                        <p className="flex justify-between"><span>Speed:</span> <span className="font-bold">{mobileData.generations.g5.speed}</span></p>
+                        <p className="flex justify-between"><span>Latency:</span> <span className="font-bold">{mobileData.generations.g5.latency}</span></p>
+                        <p className="pt-2 text-muted-foreground">Best for: {mobileData.generations.g5.use}</p>
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 3. Data Bucket Analogy */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-secondary/10 rounded-[32px] p-8 md:p-12">
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                      <div className="space-y-6">
+                        <h3 className="text-2xl font-bold">Data Limits & The "Bucket"</h3>
+                        <p className="text-lg">Unlike Wi-Fi, Mobile Data is often limited. Apps are "vampires" that suck data from your bucket.</p>
+
+                        <div className="space-y-4">
+                          {mobileData.dataConsumption.map((item: any, i: number) => (
+                            <div key={i}>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="font-bold">{item.activity}</span>
+                                <span className="text-muted-foreground">{item.usage}</span>
+                              </div>
+                              <div className="h-3 bg-white rounded-full overflow-hidden border border-black/10">
+                                <div className={`h-full ${item.color}`} style={{ width: item.width }}></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <Card className="bg-background border-l-4 border-l-yellow-500 p-4">
+                          <p className="text-sm font-bold text-yellow-600 mb-1">⚠️ Background Data Warning</p>
+                          <p className="text-xs text-muted-foreground">Apps can drain your bucket even when your phone is in your pocket!</p>
+                        </Card>
+                      </div>
+
+                      <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl bg-blue-500/20">
+                        <div className="relative aspect-[4/5] md:aspect-square flex items-center justify-center">
+                          <div className="text-[10rem]">🪣</div>
+                          <div className="absolute bottom-10 text-center">
+                            <p className="font-bold text-blue-900 dark:text-blue-100 text-xl">Your Monthly Data</p>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  </div>
+                </section>
+
+
+
+                {/* 3.1 History: 1G to 5G */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8 text-center">Evolution from 1G to 5G</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+                    {mobileData.history.map((h: any, i: number) => (
+                      <Card key={i} className={`p-6 border-l-4 border-l-primary/50 hover:border-l-primary transition-all ${i < 3 ? 'md:col-span-2' : 'md:col-span-3'}`}>
+                        <div className="flex justify-between items-start mb-4">
+                          <span className="text-4xl">{h.icon}</span>
+                          <Badge variant="secondary" className="font-mono text-xs">{h.era}</Badge>
+                        </div>
+                        <h4 className="text-xl font-bold mb-1">{h.name}</h4>
+                        <p className="text-xs font-bold text-primary mb-3 uppercase tracking-wide">{h.feature}</p>
+
+                        <p className="text-sm text-muted-foreground mb-4 h-14 overflow-hidden">{h.desc}</p>
+
+                        <div className="pt-4 border-t border-border/50 flex items-center justify-between text-xs font-mono">
+                          <span className="text-muted-foreground">Speed:</span>
+                          <span className="font-bold">{h.speed}</span>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 4. Settings Simulation */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8 text-center">Settings Simulator</h3>
+                  <Card className="max-w-md mx-auto p-4 bg-black border-4 border-gray-800 rounded-[30px] shadow-2xl overflow-hidden">
+                    <div className="bg-gray-900 text-white p-4 mb-4 rounded-xl flex items-center gap-4">
+                      <span>⬅️</span>
+                      <span className="font-bold">Network & Internet</span>
+                    </div>
+
+                    <div className="space-y-4 font-sans">
+                      {/* Mobile Data Toggle */}
+                      <div className="bg-gray-800 p-4 rounded-xl flex items-center justify-between">
+                        <div>
+                          <p className="text-white font-bold">Mobile Data</p>
+                          <p className="text-gray-400 text-xs">{mobileData.simSettings.data}</p>
+                        </div>
+                        <Switch
+                          checked={isMobileDataOn}
+                          onCheckedChange={setIsMobileDataOn}
+                          className="data-[state=checked]:bg-green-500"
+                        />
+                      </div>
+
+                      {/* Roaming Toggle */}
+                      <div className={`bg-gray-800 p-4 rounded-xl flex items-center justify-between border ${isRoamingOn ? 'border-red-500' : 'border-red-500/30'}`}>
+                        <div>
+                          <p className="text-white font-bold">Roaming</p>
+                          <p className="text-gray-400 text-xs">{mobileData.simSettings.roaming}</p>
+                        </div>
+                        <Switch
+                          checked={isRoamingOn}
+                          onCheckedChange={setIsRoamingOn}
+                          className="data-[state=checked]:bg-green-500"
+                        />
+                      </div>
+
+                      {/* Network Type */}
+                      <div className="bg-gray-800 p-4 rounded-xl">
+                        <p className="text-white font-bold mb-1">Preferred Network Type</p>
+                        <div className="text-green-400 text-sm font-mono flex items-center justify-between bg-black/50 p-2 rounded">
+                          <span>5G (Recommended)</span>
+                          <span>▼</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 p-3 bg-yellow-900/50 rounded-lg border border-yellow-500/50">
+                      <p className="text-yellow-400 text-xs text-center font-bold">⚠️ {mobileData.simSettings.warning}</p>
+                    </div>
+                  </Card>
+                </section>
+
+                {/* 5. SIM Types */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6 text-center">SIM Card Evolution</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {mobileData.simTypes.map((sim: any, i: number) => (
+                      <Card key={i} className="p-4 text-center hover:border-primary transition-colors">
+                        <div className="h-16 flex items-center justify-center mb-2">
+                          <div className={`bg-yellow-400 rounded border-2 border-yellow-600 shadow-sm ${i === 0 ? 'w-16 h-10' : i === 1 ? 'w-10 h-8' : i === 2 ? 'w-6 h-5' : 'w-0 h-0 hidden'}`}></div>
+                          {i === 3 && <span className="text-4xl">📲</span>}
+                        </div>
+                        <h4 className="font-bold">{sim.name}</h4>
+                        <p className="text-xs text-muted-foreground">{sim.desc}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/9")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/11")}>Next Topic: Common Problems →</Button>
+                  </div>
+                </section>
+              </div >
+            );
+          }
+
+          // Topic 11: Common Network Problems (Formerly Troubleshooting)
+          if (topicId === "11") {
+            const { troubleshooting } = sections as any;
+            return (
+              <div id="topic-troubleshooting" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">Common Network Problems</h2>
+                      <p className="text-lg text-muted-foreground">{troubleshooting.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(troubleshooting.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. Chain of Connection */}
+                <section className="container mx-auto px-4 text-center">
+                  <h3 className="text-2xl font-bold mb-8">The Chain of Connection</h3>
+                  <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-bold md:gap-8">
+                    {troubleshooting.chain.map((link: string, i: number) => (
+                      <div key={i} className="flex items-center gap-4">
+                        <div className="px-6 py-3 bg-secondary rounded-full">{link}</div>
+                        {i < troubleshooting.chain.length - 1 && <span className="text-muted-foreground text-xl">→</span>}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 2.1 Decoding Icons (New) */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8 text-center text-primary">Decoding Network Icons</h3>
+                  <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">Your computer talks in symbols. Here is your translator for those annoying little icons.</p>
+
+                  <div className="grid md:grid-cols-3 gap-6 mb-16">
+                    {troubleshooting.errorIcons?.map((icon: any, i: number) => (
+                      <Card key={i} className="p-6 text-center border-t-4 border-t-primary shadow-lg hover:-translate-y-1 transition-transform">
+                        <div className="text-6xl mb-4">{icon.icon}</div>
+                        <h4 className={`text-xl font-bold mb-2 ${icon.color}`}>{icon.name}</h4>
+                        <p className="text-sm font-bold mb-4 bg-secondary/20 py-1 rounded">FIX: {icon.fix}</p>
+                        <p className="text-sm text-muted-foreground">{icon.meaning}</p>
+                      </Card>
+                    ))}
+                  </div>
+
+                  {/* Scenarios */}
+                  <div className="bg-secondary/10 rounded-2xl p-8 border border-secondary/20">
+                    <h4 className="text-xl font-bold mb-6 flex items-center gap-2">
+                      <span className="text-2xl">🕵️‍♂️</span> Troubleshooting Scenarios
+                    </h4>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {troubleshooting.scenarios?.map((s: any, i: number) => (
+                        <div key={i} className="bg-background p-4 rounded-xl border border-border">
+                          <p className="font-bold text-red-500 mb-1">Problem: "{s.title}"</p>
+                          <div className="text-sm space-y-1">
+                            <p><span className="font-semibold">Cause:</span> {s.cause}</p>
+                            <p><span className="font-semibold text-green-600">Fix:</span> {s.fix}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* 3. Flowchart */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8 text-center">The Fix-It Flowchart</h3>
+                  <div className="space-y-6 max-w-3xl mx-auto">
+                    {troubleshooting.steps.map((step: any, i: number) => (
+                      <div key={i} className="flex gap-6 items-start group">
+                        <div className="flex flex-col items-center">
+                          <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl shadow-lg group-hover:scale-110 transition-transform">{step.step}</div>
+                          {i < troubleshooting.steps.length - 1 && <div className="w-1 h-16 bg-border my-2"></div>}
+                        </div>
+                        <Card className="flex-1 p-6 hover:border-primary/50 transition-colors">
+                          <h4 className="text-xl font-bold mb-1">{step.title}</h4>
+                          <p className="text-muted-foreground">{step.desc}</p>
+                        </Card>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 4. Restart Ritual */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-secondary/10 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-4">When in doubt...</h3>
+                      <p className="text-lg">Unplug the router. Count to 10. Plug it back in.</p>
+                      <p className="text-sm text-muted-foreground mt-2">It sounds like a joke, but it clears the router's short-term memory (RAM) and fixes 99% of glitches.</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-xl border border-border/50 w-full md:w-64">
+                      <div className="aspect-square bg-muted">
+                        <img src={getImageUrl(troubleshooting.images.restart.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 5. Command Tools: Interactive Terminal */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-8">Hands-on: The Terminal Simulator</h3>
+                  <Card className="max-w-3xl mx-auto bg-black border-4 border-gray-700 rounded-xl shadow-2xl overflow-hidden">
+                    {/* Terminal Header */}
+                    <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      </div>
+                      <span className="text-xs text-gray-400 font-mono italic">Command Prompt - Student@Network</span>
+                    </div>
+
+                    {/* Terminal Content */}
+                    <div className="p-6 h-64 overflow-y-auto font-mono text-sm text-green-400 space-y-1 scrollbar-hide">
+                      {terminalLines.map((line, i) => (
+                        <p key={i}>{line}</p>
+                      ))}
+                      <form onSubmit={handleTerminalSubmit} className="flex items-center gap-2">
+                        <span className="text-blue-400">C:\Users\Student&gt;</span>
+                        <input
+                          className="bg-transparent border-none outline-none text-white flex-1"
+                          autoFocus
+                          value={terminalInput}
+                          onChange={(e) => setTerminalInput(e.target.value)}
+                        />
+                      </form>
+                    </div>
+                  </Card>
+                  <div className="mt-6 flex flex-wrap justify-center gap-4">
+                    <Badge variant="outline" className="cursor-help" title="Try typing: ping google.com">💡 Tip: Try "ping google.com"</Badge>
+                    <Badge variant="outline" className="cursor-help" title="Try typing: ipconfig">💡 Tip: Try "ipconfig"</Badge>
+                    <Badge variant="outline" className="cursor-help" title="Try typing: cls">💡 Tip: Try "cls" to clear</Badge>
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/10")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/12")}>Next Topic: How Internet Works →</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+          // Topic 12: How the Internet Works
+          if (topicId === "12") {
+            const { internetWorks } = sections;
+            return (
+              <div id="topic-internet-works" className="space-y-16">
+                {/* 1. Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 09: NETWORKING FUNDAMENTALS</p>
+                      <h2 className="text-4xl font-bold">How the Internet Works</h2>
+                      <p className="text-lg text-muted-foreground">{internetWorks.intro}</p>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img src={getImageUrl(internetWorks.images.hero.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 2. The Cycle (Steps) */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-10 text-center">{internetWorks.cycle.title}</h3>
+                  <div className="grid md:grid-cols-4 gap-6 relative">
+                    {/* Connector Line */}
+                    <div className="hidden md:block absolute top-[2.5rem] left-[10%] w-[80%] h-1 bg-border -z-10"></div>
+
+                    {internetWorks.cycle.steps.map((step, i) => (
+                      <div key={i} className="flex flex-col items-center text-center group">
+                        <div className="w-20 h-20 rounded-full bg-background border-4 border-primary flex items-center justify-center text-3xl mb-4 z-10 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          {step.icon}
+                        </div>
+                        <h4 className="text-lg font-bold mb-2">{step.name}</h4>
+                        <p className="text-sm text-muted-foreground">{step.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 3. The Analogy (Restaurant) */}
+                <section className="container mx-auto px-4">
+                  <div className="bg-secondary/10 rounded-[40px] p-8 md:p-14">
+                    <div className="text-center max-w-3xl mx-auto mb-12">
+                      <h3 className="text-3xl font-bold mb-4">The Restaurant Analogy</h3>
+                      <p className="text-lg text-muted-foreground">Understanding Client-Server architecture is easy if you've ever eaten dinner out.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-10 items-center">
+                      <Card className="p-0 overflow-hidden rounded-3xl border-none shadow-xl rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                          <img src={getImageUrl(internetWorks.images.restaurant.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                        </div>
+                      </Card>
+                      <div className="space-y-6">
+                        <div className="flex bg-background p-4 rounded-xl items-start gap-4 shadow-sm border border-border/50">
+                          <div className="text-3xl">😋</div>
+                          <div>
+                            <h4 className="font-bold text-primary">The Client (You)</h4>
+                            <p className="text-sm">You want food (a webpage). You check the menu and make a request.</p>
+                          </div>
+                        </div>
+                        <div className="flex bg-background p-4 rounded-xl items-start gap-4 shadow-sm border border-border/50">
+                          <div className="text-3xl">👨‍🍳</div>
+                          <div>
+                            <h4 className="font-bold text-primary">The Server (Kitchen)</h4>
+                            <p className="text-sm">They have the ingredients (files/database). They cook the meal and plate it.</p>
+                          </div>
+                        </div>
+                        <div className="flex bg-background p-4 rounded-xl items-start gap-4 shadow-sm border border-border/50">
+                          <div className="text-3xl">🤵</div>
+                          <div>
+                            <h4 className="font-bold text-primary">The Network (Waiter)</h4>
+                            <p className="text-sm">Runs back and forth. Takes your request to the kitchen and brings the food back.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* 4. Physical World (Cables) */}
+                <section className="container mx-auto px-4">
+                  <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">{internetWorks.underseaCables?.title}</h3>
+                      <p className="text-lg text-muted-foreground">{internetWorks.underseaCables?.fact}</p>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 bg-secondary/30 p-3 rounded-lg">
+                          <span className="text-xl">🗺️</span>
+                          <p className="text-sm font-medium">{internetWorks.underseaCables?.map}</p>
+                        </div>
+                        <div className="flex items-center gap-3 bg-secondary/30 p-3 rounded-lg">
+                          <span className="text-xl">🦈</span>
+                          <p className="text-sm font-medium">{internetWorks.underseaCables?.shark}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 shadow-lg">
+                      <div className="relative w-full aspect-video bg-muted overflow-hidden">
+                        <img src={getImageUrl(internetWorks.images.cables.fileName)} className="w-full h-full object-cover" onError={(e) => (e.target as HTMLImageElement).style.display = 'none'} />
+                      </div>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* 5. Web Types */}
+                <section className="container mx-auto px-4">
+                  <h3 className="text-2xl font-bold mb-6 text-center">Types of Web Experiences</h3>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {internetWorks.webTypes.map((type, i) => (
+                      <Card key={i} className="p-6 text-center hover:border-primary transition-colors">
+                        <div className="text-4xl mb-3">{type.icon}</div>
+                        <h4 className="font-bold mb-2">{type.name}</h4>
+                        <p className="text-sm text-muted-foreground">{type.desc}</p>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Navigation */}
+                <section className="container mx-auto px-4 pb-14">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
+                    <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/9/topic/11")}>← Previous Topic</Button>
+                    <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/modules")}>Finish Module 9 🎉</Button>
+                  </div>
+                </section>
+              </div>
+            );
+          }
+
+        })()
+      }
 
       {
         moduleId === 10 && (() => {
@@ -24078,7 +24517,167 @@ const ModuleDetail = () => {
           }
 
           if (topicId === "7") {
-            return <FirewallTopic />;
+            const { firewalls } = sections as any;
+            const { windowsFirewall, networkFirewalls } = firewalls;
+
+            return (
+              <div className="space-y-16">
+                {/* 1. HERO Content from FirewallTopic Component (Integrated) */}
+                <FirewallTopic />
+
+                {/* NEW SUBTOPIC: Windows Firewall */}
+                <section className="container mx-auto px-4">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Device Security</p>
+                      <h2 className="text-3xl font-semibold text-foreground">{windowsFirewall.title}</h2>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {windowsFirewall.intro}
+                      </p>
+                      <div className="space-y-4 mt-6">
+                        {windowsFirewall.features.map((feature: any, i: number) => (
+                          <div key={i} className="flex gap-4 p-4 bg-muted/50 rounded-xl border border-border/50">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                              <span className="text-primary font-bold text-sm">{i + 1}</span>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-sm">{feature.name}</h4>
+                              <p className="text-xs text-muted-foreground">{feature.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(windowsFirewall.visualAsset.fileName)}
+                          alt={windowsFirewall.visualAsset.alt}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) {
+                              parent.innerHTML =
+                                `<div class="p-8 text-center text-sm text-muted-foreground">
+                                  Add ${windowsFirewall.visualAsset.fileName}. ${windowsFirewall.visualAsset.brief}
+                                </div>`;
+                            }
+                          }}
+                        />
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* Comparison Section: Public vs Private Network */}
+                  <div className="mt-12 bg-slate-900 text-white rounded-[40px] p-8 md:p-12">
+                    <div className="text-center mb-10">
+                      <h3 className="text-2xl font-bold">Network Profiles: Public vs. Private</h3>
+                      <p className="text-slate-400 mt-2">How Windows Firewall adapts to your location.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                        <div className="flex items-center gap-3 mb-4 text-blue-400">
+                          <Monitor className="w-6 h-6" />
+                          <h4 className="text-xl font-bold">Private (Home/Office)</h4>
+                        </div>
+                        <p className="text-sm text-slate-300 mb-6 font-medium">Example: Your secure Home Wi-Fi.</p>
+                        <ul className="space-y-3 text-sm text-slate-400">
+                          <li className="flex gap-2">✅ Allows printer sharing</li>
+                          <li className="flex gap-2">✅ Discovers other devices</li>
+                          <li className="flex gap-2">✅ Less restrictive rules</li>
+                        </ul>
+                      </div>
+                      <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                        <div className="flex items-center gap-3 mb-4 text-red-400">
+                          <Router className="w-6 h-6" />
+                          <h4 className="text-xl font-bold">Public (Starbucks/Airport)</h4>
+                        </div>
+                        <p className="text-sm text-slate-300 mb-6 font-medium">Example: Open Free Wi-Fi.</p>
+                        <ul className="space-y-3 text-sm text-slate-400">
+                          <li className="flex gap-2">❌ Blocks file sharing</li>
+                          <li className="flex gap-2">❌ Disables device discovery</li>
+                          <li className="flex gap-2">⚠️ Maximum "Stealth" security</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* NEW SUBTOPIC: Network Firewalls */}
+                <section className="container mx-auto px-4">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(networkFirewalls.visualAsset.fileName)}
+                          alt={networkFirewalls.visualAsset.alt}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) {
+                              parent.innerHTML =
+                                `<div class="p-8 text-center text-sm text-muted-foreground">
+                                  Add ${networkFirewalls.visualAsset.fileName}. ${networkFirewalls.visualAsset.brief}
+                                </div>`;
+                            }
+                          }}
+                        />
+                      </div>
+                    </Card>
+                    <div className="space-y-5 order-1 lg:order-2">
+                      <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Perimeter Defense</p>
+                      <h2 className="text-3xl font-semibold text-foreground">{networkFirewalls.title}</h2>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {networkFirewalls.intro}
+                      </p>
+                      <div className="mt-8 space-y-4">
+                        <h4 className="font-bold text-lg">Common Locations:</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
+                            <h5 className="font-bold text-primary mb-1">Home Routers</h5>
+                            <p className="text-xs text-muted-foreground">Protects your phone, PC, and smart TV.</p>
+                          </div>
+                          <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
+                            <h5 className="font-bold text-primary mb-1">Corporate Gates</h5>
+                            <p className="text-xs text-muted-foreground">Massive dedicated machines for businesses.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Feature Comparison Section */}
+                  <div className="mt-12 bg-card border border-border/70 rounded-3xl p-8 md:p-12 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                    <div className="relative z-10 grid md:grid-cols-3 gap-8 text-center">
+                      <div className="space-y-4">
+                        <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto text-blue-500">
+                          <ShieldCheck className="w-8 h-8" />
+                        </div>
+                        <h4 className="font-bold">Access Control</h4>
+                        <p className="text-xs text-muted-foreground">Blocks IP addresses from known "malicious" countries or lists.</p>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center mx-auto text-orange-500">
+                          <Cog className="w-8 h-8" />
+                        </div>
+                        <h4 className="font-bold">Content Filtering</h4>
+                        <p className="text-xs text-muted-foreground">Parents or offices can block entire categories of websites.</p>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center mx-auto text-green-500">
+                          <CheckCircle className="w-8 h-8" />
+                        </div>
+                        <h4 className="font-bold">Intrusion Prevention</h4>
+                        <p className="text-xs text-muted-foreground">Detects and drops "weird" traffic patterns that look like hacks.</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            );
           }
 
           if (topicId === "8") {
@@ -24107,21 +24706,43 @@ const ModuleDetail = () => {
 
           if (topicId === "1") {
             const { cybersecurity } = sections as any;
-            const { hero, cia, castle, motives, simulation } = cybersecurity;
+            const { hero, cia, castle, motives, simulation, protection, attackReasons } = cybersecurity;
 
             return (
               <div id="topic-cybersecurity" className="space-y-16">
                 {/* Hero */}
                 <section className="container mx-auto px-4 pt-16">
-                  <div className="grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
-                      <h2 className="text-5xl font-bold">{hero.title}</h2>
-                      <p className="text-xl text-muted-foreground">{hero.subtitle}</p>
+                  <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-sm font-semibold tracking-wide uppercase">
+                        <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                        Module 10: Topic 1
+                      </div>
+                      <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+                        {hero.title}
+                      </h1>
+                      <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                        {hero.subtitle}
+                      </p>
                     </div>
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 rotate-3 transition-transform hover:rotate-0">
-                      <div className="aspect-video bg-gradient-to-br from-blue-900 to-black flex items-center justify-center">
-                        <span className="text-9xl">🛡️</span>
+
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-border/70 relative group shadow-2xl">
+                      <div className="relative w-full aspect-square bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(hero.visual)}
+                          alt={hero.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                          }}
+                        />
+                        {/* Fallback */}
+                        <div className="hidden w-full h-full bg-slate-900 flex items-center justify-center flex-col text-center p-12 text-white">
+                          <span className="text-9xl mb-4">🛡️</span>
+                          <p className="font-bold text-3xl">Cybersecurity Basics</p>
+                          <p className="text-slate-400 mt-2 italic">Building a Safer Digital World</p>
+                        </div>
                       </div>
                     </Card>
                   </div>
@@ -24129,23 +24750,42 @@ const ModuleDetail = () => {
 
                 {/* CIA Triad */}
                 <section className="container mx-auto px-4">
-                  <h3 className="text-3xl font-bold mb-8 text-center">{cia.title}</h3>
-                  <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">{cia.desc}</p>
+                  <div className="text-center mb-12">
+                    <Badge variant="outline" className="mb-4 border-primary text-primary px-4 py-1">THE FOUNDATION</Badge>
+                    <h3 className="text-4xl font-bold mb-4">{cia.title}</h3>
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">{cia.desc}</p>
+                  </div>
 
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {['c', 'i', 'a'].map((key) => (
                       <Card
                         key={key}
-                        className={`p-8 cursor-pointer transition-all duration-300 hover:scale-105 border-2 ${ciaSelection === key ? cia[key].border + ' ' + cia[key].bg : 'border-border'}`}
+                        className={`group relative p-10 cursor-pointer overflow-hidden transition-all duration-500 hover:shadow-2xl border-2 ${ciaSelection === key ? cia[key].border + ' ' + cia[key].bg : 'border-border/50 bg-card/50'}`}
                         onClick={() => setCiaSelection(key)}
                       >
-                        <div className={`text-6xl font-bold mb-4 ${cia[key].color}`}>{cia[key].letter}</div>
-                        <h4 className="text-2xl font-bold mb-2">{cia[key].title}</h4>
-                        {ciaSelection === key ? (
-                          <p className="text-sm border-t border-dashed border-gray-500 pt-4 mt-4 whitespace-pre-line animate-in fade-in">{cia[key].text}</p>
-                        ) : (
-                          <p className="text-sm text-muted-foreground">Click to reveal</p>
-                        )}
+                        {/* Decorative Background Letter */}
+                        <div className={`absolute -right-4 -bottom-4 text-[12rem] font-black opacity-5 transition-opacity group-hover:opacity-10 ${cia[key].color}`}>
+                          {cia[key].letter}
+                        </div>
+
+                        <div className={`text-7xl font-black mb-6 ${cia[key].color} tracking-tighter`}>{cia[key].letter}</div>
+                        <h4 className="text-2xl font-bold mb-4 tracking-tight">{cia[key].title}</h4>
+
+                        <div className="relative z-10">
+                          {ciaSelection === key ? (
+                            <div className="animate-in fade-in slide-in-from-top-2 duration-500">
+                              <p className="text-sm leading-relaxed whitespace-pre-line text-foreground/90 font-medium">
+                                {cia[key].text}
+                              </p>
+                              <div className={`mt-6 h-1 w-12 rounded-full ${cia[key].bg.replace('/10', '')}`}></div>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2 text-sm font-semibold text-primary transition-colors group-hover:text-primary/80">
+                              <span>Reveal Meaning</span>
+                              <ArrowRight className="w-4 h-4" />
+                            </div>
+                          )}
+                        </div>
                       </Card>
                     ))}
                   </div>
@@ -24193,16 +24833,24 @@ const ModuleDetail = () => {
 
                 {/* Motives */}
                 <section className="container mx-auto px-4">
-                  <h3 className="text-3xl font-bold mb-12 text-center">Who are the Attackers?</h3>
-                  <div className="grid md:grid-cols-3 gap-8">
-                    {motives.map((m: any, i: number) => (
-                      <Card key={i} className="group relative overflow-hidden text-center p-8 hover:border-primary transition-colors">
-                        <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">{m.icon}</div>
-                        <h4 className="text-2xl font-bold mb-1">{m.title}</h4>
-                        <p className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4">{m.role}</p>
-                        <p className="text-muted-foreground">{m.desc}</p>
-                      </Card>
-                    ))}
+                  <div className="grid lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-1 space-y-6">
+                      <h3 className="text-4xl font-bold tracking-tight">Who are the Attackers?</h3>
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        Cybersecurity isn't just about hardware—it's about understanding human intent. Hackers are driven by different goals.
+                      </p>
+                      <div className="w-20 h-1.5 bg-red-500 rounded-full"></div>
+                    </div>
+                    <div className="lg:col-span-2 grid md:grid-cols-3 gap-6">
+                      {motives.map((m: any, i: number) => (
+                        <Card key={i} className="group p-8 hover:bg-muted/50 transition-all duration-300 border-none shadow-xl bg-card">
+                          <div className="text-5xl mb-6 transform group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300">{m.icon}</div>
+                          <h4 className="text-xl font-bold mb-1 tracking-tight">{m.title}</h4>
+                          <p className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em] mb-4">{m.role}</p>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                        </Card>
+                      ))}
+                    </div>
                   </div>
                 </section>
 
@@ -24280,6 +24928,169 @@ const ModuleDetail = () => {
                   </div>
                 </section>
 
+                {/* Subtopic: Protection of Systems */}
+                <section className="container mx-auto px-4">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-5">
+                      <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Layered Defense</p>
+                      <h2 className="text-3xl font-semibold text-foreground">{protection.title}</h2>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {protection.intro}
+                      </p>
+                      <div className="space-y-3 pt-4">
+                        <div className="flex items-start gap-3">
+                          <Badge variant="outline" className="text-primary border-primary/30">Layer 1</Badge>
+                          <p className="text-sm text-foreground/80"><strong>Hardware:</strong> Securing physical devices and servers.</p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Badge variant="outline" className="text-primary border-primary/30">Layer 2</Badge>
+                          <p className="text-sm text-foreground/80"><strong>Software:</strong> Patching bugs and using antivirus.</p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <Badge variant="outline" className="text-primary border-primary/30">Layer 3</Badge>
+                          <p className="text-sm text-foreground/80"><strong>Network:</strong> Encryption and Firewalls for data in transit.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(protection.visualAsset.fileName)}
+                          alt={protection.visualAsset.alt}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) {
+                              parent.innerHTML =
+                                `<div class="p-8 text-center text-sm text-muted-foreground">
+                                  Add ${protection.visualAsset.fileName}. ${protection.visualAsset.brief}
+                                </div>`;
+                            }
+                          }}
+                        />
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* Proactive vs Reactive Comparison */}
+                  <div className="mt-12 grid md:grid-cols-2 gap-6">
+                    <Card className="p-6 border-l-4 border-l-green-500 bg-green-500/5">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-green-500/10 rounded-lg">
+                          <ShieldCheck className="w-6 h-6 text-green-500" />
+                        </div>
+                        <h4 className="text-xl font-semibold">Proactive Protection</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-4">Defend before the attack happens.</p>
+                      <ul className="space-y-2">
+                        {protection.proactive.map((item: any, i: number) => (
+                          <li key={i} className="flex items-center gap-2 text-sm">
+                            <span className="text-green-500">✓</span>
+                            <span className="font-medium">{item.title}:</span>
+                            <span className="text-muted-foreground">{item.desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                    <Card className="p-6 border-l-4 border-l-blue-500 bg-blue-500/5">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-blue-500/10 rounded-lg">
+                          <LifeBuoy className="w-6 h-6 text-blue-500" />
+                        </div>
+                        <h4 className="text-xl font-semibold">Reactive Recovery</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-4">Minimize damage after a breach.</p>
+                      <ul className="space-y-2">
+                        {protection.reactive.map((item: any, i: number) => (
+                          <li key={i} className="flex items-center gap-2 text-sm">
+                            <span className="text-blue-500">•</span>
+                            <span className="font-medium">{item.title}:</span>
+                            <span className="text-muted-foreground">{item.desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </div>
+                </section>
+
+                {/* Subtopic: Why Attacks Happen */}
+                <section className="container mx-auto px-4">
+                  <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 order-2 lg:order-1">
+                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(attackReasons.visualAsset.fileName)}
+                          alt={attackReasons.visualAsset.alt}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) {
+                              parent.innerHTML =
+                                `<div class="p-8 text-center text-sm text-muted-foreground">
+                                  Add ${attackReasons.visualAsset.fileName}. ${attackReasons.visualAsset.brief}
+                                </div>`;
+                            }
+                          }}
+                        />
+                      </div>
+                    </Card>
+                    <div className="space-y-5 order-1 lg:order-2">
+                      <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Motivation & Logic</p>
+                      <h2 className="text-3xl font-semibold text-foreground">{attackReasons.title}</h2>
+                      <p className="text-foreground/80 leading-relaxed">
+                        {attackReasons.intro}
+                      </p>
+                      <div className="grid grid-cols-2 gap-4 pt-4">
+                        <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                          <span className="text-2xl mb-2 block">💸</span>
+                          <h5 className="font-bold text-sm">Profit</h5>
+                          <p className="text-xs text-muted-foreground">Selling data or extortion.</p>
+                        </div>
+                        <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                          <span className="text-2xl mb-2 block">🏹</span>
+                          <h5 className="font-bold text-sm">Politics</h5>
+                          <p className="text-xs text-muted-foreground">Espionage or protests.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Targeted vs Opportunistic Grid */}
+                  <div className="mt-12 bg-card border border-border/70 rounded-2xl p-8">
+                    <div className="text-center mb-8">
+                      <h3 className="text-2xl font-bold">Targeted vs. Opportunistic Attacks</h3>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-12">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2 text-red-500">
+                          <Target className="w-5 h-5" />
+                          <h4 className="font-bold">Targeted (Whaling)</h4>
+                        </div>
+                        <p className="text-sm text-muted-foreground font-medium">Example: A specific CEO or Bank.</p>
+                        <ul className="text-sm space-y-2 text-foreground/80">
+                          <li>• Deep research on the victim.</li>
+                          <li>• High effort, high payout.</li>
+                          <li>• Customized malware/spear-phishing.</li>
+                        </ul>
+                      </div>
+                      <div className="space-y-4 md:border-l md:pl-12 border-border/50">
+                        <div className="flex items-center gap-2 text-primary">
+                          <Fish className="w-5 h-5" />
+                          <h4 className="font-bold">Opportunistic (Phishing)</h4>
+                        </div>
+                        <p className="text-sm text-muted-foreground font-medium">Example: "You won a prize" emails.</p>
+                        <ul className="text-sm space-y-2 text-foreground/80">
+                          <li>• Casting a wide net for anyone.</li>
+                          <li>• Low effort, mass volume.</li>
+                          <li>• Scans for any open port or simple error.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
                 {/* Interactive Simulation: Scanner */}
                 <section className="container mx-auto px-4">
                   <Card className="max-w-4xl mx-auto overflow-hidden border-4 border-gray-800 bg-gray-900 text-white rounded-xl shadow-2xl">
@@ -24351,12 +25162,26 @@ const ModuleDetail = () => {
                   </Card>
                 </section>
 
-                {/* Navigation */}
-                <section className="container mx-auto px-4 pb-14">
-                  <div className="flex justify-end p-6">
-                    <Button size="lg" onClick={() => navigate("/module/10/topic/2")}>Next Topic: Password Security →</Button>
-                  </div>
+                {/* Why Cybersecurity Matters (Summary Section) */}
+                <section className="container mx-auto px-4">
+                  <Card className="bg-primary/5 border border-primary/20 rounded-[40px] p-8 md:p-14 text-center space-y-8 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -z-10"></div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 blur-[100px] -z-10"></div>
+
+                    <h3 className="text-3xl font-bold">Why Does This Matter to You?</h3>
+                    <p className="max-w-3xl mx-auto text-xl text-muted-foreground leading-relaxed">
+                      In a world where even your fridge is connected to the internet, cybersecurity is no longer a "tech skill"—it's a <strong>basic survival skill</strong>. Protecting your data protects your future.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                      <Badge className="bg-green-500/10 text-green-600 border-green-200 py-1 px-4 text-sm font-semibold">Privacy</Badge>
+                      <Badge className="bg-blue-500/10 text-blue-600 border-blue-200 py-1 px-4 text-sm font-semibold">Identity</Badge>
+                      <Badge className="bg-purple-500/10 text-purple-600 border-purple-200 py-1 px-4 text-sm font-semibold">Finances</Badge>
+                    </div>
+                  </Card>
                 </section>
+
+                {/* Navigation */}
+                <TopicNavigation currentModuleId={10} currentTopicId="m10-t1" />
               </div>
             );
           }
@@ -24379,52 +25204,50 @@ const ModuleDetail = () => {
             const crackTime = strength < 30 ? "Instantly ❌" : strength < 60 ? "2 Minutes ⚠️" : strength < 80 ? "2 Weeks ⚠️" : "3 Million Years ✅";
 
             return (
-              <div className="space-y-16">
-                {/* Hero - Option A: Digital Vault */}
-                <section className="relative overflow-hidden min-h-[60vh] flex items-center bg-gradient-to-b from-slate-900 to-black text-white">
-                  {/* Background Glow */}
-                  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 blur-[100px] rounded-full mix-blend-screen animate-pulse"></div>
-
-                  <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-                    {/* Left: Text */}
+              <div id="topic-passwords" className="space-y-16">
+                {/* Hero */}
+                <section className="container mx-auto px-4 pt-16">
+                  <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
                       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-sm font-semibold tracking-wide uppercase">
                         <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                        Cybersecurity Essentials
+                        Module 10: Topic 2
                       </div>
                       <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
                         {hero.title}
                       </h1>
-                      <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-lg">
+                      <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
                         {hero.subtitle}
                       </p>
                     </div>
 
-                    {/* Right: Visual (Vault Lock) */}
-                    <div className="relative flex justify-center">
-                      <div className="relative w-72 h-72 lg:w-96 lg:h-96">
-                        {/* Outer Ring */}
-                        <div className="absolute inset-0 rounded-full border-[20px] border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex items-center justify-center">
-                          {/* Inner Ring */}
-                          <div className="w-[80%] h-[80%] rounded-full border-[10px] border-slate-700 flex items-center justify-center bg-slate-900">
-                            {/* The Lock Icon */}
-                            <div className="text-9xl filter drop-shadow-[0_0_20px_rgba(59,130,246,0.5)] animate-pulse">
-                              🔐
-                            </div>
-                          </div>
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-border/70 relative group shadow-2xl">
+                      <div className="relative w-full aspect-square bg-muted overflow-hidden">
+                        <img
+                          src={getImageUrl(hero.visual)}
+                          alt={hero.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                          }}
+                        />
+                        {/* Fallback */}
+                        <div className="hidden w-full h-full bg-gradient-to-br from-slate-900 to-black flex items-center justify-center flex-col text-center p-12 text-white">
+                          <span className="text-9xl mb-4 animate-pulse">🔐</span>
+                          <p className="font-bold text-3xl">Password Fortress</p>
+                          <p className="text-slate-400 mt-2 italic">Building digital resilience</p>
                         </div>
-                        {/* Decorative Dots */}
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-green-500 rounded-full shadow-[0_0_10px_#22c55e]"></div>
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-red-500 rounded-full opacity-50"></div>
                       </div>
-                    </div>
+                    </Card>
                   </div>
                 </section>
 
-                {/* Intro Text (Enhanced) */}
+                {/* Intro Text */}
                 <section className="container mx-auto px-4">
-                  <div className="max-w-3xl mx-auto text-center space-y-6">
-                    <h2 className="text-3xl font-bold">{intro.title}</h2>
+                  <div className="max-w-4xl mx-auto text-center space-y-6">
+                    <Badge variant="outline" className="border-primary/30 text-primary">THE FIRST LINE OF DEFENSE</Badge>
+                    <h2 className="text-4xl font-bold">{intro.title}</h2>
                     <p className="text-xl text-muted-foreground leading-relaxed whitespace-pre-line">
                       {intro.desc}
                     </p>
@@ -24433,48 +25256,67 @@ const ModuleDetail = () => {
 
                 {/* Interactive Meter */}
                 <section className="container mx-auto px-4">
-                  <Card className="p-10 border-2 border-primary/20 bg-secondary/5">
-                    <h3 className="text-3xl font-bold mb-6 text-center">🔐 Password Strength Meter</h3>
-                    <div className="max-w-xl mx-auto space-y-6">
-                      <Input
-                        type="text"
-                        placeholder="Type a password here (Not your real one!)..."
-                        className="text-xl p-6"
-                        value={passwordInput}
-                        onChange={(e) => setPasswordInput(e.target.value)}
-                      />
-
-                      {/* Bar */}
-                      <div className="h-4 w-full bg-secondary/20 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full transition-all duration-500 ${strength < 40 ? 'bg-red-500' : strength < 80 ? 'bg-yellow-500' : 'bg-green-500'}`}
-                          style={{ width: `${strength}%` }}
-                        ></div>
+                  <div className="max-w-4xl mx-auto">
+                    <Card className="p-8 md:p-12 border-2 border-primary/10 bg-card shadow-xl overflow-hidden relative">
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl -z-10"></div>
+                      <div className="text-center mb-10">
+                        <h3 className="text-3xl font-bold mb-2">🔐 Password Strength Lab</h3>
+                        <p className="text-muted-foreground">Test your password's resilience against modern hacking tools.</p>
                       </div>
 
-                      {/* Stats */}
-                      <div className="grid grid-cols-2 gap-4 text-center">
-                        <div className="p-4 bg-background rounded-xl border">
-                          <p className="text-sm text-muted-foreground">Score</p>
-                          <p className="text-2xl font-bold">{strength}/100</p>
+                      <div className="max-w-2xl mx-auto space-y-8">
+                        <div className="space-y-2">
+                          <Input
+                            type="text"
+                            placeholder="Type a test password (Do not use your real one!)..."
+                            className="text-xl p-8 h-auto bg-muted/30 border-2 focus:ring-primary/20 transition-all font-mono"
+                            value={passwordInput}
+                            onChange={(e) => setPasswordInput(e.target.value)}
+                          />
                         </div>
-                        <div className="p-4 bg-background rounded-xl border">
-                          <p className="text-sm text-muted-foreground">Time to Crack</p>
-                          <p className="text-xl font-bold">{crackTime}</p>
+
+                        {/* Visual Meter */}
+                        <div className="space-y-4">
+                          <div className="h-4 w-full bg-muted rounded-full overflow-hidden border border-border/50">
+                            <div
+                              className={`h-full transition-all duration-700 ease-out ${strength < 40 ? 'bg-red-500' : strength < 80 ? 'bg-yellow-500' : 'bg-green-500'}`}
+                              style={{ width: `${strength}%` }}
+                            ></div>
+                          </div>
+                          <div className="flex justify-between items-center text-sm font-bold">
+                            <span className={strength < 40 ? 'text-red-500' : strength < 80 ? 'text-yellow-500' : 'text-green-500 uppercase tracking-widest'}>
+                              {strength < 40 ? 'WEAK' : strength < 80 ? 'MEDIUM' : 'STRONG'}
+                            </span>
+                            <span className="text-muted-foreground">{strength}/100</span>
+                          </div>
+                        </div>
+
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-2 gap-6 pt-4">
+                          <div className="p-6 bg-muted/30 rounded-3xl border border-border/50 text-center group hover:bg-muted/50 transition-colors">
+                            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1 font-bold">Resilience</p>
+                            <p className="text-3xl font-black">{strength < 40 ? '脆弱' : strength < 80 ? '安定' : '無敵'}</p>
+                          </div>
+                          <div className="p-6 bg-muted/30 rounded-3xl border border-border/50 text-center group hover:bg-muted/50 transition-colors">
+                            <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1 font-bold">Time to Crack</p>
+                            <p className={`text-2xl font-bold ${strength >= 80 ? 'text-green-500' : 'text-foreground'}`}>{crackTime}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </div>
                 </section>
 
                 {/* Tips */}
                 <section className="container mx-auto px-4">
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-3 gap-8">
                     {tips.map((tip: any, i: number) => (
-                      <Card key={i} className="p-6 text-center hover:bg-secondary/10 transition-colors">
-                        <div className="text-4xl mb-4">{tip.icon}</div>
-                        <h4 className="text-xl font-bold mb-2">{tip.title}</h4>
-                        <p className="text-muted-foreground">{tip.desc}</p>
+                      <Card key={i} className="p-8 text-center bg-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-none shadow-lg">
+                        <div className="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                          <span className="text-4xl">{tip.icon}</span>
+                        </div>
+                        <h4 className="text-2xl font-bold mb-3">{tip.title}</h4>
+                        <p className="text-muted-foreground leading-relaxed">{tip.desc}</p>
                       </Card>
                     ))}
                   </div>
@@ -24482,13 +25324,17 @@ const ModuleDetail = () => {
 
                 {/* Mistakes (Hall of Shame) */}
                 <section className="container mx-auto px-4">
-                  <h3 className="text-3xl font-bold text-center mb-10">🚫 The Hall of Shame (Common Mistakes)</h3>
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="text-center mb-12">
+                    <Badge variant="destructive" className="mb-4 px-4 py-1">AVOID THESE</Badge>
+                    <h3 className="text-4xl font-bold">The Hall of Shame</h3>
+                    <p className="text-muted-foreground mt-2">These common habits are a goldmine for hackers.</p>
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-8">
                     {mistakes.map((m: any, i: number) => (
-                      <Card key={i} className="p-6 border-red-500/20 bg-red-500/5">
-                        <div className="text-4xl mb-4 text-center">{m.icon}</div>
-                        <h4 className="text-xl font-bold text-red-500 mb-2 text-center">{m.title}</h4>
-                        <p className="text-center whitespace-pre-line">{m.desc}</p>
+                      <Card key={i} className="p-8 border-red-500/10 bg-red-500/[0.02] hover:bg-red-500/[0.05] transition-colors border-2">
+                        <div className="text-5xl mb-6 text-center">{m.icon}</div>
+                        <h4 className="text-xl font-bold text-red-600 mb-3 text-center tracking-tight">{m.title}</h4>
+                        <p className="text-center text-muted-foreground leading-relaxed whitespace-pre-line">{m.desc}</p>
                       </Card>
                     ))}
                   </div>
@@ -24496,58 +25342,77 @@ const ModuleDetail = () => {
 
                 {/* NEW: THE MATH OF RESISTANCE */}
                 <section className="container mx-auto px-4">
-                  <div className="max-w-4xl mx-auto">
-                    <div className="bg-secondary/10 border border-secondary p-10 md:p-14 rounded-[40px] shadow-sm">
-                      <div className="flex flex-col md:flex-row gap-10 items-center">
-                        <div className="flex-1 space-y-6">
-                          <Badge className="bg-blue-600 hover:bg-blue-700">SECURITY MATH</Badge>
-                          <h3 className="text-3xl font-bold">Why Length Beats Complexity</h3>
-                          <p className="text-muted-foreground leading-relaxed">
-                            Humans think adding a symbol like <code className="bg-muted px-1 rounded">@</code> makes a password "hard". Computers don't care. They guess millions of times per second.
+                  <div className="max-w-5xl mx-auto">
+                    <div className="bg-slate-900 text-white p-10 md:p-16 rounded-[40px] shadow-2xl relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.1),transparent)] pointer-events-none"></div>
+                      <div className="flex flex-col lg:flex-row gap-12 items-center relative z-10">
+                        <div className="flex-1 space-y-8">
+                          <Badge className="bg-blue-500/20 text-blue-400 border-blue-400/30 hover:bg-blue-500/30">QUANTUM DEFENSE</Badge>
+                          <h3 className="text-4xl font-bold tracking-tight">Why Length Beats Complexity</h3>
+                          <p className="text-slate-300 text-lg leading-relaxed">
+                            Hackers don't guess your password like humans do. They use massive data centers to try millions of combinations per second. In this digital war, <span className="text-blue-400 font-bold underline">Length is your greatest weapon.</span>
                           </p>
-                          <div className="space-y-4">
-                            <div className="flex items-start gap-3">
-                              <span className="text-blue-600 font-bold">THE "WHY":</span>
-                              <p className="text-sm">Computers use "Brute Force". Every extra character added multiplies the work for a hacker by <span className="font-bold underline">94 times</span> (the number of possible keyboard keys).</p>
+                          <div className="grid gap-6">
+                            <div className="flex items-start gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                              <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center shrink-0">
+                                <span className="text-blue-400 font-bold">1</span>
+                              </div>
+                              <div>
+                                <p className="font-bold text-blue-400 uppercase text-xs tracking-widest mb-1">Brute Force</p>
+                                <p className="text-sm text-slate-400">Every extra character added multiplies the difficulty for a hacker by 94x.</p>
+                              </div>
                             </div>
-                            <div className="flex items-start gap-3">
-                              <span className="text-blue-600 font-bold">THE "HOW":</span>
-                              <p className="text-sm">Hackers use "Dictionary Attacks"—pre-made lists of common words. A unique passphrase like <span className="font-mono bg-blue-500/10 px-2 rounded">"MyCatLovesBluePizza"</span> is virtually impossible to find on any list.</p>
+                            <div className="flex items-start gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                              <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center shrink-0">
+                                <span className="text-blue-400 font-bold">2</span>
+                              </div>
+                              <div>
+                                <p className="font-bold text-blue-400 uppercase text-xs tracking-widest mb-1">Passphrases</p>
+                                <p className="text-sm text-slate-400">A simple, long sentence like <span className="font-mono text-white">"BlueCatsDanceAtMidnight"</span> is unhackable by current computers.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
 
                         {/* Visual Diagram Layer */}
-                        <Card className="w-full md:w-[350px] p-6 bg-slate-900 text-white border-blue-500/30 shadow-2xl space-y-6 overflow-hidden relative">
-                          <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-2xl"></div>
-                          <p className="text-xs font-mono text-blue-400 uppercase tracking-widest border-b border-white/10 pb-2">TIME TO CRACK (800 Trillion/sec)</p>
+                        <Card className="w-full lg:w-[400px] p-8 bg-black/40 backdrop-blur-xl border-white/10 shadow-2xl space-y-8 overflow-hidden relative group">
+                          <div className="absolute inset-0 bg-blue-500/5 transition-opacity group-hover:opacity-10"></div>
+                          <div className="text-center pb-4 border-b border-white/10">
+                            <p className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em]">Hacking Simulation</p>
+                          </div>
 
-                          <div className="space-y-4">
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-[10px] font-mono">
-                                <span>P@ssw0rd! (10 chars)</span>
-                                <span className="text-red-500">FAILED</span>
+                          <div className="space-y-6">
+                            <div className="space-y-3">
+                              <div className="flex justify-between text-[11px] font-mono">
+                                <span className="text-slate-500">P@ssw0rd! (10 chars)</span>
+                                <span className="text-red-500 font-bold">CRACKED</span>
                               </div>
-                              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div className="h-full bg-red-500 w-[10%] transition-all"></div>
+                              <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div className="h-full bg-red-500 w-[100%]"></div>
                               </div>
-                              <p className="text-[10px] text-red-400 italic">Crack Time: 2 Seconds</p>
+                              <div className="flex justify-between text-[10px] items-center">
+                                <span className="text-slate-500 italic">Complexity focus</span>
+                                <span className="text-red-400 font-bold underline">0.2 Seconds</span>
+                              </div>
                             </div>
 
-                            <div className="space-y-2">
-                              <div className="flex justify-between text-[10px] font-mono">
-                                <span>SkyBluePizza (12 chars)</span>
-                                <span className="text-green-500">HOLDING</span>
+                            <div className="space-y-3">
+                              <div className="flex justify-between text-[11px] font-mono">
+                                <span className="text-slate-500 uppercase tracking-tighter">SkyBluePizza (12 chars)</span>
+                                <span className="text-green-500 font-bold">IMMUNE</span>
                               </div>
-                              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div className="h-full bg-green-500 w-full animate-pulse transition-all"></div>
+                              <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div className="h-full bg-green-500 w-1/4 animate-pulse"></div>
                               </div>
-                              <p className="text-[10px] text-green-400 font-bold">Crack Time: 3 Million Years</p>
+                              <div className="flex justify-between text-[10px] items-center">
+                                <span className="text-slate-500 italic">Length focus</span>
+                                <span className="text-green-400 font-black">3 MILLION YEARS</span>
+                              </div>
                             </div>
                           </div>
 
-                          <div className="text-[10px] bg-white/5 p-3 rounded border border-white/10 text-slate-400">
-                            Conclusion: A longer, simple passphrase is <strong>100,000x stronger</strong> than a short, complex password.
+                          <div className="bg-blue-500/10 p-4 rounded-xl text-[11px] leading-relaxed text-blue-200 border border-blue-500/20">
+                            <strong>CONCLUSION:</strong> A longer, simple passphrase is <strong>infinite times stronger</strong> than a short, "complex" one.
                           </div>
                         </Card>
                       </div>
@@ -24609,20 +25474,29 @@ const ModuleDetail = () => {
             if (!mfa) return null;
 
             return (
-              <div className="space-y-16">
+              <div id="topic-mfa" className="space-y-16">
                 {/* Hero */}
                 <section className="container mx-auto px-4 pt-16">
-                  <div className="grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
-                      <h2 className="text-3xl font-semibold text-foreground">{mfa.hero.title}</h2>
-                      <p className="text-lg text-muted-foreground">{mfa.hero.subtitle}</p>
+                  <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-sm font-semibold tracking-wide uppercase">
+                        <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                        Module 10: Topic 3
+                      </div>
+                      <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+                        {mfa.hero.title}
+                      </h1>
+                      <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                        {mfa.hero.subtitle}
+                      </p>
                     </div>
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
+
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-border/70 relative group shadow-2xl">
                       <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
                         <img
                           src={getImageUrl(mfa.hero.visual)}
-                          className="w-full h-full object-cover"
+                          alt={mfa.hero.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
                             e.currentTarget.nextElementSibling?.classList.remove('hidden');
@@ -24630,8 +25504,9 @@ const ModuleDetail = () => {
                         />
                         {/* Fallback */}
                         <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
-                          <span className="text-6xl mb-4">🔐</span>
-                          <p className="font-bold">MFA Security</p>
+                          <span className="text-9xl mb-4">🔐</span>
+                          <p className="font-bold text-3xl">MFA Security</p>
+                          <p className="text-slate-400 mt-2">Double-layer Protection</p>
                         </div>
                       </div>
                     </Card>
@@ -24640,128 +25515,155 @@ const ModuleDetail = () => {
 
                 {/* Factors Grid */}
                 <section className="container mx-auto px-4">
-                  <div className="text-center mb-10">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-2">THE 3 FACTORS</p>
-                    <h3 className="text-3xl font-bold">The Triangle of Security</h3>
-                    <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-                      Security experts divide authentication into three categories. Strong security means combining at least two of these.
+                  <div className="text-center mb-16">
+                    <Badge variant="outline" className="mb-4 border-primary/30 text-primary px-4 py-1">THE 3 FACTORS</Badge>
+                    <h3 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">The Triangle of Security</h3>
+                    <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
+                      Security experts divide authentication into three fundamental categories. True security requires a combination of at least two.
                     </p>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-6 mb-12">
+                  <div className="grid md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
                     {mfa.factors.map((factor: any, i: number) => (
-                      <Card key={i} className="p-8 border border-border/70 hover:border-primary/50 transition-colors text-center bg-card shadow-sm hover:shadow-md">
-                        <div className="text-5xl mb-6 bg-secondary/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto">{factor.icon}</div>
-                        <h3 className="text-xl font-bold mb-2">{factor.title}</h3>
-                        <p className="text-xs font-bold text-primary uppercase mb-4 tracking-wider">{factor.subtitle}</p>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{factor.desc}</p>
+                      <Card key={i} className="p-10 border border-border/50 hover:border-primary/50 transition-all duration-500 text-center bg-card shadow-lg hover:shadow-2xl hover:-translate-y-2 group">
+                        <div className="text-6xl mb-8 bg-primary/5 w-28 h-28 rounded-full flex items-center justify-center mx-auto transition-transform group-hover:scale-110 duration-500 shadow-inner">{factor.icon}</div>
+                        <h3 className="text-2xl font-bold mb-2 tracking-tight">{factor.title}</h3>
+                        <p className="text-xs font-black text-primary uppercase mb-6 tracking-[0.2em]">{factor.subtitle}</p>
+                        <p className="text-muted-foreground leading-relaxed">{factor.desc}</p>
                       </Card>
                     ))}
                   </div>
 
                   {/* Big Visual Container */}
-                  <Card className="p-0 overflow-hidden rounded-[32px] border border-border/70 shadow-lg">
-                    <div className="relative w-full aspect-[21/9] bg-muted overflow-hidden group">
-                      <img
-                        src={getImageUrl(mfa.triangleVisual?.image)}
-                        alt={mfa.triangleVisual?.alt}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                        }}
-                      />
-                      {/* Fallback - Diagram Representation */}
-                      <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
-                        <div className="grid grid-cols-3 gap-12 items-center mb-8 opacity-80">
-                          <div className="flex flex-col items-center">
-                            <span className="text-6xl mb-2">🧠</span>
-                            <span className="text-sm uppercase">Know</span>
+                  <div className="max-w-6xl mx-auto">
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-border/70 shadow-2xl relative">
+                      <div className="relative w-full aspect-[21/9] bg-muted overflow-hidden group">
+                        <img
+                          src={getImageUrl(mfa.triangleVisual?.image)}
+                          alt={mfa.triangleVisual?.alt}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                          }}
+                        />
+                        {/* Fallback - Diagram Representation */}
+                        <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white">
+                          <div className="grid grid-cols-3 gap-16 items-center mb-10 opacity-60">
+                            <div className="flex flex-col items-center gap-4">
+                              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-4xl">🧠</div>
+                              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Knowledge</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-4">
+                              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-4xl">📱</div>
+                              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Possession</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-4">
+                              <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-4xl">👆</div>
+                              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Inherence</span>
+                            </div>
                           </div>
-                          <div className="flex flex-col items-center">
-                            <span className="text-6xl mb-2">📱</span>
-                            <span className="text-sm uppercase">Have</span>
+                          <div className="w-full h-1 bg-white/10 mb-10 max-w-lg mx-auto relative rounded-full overflow-hidden">
+                            <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-green-500 w-2/3 animate-pulse"></div>
                           </div>
-                          <div className="flex flex-col items-center">
-                            <span className="text-6xl mb-2">👆</span>
-                            <span className="text-sm uppercase">Are</span>
-                          </div>
+                          <p className="font-bold text-2xl max-w-2xl leading-relaxed text-blue-100 italic">"{mfa.triangleVisual?.caption || "Combinations create unhackable locks."}"</p>
                         </div>
-                        <div className="w-full h-1 bg-white/20 mb-8 max-w-lg mx-auto relative">
-                          <div className="absolute top-0 left-0 h-full bg-green-500 w-2/3 animate-pulse"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8 md:p-12">
+                          <p className="text-white font-medium text-lg max-w-2xl">{mfa.triangleVisual?.caption}</p>
                         </div>
-                        <p className="font-bold text-xl max-w-xl leading-relaxed text-blue-100">{mfa.triangleVisual?.caption || "Combinations create security."}</p>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </div>
                 </section>
 
                 {/* Process (Split) */}
                 <section className="container mx-auto px-4">
-                  <div className="grid md:grid-cols-2 gap-10 items-center bg-secondary/10 rounded-3xl p-8 md:p-12">
-                    <Card className="p-0 overflow-hidden rounded-2xl border-none shadow-xl">
-                      <div className="relative aspect-video bg-white flex items-center justify-center">
-                        <div className="text-center space-y-4">
-                          <span className="text-4xl">👤</span>
-                          <span className="text-2xl">➡️</span>
-                          <span className="text-4xl">🔒</span>
-                          <span className="text-2xl">➡️</span>
-                          <span className="text-6xl animate-pulse">📱</span>
-                          <span className="text-2xl">➡️</span>
-                          <span className="text-4xl">✅</span>
+                  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center bg-muted/30 rounded-[40px] p-10 md:p-16 border border-border/50">
+                    <Card className="p-0 overflow-hidden rounded-3xl border-none shadow-2xl ring-8 ring-primary/5">
+                      <div className="relative aspect-video bg-white flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05),transparent)] animate-pulse"></div>
+                        <div className="relative z-10 flex items-center gap-4 md:gap-6 scale-90 md:scale-100">
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-2xl shadow-sm">👤</div>
+                            <span className="text-[10px] font-bold text-slate-400">Step 1</span>
+                          </div>
+                          <span className="text-slate-300">➜</span>
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-2xl shadow-sm">🔒</div>
+                            <span className="text-[10px] font-bold text-slate-400">Step 2</span>
+                          </div>
+                          <span className="text-slate-300">➜</span>
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-20 h-20 bg-primary/10 ring-4 ring-primary/20 rounded-3xl flex items-center justify-center text-4xl shadow-xl animate-bounce">📱</div>
+                            <span className="text-[10px] font-black text-primary animate-pulse">VERIFY</span>
+                          </div>
+                          <span className="text-slate-300">➜</span>
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-2xl shadow-lg text-white">✅</div>
+                            <span className="text-[10px] font-bold text-green-600">Step 4</span>
+                          </div>
                         </div>
                       </div>
                     </Card>
-                    <div className="space-y-4">
-                      <h3 className="text-3xl font-bold">{mfa.process.title}</h3>
-                      <p className="text-lg text-muted-foreground">{mfa.process.desc}</p>
+                    <div className="space-y-6">
+                      <Badge className="bg-primary/10 text-primary border-primary/20">THE WORKFLOW</Badge>
+                      <h3 className="text-4xl font-bold tracking-tight">{mfa.process.title}</h3>
+                      <p className="text-xl text-muted-foreground leading-relaxed italic">
+                        "{mfa.process.desc}"
+                      </p>
                     </div>
                   </div>
                 </section>
 
                 {/* Interactive Toggle */}
                 <section className="container mx-auto px-4">
-                  <Card className={`p-12 text-center border-2 transition-all duration-500 ${mfaToggle ? 'border-green-500 bg-green-500/5' : 'border-red-500 bg-red-500/5'}`}>
-                    <h2 className="text-3xl font-bold mb-2">{mfa.interactive.title}</h2>
-                    <p className="text-muted-foreground mb-8">{mfa.interactive.desc}</p>
+                  <div className="max-w-4xl mx-auto">
+                    <Card className={`p-10 md:p-16 text-center border-4 transition-all duration-700 rounded-[50px] relative overflow-hidden ${mfaToggle ? 'border-green-500/50 bg-green-500/[0.03] shadow-green-500/10 shadow-2xl' : 'border-red-500/50 bg-red-500/[0.03] shadow-red-500/10 shadow-2xl'}`}>
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-inherit blur-[100px] opacity-20 -z-10"></div>
+                      <h2 className="text-4xl font-black mb-4 tracking-tight">{mfa.interactive.title}</h2>
+                      <p className="text-lg text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">{mfa.interactive.desc}</p>
 
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <span className={`text-sm font-bold ${!mfaToggle ? 'text-red-500' : 'text-muted-foreground'}`}>OFF</span>
-                      <Switch checked={mfaToggle} onCheckedChange={setMfaToggle} className="scale-150" />
-                      <span className={`text-sm font-bold ${mfaToggle ? 'text-green-500' : 'text-muted-foreground'}`}>ON</span>
-                    </div>
+                      <div className="flex items-center justify-center gap-8 mb-12">
+                        <span className={`text-sm font-black transition-colors ${!mfaToggle ? 'text-red-500 scale-110' : 'text-muted-foreground/40'}`}>OFF</span>
+                        <div className="relative group">
+                          <Switch checked={mfaToggle} onCheckedChange={setMfaToggle} className="scale-[2.5] data-[state=checked]:bg-green-500 shadow-xl" />
+                        </div>
+                        <span className={`text-sm font-black transition-colors ${mfaToggle ? 'text-green-500 scale-110' : 'text-muted-foreground/40'}`}>ON</span>
+                      </div>
 
-                    <div className="transition-all duration-500 transform">
-                      <div className="text-8xl mb-4 pt-4">{mfaToggle ? '🛡️' : '🔓'}</div>
-                      <p className={`text-2xl font-bold ${mfaToggle ? 'text-green-600' : 'text-red-600'}`}>
-                        {mfaToggle ? "Account Secured" : "Account Vulnerable"}
-                      </p>
-                    </div>
-                  </Card>
+                      <div className="transition-all duration-700 transform relative pt-8">
+                        <div className="text-[10rem] mb-6 leading-none transition-transform duration-700 hover:scale-110 drop-shadow-2xl">{mfaToggle ? '🛡️' : '🔓'}</div>
+                        <Badge className={`text-2xl py-2 px-10 rounded-full font-black animate-in zoom-in duration-500 ${mfaToggle ? 'bg-green-600 text-white shadow-green-900/40 shadow-xl' : 'bg-red-600 text-white shadow-red-900/40 shadow-xl'}`}>
+                          {mfaToggle ? "ACCOUNT SECURED" : "ACCOUNT VULNERABLE"}
+                        </Badge>
+                      </div>
+                    </Card>
+                  </div>
                 </section>
 
                 {/* Why Scams Succeed */}
                 <section className="container mx-auto px-4">
-                  <div className="bg-red-900/10 border-2 border-red-500/20 rounded-[40px] p-8 md:p-14 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/5 blur-[100px]"></div>
+                  <div className="max-w-6xl mx-auto bg-red-950/90 text-white border-2 border-red-500/30 rounded-[50px] p-10 md:p-20 overflow-hidden relative shadow-2xl">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/10 blur-[150px] -z-10"></div>
                     <div className="relative z-10">
-                      <div className="text-center mb-10">
-                        <Badge variant="destructive" className="mb-4">CRITICAL WARNING</Badge>
-                        <h3 className="text-3xl font-bold">{mfa.scamVulnerability.title}</h3>
-                        <p className="text-muted-foreground mt-2">{mfa.scamVulnerability.intro}</p>
+                      <div className="text-center mb-16">
+                        <Badge variant="destructive" className="mb-6 px-6 py-2 bg-red-600 text-white font-black tracking-widest animate-pulse border-none">CRITICAL WARNING</Badge>
+                        <h3 className="text-5xl font-black tracking-tighter mb-6">{mfa.scamVulnerability.title}</h3>
+                        <p className="text-red-200/80 text-xl max-w-2xl mx-auto leading-relaxed italic">{mfa.scamVulnerability.intro}</p>
                       </div>
 
                       <div className="grid md:grid-cols-3 gap-8">
                         {mfa.scamVulnerability.reasons.map((reason: any, i: number) => (
-                          <div key={i} className="bg-background/80 p-6 rounded-2xl border border-red-500/20 shadow-sm">
-                            <h4 className="font-bold text-red-500 mb-2">#{i + 1} {reason.title}</h4>
-                            <p className="text-sm leading-relaxed">{reason.desc}</p>
+                          <div key={i} className="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-xl hover:bg-white/10 transition-colors group">
+                            <div className="text-4xl font-black text-red-500 mb-6 opacity-30 group-hover:opacity-100 transition-opacity">0{i + 1}</div>
+                            <h4 className="font-bold text-2xl mb-4 tracking-tight text-red-400">{reason.title}</h4>
+                            <p className="text-red-100/70 leading-relaxed text-sm">{reason.desc}</p>
                           </div>
                         ))}
                       </div>
 
-                      <div className="mt-10 p-4 bg-green-500/10 border border-green-500/30 rounded-xl text-center">
-                        <p className="font-bold text-green-600">🛡️ PRO TIP: No bank will ever ask for your OTP. If they do, HANG UP immediately.</p>
+                      <div className="mt-16 p-8 bg-green-500/10 border-2 border-green-500/30 rounded-3xl text-center group hover:bg-green-500/20 transition-all duration-500">
+                        <p className="font-black text-2xl text-green-400 tracking-tight">🛡️ PRO TIP: No bank will ever ask for your OTP. If they do, HANG UP immediately.</p>
                       </div>
                     </div>
                   </div>
@@ -24778,31 +25680,41 @@ const ModuleDetail = () => {
             if (!malware) return null;
 
             return (
-              <div className="space-y-16">
+              <div id="topic-malware" className="space-y-16">
                 {/* Hero */}
                 <section className="container mx-auto px-4 pt-16">
-                  <div className="grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
-                      <h2 className="text-5xl font-bold">{malware.hero.title}</h2>
-                      <p className="text-xl text-muted-foreground">{malware.hero.subtitle}</p>
+                  <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/50 text-red-500 text-sm font-semibold tracking-wide uppercase">
+                        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                        Module 10: Topic 4
+                      </div>
+                      <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+                        {malware.hero.title}
+                      </h1>
+                      <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                        {malware.hero.subtitle}
+                      </p>
                     </div>
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70 relative">
-                      <div className="absolute inset-0 bg-red-500/10 animate-pulse"></div>
-                      <img
-                        src={getImageUrl(malware.hero.visual)}
-                        alt="Malware Visualization"
-                        className="w-full h-[400px] object-cover mix-blend-overlay"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                        }}
-                      />
-                      {/* Fallback */}
-                      <div className="hidden w-full h-[400px] flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
-                        <span className="text-8xl mb-4 text-red-500 animate-bounce">🐛</span>
-                        <p className="font-bold text-2xl font-mono">MALWARE DETECTED</p>
-                        <p className="text-muted-foreground mt-2">Infection Guide Loading...</p>
+
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-red-500/10 relative group shadow-2xl">
+                      <div className="relative w-full aspect-square bg-slate-950 overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.2),transparent)] animate-pulse"></div>
+                        <img
+                          src={getImageUrl(malware.hero.visual)}
+                          alt={malware.hero.title}
+                          className="w-full h-full object-cover mix-blend-overlay transition-transform duration-1000 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                          }}
+                        />
+                        {/* Fallback */}
+                        <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
+                          <span className="text-9xl mb-4 text-red-500 animate-bounce">🐛</span>
+                          <p className="font-bold text-3xl font-mono tracking-tighter text-red-500">VIRUS DETECTED</p>
+                          <p className="text-slate-400 mt-2 italic text-sm">Security breach in progress...</p>
+                        </div>
                       </div>
                     </Card>
                   </div>
@@ -24810,28 +25722,40 @@ const ModuleDetail = () => {
 
                 {/* Field Guide */}
                 <section className="container mx-auto px-4">
-                  <div className="text-center mb-12">
-                    <h3 className="text-3xl font-bold mb-4">The Malware Field Guide</h3>
-                    <p className="text-muted-foreground">Know your enemies. These digital 'monsters' behave differently.</p>
+                  <div className="text-center mb-16">
+                    <Badge variant="outline" className="mb-4 border-red-500/30 text-red-500 px-4 py-1">THREAT CLASSIFICATION</Badge>
+                    <h3 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-400">The Malware Field Guide</h3>
+                    <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg leading-relaxed italic">
+                      "Know your enemies. These digital 'monsters' behave differently, but they all have one goal: to exploit you."
+                    </p>
                   </div>
 
-                  <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto">
                     {malware.fieldGuide.map((m: any, i: number) => (
-                      <Card key={i} className="p-8 border-l-8 border-l-red-500 hover:shadow-xl transition-shadow bg-card relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 text-5xl opacity-10 group-hover:opacity-20 transition-opacity">{m.icon}</div>
-                        <div className="flex items-center gap-4 mb-4">
-                          <span className="text-5xl">{m.icon}</span>
+                      <Card key={i} className="p-10 border-l-[12px] border-l-red-600 hover:shadow-2xl transition-all duration-500 bg-card relative overflow-hidden group hover:-translate-x-2">
+                        {/* Decorative background element */}
+                        <div className="absolute top-0 right-0 p-8 text-8xl opacity-[0.03] group-hover:opacity-[0.07] transition-all duration-500 group-hover:scale-125 rotate-12">{m.icon}</div>
+
+                        <div className="flex items-center gap-6 mb-8 relative z-10">
+                          <div className="w-20 h-20 bg-red-500/10 rounded-2xl flex items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform duration-500">{m.icon}</div>
                           <div>
-                            <h4 className="text-2xl font-bold">{m.name}</h4>
-                            <span className="text-xs font-mono font-bold text-red-500 uppercase tracking-widest bg-red-500/10 px-2 py-1 rounded">
-                              Alias: {m.behavior}
-                            </span>
+                            <h4 className="text-3xl font-black tracking-tighter">{m.name}</h4>
+                            <div className="inline-block mt-1">
+                              <span className="text-[10px] font-black text-red-600 uppercase tracking-[0.2em] bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">
+                                Behavior: {m.behavior}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <p className="text-lg mb-6 leading-relaxed italic text-muted-foreground">"{m.desc}"</p>
-                        <div className="bg-secondary/20 p-4 rounded-xl">
-                          <p className="font-bold text-sm text-foreground mb-1 uppercase tracking-tight">💀 Primary Danger:</p>
-                          <p className="text-sm">{m.danger}</p>
+
+                        <div className="relative z-10 space-y-6">
+                          <p className="text-xl leading-relaxed font-medium italic text-muted-foreground/80 border-l-2 border-border/50 pl-4">"{m.desc}"</p>
+                          <div className="bg-red-500/[0.03] border border-red-500/10 p-6 rounded-[28px] transition-colors group-hover:bg-red-500/[0.06]">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-red-500 font-black text-xs uppercase tracking-[0.25em]">☠️ Primary Danger</span>
+                            </div>
+                            <p className="text-sm font-semibold leading-relaxed text-foreground/80">{m.danger}</p>
+                          </div>
                         </div>
                       </Card>
                     ))}
@@ -24912,20 +25836,29 @@ const ModuleDetail = () => {
             if (!phishing) return null;
 
             return (
-              <div className="space-y-16">
+              <div id="topic-phishing" className="space-y-16">
                 {/* Hero */}
                 <section className="container mx-auto px-4 pt-16">
-                  <div className="grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-6">MODULE 10: CYBERSECURITY BASICS</p>
-                      <h2 className="text-5xl font-bold">{phishing.hero.title}</h2>
-                      <p className="text-xl text-muted-foreground">{phishing.hero.subtitle}</p>
+                  <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-sm font-semibold tracking-wide uppercase">
+                        <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                        Module 10: Topic 5
+                      </div>
+                      <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+                        {phishing.hero.title}
+                      </h1>
+                      <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                        {phishing.hero.subtitle}
+                      </p>
                     </div>
-                    <Card className="p-0 overflow-hidden rounded-[28px] border border-border/70">
-                      <div className="relative w-full aspect-[4/3] bg-muted overflow-hidden">
+
+                    <Card className="p-0 overflow-hidden rounded-[40px] border border-border/70 relative group shadow-2xl">
+                      <div className="relative w-full aspect-square bg-muted overflow-hidden">
                         <img
                           src={getImageUrl(phishing.hero.visual)}
-                          className="w-full h-full object-cover"
+                          alt={phishing.hero.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
                             e.currentTarget.nextElementSibling?.classList.remove('hidden');
@@ -24933,8 +25866,9 @@ const ModuleDetail = () => {
                         />
                         {/* Fallback */}
                         <div className="hidden w-full h-full flex items-center justify-center flex-col text-center p-12 bg-slate-900 text-white">
-                          <span className="text-6xl mb-4">🎭</span>
-                          <p className="font-bold">Social Engineering</p>
+                          <span className="text-9xl mb-4">🎭</span>
+                          <p className="font-bold text-3xl">Social Engineering</p>
+                          <p className="text-slate-400 mt-2 italic">The Art of Digital Deception</p>
                         </div>
                       </div>
                     </Card>
@@ -24943,44 +25877,59 @@ const ModuleDetail = () => {
 
                 {/* 1. Interactive: The Human Bugs */}
                 <section className="container mx-auto px-4">
-                  <div className="text-center mb-10">
-                    <h3 className="text-3xl font-bold mb-2">The Human Bugs</h3>
-                    <p className="text-muted-foreground">Hackers exploit your emotions. Click a trigger to see how.</p>
+                  <div className="text-center mb-16">
+                    <Badge variant="outline" className="mb-4 border-primary/30 text-primary px-4 py-1 uppercase tracking-widest">PSYCHOLOGICAL EXPLOITS</Badge>
+                    <h3 className="text-4xl font-bold">The Human Bugs</h3>
+                    <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
+                      Hackers don't always hack software—they hack <span className="text-foreground font-bold underline decoration-primary/30">people</span> by exploiting common emotions.
+                    </p>
                   </div>
-                  <div className="grid md:grid-cols-4 gap-4 mb-8">
-                    {phishing.triggers.map((trigger: any) => (
-                      <Button
-                        key={trigger.id}
-                        variant={activeTrigger === trigger.id ? "default" : "outline"}
-                        className="h-24 flex flex-col gap-2 border-2"
-                        onClick={() => setActiveTrigger(trigger.id)}
-                      >
-                        <span className="text-3xl">{trigger.icon}</span>
-                        <span className="font-bold">{trigger.title}</span>
-                      </Button>
-                    ))}
+
+                  <div className="max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                      {phishing.triggers.map((trigger: any) => (
+                        <Card
+                          key={trigger.id}
+                          className={`p-6 cursor-pointer border-2 transition-all duration-300 flex flex-col items-center justify-center gap-4 text-center group hover:shadow-xl ${activeTrigger === trigger.id ? 'border-primary bg-primary/5' : 'border-border/50 bg-card hover:bg-muted/50'}`}
+                          onClick={() => setActiveTrigger(trigger.id)}
+                        >
+                          <div className={`text-5xl transition-transform duration-500 ${activeTrigger === trigger.id ? 'scale-125' : 'group-hover:scale-110'}`}>{trigger.icon}</div>
+                          <span className={`font-black uppercase tracking-tighter text-sm ${activeTrigger === trigger.id ? 'text-primary' : 'text-muted-foreground'}`}>{trigger.title}</span>
+                        </Card>
+                      ))}
+                    </div>
+
+                    {activeTrigger && (
+                      <Card className="p-10 bg-slate-950 text-white border-l-[16px] border-l-red-600 animate-in fade-in slide-in-from-top-6 duration-500 rounded-[32px] overflow-hidden relative group">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/10 blur-[100px] pointer-events-none"></div>
+                        <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
+                          <div className="bg-red-600/20 w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shrink-0">💬</div>
+                          <div className="space-y-3">
+                            <h4 className="font-black text-red-500 uppercase tracking-[0.3em] text-xs">SCAM EXAMPLE:</h4>
+                            <p className="text-3xl font-mono leading-tight tracking-tight text-red-50 italic">
+                              "{phishing.triggers.find((t: any) => t.id === activeTrigger)?.msg}"
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+                    )}
                   </div>
-                  {activeTrigger && (
-                    <Card className="p-8 bg-slate-100 dark:bg-slate-900 border-l-8 border-l-red-500 animate-in fade-in slide-in-from-top-4">
-                      <h4 className="font-bold text-red-500 mb-2 uppercase">Scam Example:</h4>
-                      <p className="text-2xl font-mono text-foreground">
-                        "{phishing.triggers.find((t: any) => t.id === activeTrigger)?.msg}"
-                      </p>
-                    </Card>
-                  )}
                 </section>
 
                 {/* 2. Common Attacks Grid */}
                 <section className="container mx-auto px-4">
-                  <div className="text-center mb-10">
-                    <h3 className="text-3xl font-bold">Common Attack Types</h3>
+                  <div className="text-center mb-16">
+                    <Badge variant="outline" className="mb-4 border-primary/30 text-primary px-4 py-1">THE ATTACK VECTORS</Badge>
+                    <h3 className="text-4xl font-bold">Common Attack Types</h3>
+                    <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">Social engineering comes in many flavors, all designed to bypass your suspicion.</p>
                   </div>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                     {phishing.attacks.map((attack: any, i: number) => (
-                      <Card key={i} className="p-6 text-center hover:scale-105 transition-transform duration-300">
-                        <div className="text-4xl mb-3">{attack.icon}</div>
-                        <h4 className="font-bold mb-1">{attack.title}</h4>
-                        <p className="text-sm text-muted-foreground">{attack.desc}</p>
+                      <Card key={i} className="p-8 text-center bg-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-none shadow-lg group">
+                        <div className="w-20 h-20 bg-primary/5 rounded-[28px] mx-auto mb-8 flex items-center justify-center text-5xl group-hover:scale-110 transition-transform duration-500">{attack.icon}</div>
+                        <h4 className="font-black text-2xl mb-3 tracking-tight">{attack.title}</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{attack.desc}</p>
                       </Card>
                     ))}
                   </div>
@@ -24988,87 +25937,125 @@ const ModuleDetail = () => {
 
                 {/* 3. Interactive: URL Inspector */}
                 <section className="container mx-auto px-4">
-                  <Card className="p-12 bg-secondary/5 border-2 border-dashed border-border">
-                    <div className="text-center max-w-2xl mx-auto">
-                      <h3 className="text-2xl font-bold mb-4">Interactive Training: The URL Inspector</h3>
-                      <p className="mb-8 text-muted-foreground">Links lie. Hover over the button below (don't click!) to see where it really goes.</p>
+                  <div className="max-w-6xl mx-auto">
+                    <Card className="p-10 md:p-20 bg-slate-950 text-white border-none rounded-[50px] shadow-2xl relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.1),transparent)] pointer-events-none"></div>
+                      <div className="text-center max-w-3xl mx-auto relative z-10 space-y-10">
+                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-400/30">INTERACTIVE TRAINING</Badge>
+                        <h3 className="text-4xl md:text-5xl font-black tracking-tighter">The URL Inspector</h3>
+                        <p className="text-xl text-slate-400 italic">"Links lie. They wear masks. Never trust a button without checking its destination."</p>
 
-                      <div className="relative inline-block group">
-                        <Button
-                          size="lg"
-                          className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6 h-auto shadow-xl"
-                          onMouseEnter={() => setIsUrlHovered(true)}
-                          onMouseLeave={() => setIsUrlHovered(false)}
-                        >
-                          UNLOCK YOUR ACCOUNT NOW 🔒
-                        </Button>
+                        <div className="relative inline-block mt-8">
+                          <Button
+                            size="lg"
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-black text-xl px-12 py-10 h-auto rounded-3xl shadow-[0_0_50px_rgba(37,99,235,0.4)] transition-all hover:scale-105 active:scale-95 flex flex-col gap-2"
+                            onMouseEnter={() => setIsUrlHovered(true)}
+                            onMouseLeave={() => setIsUrlHovered(false)}
+                          >
+                            <span className="flex items-center gap-3">UNLOCK YOUR ACCOUNT NOW <span className="text-2xl">🔒</span></span>
+                            <span className="text-blue-200/50 text-[10px] font-normal uppercase tracking-widest">(Hover to inspect link)</span>
+                          </Button>
 
-                        {/* Tooltip Inspector */}
-                        {isUrlHovered && (
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-black text-white p-4 rounded-xl shadow-2xl z-20 w-[300px] animate-in zoom-in-95">
-                            <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Link Inspector</p>
-                            <p className="font-mono text-red-400 break-all">http://www.secure-bank-login.ru/scam/login.php</p>
-                            <div className="mt-2 text-sm font-bold text-red-500 bg-red-900/20 py-1 px-2 rounded inline-block">
-                              ⚠️ MALICIOUS LINK
+                          {/* Tooltip Inspector */}
+                          {isUrlHovered && (
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-8 bg-white text-slate-900 p-8 rounded-[32px] shadow-[0_30px_60px_rgba(0,0,0,0.5)] z-20 w-[350px] md:w-[450px] animate-in zoom-in-95 fade-in duration-300 border-4 border-red-500">
+                              <div className="flex items-center gap-4 mb-4 border-b pb-4">
+                                <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center text-2xl">🔍</div>
+                                <div>
+                                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Malicious Link Detected</p>
+                                  <p className="font-mono text-red-600 text-sm font-bold">SCAM-INDICATOR: HIGH</p>
+                                </div>
+                              </div>
+                              <div className="bg-slate-50 p-6 rounded-2xl font-mono text-xs text-red-500 break-all leading-relaxed shadow-inner border border-slate-100">
+                                http://www.secure-bank-login.ru/id/39281/scam/capture_credentials.php
+                              </div>
+                              <div className="mt-8 grid grid-cols-2 gap-4">
+                                <div className="bg-red-500/10 p-3 rounded-xl border border-red-200">
+                                  <p className="text-[10px] font-bold text-red-600">DOMAIN</p>
+                                  <p className="text-sm font-black">.ru (Russia)</p>
+                                </div>
+                                <div className="bg-red-500/10 p-3 rounded-xl border border-red-200">
+                                  <p className="text-[10px] font-bold text-red-600">PROTOCOL</p>
+                                  <p className="text-sm font-black">INSECURE (HTTP)</p>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        </div>
+                        <p className="text-sm text-slate-500 italic mt-6 italic">Tip: On desktop, hover your mouse. On mobile, long-press the link.</p>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </div>
                 </section>
 
                 {/* 4. Interactive: Spot the Phish */}
                 <section className="container mx-auto px-4 pb-14">
-                  <div className="text-center mb-10">
-                    <h3 className="text-3xl font-bold font-mono">Exam: Spot the Phish 🎣</h3>
-                    <p className="text-muted-foreground">Which email is real? Select one.</p>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
-                    {/* Email A (Real) */}
-                    <Card
-                      className={`p-6 cursor-pointer border-4 transition-all ${phishSelection === "A" ? 'border-green-500 bg-green-50/10' : 'border-transparent hover:border-slate-300'}`}
-                      onClick={() => setPhishSelection("A")}
-                    >
-                      <div className="flex justify-between items-start mb-4 border-b pb-4">
-                        <div>
-                          <p className="font-bold">From: no-reply@accounts.google.com</p>
-                          <p className="text-sm text-muted-foreground">To: You</p>
-                        </div>
-                        <div className="text-xs bg-slate-200 dark:bg-slate-800 px-2 py-1 rounded">2:30 PM</div>
-                      </div>
-                      <h4 className="font-bold mb-2">Security Alert</h4>
-                      <p className="text-sm">We noticed a new login. If this wasn't you, please check your activity.</p>
-                    </Card>
-
-                    {/* Email B (Fake) */}
-                    <Card
-                      className={`p-6 cursor-pointer border-4 transition-all ${phishSelection === "B" ? 'border-red-500 bg-red-50/10' : 'border-transparent hover:border-slate-300'}`}
-                      onClick={() => setPhishSelection("B")}
-                    >
-                      <div className="flex justify-between items-start mb-4 border-b pb-4">
-                        <div>
-                          <p className="font-bold">From: google-support@securitycheck-now.net</p>
-                          <p className="text-sm text-muted-foreground">To: You</p>
-                        </div>
-                        <div className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded font-bold">URGENT</div>
-                      </div>
-                      <h4 className="font-bold mb-2">URGENT: ACCOUNT DELETED IN 2 MINUTES!!</h4>
-                      <p className="text-sm">YOUR ACCOUNT IS HACKED. CLICK HERE NOW TO STOP DELETION. DO NOT WAIT.</p>
-                    </Card>
-                  </div>
-
-                  {phishSelection && (
-                    <div className={`text-center p-6 rounded-xl animate-in fade-in slide-in-from-bottom-4 ${phishSelection === "A" ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      <h4 className="text-2xl font-bold mb-2">{phishSelection === "A" ? "✅ CORRECT!" : "❌ YOU GOT HACKED!"}</h4>
-                      <p>
-                        {phishSelection === "A"
-                          ? "The sender address is legitimate (google.com) and the tone is calm."
-                          : "The sender domain is fake, and it uses extreme urgency to panic you."}
-                      </p>
+                  <div className="max-w-6xl mx-auto space-y-16">
+                    <div className="text-center space-y-6">
+                      <Badge variant="outline" className="text-2xl py-2 px-8 font-mono tracking-tighter">EXAM: SPOT THE PHISH 🎣</Badge>
+                      <h3 className="text-4xl font-black">Which Email is Legitimate?</h3>
+                      <p className="text-muted-foreground max-w-xl mx-auto text-lg leading-relaxed">Choose the email you believe is the safe, real one. Be careful—your digital identity is on the line.</p>
                     </div>
-                  )}
+
+                    <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                      {/* Email A (Real) */}
+                      <Card
+                        className={`group p-10 cursor-pointer border-[6px] transition-all duration-500 rounded-[40px] shadow-2xl relative overflow-hidden ${phishSelection === "A" ? 'border-green-500 bg-green-500/[0.03]' : 'border-transparent hover:border-slate-200 bg-card hover:bg-muted/50'}`}
+                        onClick={() => setPhishSelection("A")}
+                      >
+                        <div className="flex justify-between items-start mb-8 border-b border-border pb-6 transition-colors group-hover:border-slate-300">
+                          <div className="space-y-1">
+                            <p className="font-black text-xs text-muted-foreground uppercase tracking-widest">SENDER</p>
+                            <p className="font-bold text-slate-900 dark:text-slate-100">no-reply<span className="bg-slate-100 px-1 rounded">@accounts.google.com</span></p>
+                          </div>
+                          <div className="text-[10px] font-black bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full tracking-widest text-slate-500">2:30 PM</div>
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="text-2xl font-black tracking-tight">Security Alert</h4>
+                          <p className="text-slate-600 dark:text-slate-400 italic leading-relaxed">"We noticed a new login on your account. If this was you, you can ignore this email. If not, please review your activity."</p>
+                        </div>
+                        {phishSelection === "A" && <div className="absolute top-4 right-4 text-4xl animate-in zoom-in">✅</div>}
+                      </Card>
+
+                      {/* Email B (Fake) */}
+                      <Card
+                        className={`group p-10 cursor-pointer border-[6px] transition-all duration-500 rounded-[40px] shadow-2xl relative overflow-hidden ${phishSelection === "B" ? 'border-red-500 bg-red-500/[0.03]' : 'border-transparent hover:border-slate-200 bg-card hover:bg-muted/50'}`}
+                        onClick={() => setPhishSelection("B")}
+                      >
+                        <div className="flex justify-between items-start mb-8 border-b border-border pb-6 transition-colors group-hover:border-slate-300">
+                          <div className="space-y-1">
+                            <p className="font-black text-xs text-muted-foreground uppercase tracking-widest">SENDER</p>
+                            <p className="font-bold text-red-600">google-support<span className="bg-red-50 px-1 rounded">@security-now.net</span></p>
+                          </div>
+                          <div className="text-[10px] font-black bg-red-600 text-white px-3 py-1.5 rounded-full tracking-widest animate-pulse">URGENT</div>
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="text-2xl font-black tracking-tighter text-red-600 uppercase">ACCOUNT DELETED IN 2 MIN!!</h4>
+                          <p className="text-red-900/80 dark:text-red-400/80 font-black leading-tight">YOUR ACCOUNT IS COMPROMISED. CLICK HERE NOW TO STOP PERMANENT DELETION. DO NOT WAIT OR YOU LOSE EVERYTHING!!</p>
+                        </div>
+                        {phishSelection === "B" && <div className="absolute top-4 right-4 text-4xl animate-in zoom-in">❌</div>}
+                      </Card>
+                    </div>
+
+                    {phishSelection && (
+                      <Card className={`max-w-4xl mx-auto p-12 rounded-[40px] border-none shadow-2xl animate-in slide-in-from-bottom-10 duration-700 ${phishSelection === "A" ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
+                        <div className="flex flex-col md:flex-row items-center gap-10">
+                          <div className="text-9xl">{phishSelection === "A" ? "🏆" : "☠️"}</div>
+                          <div className="space-y-6">
+                            <h4 className="text-5xl font-black tracking-tight">{phishSelection === "A" ? "PERFECT SCORE!" : "YOU'VE BEEN HACKED!"}</h4>
+                            <p className="text-xl leading-relaxed font-medium text-white/90">
+                              {phishSelection === "A"
+                                ? "You identified the real email. Legit companies (like Google) use their own domain (@google.com) and stay calm. They never use panic or SHOUTING in their alerts."
+                                : "You fell for the panic. 'google-support@security-now.net' is a fake domain. Hackers use 'Urgent' and 'Panic' to make you stop thinking and start clicking."}
+                            </p>
+                            <div className="bg-white/10 p-6 rounded-2xl italic border border-white/10">
+                              Lesson: Always check the sender's full email address (not just the name) and look for artificial urgency.
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    )}
+                  </div>
                 </section>
 
                 {/* Navigation */}

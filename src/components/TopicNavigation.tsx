@@ -33,28 +33,36 @@ export function TopicNavigation({ currentModuleId, currentTopicId }: TopicNaviga
 
     // Let's rely on the INDEX to build paths, to be consistent with Sidebar.
 
+    // URL Construction Helper
+    const getTopicUrl = (index: number) => {
+        const topic = module.topics[index];
+        if (!topic) return "";
+
+        if (topic.id.endsWith("-intro")) {
+            return `/module/${currentModuleId}/topic/${topic.id}`;
+        }
+
+        const firstIsIntro = module.topics[0]?.id.endsWith("-intro");
+        const effectiveNumber = firstIsIntro ? index : index + 1;
+        return `/module/${currentModuleId}/topic/${effectiveNumber}`;
+    };
+
     const handleNext = () => {
         if (nextTopic) {
-            navigate(`/module/${currentModuleId}/topic/${currentIndex + 2}`); // +2 because index is 0-based, next is +1, and URL is 1-based.
+            navigate(getTopicUrl(currentIndex + 1));
         } else {
             // End of module
-            navigate("/modules"); // Or next module?
+            navigate("/dashboard");
         }
     };
 
     const handlePrev = () => {
         if (prevTopic) {
-            navigate(`/module/${currentModuleId}/topic/${currentIndex}`); // URL is 1-based, so index (0-based) IS the previous topic number (e.g. index 1 is topic 2. Prev is topic 1).
+            navigate(getTopicUrl(currentIndex - 1));
         } else {
-            // Start of topics. Go to Module Intro?
-            // For now, let's just go to the module root dashboard or keep it disabled?
-            // Usually "/module/X" is the dashboard.
             navigate(`/module/${currentModuleId}`);
         }
     };
-
-    // URL Construction Helper
-    const getTopicUrl = (index: number) => `/module/${currentModuleId}/topic/${index + 1}`;
 
     return (
         <section className="container mx-auto px-4 pb-20 pt-10">
@@ -66,7 +74,7 @@ export function TopicNavigation({ currentModuleId, currentTopicId }: TopicNaviga
                         variant="ghost"
                         size="lg"
                         className="w-full md:w-auto gap-2 group"
-                        onClick={() => navigate(getTopicUrl(currentIndex - 1))}
+                        onClick={handlePrev}
                     >
                         <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                         <div className="text-left">
@@ -83,7 +91,7 @@ export function TopicNavigation({ currentModuleId, currentTopicId }: TopicNaviga
                     <Button
                         size="lg"
                         className="w-full md:w-auto gap-2 group h-auto py-3 px-6"
-                        onClick={() => navigate(getTopicUrl(currentIndex + 1))}
+                        onClick={handleNext}
                     >
                         <div className="text-right">
                             <span className="block text-xs text-primary-foreground/70 uppercase tracking-wider">Next Topic</span>

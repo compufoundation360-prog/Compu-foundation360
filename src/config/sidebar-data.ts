@@ -177,6 +177,7 @@ export const modules: Module[] = [
         title: "Cybersecurity Basics",
         path: "/module/10",
         topics: [
+            { id: "m10-intro", title: "▶ Intro Video" }, // Added Intro Video
             { id: "m10-t1", title: "What is Cybersecurity?" },
             { id: "m10-t2", title: "Password Security" },
             { id: "m10-t3", title: "OTP & MFA" },

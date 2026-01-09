@@ -67,25 +67,25 @@ export const module1Lessons: Lesson[] = [
               {
                 title: "Data Processing",
                 description: "A computer converts raw data into meaningful information.\n\nIt calculates, compares, and organizes data very quickly.",
-                icon: "📊",
+                icon: "ð",
                 image: "data-processing.jpg"
               },
               {
                 title: "Automation",
                 description: "Computers can perform repeated tasks automatically without human help.\n\nThis saves time and reduces errors.",
-                icon: "⚙️",
+                icon: "âï¸",
                 image: "automation.jpg"
               },
               {
                 title: "Communication",
                 description: "Computers allow people to share information instantly through the internet, emails, and messaging tools.\n\nThey connect us globally.",
-                icon: "🌐",
+                icon: "ð",
                 image: "communication.jpg"
               },
               {
                 title: "Storage & Retrieval",
                 description: "Computers can store large amounts of data and show it whenever needed.\n\nFiles can be saved, organized, and accessed instantly.",
-                icon: "💾",
+                icon: "ð¾",
                 image: "storage-retrieval.jpg"
               }
             ]
@@ -202,37 +202,37 @@ export const module1Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "Speed ⚡",
+                title: "Speed â¡",
                 description: "Computers can perform millions of calculations per second. A modern computer can execute billions of instructions in a single second.",
                 details: "Example: A calculator might take seconds to solve complex equations, while a computer solves them in microseconds.",
                 image: "speed.jpg"
               },
               {
-                title: "Accuracy 🎯",
+                title: "Accuracy ð¯",
                 description: "Computers produce precise results when given correct input and instructions. They don't make calculation errors.",
                 details: "Example: Mathematical calculations are always accurate (unless there's a programming error).",
                 image: "accuracy.jpg"
               },
               {
-                title: "Storage Capacity 💾",
+                title: "Storage Capacity ð¾",
                 description: "Computers can store vast amounts of data - from documents and images to entire libraries of information.",
                 details: "Example: A single hard drive can store thousands of books, millions of photos, or hours of video.",
                 image: "storage-capacity.jpg"
               },
               {
-                title: "Versatility 🔄",
+                title: "Versatility ð",
                 description: "The same computer can perform different types of tasks - from word processing to gaming to scientific calculations.",
                 details: "Example: You can use one computer for writing, browsing, gaming, and video editing.",
                 image: "versatility.jpg"
               },
               {
-                title: "Diligence 💪",
+                title: "Diligence ðª",
                 description: "Computers can work continuously without getting tired, bored, or making mistakes due to fatigue.",
                 details: "Example: A computer can run calculations 24/7 without breaks or errors.",
                 image: "diligence.jpg"
               },
               {
-                title: "Automation 🤖",
+                title: "Automation ð¤",
                 description: "Once programmed, computers can work automatically without constant human supervision.",
                 details: "Example: Automated systems can process transactions, send emails, or manage inventory without human intervention.",
                 image: "automation-characteristic.jpg"
@@ -341,7 +341,7 @@ export const module1Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "Microcomputers (PCs) 🖥️",
+                title: "Microcomputers (PCs) ð¥ï¸",
                 description: "Personal computers designed for individual use",
                 details: [
                   "Desktop computers: Fixed location, powerful performance",
@@ -353,7 +353,7 @@ export const module1Lessons: Lesson[] = [
                 image: "microcomputers.jpg"
               },
               {
-                title: "Minicomputers 🏢",
+                title: "Minicomputers ð¢",
                 description: "Mid-sized computers for small to medium organizations",
                 details: [
                   "More powerful than microcomputers",
@@ -365,7 +365,7 @@ export const module1Lessons: Lesson[] = [
                 image: "minicomputers.jpg"
               },
               {
-                title: "Mainframes 🏦",
+                title: "Mainframes ð¦",
                 description: "Large, powerful computers for big organizations",
                 details: [
                   "Handle massive amounts of data",
@@ -377,7 +377,7 @@ export const module1Lessons: Lesson[] = [
                 image: "mainframes.jpg"
               },
               {
-                title: "Supercomputers 🚀",
+                title: "Supercomputers ð",
                 description: "Most powerful computers for complex scientific calculations",
                 details: [
                   "Extremely fast processing speed",
@@ -389,7 +389,7 @@ export const module1Lessons: Lesson[] = [
                 image: "supercomputers.jpg"
               },
               {
-                title: "Embedded Systems 🔌",
+                title: "Embedded Systems ð",
                 description: "Computers built into other devices",
                 details: [
                   "Specialized for specific tasks",
@@ -407,7 +407,7 @@ export const module1Lessons: Lesson[] = [
           type: 'model',
           title: 'Real-World Example: Raspberry Pi',
           data: {
-            text: "The Raspberry Pi is a credit-card sized microcomputer that demonstrates modern computing technology.\n\nKey Features:\n• Affordable ($35-75)\n• Educational\n• Versatile for DIY projects\n• Runs Linux OS\n\nPerfect example of modern microcomputers! Explore the 3D model to see its components and design.",
+            text: "The Raspberry Pi is a credit-card sized microcomputer that demonstrates modern computing technology.\n\nKey Features:\nâ¢ Affordable ($35-75)\nâ¢ Educational\nâ¢ Versatile for DIY projects\nâ¢ Runs Linux OS\n\nPerfect example of modern microcomputers! Explore the 3D model to see its components and design.",
             embedHtml: `<div class="sketchfab-embed-wrapper"> <iframe title="Raspberry Pi 2" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="100%" height="100%" style="width: 100%; height: 100%;" src="https://sketchfab.com/models/89dc28451c7148fc8c8dd867d17af25b/embed?autostart=1&camera=0&preload=1&ui_hint=2"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/raspberry-pi-2-89dc28451c7148fc8c8dd867d17af25b?utm_medium=embed&utm_campaign=share-popup&utm_content=89dc28451c7148fc8c8dd867d17af25b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Raspberry Pi 2 </a> by <a href="https://sketchfab.com/VirtualStudio?utm_medium=embed&utm_campaign=share-popup&utm_content=89dc28451c7148fc8c8dd867d17af25b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Virtual Studio </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=89dc28451c7148fc8c8dd867d17af25b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>`
           }
         },
@@ -530,7 +530,7 @@ export const module1Lessons: Lesson[] = [
                 image: "input-devices.jpg"
               },
               {
-                title: "Processing Unit (CPU) 🧠",
+                title: "Processing Unit (CPU) ð§ ",
                 description: "The brain of the computer that processes data",
                 details: [
                   "Central Processing Unit (CPU)",
@@ -541,7 +541,7 @@ export const module1Lessons: Lesson[] = [
                 image: "cpu-processing.jpg"
               },
               {
-                title: "Memory 💾",
+                title: "Memory ð¾",
                 description: "Stores data and instructions",
                 details: [
                   "RAM (Random Access Memory): Temporary storage",
@@ -551,7 +551,7 @@ export const module1Lessons: Lesson[] = [
                 image: "memory-ram.jpg"
               },
               {
-                title: "Storage Devices 💿",
+                title: "Storage Devices ð¿",
                 description: "Store data permanently",
                 details: [
                   "Hard Disk Drive (HDD)",
@@ -562,7 +562,7 @@ export const module1Lessons: Lesson[] = [
                 image: "storage-devices.jpg"
               },
               {
-                title: "Output Devices 🖨️",
+                title: "Output Devices ð¨ï¸",
                 description: "Display or present processed data",
                 details: [
                   "Monitor: Visual display",
@@ -581,7 +581,7 @@ export const module1Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "System Software 🖥️",
+                title: "System Software ð¥ï¸",
                 description: "Software that manages computer hardware",
                 details: [
                   "Operating System (Windows, macOS, Linux)",
@@ -593,7 +593,7 @@ export const module1Lessons: Lesson[] = [
                 image: "system-software.jpg"
               },
               {
-                title: "Application Software 📱",
+                title: "Application Software ð±",
                 description: "Programs designed for specific tasks",
                 details: [
                   "Word Processors (Microsoft Word)",
@@ -738,7 +738,7 @@ export const module1Lessons: Lesson[] = [
             illustration: "lesson5-input",
             cards: [
               {
-                title: "Input Unit 📥",
+                title: "Input Unit ð¥",
                 description: "The entry point for data into the computer system",
                 details: [
                   "Converts human-readable data into computer-readable format",
@@ -749,7 +749,7 @@ export const module1Lessons: Lesson[] = [
                 image: "input-unit.jpg"
               },
               {
-                title: "Processing Unit (CPU) ⚙️",
+                title: "Processing Unit (CPU) âï¸",
                 description: "The central component that performs all calculations and operations",
                 details: [
                   "ALU: Performs arithmetic and logical operations",
@@ -760,7 +760,7 @@ export const module1Lessons: Lesson[] = [
                 image: "processing-unit.jpg"
               },
               {
-                title: "Output Unit 📤",
+                title: "Output Unit ð¤",
                 description: "Presents processed data in human-readable form",
                 details: [
                   "Converts digital data to human-readable format",
@@ -771,7 +771,7 @@ export const module1Lessons: Lesson[] = [
                 image: "output-unit.jpg"
               },
               {
-                title: "Storage Unit 💾",
+                title: "Storage Unit ð¾",
                 description: "Holds data and programs for future use",
                 details: [
                   "Primary Storage (RAM): Fast, temporary",
@@ -821,8 +821,8 @@ export const module1Lessons: Lesson[] = [
           type: 'text',
           title: 'Key Concepts',
           data: {
-            text: "Understanding the block diagram is crucial because it shows how data flows through a computer system. Every operation follows this pattern: Input → Processing → Output → Storage. This fundamental concept applies to all computer operations, from simple calculations to complex applications.",
-            highlight: "Input → Processing → Output → Storage"
+            text: "Understanding the block diagram is crucial because it shows how data flows through a computer system. Every operation follows this pattern: Input â Processing â Output â Storage. This fundamental concept applies to all computer operations, from simple calculations to complex applications.",
+            highlight: "Input â Processing â Output â Storage"
           }
         }
       ]
@@ -844,13 +844,13 @@ export const module1Lessons: Lesson[] = [
         id: 2,
         question: "What is the correct flow of data in a computer system?",
         options: [
-          "Output → Processing → Input → Storage",
-          "Input → Processing → Output → Storage",
-          "Storage → Input → Processing → Output",
-          "Processing → Input → Storage → Output"
+          "Output â Processing â Input â Storage",
+          "Input â Processing â Output â Storage",
+          "Storage â Input â Processing â Output",
+          "Processing â Input â Storage â Output"
         ],
         correctAnswer: 1,
-        explanation: "The correct flow is: Input (data enters) → Processing (CPU processes) → Output (results shown) → Storage (data saved)."
+        explanation: "The correct flow is: Input (data enters) â Processing (CPU processes) â Output (results shown) â Storage (data saved)."
       },
       {
         id: 3,
@@ -872,7 +872,7 @@ export const module1Lessons: Lesson[] = [
 export const module2Lessons: Lesson[] = [
   {
     id: 1,
-    title: "CPU – The Brain of the Computer",
+    title: "CPU â The Brain of the Computer",
     description: "Learn about the Central Processing Unit, its components, and how it works",
     duration: "12 min",
     content: {
@@ -895,19 +895,19 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "ALU (Arithmetic Logic Unit)",
                 description: "Performs all mathematical calculations and logical operations.\n\nHandles addition, subtraction, comparison, and decision-making.",
-                icon: "🔢",
+                icon: "ð¢",
                 image: "cpu-alu.jpg"
               },
               {
                 title: "CU (Control Unit)",
                 description: "Controls and coordinates all operations in the computer.\n\nDirects data flow and manages other components.",
-                icon: "🎮",
+                icon: "ð®",
                 image: "cpu-control-unit.jpg"
               },
               {
                 title: "Registers",
                 description: "Temporary high-speed storage inside the CPU.\n\nStores data and instructions being processed right now.",
-                icon: "💾",
+                icon: "ð¾",
                 image: "cpu-registers.jpg"
               }
             ]
@@ -1023,25 +1023,25 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "RAM (Random Access Memory)",
                 description: "Temporary storage for running programs and data.\n\nFast but loses data when power is off. Types: SRAM (faster) and DRAM (common).",
-                icon: "⚡",
+                icon: "â¡",
                 image: "ram-memory.jpg"
               },
               {
                 title: "ROM (Read Only Memory)",
                 description: "Permanent storage for system instructions.\n\nStores BIOS and firmware. Types: PROM, EPROM, EEPROM.",
-                icon: "🔒",
+                icon: "ð",
                 image: "rom-memory.jpg"
               },
               {
                 title: "Cache Memory",
                 description: "Very fast memory close to CPU.\n\nLevels: L1 (fastest, smallest), L2, L3 (larger, slower). Speeds up processing.",
-                icon: "🚀",
+                icon: "ð",
                 image: "cache-memory.jpg"
               },
               {
                 title: "Registers",
                 description: "Fastest memory inside CPU.\n\nTemporary storage for data being processed right now.",
-                icon: "💨",
+                icon: "ð¨",
                 image: "cpu-registers.jpg"
               }
             ]
@@ -1081,7 +1081,7 @@ export const module2Lessons: Lesson[] = [
           type: 'text',
           title: 'Key Takeaways',
           data: {
-            text: "Memory hierarchy: Registers (fastest) → Cache → RAM → ROM (slowest).\n\nRAM is temporary, ROM is permanent. More RAM means better performance."
+            text: "Memory hierarchy: Registers (fastest) â Cache â RAM â ROM (slowest).\n\nRAM is temporary, ROM is permanent. More RAM means better performance."
           }
         }
       ]
@@ -1149,25 +1149,25 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Hard Disk Drive (HDD)",
                 description: "Traditional storage with spinning platters.\n\nLarge capacity, affordable, but slower. Stores data on magnetic disks.",
-                icon: "💿",
+                icon: "ð¿",
                 image: "hdd-storage.jpg"
               },
               {
                 title: "Solid-State Drive (SSD)",
                 description: "Fast flash storage with no moving parts.\n\nMuch faster than HDD, more expensive, durable.",
-                icon: "⚡",
+                icon: "â¡",
                 image: "ssd-storage.jpg"
               },
               {
                 title: "Optical Discs",
                 description: "CD, DVD, Blu-ray discs.\n\nRead by laser, portable, but lower capacity than hard drives.",
-                icon: "📀",
+                icon: "ð",
                 image: "optical-discs.jpg"
               },
               {
                 title: "Flash Drives & Memory Cards",
                 description: "USB drives and SD cards.\n\nSmall, portable, convenient for transferring files.",
-                icon: "💳",
+                icon: "ð³",
                 image: "flash-drives.jpg"
               }
             ]
@@ -1295,7 +1295,7 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Mouse",
                 description: "Pointing device for clicking and navigation.\n\nLeft click, right click, scroll wheel. Controls cursor on screen.",
-                icon: "🖱️",
+                icon: "ð±ï¸",
                 image: "mouse-input.jpg"
               }
             ]
@@ -1309,25 +1309,25 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Scanner",
                 description: "Converts paper documents into digital images.\n\nFlatbed, sheet-fed, or handheld scanners.",
-                icon: "📄",
+                icon: "ð",
                 image: "scanner-input.jpg"
               },
               {
                 title: "Microphone",
                 description: "Records audio and voice input.\n\nUsed for voice commands, video calls, recording.",
-                icon: "🎤",
+                icon: "ð¤",
                 image: "microphone-input.jpg"
               },
               {
                 title: "Webcam",
                 description: "Captures video and images.\n\nUsed for video calls, streaming, security.",
-                icon: "📹",
+                icon: "ð¹",
                 image: "webcam-input.jpg"
               },
               {
                 title: "Joystick",
                 description: "Gaming controller for precise movement.\n\nPopular for games and flight simulators.",
-                icon: "🎮",
+                icon: "ð®",
                 image: "joystick-input.jpg"
               }
             ]
@@ -1405,13 +1405,13 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Monitor Types",
                 description: "CRT (old, bulky), LCD (common, thin), LED (modern, energy-efficient).\n\nDisplays text, images, and videos on screen.",
-                icon: "🖥️",
+                icon: "ð¥ï¸",
                 image: "monitor-types.jpg"
               },
               {
                 title: "Projector",
                 description: "Projects images onto large screens or walls.\n\nUsed for presentations, movies, classrooms.",
-                icon: "📽️",
+                icon: "ð½ï¸",
                 image: "projector-output.jpg"
               }
             ]
@@ -1425,13 +1425,13 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Inkjet Printer",
                 description: "Sprays tiny ink droplets onto paper.\n\nGood for photos and color printing. Affordable.",
-                icon: "🖨️",
+                icon: "ð¨ï¸",
                 image: "inkjet-printer.jpg"
               },
               {
                 title: "Laser Printer",
                 description: "Uses toner and laser to print.\n\nFast, high quality, good for documents.",
-                icon: "🖨️",
+                icon: "ð¨ï¸",
                 image: "laser-printer.jpg"
               }
             ]
@@ -1445,13 +1445,13 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Speakers",
                 description: "Play sound and music.\n\nDesktop speakers, soundbars, surround sound systems.",
-                icon: "🔊",
+                icon: "ð",
                 image: "speakers-output.jpg"
               },
               {
                 title: "Headphones",
                 description: "Personal audio output.\n\nOver-ear, on-ear, or in-ear headphones.",
-                icon: "🎧",
+                icon: "ð§",
                 image: "headphones-output.jpg"
               }
             ]
@@ -1556,13 +1556,13 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "USB Devices",
                 description: "Flash drives, external keyboards, mice, webcams.\n\nEasy to connect, plug and play. Universal connection.",
-                icon: "🔌",
+                icon: "ð",
                 image: "usb-peripherals.jpg"
               },
               {
                 title: "External Hard Drives",
                 description: "Portable storage that connects via USB.\n\nBackup files, transfer data, expand storage.",
-                icon: "💾",
+                icon: "ð¾",
                 image: "external-drives.jpg"
               }
             ]
@@ -1576,13 +1576,13 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "Bluetooth Accessories",
                 description: "Wireless mouse, keyboard, headphones.\n\nNo cables needed, convenient, works from distance.",
-                icon: "📶",
+                icon: "ð¶",
                 image: "bluetooth-devices.jpg"
               },
               {
                 title: "Wireless Printers",
                 description: "Print without cables using Wi-Fi.\n\nConnect multiple devices, print from anywhere.",
-                icon: "🖨️",
+                icon: "ð¨ï¸",
                 image: "wireless-printer.jpg"
               }
             ]
@@ -1667,19 +1667,19 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "USB Type A",
                 description: "Standard rectangular USB port.\n\nMost common, used for flash drives, mice, keyboards.",
-                icon: "🔌",
+                icon: "ð",
                 image: "usb-type-a.jpg"
               },
               {
                 title: "USB Type B",
                 description: "Square-shaped port.\n\nUsed for printers, scanners, some external drives.",
-                icon: "🔌",
+                icon: "ð",
                 image: "usb-type-b.jpg"
               },
               {
                 title: "USB Type C",
                 description: "Reversible, modern port.\n\nFaster, smaller, used in new devices. Can charge devices.",
-                icon: "⚡",
+                icon: "â¡",
                 image: "usb-type-c.jpg"
               }
             ]
@@ -1693,25 +1693,25 @@ export const module2Lessons: Lesson[] = [
               {
                 title: "HDMI Port",
                 description: "High-definition video and audio.\n\nConnects to monitors, TVs, projectors.",
-                icon: "📺",
+                icon: "ðº",
                 image: "hdmi-port.jpg"
               },
               {
                 title: "VGA Port",
                 description: "Older video connection.\n\nBlue port, analog signal, for older monitors.",
-                icon: "🖥️",
+                icon: "ð¥ï¸",
                 image: "vga-port.jpg"
               },
               {
                 title: "Ethernet Port",
                 description: "Wired internet connection.\n\nRJ-45 connector, faster and more stable than Wi-Fi.",
-                icon: "🌐",
+                icon: "ð",
                 image: "ethernet-port.jpg"
               },
               {
                 title: "Audio Ports",
                 description: "Headphone and microphone jacks.\n\n3.5mm ports for speakers, headphones, mics.",
-                icon: "🎧",
+                icon: "ð§",
                 image: "audio-ports.jpg"
               }
             ]
@@ -1823,19 +1823,19 @@ export const module2Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🧠 CPU Function",
+                title: "ð§  CPU Function",
                 description: "Handles general computing tasks.\n\nProcesses instructions sequentially. Manages all system operations.",
                 image: "cpu-function.jpg",
                 details: []
               },
               {
-                title: "⚡ CPU Speed",
+                title: "â¡ CPU Speed",
                 description: "Fewer cores but very fast.\n\nOptimized for single-threaded tasks. High clock speed.",
                 image: "cpu-speed.jpg",
                 details: []
               },
               {
-                title: "📋 CPU Uses",
+                title: "ð CPU Uses",
                 description: "Operating system, applications, multitasking.\n\nBest for general computing, office work, browsing.",
                 image: "cpu-uses.jpg",
                 details: []
@@ -1849,19 +1849,19 @@ export const module2Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🎮 GPU Function",
+                title: "ð® GPU Function",
                 description: "Specialized for graphics and parallel tasks.\n\nProcesses many tasks simultaneously. Handles visual rendering.",
                 image: "gpu-function.jpg",
                 details: []
               },
               {
-                title: "🔥 GPU Architecture",
+                title: "ð¥ GPU Architecture",
                 description: "Many cores working in parallel.\n\nThousands of small cores. Optimized for parallel processing.",
                 image: "gpu-architecture.jpg",
                 details: []
               },
               {
-                title: "🎨 GPU Uses",
+                title: "ð¨ GPU Uses",
                 description: "Gaming, video editing, 3D rendering.\n\nBest for graphics-intensive tasks, AI, cryptocurrency mining.",
                 image: "gpu-uses.jpg",
                 details: []
@@ -1975,19 +1975,19 @@ export const module2Lessons: Lesson[] = [
                 details: []
               },
               {
-                title: "🖱️ Mouse",
+                title: "ð±ï¸ Mouse",
                 description: "Feeds position and click data.\n\nControls cursor movement. Sends click commands.",
                 image: "mouse-input.jpg",
                 details: []
               },
               {
-                title: "🎤 Microphone",
+                title: "ð¤ Microphone",
                 description: "Feeds audio data into computer.\n\nRecords sound. Converts voice to digital data.",
                 image: "microphone-input.jpg",
                 details: []
               },
               {
-                title: "📷 Webcam",
+                title: "ð· Webcam",
                 description: "Feeds video data into computer.\n\nCaptures images and video. Sends visual data.",
                 image: "webcam-input.jpg",
                 details: []
@@ -2001,25 +2001,25 @@ export const module2Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖥️ Monitor",
+                title: "ð¥ï¸ Monitor",
                 description: "Displays visual results from computer.\n\nShows text, images, videos. Presents processed data.",
                 image: "monitor-output.jpg",
                 details: []
               },
               {
-                title: "🔊 Speakers",
+                title: "ð Speakers",
                 description: "Outputs audio from computer.\n\nPlays sounds, music, voice. Converts digital to sound.",
                 image: "speakers-output.jpg",
                 details: []
               },
               {
-                title: "🖨️ Printer",
+                title: "ð¨ï¸ Printer",
                 description: "Outputs physical copies of data.\n\nPrints documents, images. Creates hard copies.",
                 image: "printer-output.jpg",
                 details: []
               },
               {
-                title: "📺 Projector",
+                title: "ðº Projector",
                 description: "Outputs large visual display.\n\nProjects images on screen. Shows presentations.",
                 image: "projector-output.jpg",
                 details: []
@@ -2066,7 +2066,7 @@ export const module2Lessons: Lesson[] = [
           type: 'text',
           title: 'Key Takeaways',
           data: {
-            text: "Input devices feed data into computer. Output devices show results.\n\nData flows: Input → Process → Output."
+            text: "Input devices feed data into computer. Output devices show results.\n\nData flows: Input â Process â Output."
           }
         }
       ]
@@ -2100,13 +2100,13 @@ export const module2Lessons: Lesson[] = [
         id: 3,
         question: "What is the correct data flow?",
         options: [
-          "Output → Process → Input",
-          "Input → Process → Output",
-          "Process → Input → Output",
-          "Output → Input → Process"
+          "Output â Process â Input",
+          "Input â Process â Output",
+          "Process â Input â Output",
+          "Output â Input â Process"
         ],
         correctAnswer: 1,
-        explanation: "The correct flow is: Input devices feed data → CPU processes it → Output devices display the results."
+        explanation: "The correct flow is: Input devices feed data â CPU processes it â Output devices display the results."
       }
     ]
   }
@@ -2128,7 +2128,7 @@ export const module3Lessons: Lesson[] = [
             cards: [
               {
                 title: "The Boot Sequence",
-                description: "Power On → POST (Self Check) → Load BIOS → Load OS.",
+                description: "Power On â POST (Self Check) â Load BIOS â Load OS.",
                 image: "m3-boot-overview.jpg"
               }
             ]
@@ -2173,37 +2173,37 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "Bit",
                 description: "Smallest unit - 0 or 1.\n\nBinary digit, basic building block of data.",
-                icon: "🔢",
+                icon: "ð¢",
                 image: "data-bit.jpg"
               },
               {
                 title: "Byte",
                 description: "8 bits = 1 byte.\n\nStores one character (like 'A' or '5').",
-                icon: "📝",
+                icon: "ð",
                 image: "data-byte.jpg"
               },
               {
                 title: "Kilobyte (KB)",
                 description: "1,024 bytes.\n\nSmall text file, simple image.",
-                icon: "📄",
+                icon: "ð",
                 image: "data-kb.jpg"
               },
               {
                 title: "Megabyte (MB)",
                 description: "1,024 KB = 1 MB.\n\nPhoto, song, small document.",
-                icon: "📷",
+                icon: "ð·",
                 image: "data-mb.jpg"
               },
               {
                 title: "Gigabyte (GB)",
                 description: "1,024 MB = 1 GB.\n\nMovie, large software, many photos.",
-                icon: "🎬",
+                icon: "ð¬",
                 image: "data-gb.jpg"
               },
               {
                 title: "Terabyte (TB)",
                 description: "1,024 GB = 1 TB.\n\nLarge storage, thousands of files.",
-                icon: "💾",
+                icon: "ð¾",
                 image: "data-tb.jpg"
               }
             ]
@@ -2329,19 +2329,19 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "Volatile Memory",
                 description: "Loses data when power is off.\n\nTemporary storage for running programs.",
-                icon: "⚡",
+                icon: "â¡",
                 image: "ram-volatile.jpg"
               },
               {
                 title: "Read and Write",
                 description: "Can read and write data quickly.\n\nStores data you're working on right now.",
-                icon: "✏️",
+                icon: "âï¸",
                 image: "ram-read-write.jpg"
               },
               {
                 title: "Fast Access",
                 description: "Very fast for CPU to access.\n\nMore RAM = better performance.",
-                icon: "🚀",
+                icon: "ð",
                 image: "ram-fast.jpg"
               }
             ]
@@ -2355,19 +2355,19 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "Non-Volatile",
                 description: "Keeps data even when power is off.\n\nPermanent storage for system instructions.",
-                icon: "🔒",
+                icon: "ð",
                 image: "rom-nonvolatile.jpg"
               },
               {
                 title: "Read Only",
                 description: "Usually read-only, can't be easily changed.\n\nStores BIOS and firmware.",
-                icon: "📖",
+                icon: "ð",
                 image: "rom-read-only.jpg"
               },
               {
                 title: "System Critical",
                 description: "Essential for computer startup.\n\nContains boot instructions.",
-                icon: "⚙️",
+                icon: "âï¸",
                 image: "m3-boot-overview.jpg"
               }
             ]
@@ -2505,13 +2505,13 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "Internal Storage",
                 description: "Inside the computer case.\n\nFaster, permanent, main storage. HDD or SSD.",
-                icon: "💻",
+                icon: "ð»",
                 image: "internal-storage.jpg"
               },
               {
                 title: "External Storage",
                 description: "Outside, connects via USB.\n\nPortable, for backup and transfer. External HDD/SSD.",
-                icon: "💾",
+                icon: "ð¾",
                 image: "external-storage.jpg"
               }
             ]
@@ -2539,13 +2539,13 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "Use HDD for",
                 description: "Large storage needs, budget-friendly.\n\nBackup, archives, less-used files.",
-                icon: "💰",
+                icon: "ð°",
                 image: "hdd-use.jpg"
               },
               {
                 title: "Use SSD for",
                 description: "Speed, performance, active files.\n\nOperating system, programs, frequent access.",
-                icon: "⚡",
+                icon: "â¡",
                 image: "ssd-use.jpg"
               }
             ]
@@ -2616,19 +2616,19 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "FAT32",
                 description: "Older, compatible file system.\n\nWorks on all devices, but 4GB file size limit.",
-                icon: "📁",
+                icon: "ð",
                 image: "fat32-filesystem.jpg"
               },
               {
                 title: "NTFS",
                 description: "Windows standard file system.\n\nLarge files, security features, modern Windows.",
-                icon: "🪟",
+                icon: "ðª",
                 image: "ntfs-filesystem.jpg"
               },
               {
                 title: "exFAT",
                 description: "Modern, cross-platform system.\n\nLarge files, works on Windows, Mac, Linux.",
-                icon: "💿",
+                icon: "ð¿",
                 image: "exfat-filesystem.jpg"
               }
             ]
@@ -2754,13 +2754,13 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "C: Drive",
                 description: "Usually the main system drive.\n\nContains Windows, programs, and system files.",
-                icon: "💻",
+                icon: "ð»",
                 image: "c-drive.jpg"
               },
               {
                 title: "D:, E: Drives",
                 description: "Additional partitions or drives.\n\nUsed for data, backup, or separate storage.",
-                icon: "📁",
+                icon: "ð",
                 image: "d-e-drives.jpg"
               }
             ]
@@ -2774,19 +2774,19 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "System Partition",
                 description: "Contains operating system.\n\nEssential for booting, usually C: drive.",
-                icon: "⚙️",
+                icon: "âï¸",
                 image: "system-partition.jpg"
               },
               {
                 title: "Data Partition",
                 description: "For user files and programs.\n\nSeparate from system, safer for data.",
-                icon: "📂",
+                icon: "ð",
                 image: "data-partition.jpg"
               },
               {
                 title: "Recovery Partition",
                 description: "Backup system files.\n\nUsed to restore computer if needed.",
-                icon: "🔧",
+                icon: "ð§",
                 image: "recovery-partition.jpg"
               }
             ]
@@ -2888,19 +2888,19 @@ export const module3Lessons: Lesson[] = [
               {
                 title: "System Restore",
                 description: "Windows feature to restore system.\n\nGoes back to previous working state. Fixes system issues.",
-                icon: "🔧",
+                icon: "ð§",
                 image: "system-restore.jpg"
               },
               {
                 title: "External Backup",
                 description: "Copy files to external drive.\n\nUSB drive, external HDD. Physical backup you control.",
-                icon: "💾",
+                icon: "ð¾",
                 image: "external-backup.jpg"
               },
               {
                 title: "Cloud Backup",
                 description: "Store files online.\n\nGoogle Drive, OneDrive, Dropbox. Access from anywhere.",
-                icon: "☁️",
+                icon: "âï¸",
                 image: "cloud-backup.jpg"
               }
             ]
@@ -3023,17 +3023,17 @@ export const module4Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖥️ System Software",
+                title: "ð¥ï¸ System Software",
                 description: "Controls and manages computer hardware.\n\nOperating systems, drivers, and utilities that keep the computer running.",
                 image: "system-software.jpg"
               },
               {
-                title: "📱 Application Software",
+                title: "ð± Application Software",
                 description: "Programs for specific tasks.\n\nWord processors, browsers, games, and media players for daily use.",
                 image: "application-software.jpg"
               },
               {
-                title: "🔧 Utility Software",
+                title: "ð§ Utility Software",
                 description: "Tools to maintain and optimize the system.\n\nAntivirus, disk cleanup, file compression, and backup tools.",
                 image: "utility-software.jpg"
               }
@@ -3143,17 +3143,17 @@ export const module4Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔌 BIOS",
+                title: "ð BIOS",
                 description: "Basic Input/Output System.\n\nOlder firmware standard. Starts computer and checks hardware before OS loads.",
                 image: "bios-firmware.jpg"
               },
               {
-                title: "⚡ UEFI",
+                title: "â¡ UEFI",
                 description: "Unified Extensible Firmware Interface.\n\nModern replacement for BIOS. Faster boot, better security, larger disk support.",
                 image: "uefi-firmware.jpg"
               },
               {
-                title: "🔄 Firmware Updates",
+                title: "ð Firmware Updates",
                 description: "Updates improve performance and security.\n\nFix bugs, add features, support new hardware. Important to keep updated.",
                 image: "firmware-update.jpg"
               }
@@ -3285,22 +3285,22 @@ export const module4Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💿 From CD/DVD",
+                title: "ð¿ From CD/DVD",
                 description: "Insert disc and follow setup.\n\nOlder method. Insert disc, autorun starts, follow installation wizard.",
                 image: "install-cd.jpg"
               },
               {
-                title: "💾 From USB Drive",
+                title: "ð¾ From USB Drive",
                 description: "Copy installer to USB and run.\n\nPortable method. Copy setup file, plug USB, run installer.",
                 image: "install-usb.jpg"
               },
               {
-                title: "🌐 Online Download",
+                title: "ð Online Download",
                 description: "Download from official websites.\n\nMost common method. Visit website, download installer, run setup file.",
                 image: "install-online.jpg"
               },
               {
-                title: "📦 App Stores",
+                title: "ð¦ App Stores",
                 description: "Install from Microsoft Store or similar.\n\nSafe and easy. Browse store, click install, automatic setup.",
                 image: "install-store.jpg"
               }
@@ -3464,22 +3464,22 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖥️ Hardware Manager",
+                title: "ð¥ï¸ Hardware Manager",
                 description: "Controls all hardware components.\n\nManages CPU, memory, storage, and devices. Allocates resources efficiently.",
                 image: "os-hardware-manager.jpg"
               },
               {
-                title: "👤 User Interface",
+                title: "ð¤ User Interface",
                 description: "Provides way to interact with computer.\n\nDesktop, windows, menus, and commands. Makes computers user-friendly.",
                 image: "os-user-interface.jpg"
               },
               {
-                title: "📁 File Manager",
+                title: "ð File Manager",
                 description: "Organizes and manages files.\n\nCreates folders, saves files, finds documents. Keeps data organized.",
                 image: "os-file-manager.jpg"
               },
               {
-                title: "🔒 Security Manager",
+                title: "ð Security Manager",
                 description: "Protects system and data.\n\nUser accounts, passwords, permissions. Prevents unauthorized access.",
                 image: "os-security.jpg"
               }
@@ -3591,27 +3591,27 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "⚙️ Process Management",
+                title: "âï¸ Process Management",
                 description: "Controls running programs.\n\nStarts, stops, and schedules processes. Manages CPU time for each program.",
                 image: "os-process-management.jpg"
               },
               {
-                title: "💾 Memory Management",
+                title: "ð¾ Memory Management",
                 description: "Manages RAM usage.\n\nAllocates memory to programs. Frees memory when programs close.",
                 image: "os-memory-management.jpg"
               },
               {
-                title: "📂 File Management",
+                title: "ð File Management",
                 description: "Organizes files and folders.\n\nCreates, deletes, copies files. Manages storage space.",
                 image: "os-file-management.jpg"
               },
               {
-                title: "🖱️ Device Management",
+                title: "ð±ï¸ Device Management",
                 description: "Controls hardware devices.\n\nManages keyboard, mouse, printer, speakers. Uses device drivers.",
                 image: "os-device-management.jpg"
               },
               {
-                title: "🔐 Security Management",
+                title: "ð Security Management",
                 description: "Protects system and data.\n\nUser authentication, file permissions, firewall. Prevents unauthorized access.",
                 image: "os-security-management.jpg"
               }
@@ -3754,27 +3754,27 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👤 Single-User OS",
+                title: "ð¤ Single-User OS",
                 description: "One user at a time.\n\nWindows, macOS for personal computers. Simple and user-friendly.",
                 image: "os-single-user.jpg"
               },
               {
-                title: "👥 Multi-User OS",
+                title: "ð¥ Multi-User OS",
                 description: "Multiple users simultaneously.\n\nLinux servers, mainframes. Handles many users efficiently.",
                 image: "os-multi-user.jpg"
               },
               {
-                title: "⚡ Real-Time OS",
+                title: "â¡ Real-Time OS",
                 description: "Immediate response required.\n\nUsed in robots, medical devices. Must respond instantly.",
                 image: "os-real-time.jpg"
               },
               {
-                title: "🌐 Distributed OS",
+                title: "ð Distributed OS",
                 description: "Manages multiple computers.\n\nNetworks of computers. Shares resources across systems.",
                 image: "os-distributed.jpg"
               },
               {
-                title: "📱 Embedded OS",
+                title: "ð± Embedded OS",
                 description: "Built into devices.\n\nSmartphones, ATMs, cars. Specialized for specific devices.",
                 image: "os-embedded.jpg"
               }
@@ -3896,27 +3896,27 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🪟 Windows",
+                title: "ðª Windows",
                 description: "Most popular desktop OS.\n\nUsed on PCs and laptops. User-friendly interface. Many software options.",
                 image: "os-windows.jpg"
               },
               {
-                title: "🍎 macOS",
+                title: "ð macOS",
                 description: "Apple's desktop OS.\n\nUsed on Mac computers. Smooth design. Good for creative work.",
                 image: "os-macos.jpg"
               },
               {
-                title: "🐧 Linux",
+                title: "ð§ Linux",
                 description: "Open-source OS.\n\nFree and customizable. Used on servers and some desktops. Very secure.",
                 image: "os-linux.jpg"
               },
               {
-                title: "🤖 Android",
+                title: "ð¤ Android",
                 description: "Google's mobile OS.\n\nMost popular smartphone OS. Used on many devices. Customizable.",
                 image: "os-android.jpg"
               },
               {
-                title: "📱 iOS",
+                title: "ð± iOS",
                 description: "Apple's mobile OS.\n\nUsed on iPhones and iPads. Simple and secure. Smooth performance.",
                 image: "os-ios.jpg"
               }
@@ -4043,12 +4043,12 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "❄️ Cold Boot",
+                title: "âï¸ Cold Boot",
                 description: "Starting from power off.\n\nComputer was completely off. Takes longer. Full system check.",
                 image: "boot-cold.jpg"
               },
               {
-                title: "🔥 Warm Boot",
+                title: "ð¥ Warm Boot",
                 description: "Restarting while on.\n\nComputer was running. Faster. Skips some checks.",
                 image: "boot-warm.jpg"
               }
@@ -4190,7 +4190,7 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖼️ GUI (Graphical)",
+                title: "ð¼ï¸ GUI (Graphical)",
                 description: "Visual interface with icons.\n\nWindows, menus, buttons, mouse clicks. Easy to use. Most common.",
                 image: "ui-gui.jpg"
               },
@@ -4319,27 +4319,27 @@ export const module5Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📁 File Explorer",
+                title: "ð File Explorer",
                 description: "Browse and manage files.\n\nView folders, copy, move, delete files. Organize your data easily.",
                 image: "tool-file-explorer.jpg"
               },
               {
-                title: "⚙️ Task Manager",
+                title: "âï¸ Task Manager",
                 description: "Monitor running programs.\n\nSee CPU, RAM usage. End unresponsive programs. Check system performance.",
                 image: "tool-task-manager.jpg"
               },
               {
-                title: "🎛️ Control Panel",
+                title: "ðï¸ Control Panel",
                 description: "System settings and configuration.\n\nChange display, sound, network settings. Install/uninstall programs.",
                 image: "tool-control-panel.jpg"
               },
               {
-                title: "🔧 Device Manager",
+                title: "ð§ Device Manager",
                 description: "Manage hardware devices.\n\nView installed devices. Update drivers. Troubleshoot hardware problems.",
                 image: "tool-device-manager.jpg"
               },
               {
-                title: "💾 Disk Management",
+                title: "ð¾ Disk Management",
                 description: "Manage storage drives.\n\nView partitions, format drives, assign drive letters. Organize storage.",
                 image: "tool-disk-management.jpg"
               }
@@ -4494,19 +4494,19 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🌐 What is a Network?",
+                title: "ð What is a Network?",
                 description: "A network connects multiple computers and devices.\n\nEnables sharing of files, printers, and internet access. Makes collaboration easier.",
                 image: "network-concept.jpg",
                 details: []
               },
               {
-                title: "💡 Why Networks Matter",
+                title: "ð¡ Why Networks Matter",
                 description: "Networks enable communication and resource sharing.\n\nSaves time and money. Allows remote access to information.",
                 image: "network-importance.jpg",
                 details: []
               },
               {
-                title: "📡 Data Transfer Basics",
+                title: "ð¡ Data Transfer Basics",
                 description: "Data travels through cables or wireless signals.\n\nInformation is broken into packets. Sent from source to destination.",
                 image: "data-transfer.jpg",
                 details: []
@@ -4619,13 +4619,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🏠 LAN Basics",
+                title: "ð  LAN Basics",
                 description: "Connects devices in a small area.\n\nHome, office, or school network. Covers limited distance.",
                 image: "lan-network.jpg",
                 details: []
               },
               {
-                title: "🔌 LAN Uses",
+                title: "ð LAN Uses",
                 description: "Share files, printers, and internet.\n\nFast and reliable. Easy to set up.",
                 image: "lan-uses.jpg",
                 details: []
@@ -4639,13 +4639,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🏙️ MAN Basics",
+                title: "ðï¸ MAN Basics",
                 description: "Covers a city or large campus.\n\nLarger than LAN, smaller than WAN. Connects multiple LANs.",
                 image: "man-network.jpg",
                 details: []
               },
               {
-                title: "🌆 MAN Uses",
+                title: "ð MAN Uses",
                 description: "City-wide networks, university campuses.\n\nConnects organizations in same area.",
                 image: "man-uses.jpg",
                 details: []
@@ -4659,13 +4659,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🌍 WAN Basics",
+                title: "ð WAN Basics",
                 description: "Covers large geographic areas.\n\nConnects cities, countries, continents. Uses internet infrastructure.",
                 image: "wan-network.jpg",
                 details: []
               },
               {
-                title: "🌐 WAN Uses",
+                title: "ð WAN Uses",
                 description: "Global communication, multinational companies.\n\nInternet is the largest WAN.",
                 image: "wan-uses.jpg",
                 details: []
@@ -4679,13 +4679,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🌐 Internet",
+                title: "ð Internet",
                 description: "Global network of networks.\n\nPublic access. Connects billions of devices worldwide.",
                 image: "internet-network.jpg",
                 details: []
               },
               {
-                title: "🔒 Intranet",
+                title: "ð Intranet",
                 description: "Private network within an organization.\n\nRestricted access. Only authorized users.",
                 image: "intranet-network.jpg",
                 details: []
@@ -4797,13 +4797,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📡 Router Function",
+                title: "ð¡ Router Function",
                 description: "Directs data between networks.\n\nConnects your home network to internet. Routes data to correct destination.",
                 image: "router-device.jpg",
                 details: []
               },
               {
-                title: "🔌 Router Features",
+                title: "ð Router Features",
                 description: "Provides Wi-Fi and Ethernet ports.\n\nCreates wireless network. Connects multiple devices.",
                 image: "router-features.jpg",
                 details: []
@@ -4817,13 +4817,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔄 Switch Function",
+                title: "ð Switch Function",
                 description: "Connects devices within a network.\n\nSends data to specific device. More efficient than hub.",
                 image: "switch-device.jpg",
                 details: []
               },
               {
-                title: "📊 Switch Uses",
+                title: "ð Switch Uses",
                 description: "Used in offices and large networks.\n\nManages multiple connections. Improves network performance.",
                 image: "switch-uses.jpg",
                 details: []
@@ -4837,13 +4837,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔌 Ethernet Cable Types",
+                title: "ð Ethernet Cable Types",
                 description: "Wired connection cables.\n\nCat5, Cat6, Cat7. Different speeds and capabilities.",
                 image: "ethernet-cables.jpg",
                 details: []
               },
               {
-                title: "⚡ Ethernet Benefits",
+                title: "â¡ Ethernet Benefits",
                 description: "Faster and more stable than Wi-Fi.\n\nReliable connection. Less interference.",
                 image: "ethernet-benefits.jpg",
                 details: []
@@ -4857,13 +4857,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📶 Wi-Fi Adapter Function",
+                title: "ð¶ Wi-Fi Adapter Function",
                 description: "Enables wireless connection.\n\nBuilt into devices or external USB adapter. Receives Wi-Fi signals.",
                 image: "wifi-adapter.jpg",
                 details: []
               },
               {
-                title: "🔄 Wi-Fi Standards",
+                title: "ð Wi-Fi Standards",
                 description: "802.11n, 802.11ac, Wi-Fi 6.\n\nDifferent speeds and ranges. Newer standards are faster.",
                 image: "wifi-standards.jpg",
                 details: []
@@ -4969,19 +4969,19 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔢 IP Address Basics",
+                title: "ð¢ IP Address Basics",
                 description: "Unique number that identifies a device on network.\n\nLike a home address for your computer. Format: 192.168.1.1",
                 image: "ip-address.jpg",
                 details: []
               },
               {
-                title: "📋 IP Address Types",
+                title: "ð IP Address Types",
                 description: "IPv4 (32-bit) and IPv6 (128-bit).\n\nIPv4 most common. IPv6 for future expansion.",
                 image: "ip-types.jpg",
                 details: []
               },
               {
-                title: "🌐 IP Address Purpose",
+                title: "ð IP Address Purpose",
                 description: "Enables devices to find and communicate.\n\nRouters use IP to send data to correct device.",
                 image: "ip-purpose.jpg",
                 details: []
@@ -4995,19 +4995,19 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🌍 Public IP Address",
+                title: "ð Public IP Address",
                 description: "Visible on the internet.\n\nAssigned by ISP. Unique worldwide. Identifies your network.",
                 image: "public-ip.jpg",
                 details: []
               },
               {
-                title: "🏠 Private IP Address",
+                title: "ð  Private IP Address",
                 description: "Used within local network.\n\nNot visible on internet. Multiple networks can use same private IPs.",
                 image: "private-ip.jpg",
                 details: []
               },
               {
-                title: "🔄 How They Work Together",
+                title: "ð How They Work Together",
                 description: "Router has public IP, devices have private IPs.\n\nRouter translates between public and private.",
                 image: "ip-translation.jpg",
                 details: []
@@ -5021,20 +5021,20 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔤 What is DNS?",
+                title: "ð¤ What is DNS?",
                 description: "Domain Name System translates names to IP addresses.\n\nConverts google.com to 142.250.191.14. Makes internet easier to use.",
                 image: "dns-system.jpg",
                 details: []
               },
               {
-                title: "🌐 Domain Names",
+                title: "ð Domain Names",
                 description: "Human-readable website addresses.\n\nExample: www.example.com. Easier than remembering IP numbers.",
                 image: "domain-names.jpg",
                 details: []
               },
               {
-                title: "⚡ DNS Process",
-                description: "Type domain name → DNS finds IP → Connects to website.\n\nHappens automatically. Very fast.",
+                title: "â¡ DNS Process",
+                description: "Type domain name â DNS finds IP â Connects to website.\n\nHappens automatically. Very fast.",
                 image: "dns-process.jpg",
                 details: []
               }
@@ -5147,101 +5147,84 @@ export const module7Lessons: Lesson[] = [
   },
   {
     id: 5,
-    title: "Internet Connectivity",
-    description: "Learn about mobile data, Wi-Fi, broadband, tethering, and hotspot",
-    duration: "14 min",
+    title: "Wi-Fi Basics",
+    description: "Learn about Wi-Fi technology, SSID, security types, frequency bands, and internet connectivity",
+    duration: "15 min",
     content: {
       sections: [
         {
           type: 'text',
-          title: 'Connecting to Internet',
+          title: 'What is Wi-Fi?',
           data: {
-            text: "Multiple ways exist to connect to the internet.\n\nChoose the method that best fits your needs and location.",
+            text: "Wi-Fi technology allows devices to connect to a network using radio waves, eliminating the need for physical cables.\n\nIt turns data into invisible signals and works like a two-way radio.",
             audio: true,
-            audioTitle: "Internet Connectivity Introduction"
+            audioTitle: "Wi-Fi Basics Introduction"
           }
         },
         {
           type: 'card',
-          title: 'Mobile Data',
+          title: 'SSID & Security',
           data: {
             cards: [
               {
-                title: "📱 Mobile Data Basics",
-                description: "Internet through cellular network.\n\nUses phone's data plan. Works anywhere with signal.",
+                title: "ð·ï¸ What is an SSID?",
+                description: "An SSID (Service Set Identifier) is simply the technical name for your Wi-Fi network that you see when searching for a connection.",
+                image: "m9-wifi-ssid.jpg",
+                details: []
+              },
+              {
+                title: "ð Wi-Fi Security Types",
+                description: "Wi-Fi security types (like WPA2 or WPA3) are different 'locks' used to encrypt your wireless data.",
+                image: "m9-wifi-security-types.jpg",
+                details: ["WPA2: Standard lock for most homes.", "WPA3: Modern ultra-secure lock.", "Open: No lock! Use with extreme caution."]
+              }
+            ]
+          }
+        },
+        {
+          type: 'comparison',
+          title: 'Frequency Bands: 2.4 vs 5 GHz',
+          data: {
+            type: 'table',
+            items: [
+              {
+                band: "2.4 GHz",
+                nickname: "The Marathon Runner",
+                range: "Long (goes through walls)",
+                speed: "Slower",
+                common_use: "Older devices, far distances"
+              },
+              {
+                band: "5 GHz",
+                nickname: "The Sprinter",
+                range: "Short (stops at walls)",
+                speed: "Very Fast!",
+                common_use: "Streaming, Gaming, near router"
+              }
+            ]
+          }
+        },
+        {
+          type: 'card',
+          title: 'Other Internet Connections',
+          data: {
+            cards: [
+              {
+                title: "ð± Mobile Data",
+                description: "Internet through cellular network. Uses phone's data plan. Works anywhere with signal.",
                 image: "mobile-data.jpg",
                 details: []
               },
               {
-                title: "📊 Data Plans",
-                description: "Limited or unlimited data options.\n\nMonitor usage to avoid overage charges. Check data limits.",
-                image: "data-plans.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'card',
-          title: 'Wi-Fi',
-          data: {
-            cards: [
-              {
-                title: "📶 Wi-Fi Connection",
-                description: "Wireless internet from router.\n\nFree at home, cafes, libraries. Requires password for secure networks.",
-                image: "wifi-connection.jpg",
-                details: []
-              },
-              {
-                title: "🔒 Wi-Fi Security",
-                description: "Use password-protected networks.\n\nAvoid public Wi-Fi for sensitive tasks. Use WPA2 or WPA3 encryption.",
-                image: "wifi-security.jpg",
-                details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'card',
-          title: 'Broadband',
-          data: {
-            cards: [
-              {
-                title: "⚡ Broadband Types",
-                description: "DSL, Cable, Fiber optic.\n\nHigh-speed internet. Always-on connection.",
-                image: "broadband-types.jpg",
-                details: []
-              },
-              {
-                title: "🚀 Broadband Speed",
-                description: "Faster than dial-up.\n\nSupports streaming, gaming, video calls. Reliable connection.",
+                title: "â¡ Broadband",
+                description: "High-speed home internet (Fiber/Cable). Always-on and supports heavy streaming.",
                 image: "broadband-speed.jpg",
                 details: []
-              }
-            ]
-          }
-        },
-        {
-          type: 'card',
-          title: 'Tethering and Hotspot',
-          data: {
-            cards: [
+              },
               {
-                title: "📱 Mobile Hotspot",
-                description: "Share phone's internet with other devices.\n\nCreates Wi-Fi network from mobile data. Uses phone's data plan.",
+                title: "ð¡ Hotspot & Tethering",
+                description: "Sharing your phone's internet with other devices via Wi-Fi or USB cable.",
                 image: "mobile-hotspot.jpg",
-                details: []
-              },
-              {
-                title: "🔗 USB Tethering",
-                description: "Connect phone to computer via USB.\n\nShares internet through cable. More stable than Wi-Fi hotspot.",
-                image: "usb-tethering.jpg",
-                details: []
-              },
-              {
-                title: "⚡ When to Use",
-                description: "When Wi-Fi unavailable or traveling.\n\nEmergency internet access. Temporary solution.",
-                image: "tethering-uses.jpg",
                 details: []
               }
             ]
@@ -5249,43 +5232,16 @@ export const module7Lessons: Lesson[] = [
         },
         {
           type: 'video',
-          title: 'Video: Internet Connectivity',
+          title: 'Video: Wi-Fi & Internet Basics',
           data: {
-            description: "Learn about different ways to connect to the internet."
-          }
-        },
-        {
-          type: 'comparison',
-          title: 'Connection Methods',
-          data: {
-            type: 'table',
-            items: [
-              {
-                name: "Mobile Data",
-                speed: "Variable",
-                mobility: "High",
-                cost: "Data plan"
-              },
-              {
-                name: "Wi-Fi",
-                speed: "Fast",
-                mobility: "Limited",
-                cost: "Free/Subscription"
-              },
-              {
-                name: "Broadband",
-                speed: "Very Fast",
-                mobility: "None",
-                cost: "Monthly fee"
-              }
-            ]
+            description: "Watch how Wi-Fi signals work and the differences between various internet connection types."
           }
         },
         {
           type: 'text',
           title: 'Key Takeaways',
           data: {
-            text: "Mobile data works anywhere. Wi-Fi is fast and free at home.\n\nBroadband offers fastest speeds. Hotspot shares mobile data."
+            text: "Wi-Fi uses radio waves to connect devices. SSID is your network name. 2.4GHz has range, 5GHz has speed.\n\nUse secure WPA2/WPA3 passwords and be aware of other options like mobile data and hotspots."
           }
         }
       ]
@@ -5293,39 +5249,39 @@ export const module7Lessons: Lesson[] = [
     quiz: [
       {
         id: 1,
-        question: "What is mobile data?",
+        question: "What is an SSID?",
         options: [
-          "Internet through Wi-Fi",
-          "Internet through cellular network using phone's data plan",
-          "Internet through cable",
-          "A type of router"
+          "A type of password",
+          "Your Wi-Fi network's name",
+          "A fast internet signal",
+          "A hardware address"
         ],
         correctAnswer: 1,
-        explanation: "Mobile data is internet access through your cellular network, using your phone's data plan, and works anywhere you have a cellular signal."
+        explanation: "SSID is the technical name for your Wi-Fi network that appears when you search for available connections."
       },
       {
         id: 2,
-        question: "What is a mobile hotspot?",
+        question: "Which Wi-Fi band is best for range (distance)?",
         options: [
-          "A Wi-Fi router",
-          "Sharing phone's internet with other devices",
-          "A type of cable",
-          "A security feature"
+          "5 GHz",
+          "2.4 GHz",
+          "Bluetooth",
+          "Ethernet"
         ],
         correctAnswer: 1,
-        explanation: "A mobile hotspot allows you to share your phone's mobile data connection with other devices, creating a Wi-Fi network from your phone."
+        explanation: "The 2.4 GHz band has a longer range and can better penetrate walls, although it is slower than 5 GHz."
       },
       {
         id: 3,
-        question: "Which connection method offers the fastest speeds?",
+        question: "What is a mobile hotspot?",
         options: [
-          "Mobile data",
-          "Wi-Fi",
-          "Broadband (Fiber/Cable)",
-          "All same"
+          "A very fast router",
+          "Sharing your phone's internet with other devices",
+          "A secure password type",
+          "A way to cool down a computer"
         ],
-        correctAnswer: 2,
-        explanation: "Broadband connections, especially fiber optic, typically offer the fastest internet speeds, followed by Wi-Fi, then mobile data."
+        correctAnswer: 1,
+        explanation: "A mobile hotspot allows you to share your phone's cellular data connection with other devices like laptops or tablets."
       }
     ]
   },
@@ -5351,19 +5307,19 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔒 HTTPS Protocol",
+                title: "ð HTTPS Protocol",
                 description: "Secure version of HTTP.\n\nEncrypts data between browser and website. Protects your information.",
                 image: "https-secure.jpg",
                 details: []
               },
               {
-                title: "🔐 How to Identify",
+                title: "ð How to Identify",
                 description: "Look for padlock icon in address bar.\n\nURL starts with https://. Green padlock means secure.",
                 image: "https-identify.jpg",
                 details: []
               },
               {
-                title: "⚠️ HTTP Warning",
+                title: "â ï¸ HTTP Warning",
                 description: "HTTP websites are not encrypted.\n\nAvoid entering passwords on HTTP sites. Data can be intercepted.",
                 image: "http-warning.jpg",
                 details: []
@@ -5377,13 +5333,13 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🎣 What is Phishing?",
+                title: "ð£ What is Phishing?",
                 description: "Fake emails or websites that steal information.\n\nLooks like legitimate companies. Asks for passwords or personal data.",
                 image: "phishing-scam.jpg",
                 details: []
               },
               {
-                title: "🚨 Phishing Signs",
+                title: "ð¨ Phishing Signs",
                 description: "Urgent language, spelling errors, suspicious links.\n\nAsks for personal information. Unusual sender address.",
                 image: "phishing-signs.jpg",
                 details: []
@@ -5403,19 +5359,19 @@ export const module7Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔍 Check URLs",
+                title: "ð Check URLs",
                 description: "Verify website addresses before entering information.\n\nLook for typos or unusual domains. Use bookmarks for trusted sites.",
                 image: "check-urls.jpg",
                 details: []
               },
               {
-                title: "🛡️ Use Antivirus",
+                title: "ð¡ï¸ Use Antivirus",
                 description: "Keep antivirus software updated.\n\nScans downloads for malware. Blocks dangerous websites.",
                 image: "antivirus-browsing.jpg",
                 details: []
               },
               {
-                title: "🔐 Strong Passwords",
+                title: "ð Strong Passwords",
                 description: "Use unique passwords for each account.\n\nEnable two-factor authentication. Don't share passwords.",
                 image: "strong-passwords.jpg",
                 details: []
@@ -5554,31 +5510,31 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🦠 Computer Viruses",
+                title: "ð¦  Computer Viruses",
                 description: "Malicious code that attaches to files and spreads.\n\nDamages files and slows down your computer. Requires user action to spread.",
                 image: "computer-virus.jpg",
                 details: []
               },
               {
-                title: "🐛 Worms",
+                title: "ð Worms",
                 description: "Self-replicating malware that spreads automatically.\n\nSpreads through networks without user interaction. Can consume network bandwidth.",
                 image: "computer-worm.jpg",
                 details: []
               },
               {
-                title: "🐴 Trojans",
+                title: "ð´ Trojans",
                 description: "Malware disguised as legitimate software.\n\nTricks users into installing it. Opens backdoors for hackers.",
                 image: "trojan-horse.jpg",
                 details: []
               },
               {
-                title: "👁️ Spyware",
+                title: "ðï¸ Spyware",
                 description: "Secretly monitors your computer activity.\n\nCollects personal information without permission. Tracks keystrokes and browsing habits.",
                 image: "spyware-threat.jpg",
                 details: []
               },
               {
-                title: "🔒 Ransomware",
+                title: "ð Ransomware",
                 description: "Encrypts your files and demands payment.\n\nLocks you out of your data. Requires payment to restore access.",
                 image: "ransomware-threat.jpg",
                 details: []
@@ -5690,19 +5646,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔥 Firewall Basics",
+                title: "ð¥ Firewall Basics",
                 description: "A firewall blocks unauthorized access to your computer.\n\nActs as a barrier between your computer and the internet. Monitors incoming and outgoing traffic.",
                 image: "firewall-protection.jpg",
                 details: []
               },
               {
-                title: "🛡️ Software Firewall",
+                title: "ð¡ï¸ Software Firewall",
                 description: "Built into Windows or installed as software.\n\nProtects individual computers. Can be customized with rules.",
                 image: "software-firewall.jpg",
                 details: []
               },
               {
-                title: "🏠 Hardware Firewall",
+                title: "ð  Hardware Firewall",
                 description: "Physical device that protects entire networks.\n\nUsually built into routers. Protects all connected devices.",
                 image: "hardware-firewall.jpg",
                 details: []
@@ -5716,19 +5672,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🛡️ Antivirus Protection",
+                title: "ð¡ï¸ Antivirus Protection",
                 description: "Scans and removes malicious software from your computer.\n\nDetects viruses, worms, trojans, and other threats. Updates regularly to catch new threats.",
                 image: "antivirus-software.jpg",
                 details: []
               },
               {
-                title: "🔄 Real-time Scanning",
+                title: "ð Real-time Scanning",
                 description: "Continuously monitors your computer for threats.\n\nScans files as you download or open them. Provides instant protection.",
                 image: "realtime-scanning.jpg",
                 details: []
               },
               {
-                title: "📅 Scheduled Scans",
+                title: "ð Scheduled Scans",
                 description: "Regular full system scans to find hidden threats.\n\nRuns automatically at set times. Checks all files on your computer.",
                 image: "scheduled-scan.jpg",
                 details: []
@@ -5749,13 +5705,13 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👤 Administrator Account",
+                title: "ð¤ Administrator Account",
                 description: "Full access to system settings and programs.\n\nCan install software and change system settings. Use carefully.",
                 image: "admin-account.jpg",
                 details: []
               },
               {
-                title: "👥 Standard Account",
+                title: "ð¥ Standard Account",
                 description: "Limited access for daily use.\n\nSafer for regular tasks. Cannot install programs or change system settings.",
                 image: "standard-account.jpg",
                 details: []
@@ -5860,19 +5816,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔐 What is Encryption?",
+                title: "ð What is Encryption?",
                 description: "Scrambles data so only authorized users can read it.\n\nConverts readable data into coded format. Requires key to decrypt.",
                 image: "encryption-basics.jpg",
                 details: []
               },
               {
-                title: "🔑 File Encryption",
-                description: "Encrypt individual files or folders.\n\nRight-click file → Properties → Advanced → Encrypt contents. Windows encrypts automatically.",
+                title: "ð File Encryption",
+                description: "Encrypt individual files or folders.\n\nRight-click file â Properties â Advanced â Encrypt contents. Windows encrypts automatically.",
                 image: "file-encryption.jpg",
                 details: []
               },
               {
-                title: "💾 Full Disk Encryption",
+                title: "ð¾ Full Disk Encryption",
                 description: "Encrypts entire hard drive.\n\nProtects all data if computer is stolen. BitLocker on Windows.",
                 image: "disk-encryption.jpg",
                 details: []
@@ -5886,20 +5842,20 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👤 File Permissions",
+                title: "ð¤ File Permissions",
                 description: "Control who can access files.\n\nSet read, write, or execute permissions. Restrict access to authorized users.",
                 image: "file-permissions.jpg",
                 details: []
               },
               {
-                title: "🔒 User Rights",
+                title: "ð User Rights",
                 description: "Different users have different access levels.\n\nAdministrator can access all files. Standard users have limited access.",
                 image: "user-rights.jpg",
                 details: []
               },
               {
-                title: "📁 Folder Permissions",
-                description: "Control access to entire folders.\n\nRight-click folder → Properties → Security. Set permissions for users or groups.",
+                title: "ð Folder Permissions",
+                description: "Control access to entire folders.\n\nRight-click folder â Properties â Security. Set permissions for users or groups.",
                 image: "folder-permissions.jpg",
                 details: []
               }
@@ -5912,19 +5868,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💾 Backup Important Files",
+                title: "ð¾ Backup Important Files",
                 description: "Keep copies in multiple locations.\n\nExternal drives, cloud storage, or network drives. Protects against loss.",
                 image: "secure-backup.jpg",
                 details: []
               },
               {
-                title: "🔐 Password Protect Files",
+                title: "ð Password Protect Files",
                 description: "Add passwords to sensitive documents.\n\nOffice files support password protection. Prevents unauthorized access.",
                 image: "password-files.jpg",
                 details: []
               },
               {
-                title: "🗑️ Secure Deletion",
+                title: "ðï¸ Secure Deletion",
                 description: "Permanently delete sensitive files.\n\nUse secure delete tools. Overwrites data so it cannot be recovered.",
                 image: "secure-delete.jpg",
                 details: []
@@ -6033,19 +5989,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔐 Password Strength",
+                title: "ð Password Strength",
                 description: "Strong passwords are hard for others to guess.\n\nUse at least 8 characters with letters, numbers, and symbols. Avoid common words.",
                 image: "strong-password.jpg",
                 details: []
               },
               {
-                title: "🔑 Password Tips",
+                title: "ð Password Tips",
                 description: "Use unique passwords for each account.\n\nDon't share passwords with others. Change passwords regularly.",
                 image: "password-tips.jpg",
                 details: []
               },
               {
-                title: "🔒 Password Managers",
+                title: "ð Password Managers",
                 description: "Tools that securely store your passwords.\n\nRemember passwords for you. Generate strong passwords automatically.",
                 image: "password-manager.jpg",
                 details: []
@@ -6066,13 +6022,13 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🎣 What is Phishing?",
+                title: "ð£ What is Phishing?",
                 description: "Fake emails or websites that trick you into sharing information.\n\nLooks like legitimate companies. Asks for passwords or personal details.",
                 image: "phishing-attack.jpg",
                 details: []
               },
               {
-                title: "⚠️ Phishing Signs",
+                title: "â ï¸ Phishing Signs",
                 description: "Urgent language, spelling errors, suspicious links.\n\nAsks for personal information. Comes from unknown senders.",
                 image: "phishing-signs.jpg",
                 details: []
@@ -6184,13 +6140,13 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💳 Digital Currency Definition",
+                title: "ð³ Digital Currency Definition",
                 description: "Money that exists only in electronic or digital form.\n\nNo physical coins or bills. Stored and transferred electronically.",
                 image: "digital-currency.jpg",
                 details: []
               },
               {
-                title: "🌐 Types of Digital Currency",
+                title: "ð Types of Digital Currency",
                 description: "Cryptocurrencies and CBDC.\n\nCryptocurrencies are decentralized. CBDC is issued by central banks.",
                 image: "currency-types.jpg",
                 details: []
@@ -6204,19 +6160,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "₿ Bitcoin",
+                title: "â¿ Bitcoin",
                 description: "First and most popular cryptocurrency.\n\nCreated in 2009. Decentralized digital currency. Limited supply.",
                 image: "bitcoin-crypto.jpg",
                 details: []
               },
               {
-                title: "Ξ Ethereum",
+                title: "Î Ethereum",
                 description: "Second-largest cryptocurrency.\n\nSupports smart contracts. Used for decentralized applications.",
                 image: "ethereum-crypto.jpg",
                 details: []
               },
               {
-                title: "🪙 How Cryptocurrencies Work",
+                title: "ðª How Cryptocurrencies Work",
                 description: "Use blockchain technology for transactions.\n\nNo central authority. Transactions verified by network.",
                 image: "crypto-work.jpg",
                 details: []
@@ -6230,13 +6186,13 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🏦 What is CBDC?",
+                title: "ð¦ What is CBDC?",
                 description: "Digital currency issued by central bank.\n\nOfficial government-backed digital money. Regulated and secure.",
                 image: "cbdc-currency.jpg",
                 details: []
               },
               {
-                title: "💼 CBDC Benefits",
+                title: "ð¼ CBDC Benefits",
                 description: "Faster transactions and lower costs.\n\nGovernment-backed security. Easier financial inclusion.",
                 image: "cbdc-benefits.jpg",
                 details: []
@@ -6250,19 +6206,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "⛓️ Distributed Ledger",
+                title: "âï¸ Distributed Ledger",
                 description: "Database shared across many computers.\n\nNo single point of control. All participants have copy of ledger.",
                 image: "distributed-ledger.jpg",
                 details: []
               },
               {
-                title: "🔒 Immutability",
+                title: "ð Immutability",
                 description: "Records cannot be changed once added.\n\nTransactions are permanent. Prevents fraud and tampering.",
                 image: "immutability.jpg",
                 details: []
               },
               {
-                title: "👁️ Transparency",
+                title: "ðï¸ Transparency",
                 description: "All transactions are visible to network.\n\nPublic record of all activities. Increases trust and accountability.",
                 image: "transparency.jpg",
                 details: []
@@ -6283,19 +6239,19 @@ export const module8Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "⚠️ Scams",
+                title: "â ï¸ Scams",
                 description: "Fake cryptocurrency schemes and fraud.\n\nBe cautious of promises of high returns. Research before investing.",
                 image: "crypto-scams.jpg",
                 details: []
               },
               {
-                title: "📈 Volatility",
+                title: "ð Volatility",
                 description: "Prices can change dramatically.\n\nCryptocurrency values fluctuate rapidly. High risk investment.",
                 image: "volatility.jpg",
                 details: []
               },
               {
-                title: "⚖️ Ethics",
+                title: "âï¸ Ethics",
                 description: "Consider environmental impact and regulation.\n\nMining uses energy. Regulatory concerns exist.",
                 image: "crypto-ethics.jpg",
                 details: []
@@ -6371,6 +6327,138 @@ export const module8Lessons: Lesson[] = [
         explanation: "Cryptocurrencies have high volatility (prices change dramatically) and are targets for scams, making them risky investments."
       }
     ]
+  },
+  {
+    id: 15,
+    title: "Setting Up Security",
+    description: "Learn about PINs and passwords to secure your devices",
+    duration: "10 min",
+    content: {
+      sections: [
+        {
+          type: 'text',
+          title: 'Secure Login Basics',
+          data: {
+            text: "PIN and passwords are simple ways to lock and unlock your devices so that only you can access them.\n\nThey help you make sure only you can access your phone, computer, or accounts.",
+            audio: true,
+            audioTitle: "Security Introduction"
+          }
+        },
+        {
+          type: 'card',
+          title: 'PIN & Password',
+          data: {
+            cards: [
+              {
+                title: "ð¢ What is a PIN?",
+                description: "A PIN (Personal Identification Number) is a short numeric code used to quickly unlock a device.",
+                image: "security-pin.jpg",
+                details: ["Example: A 4-digit PIN like 2580 used to unlock your phone or ATM card."]
+              },
+              {
+                title: "ð What is a Password?",
+                description: "A password is a longer secret text made of letters, numbers, or symbols for better security.",
+                image: "security-password.jpg",
+                details: ["Example: MyLaptop@123 used to log in to your computer, email, or app."]
+              }
+            ]
+          }
+        },
+        {
+          type: 'text',
+          title: 'The Simple Difference',
+          data: {
+            text: "ð PIN = short & fast ð¢ | Password = longer & more secure ð"
+          }
+        }
+      ]
+    },
+    quiz: [
+      {
+        id: 1,
+        question: "What is a PIN?",
+        options: [
+          "A long secret text",
+          "A short numeric code",
+          "A type of hardware",
+          "An email address"
+        ],
+        correctAnswer: 1,
+        explanation: "A PIN is a short numeric code (Personal Identification Number) used for quick device unlocking."
+      },
+      {
+        id: 2,
+        question: "Which is generally more secure?",
+        options: [
+          "A 4-digit PIN",
+          "A long password with symbols",
+          "A 1-digit PIN",
+          "They are the same"
+        ],
+        correctAnswer: 1,
+        explanation: "Passwords are longer and can include letters and symbols, making them harder to guess than short PINs."
+      }
+    ]
+  },
+  {
+    id: 16,
+    title: "Backup Setup",
+    description: "Learn how to protect your files with local and cloud backups",
+    duration: "12 min",
+    content: {
+      sections: [
+        {
+          type: 'text',
+          title: 'Protecting Your Data',
+          data: {
+            text: "Backup setup protects your important files from loss. This knowledge helps you recover from hardware failure, accidental deletion, or malware attacks.\n\nYou can backup your data locally to an external drive or use cloud services.",
+            audio: true,
+            audioTitle: "Backup Introduction"
+          }
+        },
+        {
+          type: 'card',
+          title: 'Cloud Backup Settings',
+          data: {
+            cards: [
+              {
+                title: "âï¸ OneDrive (Windows)",
+                description: "Built directly into Windows. It automatically syncs your folders to the cloud.",
+                image: "cloud-backup.jpg",
+                details: ["Setup: Click the âï¸ icon in your taskbar and sign in."]
+              },
+              {
+                title: "ð Google & iCloud",
+                description: "Digital filing cabinets in the sky. Great for multi-device sync.",
+                image: "cloud-alternatives.jpg",
+                details: ["Setup: Download the app and choose folders to protect."]
+              }
+            ]
+          }
+        },
+        {
+          type: 'text',
+          title: 'The Simple Difference',
+          data: {
+            text: "ð Cloud Backup = Accessible Everywhere âï¸ | Local Backup = Fast & Physical ð¾"
+          }
+        }
+      ]
+    },
+    quiz: [
+      {
+        id: 1,
+        question: "What is the main benefit of cloud backup?",
+        options: [
+          "It makes your computer faster",
+          "It is accessible from any device",
+          "It doesn't require internet",
+          "It is only for images"
+        ],
+        correctAnswer: 1,
+        explanation: "Cloud backup allows you to access your files from any device with an internet connection."
+      }
+    ]
   }
 ];
 
@@ -6401,31 +6489,31 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🦠 Computer Viruses",
+                title: "ð¦  Computer Viruses",
                 description: "Malicious code that attaches to files and spreads.\n\nDamages files and slows down your computer. Requires user action to spread.",
                 image: "computer-virus.jpg",
                 details: []
               },
               {
-                title: "🐛 Worms",
+                title: "ð Worms",
                 description: "Self-replicating malware that spreads automatically.\n\nSpreads through networks without user interaction. Can consume network bandwidth.",
                 image: "computer-worm.jpg",
                 details: []
               },
               {
-                title: "🐴 Trojans",
+                title: "ð´ Trojans",
                 description: "Malware disguised as legitimate software.\n\nTricks users into installing it. Opens backdoors for hackers.",
                 image: "trojan-horse.jpg",
                 details: []
               },
               {
-                title: "👁️ Spyware",
+                title: "ðï¸ Spyware",
                 description: "Secretly monitors your computer activity.\n\nCollects personal information without permission. Tracks keystrokes and browsing habits.",
                 image: "spyware-threat.jpg",
                 details: []
               },
               {
-                title: "🔒 Ransomware",
+                title: "ð Ransomware",
                 description: "Encrypts your files and demands payment.\n\nLocks you out of your data. Requires payment to restore access.",
                 image: "ransomware-threat.jpg",
                 details: []
@@ -6537,19 +6625,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔥 Firewall Basics",
+                title: "ð¥ Firewall Basics",
                 description: "A firewall blocks unauthorized access to your computer.\n\nActs as a barrier between your computer and the internet. Monitors incoming and outgoing traffic.",
                 image: "firewall-protection.jpg",
                 details: []
               },
               {
-                title: "🛡️ Software Firewall",
+                title: "ð¡ï¸ Software Firewall",
                 description: "Built into Windows or installed as software.\n\nProtects individual computers. Can be customized with rules.",
                 image: "software-firewall.jpg",
                 details: []
               },
               {
-                title: "🏠 Hardware Firewall",
+                title: "ð  Hardware Firewall",
                 description: "Physical device that protects entire networks.\n\nUsually built into routers. Protects all connected devices.",
                 image: "hardware-firewall.jpg",
                 details: []
@@ -6563,19 +6651,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🛡️ Antivirus Protection",
+                title: "ð¡ï¸ Antivirus Protection",
                 description: "Scans and removes malicious software from your computer.\n\nDetects viruses, worms, trojans, and other threats. Updates regularly to catch new threats.",
                 image: "antivirus-software.jpg",
                 details: []
               },
               {
-                title: "🔄 Real-time Scanning",
+                title: "ð Real-time Scanning",
                 description: "Continuously monitors your computer for threats.\n\nScans files as you download or open them. Provides instant protection.",
                 image: "realtime-scanning.jpg",
                 details: []
               },
               {
-                title: "📅 Scheduled Scans",
+                title: "ð Scheduled Scans",
                 description: "Regular full system scans to find hidden threats.\n\nRuns automatically at set times. Checks all files on your computer.",
                 image: "scheduled-scan.jpg",
                 details: []
@@ -6681,19 +6769,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔐 Password Strength",
+                title: "ð Password Strength",
                 description: "Strong passwords are hard for others to guess.\n\nUse at least 8 characters with letters, numbers, and symbols. Avoid common words.",
                 image: "strong-password.jpg",
                 details: []
               },
               {
-                title: "🔑 Password Tips",
+                title: "ð Password Tips",
                 description: "Use unique passwords for each account.\n\nDon't share passwords with others. Change passwords regularly.",
                 image: "password-tips.jpg",
                 details: []
               },
               {
-                title: "🔒 Password Managers",
+                title: "ð Password Managers",
                 description: "Tools that securely store your passwords.\n\nRemember passwords for you. Generate strong passwords automatically.",
                 image: "password-manager.jpg",
                 details: []
@@ -6714,13 +6802,13 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🎣 What is Phishing?",
+                title: "ð£ What is Phishing?",
                 description: "Fake emails or websites that trick you into sharing information.\n\nLooks like legitimate companies. Asks for passwords or personal details.",
                 image: "phishing-attack.jpg",
                 details: []
               },
               {
-                title: "⚠️ Phishing Signs",
+                title: "â ï¸ Phishing Signs",
                 description: "Urgent language, spelling errors, suspicious links.\n\nAsks for personal information. Comes from unknown senders.",
                 image: "phishing-signs.jpg",
                 details: []
@@ -6832,19 +6920,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🧹 Disk Cleanup Tool",
+                title: "ð§¹ Disk Cleanup Tool",
                 description: "Removes temporary files and unnecessary data.\n\nFrees up storage space. Improves system performance.",
                 image: "disk-cleanup.jpg",
                 details: []
               },
               {
-                title: "🗑️ Temporary Files",
+                title: "ðï¸ Temporary Files",
                 description: "Files created by programs that are no longer needed.\n\nBrowser cache, temp files, recycle bin. Safe to delete.",
                 image: "temp-files.jpg",
                 details: []
               },
               {
-                title: "📊 Cleanup Benefits",
+                title: "ð Cleanup Benefits",
                 description: "More storage space and faster performance.\n\nRemoves clutter. Helps system run efficiently.",
                 image: "cleanup-benefits.jpg",
                 details: []
@@ -6879,13 +6967,13 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔧 What is Defragmentation?",
+                title: "ð§ What is Defragmentation?",
                 description: "Reorganizes files on your hard drive for faster access.\n\nPuts file pieces together. Improves read/write speed.",
                 image: "disk-defrag.jpg",
                 details: []
               },
               {
-                title: "⚡ When to Defragment",
+                title: "â¡ When to Defragment",
                 description: "For traditional hard drives (HDD), not SSDs.\n\nRun monthly or when system is slow. Takes time to complete.",
                 image: "defrag-process.jpg",
                 details: []
@@ -6906,13 +6994,13 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💨 Ventilation",
+                title: "ð¨ Ventilation",
                 description: "Keep computer vents clean and unobstructed.\n\nPrevents overheating. Ensures proper airflow.",
                 image: "computer-ventilation.jpg",
                 details: []
               },
               {
-                title: "🧽 Physical Cleaning",
+                title: "ð§½ Physical Cleaning",
                 description: "Clean keyboard, mouse, and screen regularly.\n\nUse appropriate cleaning tools. Turn off before cleaning.",
                 image: "hardware-cleaning.jpg",
                 details: []
@@ -7018,25 +7106,25 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔄 Regular Updates",
+                title: "ð Regular Updates",
                 description: "Keep Windows and software updated.\n\nUpdates fix security vulnerabilities. Install updates promptly.",
                 image: "system-updates.jpg",
                 details: []
               },
               {
-                title: "🔒 Secure Browsing",
+                title: "ð Secure Browsing",
                 description: "Only visit trusted websites.\n\nLook for HTTPS in URLs. Avoid suspicious downloads.",
                 image: "secure-browsing.jpg",
                 details: []
               },
               {
-                title: "📧 Email Safety",
+                title: "ð§ Email Safety",
                 description: "Don't open attachments from unknown senders.\n\nVerify sender identity. Be cautious with links.",
                 image: "email-safety.jpg",
                 details: []
               },
               {
-                title: "💾 Regular Backups",
+                title: "ð¾ Regular Backups",
                 description: "Back up important files regularly.\n\nProtects against data loss. Use external drives or cloud.",
                 image: "regular-backup.jpg",
                 details: []
@@ -7146,25 +7234,25 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "⚙️ CPU Usage",
+                title: "âï¸ CPU Usage",
                 description: "CPU processes all tasks on your computer.\n\nHigh CPU usage slows down everything. Close unnecessary programs to free up CPU.",
                 image: "cpu-usage.jpg",
                 details: []
               },
               {
-                title: "💾 RAM Usage",
+                title: "ð¾ RAM Usage",
                 description: "RAM stores running programs and data.\n\nLow RAM causes slow performance. More RAM means better multitasking.",
                 image: "ram-usage.jpg",
                 details: []
               },
               {
-                title: "💿 Disk Usage",
+                title: "ð¿ Disk Usage",
                 description: "Storage space affects system speed.\n\nFull hard drives slow down computers. Keep at least 10% free space.",
                 image: "disk-usage.jpg",
                 details: []
               },
               {
-                title: "🚀 Startup Programs",
+                title: "ð Startup Programs",
                 description: "Programs that start automatically with Windows.\n\nToo many startup programs slow boot time. Disable unnecessary ones.",
                 image: "startup-programs.jpg",
                 details: []
@@ -7270,13 +7358,13 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖥️ Viewing System Info",
-                description: "Shows processor, RAM, and Windows version.\n\nRight-click This PC → Properties. Displays hardware specifications.",
+                title: "ð¥ï¸ Viewing System Info",
+                description: "Shows processor, RAM, and Windows version.\n\nRight-click This PC â Properties. Displays hardware specifications.",
                 image: "system-properties.jpg",
                 details: []
               },
               {
-                title: "📊 System Specifications",
+                title: "ð System Specifications",
                 description: "Lists CPU model, installed RAM, and system type.\n\nHelps identify hardware capabilities. Useful for troubleshooting.",
                 image: "system-specs.jpg",
                 details: []
@@ -7290,19 +7378,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📈 Performance Tab",
+                title: "ð Performance Tab",
                 description: "Shows real-time CPU, RAM, disk, and network usage.\n\nVisual graphs display current usage. Helps identify bottlenecks.",
                 image: "task-manager-performance.jpg",
                 details: []
               },
               {
-                title: "📋 Processes Tab",
+                title: "ð Processes Tab",
                 description: "Lists all running programs and their resource usage.\n\nShows which programs use most CPU and RAM. Can end unresponsive programs.",
                 image: "task-manager-processes.jpg",
                 details: []
               },
               {
-                title: "🚀 Startup Tab",
+                title: "ð Startup Tab",
                 description: "Shows programs that start with Windows.\n\nCan enable or disable startup programs. Reduces boot time.",
                 image: "task-manager-startup.jpg",
                 details: []
@@ -7415,20 +7503,20 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔊 Check Volume",
+                title: "ð Check Volume",
                 description: "First, check if volume is muted or too low.\n\nClick speaker icon in taskbar. Adjust volume slider.",
                 image: "check-volume.jpg",
                 details: []
               },
               {
-                title: "🔌 Check Connections",
+                title: "ð Check Connections",
                 description: "Verify speakers or headphones are connected properly.\n\nCheck audio cable connections. Try different ports.",
                 image: "audio-connections.jpg",
                 details: []
               },
               {
-                title: "⚙️ Audio Drivers",
-                description: "Update or reinstall audio drivers if needed.\n\nDevice Manager → Sound devices. Update driver.",
+                title: "âï¸ Audio Drivers",
+                description: "Update or reinstall audio drivers if needed.\n\nDevice Manager â Sound devices. Update driver.",
                 image: "audio-drivers.jpg",
                 details: []
               }
@@ -7441,19 +7529,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🧹 Clean Up Disk",
+                title: "ð§¹ Clean Up Disk",
                 description: "Remove temporary files and free up space.\n\nRun Disk Cleanup tool. Delete unnecessary files.",
                 image: "clean-disk.jpg",
                 details: []
               },
               {
-                title: "🔄 Restart Computer",
+                title: "ð Restart Computer",
                 description: "Simple restart often fixes many issues.\n\nCloses all programs. Clears RAM. Refreshes system.",
                 image: "restart-computer.jpg",
                 details: []
               },
               {
-                title: "🚫 Close Programs",
+                title: "ð« Close Programs",
                 description: "Close unnecessary programs using Task Manager.\n\nEnd processes using high CPU or RAM. Frees resources.",
                 image: "close-programs.jpg",
                 details: []
@@ -7474,19 +7562,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📡 Check Wi-Fi",
+                title: "ð¡ Check Wi-Fi",
                 description: "Verify Wi-Fi is connected and signal is strong.\n\nCheck network icon. Reconnect if needed.",
                 image: "check-wifi.jpg",
                 details: []
               },
               {
-                title: "🔌 Check Cables",
+                title: "ð Check Cables",
                 description: "For wired connection, check Ethernet cable.\n\nEnsure cable is plugged in securely. Try different cable.",
                 image: "check-cables.jpg",
                 details: []
               },
               {
-                title: "🔄 Restart Router",
+                title: "ð Restart Router",
                 description: "Restart your router or modem.\n\nUnplug for 30 seconds. Plug back in. Wait for connection.",
                 image: "restart-router.jpg",
                 details: []
@@ -7584,19 +7672,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🛡️ What is Safe Mode?",
+                title: "ð¡ï¸ What is Safe Mode?",
                 description: "Windows starts with minimal programs and drivers.\n\nOnly essential system files load. Helps diagnose problems.",
                 image: "safe-mode.jpg",
                 details: []
               },
               {
-                title: "🔧 When to Use Safe Mode",
+                title: "ð§ When to Use Safe Mode",
                 description: "Use when computer won't start normally or has malware.\n\nAllows removal of problematic programs. Fixes system issues.",
                 image: "when-safe-mode.jpg",
                 details: []
               },
               {
-                title: "🚀 How to Enter Safe Mode",
+                title: "ð How to Enter Safe Mode",
                 description: "Hold Shift while clicking Restart.\n\nOr press F8 during boot. Select Safe Mode from menu.",
                 image: "enter-safe-mode.jpg",
                 details: []
@@ -7617,19 +7705,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔍 Troubleshooter",
-                description: "Windows built-in problem solver.\n\nSettings → Update & Security → Troubleshoot. Fixes common issues automatically.",
+                title: "ð Troubleshooter",
+                description: "Windows built-in problem solver.\n\nSettings â Update & Security â Troubleshoot. Fixes common issues automatically.",
                 image: "troubleshooter.jpg",
                 details: []
               },
               {
-                title: "💾 System Restore",
+                title: "ð¾ System Restore",
                 description: "Returns computer to previous working state.\n\nReverts system changes. Fixes problems caused by recent changes.",
                 image: "system-restore.jpg",
                 details: []
               },
               {
-                title: "🔧 Device Manager",
+                title: "ð§ Device Manager",
                 description: "Manages hardware devices and drivers.\n\nUpdate or reinstall drivers. Fix device problems.",
                 image: "device-manager.jpg",
                 details: []
@@ -7740,25 +7828,25 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "😴 Sleep Mode",
+                title: "ð´ Sleep Mode",
                 description: "Computer enters low-power state but stays on.\n\nSaves current work. Wakes up quickly. Uses small amount of power.",
                 image: "sleep-mode.jpg",
                 details: []
               },
               {
-                title: "🐻 Hibernate",
+                title: "ð» Hibernate",
                 description: "Saves everything to disk and turns off completely.\n\nNo power used. Takes longer to wake. Resumes where you left off.",
                 image: "hibernate-mode.jpg",
                 details: []
               },
               {
-                title: "🔄 Restart",
+                title: "ð Restart",
                 description: "Shuts down and starts up again immediately.\n\nCloses all programs. Refreshes system. Fixes many issues.",
                 image: "restart-system.jpg",
                 details: []
               },
               {
-                title: "⏻ Shutdown",
+                title: "â» Shutdown",
                 description: "Completely turns off the computer.\n\nCloses all programs. Saves settings. No power used.",
                 image: "shutdown-system.jpg",
                 details: []
@@ -7904,19 +7992,19 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🧹 Disk Cleanup Tool",
+                title: "ð§¹ Disk Cleanup Tool",
                 description: "Removes temporary files and unnecessary data.\n\nFrees up storage space. Improves system performance.",
                 image: "disk-cleanup.jpg",
                 details: []
               },
               {
-                title: "🗑️ Temporary Files",
+                title: "ðï¸ Temporary Files",
                 description: "Files created by programs that are no longer needed.\n\nBrowser cache, temp files, recycle bin. Safe to delete.",
                 image: "temp-files.jpg",
                 details: []
               },
               {
-                title: "📊 Cleanup Benefits",
+                title: "ð Cleanup Benefits",
                 description: "More storage space and faster performance.\n\nRemoves clutter. Helps system run efficiently.",
                 image: "cleanup-benefits.jpg",
                 details: []
@@ -7953,13 +8041,13 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔧 What is Defragmentation?",
+                title: "ð§ What is Defragmentation?",
                 description: "Reorganizes files on your hard drive for faster access.\n\nPuts file pieces together. Improves read/write speed.",
                 image: "disk-defrag.jpg",
                 details: []
               },
               {
-                title: "⚡ When to Defragment",
+                title: "â¡ When to Defragment",
                 description: "For traditional hard drives (HDD), not SSDs.\n\nRun monthly or when system is slow. Takes time to complete.",
                 image: "defrag-process.jpg",
                 details: []
@@ -7980,13 +8068,13 @@ export const module9Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💨 Ventilation",
+                title: "ð¨ Ventilation",
                 description: "Keep computer vents clean and unobstructed.\n\nPrevents overheating. Ensures proper airflow.",
                 image: "computer-ventilation.jpg",
                 details: []
               },
               {
-                title: "🧽 Physical Cleaning",
+                title: "ð§½ Physical Cleaning",
                 description: "Clean keyboard, mouse, and screen regularly.\n\nUse appropriate cleaning tools. Turn off before cleaning.",
                 image: "hardware-cleaning.jpg",
                 details: []
@@ -8089,25 +8177,25 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🧠 Processor (CPU)",
+                title: "ð§  Processor (CPU)",
                 description: "Both have processors to run programs.\n\nMobile CPUs are smaller but powerful. Process data and run apps.",
                 image: "mobile-cpu.jpg",
                 details: []
               },
               {
-                title: "💾 Memory (RAM)",
+                title: "ð¾ Memory (RAM)",
                 description: "Both use RAM to store running programs.\n\nMobile devices have less RAM but optimized for efficiency.",
                 image: "mobile-ram.jpg",
                 details: []
               },
               {
-                title: "📱 Storage",
+                title: "ð± Storage",
                 description: "Both store files and programs.\n\nMobile uses flash storage like SSDs. Can expand with memory cards.",
                 image: "mobile-storage.jpg",
                 details: []
               },
               {
-                title: "🔋 Battery",
+                title: "ð Battery",
                 description: "Mobile devices run on battery power.\n\nComputers usually plug into wall. Mobile needs charging.",
                 image: "mobile-battery.jpg",
                 details: []
@@ -8219,13 +8307,13 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔌 USB Cable Connection",
+                title: "ð USB Cable Connection",
                 description: "Connect phone to computer with USB cable.\n\nTransfer files quickly. Charge phone. Access phone storage.",
                 image: "usb-transfer-mobile.jpg",
                 details: []
               },
               {
-                title: "📁 File Transfer",
+                title: "ð File Transfer",
                 description: "Move photos, videos, and documents.\n\nDrag and drop files. Works like external drive. Fast transfer speed.",
                 image: "file-transfer-mobile.jpg",
                 details: []
@@ -8239,13 +8327,13 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📶 Bluetooth Basics",
+                title: "ð¶ Bluetooth Basics",
                 description: "Wireless connection between devices.\n\nNo cables needed. Short range. Low power usage.",
                 image: "bluetooth-mobile.jpg",
                 details: []
               },
               {
-                title: "🎧 Bluetooth Uses",
+                title: "ð§ Bluetooth Uses",
                 description: "Connect headphones, speakers, keyboards.\n\nShare files between phones. Transfer contacts.",
                 image: "bluetooth-uses-mobile.jpg",
                 details: []
@@ -8266,13 +8354,13 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📡 Mobile Hotspot",
+                title: "ð¡ Mobile Hotspot",
                 description: "Share phone's internet with other devices.\n\nCreates Wi-Fi network. Other devices connect wirelessly. Uses mobile data.",
                 image: "mobile-hotspot.jpg",
                 details: []
               },
               {
-                title: "🔗 USB Tethering",
+                title: "ð USB Tethering",
                 description: "Share internet via USB cable.\n\nConnect phone to computer. Share mobile data. More stable than Wi-Fi.",
                 image: "usb-tethering.jpg",
                 details: []
@@ -8370,19 +8458,19 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📁 File Manager App",
+                title: "ð File Manager App",
                 description: "Built-in app to browse files on your phone.\n\nShows all folders and files. Similar to computer file explorer.",
                 image: "mobile-file-manager.jpg",
                 details: []
               },
               {
-                title: "📂 Common Folders",
+                title: "ð Common Folders",
                 description: "Downloads, Pictures, Documents, Music.\n\nOrganized by file type. Easy to find what you need.",
                 image: "mobile-folders.jpg",
                 details: []
               },
               {
-                title: "🔍 Search Files",
+                title: "ð Search Files",
                 description: "Search for files by name.\n\nQuickly find specific files. Works across all folders.",
                 image: "search-files-mobile.jpg",
                 details: []
@@ -8396,19 +8484,19 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "✂️ Copy and Move",
+                title: "âï¸ Copy and Move",
                 description: "Copy or move files between folders.\n\nLong press file to select. Choose copy or move. Select destination.",
                 image: "copy-move-mobile.jpg",
                 details: []
               },
               {
-                title: "🗑️ Delete Files",
+                title: "ðï¸ Delete Files",
                 description: "Remove unwanted files to free space.\n\nSelect file and delete. Files go to trash. Can restore if needed.",
                 image: "delete-files-mobile.jpg",
                 details: []
               },
               {
-                title: "📤 Share Files",
+                title: "ð¤ Share Files",
                 description: "Share files via email, messaging, or cloud.\n\nSelect file and choose share option. Send to other devices.",
                 image: "share-files-mobile.jpg",
                 details: []
@@ -8521,19 +8609,19 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "☁️ Cloud Backup",
+                title: "âï¸ Cloud Backup",
                 description: "Automatically backup to cloud storage.\n\niCloud for iPhone, Google Drive for Android. Access from any device.",
                 image: "cloud-backup-mobile.jpg",
                 details: []
               },
               {
-                title: "💾 Computer Backup",
+                title: "ð¾ Computer Backup",
                 description: "Backup phone to computer via USB.\n\nTransfer files manually. Store on computer hard drive. Full control.",
                 image: "computer-backup-mobile.jpg",
                 details: []
               },
               {
-                title: "🔄 Automatic Sync",
+                title: "ð Automatic Sync",
                 description: "Sync photos and files automatically.\n\nUploads to cloud when connected. Always up to date.",
                 image: "auto-sync-mobile.jpg",
                 details: []
@@ -8575,19 +8663,19 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📸 Photos and Videos",
+                title: "ð¸ Photos and Videos",
                 description: "Most important files to backup.\n\nPrecious memories. Take up most space. Easy to lose.",
                 image: "backup-photos-mobile.jpg",
                 details: []
               },
               {
-                title: "📞 Contacts",
+                title: "ð Contacts",
                 description: "Save your contact list.\n\nImportant phone numbers. Easy to restore if phone is lost.",
                 image: "backup-contacts-mobile.jpg",
                 details: []
               },
               {
-                title: "📱 App Data",
+                title: "ð± App Data",
                 description: "Backup app settings and data.\n\nRestore apps after reset. Keep your preferences.",
                 image: "backup-apps-mobile.jpg",
                 details: []
@@ -8686,19 +8774,19 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔔 Notifications",
+                title: "ð Notifications",
                 description: "Control which apps send notifications.\n\nReduce distractions. Save battery. Customize alerts.",
                 image: "notification-settings-mobile.jpg",
                 details: []
               },
               {
-                title: "🔋 Battery Settings",
+                title: "ð Battery Settings",
                 description: "Monitor battery usage and optimize power.\n\nSee which apps use most battery. Enable power saving mode.",
                 image: "battery-settings-mobile.jpg",
                 details: []
               },
               {
-                title: "💾 Storage Management",
+                title: "ð¾ Storage Management",
                 description: "Check storage space and clean up.\n\nSee what's using space. Delete unnecessary files. Free up storage.",
                 image: "storage-settings-mobile.jpg",
                 details: []
@@ -8719,19 +8807,19 @@ export const module10Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🧹 Clear Cache",
+                title: "ð§¹ Clear Cache",
                 description: "Remove temporary files from apps.\n\nFrees up storage. Improves performance. Safe to do.",
                 image: "clear-cache-mobile.jpg",
                 details: []
               },
               {
-                title: "🔄 Update Apps",
+                title: "ð Update Apps",
                 description: "Keep apps updated for best performance.\n\nGet new features. Fix bugs. Improve security.",
                 image: "update-apps-mobile.jpg",
                 details: []
               },
               {
-                title: "🔒 Security Settings",
+                title: "ð Security Settings",
                 description: "Set up screen lock and security.\n\nProtect your device. Use PIN, pattern, or fingerprint.",
                 image: "security-settings-mobile.jpg",
                 details: []
@@ -8833,25 +8921,25 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖼️ Desktop Background",
-                description: "The image or color behind your icons.\n\nCan be customized with personal photos or themes. Right-click desktop → Personalize.",
+                title: "ð¼ï¸ Desktop Background",
+                description: "The image or color behind your icons.\n\nCan be customized with personal photos or themes. Right-click desktop â Personalize.",
                 image: "desktop-background.jpg",
                 details: []
               },
               {
-                title: "📁 Icons",
+                title: "ð Icons",
                 description: "Small pictures representing programs, files, or folders.\n\nDouble-click to open. Can be arranged and organized on desktop.",
                 image: "desktop-icons.jpg",
                 details: []
               },
               {
-                title: "📊 Taskbar",
+                title: "ð Taskbar",
                 description: "Bar at bottom of screen with open programs.\n\nShows running applications. Start button on left. System tray on right.",
                 image: "taskbar.jpg",
                 details: []
               },
               {
-                title: "🗑️ Recycle Bin",
+                title: "ðï¸ Recycle Bin",
                 description: "Icon for deleted files and folders.\n\nFiles go here when deleted. Can be restored or permanently deleted.",
                 image: "recycle-bin.jpg",
                 details: []
@@ -8865,26 +8953,26 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👆 Selecting Icons",
+                title: "ð Selecting Icons",
                 description: "Click once to select an icon.\n\nSelected icon is highlighted. Can select multiple with Ctrl+Click.",
                 image: "select-icons.jpg",
                 details: []
               },
               {
-                title: "🚀 Opening Programs",
+                title: "ð Opening Programs",
                 description: "Double-click icon to open program.\n\nOr right-click and select 'Open'. Program window appears.",
                 image: "open-programs.jpg",
                 details: []
               },
               {
-                title: "📦 Arranging Icons",
-                description: "Right-click desktop → View → Auto arrange.\n\nIcons align automatically. Or drag to position manually.",
+                title: "ð¦ Arranging Icons",
+                description: "Right-click desktop â View â Auto arrange.\n\nIcons align automatically. Or drag to position manually.",
                 image: "arrange-icons.jpg",
                 details: []
               },
               {
-                title: "✂️ Creating Shortcuts",
-                description: "Right-click program → Send to → Desktop.\n\nCreates shortcut icon. Double-click to launch quickly.",
+                title: "âï¸ Creating Shortcuts",
+                description: "Right-click program â Send to â Desktop.\n\nCreates shortcut icon. Double-click to launch quickly.",
                 image: "create-shortcuts.jpg",
                 details: []
               }
@@ -8996,14 +9084,14 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📄 Create New File",
-                description: "Right-click in folder → New → File type.\n\nChoose document, text file, or other. Name the file.",
+                title: "ð Create New File",
+                description: "Right-click in folder â New â File type.\n\nChoose document, text file, or other. Name the file.",
                 image: "create-file.jpg",
                 details: []
               },
               {
-                title: "📁 Create Folder",
-                description: "Right-click → New → Folder.\n\nName the folder. Organize files inside.",
+                title: "ð Create Folder",
+                description: "Right-click â New â Folder.\n\nName the folder. Organize files inside.",
                 image: "create-folder.jpg",
                 details: []
               }
@@ -9016,20 +9104,20 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📋 Copy Files",
-                description: "Select file → Ctrl+C to copy.\n\nThen Ctrl+V to paste. Creates duplicate in new location.",
+                title: "ð Copy Files",
+                description: "Select file â Ctrl+C to copy.\n\nThen Ctrl+V to paste. Creates duplicate in new location.",
                 image: "copy-files.jpg",
                 details: []
               },
               {
-                title: "✂️ Move Files",
-                description: "Select file → Ctrl+X to cut.\n\nThen Ctrl+V to paste. Moves file to new location.",
+                title: "âï¸ Move Files",
+                description: "Select file â Ctrl+X to cut.\n\nThen Ctrl+V to paste. Moves file to new location.",
                 image: "move-files.jpg",
                 details: []
               },
               {
-                title: "✏️ Rename Files",
-                description: "Right-click file → Rename.\n\nOr press F2. Type new name. Press Enter.",
+                title: "âï¸ Rename Files",
+                description: "Right-click file â Rename.\n\nOr press F2. Type new name. Press Enter.",
                 image: "rename-files.jpg",
                 details: []
               }
@@ -9042,25 +9130,25 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🗑️ Delete Files",
-                description: "Select file → Press Delete key.\n\nOr right-click → Delete. File goes to Recycle Bin.",
+                title: "ðï¸ Delete Files",
+                description: "Select file â Press Delete key.\n\nOr right-click â Delete. File goes to Recycle Bin.",
                 image: "delete-files.jpg",
                 details: []
               },
               {
-                title: "♻️ Restore Files",
-                description: "Open Recycle Bin → Right-click file → Restore.\n\nFile returns to original location.",
+                title: "â»ï¸ Restore Files",
+                description: "Open Recycle Bin â Right-click file â Restore.\n\nFile returns to original location.",
                 image: "restore-files.jpg",
                 details: []
               },
               {
-                title: "🗑️ Empty Recycle Bin",
-                description: "Right-click Recycle Bin → Empty Recycle Bin.\n\nPermanently deletes all files. Cannot be undone.",
+                title: "ðï¸ Empty Recycle Bin",
+                description: "Right-click Recycle Bin â Empty Recycle Bin.\n\nPermanently deletes all files. Cannot be undone.",
                 image: "empty-recycle-bin.jpg",
                 details: []
               },
               {
-                title: "⚠️ Permanent Delete",
+                title: "â ï¸ Permanent Delete",
                 description: "Press Shift+Delete to skip Recycle Bin.\n\nFile deleted immediately. Cannot be restored. Use carefully.",
                 image: "permanent-delete.jpg",
                 details: []
@@ -9074,19 +9162,19 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔍 Quick Search",
+                title: "ð Quick Search",
                 description: "Type in search box to find files.\n\nSearches current folder. Shows results instantly. Fast and simple.",
                 image: "quick-search.jpg",
                 details: []
               },
               {
-                title: "📋 File Name, Type, Date Filters",
+                title: "ð File Name, Type, Date Filters",
                 description: "Filter search by file properties.\n\nSearch by name, file type (.txt, .jpg), or date modified. Narrow results.",
                 image: "search-filters.jpg",
                 details: []
               },
               {
-                title: "🔎 Advanced Search",
+                title: "ð Advanced Search",
                 description: "Use search options for detailed search.\n\nSearch by size, date range, content. More precise results.",
                 image: "advanced-search.jpg",
                 details: []
@@ -9168,7 +9256,7 @@ export const module6Lessons: Lesson[] = [
         question: "How do you rename a file?",
         options: [
           "Double-click the name",
-          "Right-click → Rename or press F2",
+          "Right-click â Rename or press F2",
           "Delete and create new",
           "Copy the file"
         ],
@@ -9232,13 +9320,13 @@ export const module6Lessons: Lesson[] = [
             cards: [
               {
                 title: "Ctrl+C / Ctrl+V",
-                description: "Copy and paste.\n\nSelect text → Ctrl+C to copy, Ctrl+V to paste.",
+                description: "Copy and paste.\n\nSelect text â Ctrl+C to copy, Ctrl+V to paste.",
                 image: "copy-paste.jpg",
                 details: []
               },
               {
                 title: "Ctrl+X / Ctrl+V",
-                description: "Cut and paste.\n\nSelect item → Ctrl+X to cut, Ctrl+V to paste elsewhere.",
+                description: "Cut and paste.\n\nSelect item â Ctrl+X to cut, Ctrl+V to paste elsewhere.",
                 image: "cut-paste.jpg",
                 details: []
               },
@@ -9293,13 +9381,13 @@ export const module6Lessons: Lesson[] = [
                 details: []
               },
               {
-                title: "⚡ Accuracy vs Speed",
+                title: "â¡ Accuracy vs Speed",
                 description: "Focus on accuracy first, then speed.\n\nCorrect typing is more important than fast typing. Speed comes with practice.",
                 image: "accuracy-speed.jpg",
                 details: []
               },
               {
-                title: "🔤 Common Symbols",
+                title: "ð¤ Common Symbols",
                 description: "Learn to type symbols quickly.\n\nPractice @, #, $, %, &, *, (, ), etc. Use Shift key for uppercase and symbols.",
                 image: "common-symbols.jpg",
                 details: []
@@ -9405,19 +9493,19 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👆 Single Click",
+                title: "ð Single Click",
                 description: "Press left button once.\n\nSelects items. Opens menus. Activates buttons.",
                 image: "single-click.jpg",
                 details: []
               },
               {
-                title: "👆👆 Double-Click",
+                title: "ðð Double-Click",
                 description: "Press left button twice quickly.\n\nOpens files and programs. Launches applications.",
                 image: "double-click.jpg",
                 details: []
               },
               {
-                title: "👉 Right-Click",
+                title: "ð Right-Click",
                 description: "Press right button once.\n\nOpens context menu. Shows options for selected item.",
                 image: "right-click.jpg",
                 details: []
@@ -9431,25 +9519,25 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖱️ Drag Files",
+                title: "ð±ï¸ Drag Files",
                 description: "Click and hold file, move mouse.\n\nDrags file to new location. Releases when you let go.",
                 image: "drag-files.jpg",
                 details: []
               },
               {
-                title: "📦 Drop Files",
+                title: "ð¦ Drop Files",
                 description: "Release mouse button over target.\n\nDrops file in new location. Moves or copies file.",
                 image: "drop-files.jpg",
                 details: []
               },
               {
-                title: "📋 Select Ranges",
+                title: "ð Select Ranges",
                 description: "Click first item, Shift+Click last item.\n\nSelects range of files. Or Ctrl+Click to select individual items.",
                 image: "select-ranges.jpg",
                 details: []
               },
               {
-                title: "📦 Create Shortcuts",
+                title: "ð¦ Create Shortcuts",
                 description: "Drag file while holding Alt key.\n\nCreates shortcut at drop location. Original file stays in place.",
                 image: "create-shortcuts-drag.jpg",
                 details: []
@@ -9463,25 +9551,25 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "⚙️ Adjust Speed",
-                description: "Settings → Devices → Mouse.\n\nChange pointer speed. Test until comfortable.",
+                title: "âï¸ Adjust Speed",
+                description: "Settings â Devices â Mouse.\n\nChange pointer speed. Test until comfortable.",
                 image: "mouse-speed.jpg",
                 details: []
               },
               {
-                title: "🖱️ Button Configuration",
+                title: "ð±ï¸ Button Configuration",
                 description: "Swap left and right buttons if needed.\n\nUseful for left-handed users.",
                 image: "mouse-buttons.jpg",
                 details: []
               },
               {
-                title: "👆 Double-Click Speed",
+                title: "ð Double-Click Speed",
                 description: "Adjust how fast you need to double-click.\n\nSlower for beginners, faster for experienced users.",
                 image: "double-click-speed.jpg",
                 details: []
               },
               {
-                title: "🖱️ Scroll Behavior",
+                title: "ð±ï¸ Scroll Behavior",
                 description: "Configure scroll wheel settings.\n\nAdjust scroll speed. Choose lines per scroll. Reverse scroll direction if needed.",
                 image: "scroll-behavior.jpg",
                 details: []
@@ -9563,12 +9651,12 @@ export const module6Lessons: Lesson[] = [
         question: "Where do you adjust mouse speed?",
         options: [
           "Desktop settings",
-          "Settings → Devices → Mouse",
+          "Settings â Devices â Mouse",
           "Control Panel only",
           "Cannot be changed"
         ],
         correctAnswer: 1,
-        explanation: "Mouse speed can be adjusted in Settings → Devices → Mouse."
+        explanation: "Mouse speed can be adjusted in Settings â Devices â Mouse."
       }
     ]
   },
@@ -9594,26 +9682,26 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📐 Resolution Settings",
-                description: "Settings → System → Display.\n\nChoose resolution. Higher = sharper but smaller text.",
+                title: "ð Resolution Settings",
+                description: "Settings â System â Display.\n\nChoose resolution. Higher = sharper but smaller text.",
                 image: "screen-resolution.jpg",
                 details: []
               },
               {
-                title: "🖥️ Recommended Resolution",
+                title: "ð¥ï¸ Recommended Resolution",
                 description: "Use recommended resolution for best quality.\n\nMatches your monitor's native resolution.",
                 image: "recommended-resolution.jpg",
                 details: []
               },
               {
-                title: "📏 Text Size",
-                description: "Adjust text size for readability.\n\nSettings → Ease of Access → Display. Increase text size.",
+                title: "ð Text Size",
+                description: "Adjust text size for readability.\n\nSettings â Ease of Access â Display. Increase text size.",
                 image: "text-size.jpg",
                 details: []
               },
               {
-                title: "🔍 Display Scaling",
-                description: "Scale everything larger or smaller.\n\nSettings → System → Display → Scale. Makes UI elements bigger.",
+                title: "ð Display Scaling",
+                description: "Scale everything larger or smaller.\n\nSettings â System â Display â Scale. Makes UI elements bigger.",
                 image: "display-scaling.jpg",
                 details: []
               }
@@ -9626,20 +9714,20 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💡 Adjust Brightness",
-                description: "Settings → System → Display → Brightness.\n\nUse slider to increase or decrease. Reduce for eye comfort.",
+                title: "ð¡ Adjust Brightness",
+                description: "Settings â System â Display â Brightness.\n\nUse slider to increase or decrease. Reduce for eye comfort.",
                 image: "brightness-settings.jpg",
                 details: []
               },
               {
-                title: "🎨 Night Light",
+                title: "ð¨ Night Light",
                 description: "Reduces blue light in evening.\n\nEasier on eyes. Can schedule automatically.",
                 image: "night-light.jpg",
                 details: []
               },
               {
-                title: "🎨 Color Profile Basics",
-                description: "Adjust color settings for accuracy.\n\nSettings → System → Display → Advanced. Calibrate colors.",
+                title: "ð¨ Color Profile Basics",
+                description: "Adjust color settings for accuracy.\n\nSettings â System â Display â Advanced. Calibrate colors.",
                 image: "color-profile.jpg",
                 details: []
               }
@@ -9652,14 +9740,14 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔤 Scale Text",
-                description: "Settings → System → Display → Scale.\n\nMake text larger or smaller. 100% to 200%.",
+                title: "ð¤ Scale Text",
+                description: "Settings â System â Display â Scale.\n\nMake text larger or smaller. 100% to 200%.",
                 image: "text-scale.jpg",
                 details: []
               },
               {
-                title: "👁️ High Contrast",
-                description: "Settings → Ease of Access → High Contrast.\n\nMakes text easier to read. Better visibility.",
+                title: "ðï¸ High Contrast",
+                description: "Settings â Ease of Access â High Contrast.\n\nMakes text easier to read. Better visibility.",
                 image: "high-contrast.jpg",
                 details: []
               }
@@ -9672,25 +9760,25 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔊 Narrator",
+                title: "ð Narrator",
                 description: "Reads screen text aloud.\n\nHelps visually impaired users. Press Windows+Ctrl+Enter.",
                 image: "narrator.jpg",
                 details: []
               },
               {
                 title: "⌨️ On-Screen Keyboard",
-                description: "Virtual keyboard on screen.\n\nUseful if physical keyboard unavailable. Settings → Ease of Access.",
+                description: "Virtual keyboard on screen.\n\nUseful if physical keyboard unavailable. Settings â Ease of Access.",
                 image: "on-screen-keyboard.jpg",
                 details: []
               },
               {
-                title: "🖱️ Mouse Keys",
+                title: "ð±ï¸ Mouse Keys",
                 description: "Control mouse with keyboard.\n\nUse number pad to move cursor. Accessibility option.",
                 image: "mouse-keys.jpg",
                 details: []
               },
               {
-                title: "🔍 Magnifier Tool",
+                title: "ð Magnifier Tool",
                 description: "Zoom in on screen areas.\n\nPress Windows + Plus to zoom. Helps see small text.",
                 image: "magnifier.jpg",
                 details: []
@@ -9732,12 +9820,12 @@ export const module6Lessons: Lesson[] = [
         question: "Where do you adjust screen brightness?",
         options: [
           "Desktop right-click",
-          "Settings → System → Display",
+          "Settings â System â Display",
           "Control Panel only",
           "Cannot be changed"
         ],
         correctAnswer: 1,
-        explanation: "Screen brightness can be adjusted in Settings → System → Display → Brightness."
+        explanation: "Screen brightness can be adjusted in Settings â System â Display â Brightness."
       },
       {
         id: 2,
@@ -9756,12 +9844,12 @@ export const module6Lessons: Lesson[] = [
         question: "How do you make text larger?",
         options: [
           "Change resolution",
-          "Settings → Display → Scale",
+          "Settings â Display â Scale",
           "Use zoom in browser",
           "Cannot be changed"
         ],
         correctAnswer: 1,
-        explanation: "Text size can be increased using Settings → System → Display → Scale, which adjusts the overall scale of text and UI elements."
+        explanation: "Text size can be increased using Settings â System â Display â Scale, which adjusts the overall scale of text and UI elements."
       }
     ]
   },
@@ -9787,43 +9875,43 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📄 .txt - Text Files",
+                title: "ð .txt - Text Files",
                 description: "Plain text documents.\n\nOpens in Notepad. Simple text without formatting.",
                 image: "txt-file.jpg",
                 details: []
               },
               {
-                title: "📷 .jpg / .png - Images",
+                title: "ð· .jpg / .png - Images",
                 description: "Photo and image files.\n\n.jpg for photos. .png for graphics with transparency.",
                 image: "image-files.jpg",
                 details: []
               },
               {
-                title: "📄 .pdf - PDF Documents",
+                title: "ð .pdf - PDF Documents",
                 description: "Portable document format.\n\nOpens in PDF reader. Preserves formatting.",
                 image: "pdf-file.jpg",
                 details: []
               },
               {
-                title: "🎬 .mp4 / .avi - Videos",
+                title: "ð¬ .mp4 / .avi - Videos",
                 description: "Video files.\n\n.mp4 is common. Opens in media player or browser.",
                 image: "video-files.jpg",
                 details: []
               },
               {
-                title: "🔧 .exe - Executable",
+                title: "ð§ .exe - Executable",
                 description: "Program installation files.\n\nRuns programs. Double-click to install or run.",
                 image: "exe-file.jpg",
                 details: []
               },
               {
-                title: "📊 .xlsx / .docx - Office Files",
+                title: "ð .xlsx / .docx - Office Files",
                 description: "Microsoft Office documents.\n\n.xlsx for spreadsheets. .docx for Word documents.",
                 image: "office-files.jpg",
                 details: []
               },
               {
-                title: "🎵 .mp3 - Audio Files",
+                title: "ðµ .mp3 - Audio Files",
                 description: "Music and audio files.\n\nCommon audio format. Opens in media player.",
                 image: "mp3-file.jpg",
                 details: []
@@ -9837,13 +9925,13 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👁️ Show Extensions",
-                description: "File Explorer → View tab → File name extensions.\n\nCheck box to see extensions for all files.",
+                title: "ðï¸ Show Extensions",
+                description: "File Explorer â View tab â File name extensions.\n\nCheck box to see extensions for all files.",
                 image: "show-extensions.jpg",
                 details: []
               },
               {
-                title: "🔍 File Icons",
+                title: "ð File Icons",
                 description: "Different icons for different file types.\n\nWindows shows appropriate icon based on extension.",
                 image: "file-icons.jpg",
                 details: []
@@ -9857,20 +9945,20 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔗 Default Programs",
-                description: "Settings → Apps → Default apps.\n\nChoose which program opens each file type.",
+                title: "ð Default Programs",
+                description: "Settings â Apps â Default apps.\n\nChoose which program opens each file type.",
                 image: "default-programs.jpg",
                 details: []
               },
               {
-                title: "📂 Open With",
-                description: "Right-click file → Open with.\n\nChoose different program to open file once or always.",
+                title: "ð Open With",
+                description: "Right-click file â Open with.\n\nChoose different program to open file once or always.",
                 image: "open-with.jpg",
                 details: []
               },
               {
-                title: "⚙️ Changing Associations",
-                description: "Set default app for file types.\n\nSettings → Apps → Default apps → Choose defaults by file type.",
+                title: "âï¸ Changing Associations",
+                description: "Set default app for file types.\n\nSettings â Apps â Default apps â Choose defaults by file type.",
                 image: "change-associations.jpg",
                 details: []
               }
@@ -9883,19 +9971,19 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👁️ Show/Hide Extensions",
-                description: "File Explorer → View → File name extensions.\n\nToggle to show or hide extensions. Helpful for identification.",
+                title: "ðï¸ Show/Hide Extensions",
+                description: "File Explorer â View â File name extensions.\n\nToggle to show or hide extensions. Helpful for identification.",
                 image: "show-hide-extensions.jpg",
                 details: []
               },
               {
-                title: "⚠️ Avoid Renaming Extensions",
+                title: "â ï¸ Avoid Renaming Extensions",
                 description: "Don't change file extensions manually.\n\nChanging .txt to .exe won't work. Can break files.",
                 image: "avoid-rename-extensions.jpg",
                 details: []
               },
               {
-                title: "🔍 Identifying Executable Files",
+                title: "ð Identifying Executable Files",
                 description: "Recognize .exe, .msi, .bat files.\n\nThese run programs. Only open from trusted sources.",
                 image: "identify-executables.jpg",
                 details: []
@@ -9976,12 +10064,12 @@ export const module6Lessons: Lesson[] = [
         question: "How do you see file extensions in File Explorer?",
         options: [
           "They're always visible",
-          "View tab → File name extensions",
+          "View tab â File name extensions",
           "Cannot be shown",
           "Right-click only"
         ],
         correctAnswer: 1,
-        explanation: "To see file extensions, go to File Explorer → View tab → check 'File name extensions'."
+        explanation: "To see file extensions, go to File Explorer â View tab â check 'File name extensions'."
       }
     ]
   },
@@ -10007,20 +10095,20 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔔 Notifications",
+                title: "ð Notifications",
                 description: "Alerts from apps and system.\n\nAppear in bottom-right corner. Click to view details.",
                 image: "notifications.jpg",
                 details: []
               },
               {
-                title: "⚡ Quick Settings",
+                title: "â¡ Quick Settings",
                 description: "Access from Action Center.\n\nWi-Fi, Bluetooth, brightness, airplane mode. Quick toggles.",
                 image: "quick-settings.jpg",
                 details: []
               },
               {
-                title: "🔕 Focus Assist",
-                description: "Reduce distractions from notifications.\n\nSettings → System → Focus assist. Choose when to receive alerts.",
+                title: "ð Focus Assist",
+                description: "Reduce distractions from notifications.\n\nSettings â System â Focus assist. Choose when to receive alerts.",
                 image: "focus-assist.jpg",
                 details: []
               }
@@ -10033,19 +10121,19 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "⚙️ Modern Settings App",
-                description: "New Windows settings interface.\n\nSettings → Start menu. Organized by categories. User-friendly design.",
+                title: "âï¸ Modern Settings App",
+                description: "New Windows settings interface.\n\nSettings â Start menu. Organized by categories. User-friendly design.",
                 image: "settings-app.jpg",
                 details: []
               },
               {
-                title: "🖥️ Legacy Control Panel",
+                title: "ð¥ï¸ Legacy Control Panel",
                 description: "Classic Windows control panel.\n\nSearch 'Control Panel' in Start menu. Advanced system settings.",
                 image: "control-panel.jpg",
                 details: []
               },
               {
-                title: "🔄 When to Use Each",
+                title: "ð When to Use Each",
                 description: "Settings for common tasks. Control Panel for advanced.\n\nMost users use Settings. Control Panel for power users.",
                 image: "settings-vs-control.jpg",
                 details: []
@@ -10059,26 +10147,26 @@ export const module6Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👤 Sign-In Methods",
-                description: "Password, PIN, picture password, Windows Hello.\n\nSettings → Accounts → Sign-in options. Choose secure method.",
+                title: "ð¤ Sign-In Methods",
+                description: "Password, PIN, picture password, Windows Hello.\n\nSettings â Accounts â Sign-in options. Choose secure method.",
                 image: "sign-in-methods.jpg",
                 details: []
               },
               {
-                title: "🔒 Lock Screen",
+                title: "ð Lock Screen",
                 description: "Press Win+L to lock computer.\n\nRequires password to unlock. Protects your work.",
                 image: "lock-screen.jpg",
                 details: []
               },
               {
-                title: "🚪 Log Off",
-                description: "Start menu → User icon → Sign out.\n\nCloses all programs. Returns to sign-in screen.",
+                title: "ðª Log Off",
+                description: "Start menu â User icon â Sign out.\n\nCloses all programs. Returns to sign-in screen.",
                 image: "log-off.jpg",
                 details: []
               },
               {
-                title: "👥 Switch Users",
-                description: "Start menu → User icon → Switch account.\n\nSwitch between user accounts without logging off.",
+                title: "ð¥ Switch Users",
+                description: "Start menu â User icon â Switch account.\n\nSwitch between user accounts without logging off.",
                 image: "switch-users.jpg",
                 details: []
               }
@@ -10218,19 +10306,19 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "✉️ Email Address",
+                title: "âï¸ Email Address",
                 description: "Unique address like name@example.com.\n\nRecipient's email address goes in 'To' field. Required to send email.",
                 image: "email-address.jpg",
                 details: []
               },
               {
-                title: "📧 Email Components",
+                title: "ð§ Email Components",
                 description: "Subject line, body text, and signature.\n\nSubject describes email content. Body contains your message.",
                 image: "email-components.jpg",
                 details: []
               },
               {
-                title: "📤 Sending Process",
+                title: "ð¤ Sending Process",
                 description: "Click 'Send' button to deliver email.\n\nEmail arrives in recipient's inbox. Can take seconds to minutes.",
                 image: "send-email.jpg",
                 details: []
@@ -10251,13 +10339,13 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📎 File Attachments",
+                title: "ð File Attachments",
                 description: "Add files like documents, photos, or videos to emails.\n\nClick attachment icon. Select file from computer. File size limits apply.",
                 image: "email-attachment.jpg",
                 details: []
               },
               {
-                title: "📏 File Size Limits",
+                title: "ð File Size Limits",
                 description: "Most email services limit attachment size.\n\nUsually 25MB or less. Use cloud storage for larger files.",
                 image: "file-size-limit.jpg",
                 details: []
@@ -10271,19 +10359,19 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👋 Professional Greeting",
+                title: "ð Professional Greeting",
                 description: "Start with appropriate greeting.\n\nUse 'Dear' for formal, 'Hi' for casual. Match recipient's style.",
                 image: "email-greeting.jpg",
                 details: []
               },
               {
-                title: "✍️ Clear Writing",
+                title: "âï¸ Clear Writing",
                 description: "Write clearly and concisely.\n\nUse proper grammar. Break into paragraphs. Be polite and respectful.",
                 image: "clear-writing.jpg",
                 details: []
               },
               {
-                title: "⏰ Timely Responses",
+                title: "â° Timely Responses",
                 description: "Reply to emails within reasonable time.\n\nRespond within 24-48 hours for business. Acknowledge receipt if needed.",
                 image: "email-response.jpg",
                 details: []
@@ -10400,19 +10488,19 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🔌 USB Connection",
+                title: "ð USB Connection",
                 description: "Connect printer to computer with USB cable.\n\nPlug cable into printer and computer. Windows detects automatically.",
                 image: "usb-printer.jpg",
                 details: []
               },
               {
-                title: "📶 Wireless Connection",
+                title: "ð¶ Wireless Connection",
                 description: "Connect printer to Wi-Fi network.\n\nUse printer settings to connect. Print from any device on network.",
                 image: "wireless-printer.jpg",
                 details: []
               },
               {
-                title: "⚙️ Printer Setup",
+                title: "âï¸ Printer Setup",
                 description: "Install printer drivers from manufacturer.\n\nDownload from website or use installation CD. Follow setup wizard.",
                 image: "printer-setup.jpg",
                 details: []
@@ -10433,13 +10521,13 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🖨️ Printing Documents",
-                description: "File → Print or Ctrl+P to print.\n\nChoose printer, number of copies, and pages. Click Print.",
+                title: "ð¨ï¸ Printing Documents",
+                description: "File â Print or Ctrl+P to print.\n\nChoose printer, number of copies, and pages. Click Print.",
                 image: "print-document.jpg",
                 details: []
               },
               {
-                title: "📄 Print Preview",
+                title: "ð Print Preview",
                 description: "Preview document before printing.\n\nSee how it will look. Adjust settings if needed. Saves paper.",
                 image: "print-preview.jpg",
                 details: []
@@ -10453,13 +10541,13 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📷 What is Scanning?",
+                title: "ð· What is Scanning?",
                 description: "Scanning creates digital copy of physical document.\n\nPlace document on scanner. Press scan button. Save as file.",
                 image: "scanner-device.jpg",
                 details: []
               },
               {
-                title: "💾 Saving Formats",
+                title: "ð¾ Saving Formats",
                 description: "Save scans as PDF, JPG, or PNG files.\n\nPDF for documents. JPG/PNG for photos. Choose quality settings.",
                 image: "scan-formats.jpg",
                 details: []
@@ -10557,19 +10645,19 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "📸 Print Screen (PrtScn)",
+                title: "ð¸ Print Screen (PrtScn)",
                 description: "Captures entire screen to clipboard.\n\nPress PrtScn key. Paste into Paint or Word. Saves full screen.",
                 image: "print-screen.jpg",
                 details: []
               },
               {
-                title: "🪟 Windows + Shift + S",
+                title: "ðª Windows + Shift + S",
                 description: "Opens Snipping Tool for selective screenshots.\n\nSelect area to capture. Saves to clipboard automatically.",
                 image: "snipping-tool.jpg",
                 details: []
               },
               {
-                title: "💻 Alt + Print Screen",
+                title: "ð» Alt + Print Screen",
                 description: "Captures only active window.\n\nPress Alt + PrtScn. Paste to save. Captures current window only.",
                 image: "alt-printscreen.jpg",
                 details: []
@@ -10590,13 +10678,13 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "✂️ Snipping Tool",
+                title: "âï¸ Snipping Tool",
                 description: "Built-in Windows tool for screenshots.\n\nSelect area, window, or full screen. Annotate and save.",
                 image: "snipping-tool-app.jpg",
                 details: []
               },
               {
-                title: "📷 Snipping Tool (New)",
+                title: "ð· Snipping Tool (New)",
                 description: "Updated version with more features.\n\nDelay timer, shapes, and editing. Access from Start menu.",
                 image: "new-snipping.jpg",
                 details: []
@@ -10610,13 +10698,13 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "💾 Save Location",
+                title: "ð¾ Save Location",
                 description: "Screenshots save to Pictures/Screenshots folder.\n\nAutomatically named with date and time. Can change location.",
                 image: "screenshot-folder.jpg",
                 details: []
               },
               {
-                title: "📁 File Format",
+                title: "ð File Format",
                 description: "Screenshots save as PNG files by default.\n\nHigh quality images. Can convert to JPG if needed.",
                 image: "screenshot-format.jpg",
                 details: []
@@ -10694,19 +10782,19 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "🤝 Respect Others",
+                title: "ð¤ Respect Others",
                 description: "Treat others online with kindness and respect.\n\nDon't bully or harass. Think before posting. Be polite in comments.",
                 image: "respect-online.jpg",
                 details: []
               },
               {
-                title: "🔒 Protect Privacy",
+                title: "ð Protect Privacy",
                 description: "Don't share personal information unnecessarily.\n\nKeep passwords private. Be careful with photos. Limit location sharing.",
                 image: "protect-privacy.jpg",
                 details: []
               },
               {
-                title: "⚖️ Follow Rules",
+                title: "âï¸ Follow Rules",
                 description: "Respect copyright and terms of service.\n\nDon't pirate content. Follow website rules. Use content legally.",
                 image: "follow-rules.jpg",
                 details: []
@@ -10727,19 +10815,19 @@ export const module11Lessons: Lesson[] = [
           data: {
             cards: [
               {
-                title: "👣 What is Digital Footprint?",
+                title: "ð£ What is Digital Footprint?",
                 description: "All information about you online.\n\nPosts, comments, photos, and activity. Can be permanent. Think before sharing.",
                 image: "digital-footprint.jpg",
                 details: []
               },
               {
-                title: "🔍 Managing Your Footprint",
+                title: "ð Managing Your Footprint",
                 description: "Control what information is available about you.\n\nReview privacy settings. Delete old posts. Be selective about sharing.",
                 image: "manage-footprint.jpg",
                 details: []
               },
               {
-                title: "⚠️ Long-term Impact",
+                title: "â ï¸ Long-term Impact",
                 description: "Digital footprint can affect future opportunities.\n\nEmployers may check online presence. Colleges review social media. Be mindful.",
                 image: "footprint-impact.jpg",
                 details: []
@@ -10817,4 +10905,3 @@ export const module11Lessons: Lesson[] = [
     ]
   }
 ];
-

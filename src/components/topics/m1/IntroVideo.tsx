@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Play, Globe, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
 // 1. Dynamic Import of Thumbnails using Vite's import.meta.glob
 const thumbnailModules = import.meta.glob<{ default: string }>('@/assets/thumbnails/*.{png,jpg,jpeg,webp}', { eager: true });
 
@@ -42,6 +43,11 @@ const MODULE_CONTENT: Record<string, Record<string, { id: string; title: string;
         en: { id: "dQw4w9WgXcQ", title: "Internal Components", desc: "Discover the heart of the computer: CPU, RAM, and Motherboard explained." },
         hi: { id: "dQw4w9WgXcQ", title: "कंप्यूटर के आंतरिक भाग", desc: "CPU, RAM, और मदरबोर्ड के बारे में जानें।" },
         te: { id: "dQw4w9WgXcQ", title: "కంప్యూటర్ అంతర్గత భాగాలు", desc: "CPU, RAM మరియు మదర్‌బోర్డ్ గురించి తెలుసుకోండి." }
+    },
+    "10": {
+        en: { id: "gAM5y3SIfdM", title: "Cybersecurity Essentials", desc: "Protecting your digital life is more important than ever. Learn the basics of cybersecurity in this module." },
+        hi: { id: "gAM5y3SIfdM", title: "Cybersecurity (Hindi Coming Soon)", desc: "Hindi audio is coming soon! Please watch the English version to start learning about cybersecurity." },
+        te: { id: "gAM5y3SIfdM", title: "Cybersecurity (Telugu Coming Soon)", desc: "Telugu audio is coming soon! Please watch the English version to start learning about cybersecurity." }
     }
 };
 
@@ -62,7 +68,6 @@ export function IntroVideo({ moduleId = "1" }: IntroVideoProps) {
         title: `Module ${activeModuleId} Intro`,
         desc: "Introduction video coming soon."
     };
-
     const thumbnail = getThumbnail(activeModuleId, language);
 
     const langLabels = { en: "English", hi: "Hindi / Urdu", te: "Telugu" };
@@ -98,10 +103,10 @@ export function IntroVideo({ moduleId = "1" }: IntroVideoProps) {
 
             {/* Video Player / Thumbnail Area */}
             <Card className="overflow-hidden border-none shadow-2xl bg-black aspect-video relative group rounded-[2rem]">
-                {isPlaying ? (
+                {(activeModuleId === "10" || isPlaying) ? (
                     <iframe
                         className="w-full h-full"
-                        src={`https://www.youtube.com/embed/${content.id}?autoplay=1&rel=0`}
+                        src={`https://www.youtube.com/embed/${content.id}?autoplay=${activeModuleId === "10" ? 0 : 1}&rel=0`}
                         title="Module Intro Video"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
