@@ -2071,13 +2071,11 @@ const ModuleDetail = () => {
     return `/module-media/${imageName}`;
   };
 
-  // Redirect Module 2 to Topic 1 if no topic specified (topic-based navigation)
+  // Redirect to Intro Video if no topic specified
   useEffect(() => {
-    if (moduleId === 2 && !topicId && !partNumber && location.pathname === `/module/2`) {
-      navigate("/module/2/topic/1", { replace: true });
-    }
-    if (moduleId === 10 && !topicId && !partNumber && location.pathname === `/module/10`) {
-      navigate("/module/10/topic/m10-intro", { replace: true });
+    const modulesWithIntro = Array.from({ length: 25 }, (_, i) => i + 1);
+    if (modulesWithIntro.includes(moduleId) && !topicId && !partNumber && location.pathname === `/module/${moduleId}`) {
+      navigate(`/module/${moduleId}/topic/m${moduleId}-intro`, { replace: true });
     }
   }, [moduleId, topicId, partNumber, navigate, location.pathname]);
 
@@ -6653,7 +6651,8 @@ const ModuleDetail = () => {
   }
 
   // Module Intro Video Renderer
-  if ((moduleId === 1 && topicId === "m1-intro") || (moduleId === 10 && topicId === "m10-intro")) {
+  const isIntroTopic = topicId && topicId.endsWith("-intro");
+  if (isIntroTopic) {
     return (
       <div className={`min-h-screen bg-background hide-scrollbar ${isTransitioning ? 'page-enter' : ''} ${isModule1Light ? 'module-1-light' : ''}`}
         style={isModule1Light ? {
@@ -6676,7 +6675,8 @@ const ModuleDetail = () => {
                   className={`flex items-center gap-2 ${isModule1Light ? 'text-[#2C666E] hover:text-[#2C666E]/80' : 'text-muted-foreground hover:text-primary'} transition-colors shrink-0`}
                 >
                   <ArrowLeft className="h-5 w-5" />
-                  <span className="whitespace-nowrap">Back to Dashboard</span>
+                  <span className="hidden sm:inline whitespace-nowrap">Back to Dashboard</span>
+                  <span className="sm:hidden whitespace-nowrap font-bold">Back</span>
                 </button>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -14005,10 +14005,10 @@ const ModuleDetail = () => {
             <section className="container mx-auto px-4 pb-14">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border rounded-3xl p-6">
                 <Button variant="outline" size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/3")}>
-                  ← Previous Topic
+                  Previous Topic
                 </Button>
                 <Button size="lg" className="w-full md:w-auto" onClick={() => navigate("/module/4/topic/5")}>
-                  Next Topic: Storage Connections →
+                  Next Topic: Storage Connections
                 </Button>
               </div>
             </section>
@@ -26208,9 +26208,7 @@ const ModuleDetail = () => {
       }
 
       {/* End of Module Content */}
-
-      {/* End of Module Content */}
-    </div >
+    </div>
   );
 };
 

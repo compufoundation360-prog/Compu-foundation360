@@ -32,6 +32,7 @@ export const modules: Module[] = [
         title: "Internal Components & Architecture",
         path: "/module/2",
         topics: [
+            { id: "m2-intro", title: "▶ Intro Video" },
             { id: "m2-t1", title: "CPU Basics" },
             { id: "m2-t2", title: "RAM Basics" },
             { id: "m2-t3", title: "ROM Basics" },
@@ -51,6 +52,7 @@ export const modules: Module[] = [
         title: "Operating Systems, Files & Mobile Computing",
         path: "/module/3",
         topics: [
+            { id: "m3-intro", title: "▶ Intro Video" },
             { id: "m3-t1", title: "Boot Process" },
             { id: "m3-t2", title: "Operating Systems" },
             { id: "m3-t3", title: "File System" },
@@ -68,6 +70,7 @@ export const modules: Module[] = [
         title: "Computer Hardware (Deep Dive)",
         path: "/module/4",
         topics: [
+            { id: "m4-intro", title: "▶ Intro Video" },
             { id: "m4-t1", title: "Inside a Computer" },
             { id: "m4-t2", title: "CPU Architecture" },
             { id: "m4-t3", title: "GPU Architecture" },
@@ -87,6 +90,7 @@ export const modules: Module[] = [
         title: "Storage Systems",
         path: "/module/5",
         topics: [
+            { id: "m5-intro", title: "▶ Intro Video" },
             { id: "m5-t1", title: "Storage Concepts" },
             { id: "m5-t2", title: "HDD Deep Dive" },
             { id: "m5-t3", title: "SSD Deep Dive" },
@@ -103,6 +107,7 @@ export const modules: Module[] = [
         title: "Software & Operating Systems",
         path: "/module/6",
         topics: [
+            { id: "m6-intro", title: "▶ Intro Video" },
             { id: "m6-t1", title: "Types of Software" },
             { id: "m6-t2", title: "OS Responsibilities" },
             { id: "m6-t3", title: "Windows OS Overview" },
@@ -119,6 +124,7 @@ export const modules: Module[] = [
         title: "File Systems & Data Management",
         path: "/module/7",
         topics: [
+            { id: "m7-intro", title: "▶ Intro Video" },
             { id: "m7-t1", title: "File Organization" },
             { id: "m7-t2", title: "File Operations" },
             { id: "m7-t3", title: "File Types" },
@@ -134,6 +140,7 @@ export const modules: Module[] = [
         title: "System Setup, Installation & Configuration",
         path: "/module/8",
         topics: [
+            { id: "m8-intro", title: "▶ Intro Video" },
             { id: "m8-t1", title: "Pre-Installation Requirements" },
             { id: "m8-t2", title: "BIOS/UEFI Configuration" },
             { id: "m8-t3", title: "Bootable USB Creation" },
@@ -158,6 +165,7 @@ export const modules: Module[] = [
         title: "Networking Fundamentals",
         path: "/module/9",
         topics: [
+            { id: "m9-intro", title: "▶ Intro Video" },
             { id: "m9-t1", title: "What is a Network?" },
             { id: "m9-t2", title: "Network Devices" },
             { id: "m9-t3", title: "IP Addressing" },
@@ -197,6 +205,7 @@ export const modules: Module[] = [
         title: "Security Ethics & Digital Citizenship",
         path: "/module/11",
         topics: [
+            { id: "m11-intro", title: "▶ Intro Video" },
             { id: "m11-t1", title: "Digital Citizenship Basics" },
             { id: "m11-t2", title: "Online Etiquette" },
             { id: "m11-t3", title: "Data Privacy" },
@@ -214,6 +223,7 @@ export const modules: Module[] = [
         title: "Cloud Computing Basics",
         path: "/module/12",
         topics: [
+            { id: "m12-intro", title: "▶ Intro Video" },
             { id: "m12-t1", title: "What is Cloud Computing?" },
             { id: "m12-t2", title: "Cloud in Daily Life" },
             { id: "m12-t3", title: "Cloud Service Models" },
@@ -231,6 +241,7 @@ export const modules: Module[] = [
         title: "Digital Literacy & Online Tools",
         path: "/module/13",
         topics: [
+            { id: "m13-intro", title: "▶ Intro Video" },
             { id: "m13-t1", title: "Introduction to Digital Literacy" },
             { id: "m13-t2", title: "Using Web Browsers" },
             { id: "m13-t3", title: "Search Engine Skills" },
@@ -248,6 +259,7 @@ export const modules: Module[] = [
         title: "Troubleshooting & Maintenance",
         path: "/module/14",
         topics: [
+            { id: "m14-intro", title: "▶ Intro Video" },
             { id: "m14-t1", title: "Slow Computer Issues" },
             { id: "m14-t2", title: "Internet Troubleshooting" },
             { id: "m14-t3", title: "Startup Problems" },
@@ -265,6 +277,7 @@ export const modules: Module[] = [
         title: "Device Management (Mobile + PC)",
         path: "/module/15",
         topics: [
+            { id: "m15-intro", title: "▶ Intro Video" },
             { id: "m15-t1", title: "Mobile OS Basics" },
             { id: "m15-t2", title: "Mobile Storage" },
             { id: "m15-t3", title: "Mobile Security" },
@@ -282,6 +295,7 @@ export const modules: Module[] = [
         title: "Productivity Tools (Office)",
         path: "/module/16",
         topics: [
+            { id: "m16-intro", title: "▶ Intro Video" },
             { id: "m16-t1", title: "MS Word Basics" },
             { id: "m16-t2", title: "Word Essential Skills" },
             { id: "m16-t3", title: "Word Professional Use" },
@@ -299,6 +313,7 @@ export const modules: Module[] = [
         title: "Data & AI Basics",
         path: "/module/17",
         topics: [
+            { id: "m17-intro", title: "▶ Intro Video" },
             { id: "m17-t1", title: "What is Data?" },
             { id: "m17-t2", title: "Data Formats" },
             { id: "m17-t3", title: "Basic Data Tools" },
@@ -316,6 +331,7 @@ export const modules: Module[] = [
         title: "Programming Basics",
         path: "/module/18",
         topics: [
+            { id: "m18-intro", title: "▶ Intro Video" },
             { id: "m18-t1", title: "What is Programming?" },
             { id: "m18-t2", title: "Programming Languages" },
             { id: "m18-t3", title: "Python Basics" },
@@ -333,6 +349,7 @@ export const modules: Module[] = [
         title: "Databases",
         path: "/module/19",
         topics: [
+            { id: "m19-intro", title: "▶ Intro Video" },
             { id: "m19-t1", title: "What is a Database?" },
             { id: "m19-t2", title: "Database Types" },
             { id: "m19-t3", title: "Tables, Rows, Columns" },
@@ -350,6 +367,7 @@ export const modules: Module[] = [
         title: "Web Concepts",
         path: "/module/20",
         topics: [
+            { id: "m20-intro", title: "▶ Intro Video" },
             { id: "m20-t1", title: "How the Web Works" },
             { id: "m20-t2", title: "What is a Website?" },
             { id: "m20-t3", title: "What is a Domain?" },
@@ -367,6 +385,7 @@ export const modules: Module[] = [
         title: "Virtualization & Containers",
         path: "/module/21",
         topics: [
+            { id: "m21-intro", title: "▶ Intro Video" },
             { id: "m21-t1", title: "What is Virtualization?" },
             { id: "m21-t2", title: "VMs vs Physical Machines" },
             { id: "m21-t3", title: "Hypervisors" },
@@ -384,6 +403,7 @@ export const modules: Module[] = [
         title: "Raspberry Pi & Embedded Systems",
         path: "/module/22",
         topics: [
+            { id: "m22-intro", title: "▶ Intro Video" },
             { id: "m22-t1", title: "What is Raspberry Pi?" },
             { id: "m22-t2", title: "Raspberry Pi Hardware" },
             { id: "m22-t3", title: "Installing OS on Raspberry Pi" },
@@ -401,6 +421,7 @@ export const modules: Module[] = [
         title: "Blockchain & Digital Currency",
         path: "/module/23",
         topics: [
+            { id: "m23-intro", title: "▶ Intro Video" },
             { id: "m23-t1", title: "What is Blockchain?" },
             { id: "m23-t2", title: "How Blockchain Works" },
             { id: "m23-t3", title: "Key Blockchain Characteristics" },
@@ -418,6 +439,7 @@ export const modules: Module[] = [
         title: "Quantum Computing Basics",
         path: "/module/24",
         topics: [
+            { id: "m24-intro", title: "▶ Intro Video" },
             { id: "m24-t1", title: "What is Quantum Computing?" },
             { id: "m24-t2", title: "Qubits" },
             { id: "m24-t3", title: "Quantum Gates" },
@@ -435,6 +457,7 @@ export const modules: Module[] = [
         title: "AI Ethics & Responsible AI",
         path: "/module/25",
         topics: [
+            { id: "m25-intro", title: "▶ Intro Video" },
             { id: "m25-t1", title: "Introduction to AI Ethics" },
             { id: "m25-t2", title: "AI Bias" },
             { id: "m25-t3", title: "Fairness" },
