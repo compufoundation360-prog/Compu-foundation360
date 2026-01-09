@@ -283,8 +283,7 @@ const Dashboard = () => {
     { type: "module", moduleId: 1, title: "Introduction to Computers", timeAgo: "3 days ago" },
   ];
 
-  // Get available simulators (first 6)
-  const availableSimulators = simulators.filter(s => s.url && s.url !== "#").slice(0, 6);
+
 
   const handleSimulatorClick = (simulator: typeof simulators[0]) => {
     if (simulator.topicId) {
@@ -587,28 +586,48 @@ const Dashboard = () => {
                 <h3 className="text-xl font-bold text-foreground">Quick Access to Simulators</h3>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              {availableSimulators.map((simulator) => (
-                <button
-                  key={simulator.id}
-                  onClick={() => handleSimulatorClick(simulator)}
-                  className="p-4 bg-muted/50 hover:bg-muted border border-border rounded-lg transition-colors text-left group"
-                >
-                  <div className="flex items-start justify-between gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {simulators
+                .filter(s => (s.url && s.url !== "#") || s.componentId)
+                // Deduplicate by componentId
+                .filter((s, index, self) =>
+                  index === self.findIndex((t) => (
+                    t.id === s.id || (t.componentId && t.componentId === s.componentId)
+                  ))
+                )
+                .slice(0, 6)
+                .map((simulator) => (
+                  <button
+                    key={simulator.id}
+                    onClick={() => {
+                      if (simulator.componentId) {
+                        navigate(`/simulator/${simulator.componentId}`);
+                      } else if (simulator.url && simulator.url !== "#") {
+                        window.location.href = simulator.url;
+                      } else {
+                        handleSimulatorClick(simulator);
+                      }
+                    }}
+                    className="p-4 bg-muted/50 hover:bg-muted border border-border rounded-lg transition-colors text-left group h-full flex flex-col"
+                  >
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <span className="inline-flex items-center justify-center p-2 bg-primary/10 rounded-md text-primary">
+                        <Gamepad2 className="w-5 h-5" />
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
+                    </div>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors mb-1">
                         {simulator.name}
                       </p>
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                      <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                         {simulator.description}
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
-                  </div>
-                </button>
-              ))}
+                  </button>
+                ))}
             </div>
-            {availableSimulators.length === 0 && (
+            {simulators.filter(s => (s.url && s.url !== "#") || s.componentId).length === 0 && (
               <div className="text-center py-8 text-muted-foreground">
                 <Gamepad2 className="h-12 w-12 mx-auto mb-2 opacity-50" />
                 <p className="text-sm">No simulators available yet</p>

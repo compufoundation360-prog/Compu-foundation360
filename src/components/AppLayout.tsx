@@ -26,12 +26,12 @@ function AppLayoutContent({ children }: AppLayoutProps) {
     if (topicMatch) {
       const moduleId = parseInt(topicMatch[1], 10);
       const topicIdentifier = topicMatch[2]; // Could be a number or topic id like "m1-intro"
-      
+
       const module = modules.find(m => m.id === moduleId);
       if (module && module.topics.length > 0) {
         // Find current topic index
         let currentIndex = -1;
-        
+
         // Check if it's an intro topic (has topic id in path)
         const introTopic = module.topics.find(t => topicIdentifier === t.id);
         if (introTopic) {
@@ -51,12 +51,12 @@ function AppLayoutContent({ children }: AppLayoutProps) {
             }
           }
         }
-        
+
         // Navigate to next topic if available
         if (currentIndex >= 0 && currentIndex < module.topics.length - 1) {
           const nextTopic = module.topics[currentIndex + 1];
           const isNextIntro = nextTopic.id.endsWith("-intro");
-          
+
           let nextPath: string;
           if (isNextIntro) {
             nextPath = `${module.path}/topic/${nextTopic.id}`;
@@ -65,7 +65,7 @@ function AppLayoutContent({ children }: AppLayoutProps) {
             const effectiveNumber = firstIsIntro ? currentIndex + 1 : currentIndex + 2;
             nextPath = `${module.path}/topic/${effectiveNumber}`;
           }
-          
+
           navigate(nextPath);
         }
       }

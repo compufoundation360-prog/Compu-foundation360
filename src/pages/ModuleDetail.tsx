@@ -88,7 +88,7 @@ const ModuleDetail = () => {
   const partNumber = part ? parseInt(part) : null;
 
   // Apply Module 1 light theme colors
-  const isModule1Light = moduleId === 1 && theme === 'light';
+  const isModule1Light = false; // Disabled custom theme for consistency
 
   // Helper function to get Module 1 light theme classes
   const getModule1Class = (baseClass: string, module1Class?: string) => {
@@ -105,11 +105,16 @@ const ModuleDetail = () => {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
-  // Scroll to top immediately when module or part changes (before transition)
+  // Scroll to top on navigation, but stay put on reload
   useEffect(() => {
-    // Scroll instantly to top first
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [id, part, location.pathname]);
+    // Check if this is a fresh navigation or a reload
+    const navEntries = window.performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
+
+    if (!isReload) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, [id, part, topicId, location.pathname]);
 
   // Get simulator for this module/topic
   const simulator = (moduleId === 1 || moduleId === 2 || moduleId === 3) && topicId
@@ -6746,7 +6751,7 @@ const ModuleDetail = () => {
               </p>
             </div>
 
-            <div className="hidden lg:block">
+            <div className="block lg:block mt-8 lg:mt-0">
               {simulator ? (
                 <Card className="p-6 border-primary/20 bg-primary/5 cursor-pointer hover:border-primary/50 transition-all group" onClick={() => navigate('/simulator/' + (simulator.componentId || simulator.id))}>
                   <div className="relative aspect-video rounded-lg overflow-hidden mb-4 bg-muted">

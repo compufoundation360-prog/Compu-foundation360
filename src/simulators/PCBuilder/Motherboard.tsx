@@ -58,8 +58,8 @@ export const Motherboard = () => {
                 alt="Motherboard Schematic"
                 className="absolute inset-0 w-full h-full object-contain object-center opacity-90 dark:opacity-100 dark:invert-[.02]"
                 loading="eager"
-                // @ts-ignore - fetchPriority is standard now but types might lag
-                fetchPriority="high"
+                // @ts-ignore - fetchpriority is the standard attribute
+                fetchpriority="high"
             />
 
             {/* Overlay Grid/Texture for tech feel */}

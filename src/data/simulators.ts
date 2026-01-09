@@ -49,6 +49,7 @@ export const simulators: Simulator[] = [
     topicId: "6", // Topic 6: SSD & NVMe
     previewImage: storageSpeedThumb, // Use imported variable
     url: "#", // Placeholder - user will add link later
+    componentId: "ssd-installation",
   },
   {
     id: "pc-build-module2",

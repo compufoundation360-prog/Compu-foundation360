@@ -546,82 +546,52 @@ export function AppSidebar() {
     };
   }, []);
 
-  // Auto-expand modules based on current path
-  const [isModule1Open, setIsModule1Open] = useState(location.pathname.startsWith("/module/1"));
-  const [isModule2Open, setIsModule2Open] = useState(location.pathname.startsWith("/module/2"));
-  const [isModule3Open, setIsModule3Open] = useState(location.pathname.startsWith("/module/3"));
-  const [isModule4Open, setIsModule4Open] = useState(location.pathname.startsWith("/module/4"));
-  const [isModule5Open, setIsModule5Open] = useState(location.pathname.startsWith("/module/5"));
-  const [isModule6Open, setIsModule6Open] = useState(location.pathname.startsWith("/module/6"));
-  const [isModule7Open, setIsModule7Open] = useState(location.pathname.startsWith("/module/7"));
-  const [isModule8Open, setIsModule8Open] = useState(location.pathname.startsWith("/module/8"));
-  const [isModule9Open, setIsModule9Open] = useState(location.pathname.startsWith("/module/9"));
-  const [isModule10Open, setIsModule10Open] = useState(location.pathname.startsWith("/module/10"));
-  const [isModule11Open, setIsModule11Open] = useState(location.pathname.startsWith("/module/11"));
-  const [isModule12Open, setIsModule12Open] = useState(location.pathname.startsWith("/module/12"));
-  const [isModule13Open, setIsModule13Open] = useState(location.pathname.startsWith("/module/13"));
-  const [isModule14Open, setIsModule14Open] = useState(location.pathname.startsWith("/module/14"));
-  const [isModule15Open, setIsModule15Open] = useState(location.pathname.startsWith("/module/15"));
-  const [isModule16Open, setIsModule16Open] = useState(location.pathname.startsWith("/module/16"));
-  const [isModule17Open, setIsModule17Open] = useState(location.pathname.startsWith("/module/17"));
-  const [isModule18Open, setIsModule18Open] = useState(location.pathname.startsWith("/module/18"));
-  const [isModule19Open, setIsModule19Open] = useState(location.pathname.startsWith("/module/19"));
-  const [isModule20Open, setIsModule20Open] = useState(location.pathname.startsWith("/module/20"));
-  const [isModule21Open, setIsModule21Open] = useState(location.pathname.startsWith("/module/21"));
-  const [isModule22Open, setIsModule22Open] = useState(location.pathname.startsWith("/module/22"));
-  const [isModule23Open, setIsModule23Open] = useState(location.pathname.startsWith("/module/23"));
-  const [isModule24Open, setIsModule24Open] = useState(location.pathname.startsWith("/module/24"));
-  const [isModule25Open, setIsModule25Open] = useState(location.pathname.startsWith("/module/25"));
+  // State to track open modules (multiple allowed)
+  // Initialize with the current module if we are on a module page
+  const getInitialModules = (): number[] => {
+    const match = location.pathname.match(/\/module\/(\d+)/);
+    return match ? [parseInt(match[1])] : [];
+  };
 
-  // Update module expansion when location changes
+  const [openModuleIds, setOpenModuleIds] = useState<number[]>(getInitialModules);
+
+  // When navigating, ALWAYS ADD the new module to the open list
+  // DO NOT remove old ones. This ensures things stay open as requested.
   useEffect(() => {
-    setIsModule1Open(location.pathname.startsWith("/module/1"));
-    setIsModule2Open(location.pathname.startsWith("/module/2"));
-    setIsModule3Open(location.pathname.startsWith("/module/3"));
-    setIsModule4Open(location.pathname.startsWith("/module/4"));
-    setIsModule5Open(location.pathname.startsWith("/module/5"));
-    setIsModule6Open(location.pathname.startsWith("/module/6"));
-    setIsModule7Open(location.pathname.startsWith("/module/7"));
-    setIsModule8Open(location.pathname.startsWith("/module/8"));
-    setIsModule9Open(location.pathname.startsWith("/module/9"));
-    setIsModule10Open(location.pathname.startsWith("/module/10"));
-    setIsModule11Open(location.pathname.startsWith("/module/11"));
-    setIsModule12Open(location.pathname.startsWith("/module/12"));
-    setIsModule13Open(location.pathname.startsWith("/module/13"));
-    setIsModule14Open(location.pathname.startsWith("/module/14"));
-    setIsModule15Open(location.pathname.startsWith("/module/15"));
-    setIsModule16Open(location.pathname.startsWith("/module/16"));
-    setIsModule17Open(location.pathname.startsWith("/module/17"));
-    setIsModule18Open(location.pathname.startsWith("/module/18"));
-    setIsModule19Open(location.pathname.startsWith("/module/19"));
-    setIsModule20Open(location.pathname.startsWith("/module/20"));
-    setIsModule21Open(location.pathname.startsWith("/module/21"));
-    setIsModule22Open(location.pathname.startsWith("/module/22"));
-    setIsModule23Open(location.pathname.startsWith("/module/23"));
-    setIsModule24Open(location.pathname.startsWith("/module/24"));
-    setIsModule25Open(location.pathname.startsWith("/module/25"));
+    const match = location.pathname.match(/\/module\/(\d+)/);
+    if (match) {
+      const moduleId = parseInt(match[1]);
+      setOpenModuleIds((prev) => {
+        if (!prev.includes(moduleId)) {
+          return [...prev, moduleId];
+        }
+        return prev;
+      });
+    }
   }, [location.pathname]);
+
+  const handleModuleToggle = (id: number, isOpen: boolean) => {
+    setOpenModuleIds((prev) => {
+      if (isOpen) {
+        if (!prev.includes(id)) return [...prev, id];
+        return prev;
+      } else {
+        return prev.filter((mid) => mid !== id);
+      }
+    });
+  };
 
   const isActive = (path: string) => {
     if (path === "/dashboard") {
       return location.pathname === "/dashboard";
     }
-    // Extract module ID from path (e.g., "/module/2" -> "2")
     const moduleIdFromPath = path.split("/").pop();
-
-    // Check if we're on the module page
-    if (location.pathname.startsWith(path)) {
-      return true;
-    }
-
-    // Check if we're on a lesson page for this module
-    // Lesson paths are like "/lesson/2/1" where 2 is the module ID
+    if (location.pathname.startsWith(path)) return true;
     const lessonPathMatch = location.pathname.match(/^\/lesson\/(\d+)\//);
     if (lessonPathMatch) {
       const currentModuleId = lessonPathMatch[1];
       return currentModuleId === moduleIdFromPath;
     }
-
     return false;
   };
 
@@ -687,45 +657,16 @@ export function AppSidebar() {
                   active && "text-primary font-semibold"
                 );
                 const topics = moduleTopics[module.id] ?? [];
-                const hasTopics = topics.length > 0;
 
-                if (hasTopics) {
-                  const moduleStates = {
-                    1: { isOpen: isModule1Open, setIsOpen: setIsModule1Open },
-                    2: { isOpen: isModule2Open, setIsOpen: setIsModule2Open },
-                    3: { isOpen: isModule3Open, setIsOpen: setIsModule3Open },
-                    4: { isOpen: isModule4Open, setIsOpen: setIsModule4Open },
-                    5: { isOpen: isModule5Open, setIsOpen: setIsModule5Open },
-                    6: { isOpen: isModule6Open, setIsOpen: setIsModule6Open },
-                    7: { isOpen: isModule7Open, setIsOpen: setIsModule7Open },
-                    8: { isOpen: isModule8Open, setIsOpen: setIsModule8Open },
-                    9: { isOpen: isModule9Open, setIsOpen: setIsModule9Open },
-                    10: { isOpen: isModule10Open, setIsOpen: setIsModule10Open },
-                    11: { isOpen: isModule11Open, setIsOpen: setIsModule11Open },
-                    12: { isOpen: isModule12Open, setIsOpen: setIsModule12Open },
-                    13: { isOpen: isModule13Open, setIsOpen: setIsModule13Open },
-                    14: { isOpen: isModule14Open, setIsOpen: setIsModule14Open },
-                    15: { isOpen: isModule15Open, setIsOpen: setIsModule15Open },
-                    16: { isOpen: isModule16Open, setIsOpen: setIsModule16Open },
-                    17: { isOpen: isModule17Open, setIsOpen: setIsModule17Open },
-                    18: { isOpen: isModule18Open, setIsOpen: setIsModule18Open },
-                    19: { isOpen: isModule19Open, setIsOpen: setIsModule19Open },
-                    20: { isOpen: isModule20Open, setIsOpen: setIsModule20Open },
-                    21: { isOpen: isModule21Open, setIsOpen: setIsModule21Open },
-                    22: { isOpen: isModule22Open, setIsOpen: setIsModule22Open },
-                    23: { isOpen: isModule23Open, setIsOpen: setIsModule23Open },
-                    24: { isOpen: isModule24Open, setIsOpen: setIsModule24Open },
-                    25: { isOpen: isModule25Open, setIsOpen: setIsModule25Open },
-                  };
-                  const moduleState = moduleStates[module.id as keyof typeof moduleStates];
-                  const isModuleOpen = moduleState.isOpen;
-                  const setIsModuleOpen = moduleState.setIsOpen;
+                // NEW: Use multi-state array variable
+                const isModuleOpen = openModuleIds.includes(module.id);
 
+                if (topics.length > 0) {
                   return (
                     <Collapsible
                       key={module.id}
                       open={isModuleOpen}
-                      onOpenChange={setIsModuleOpen}
+                      onOpenChange={(isOpen) => handleModuleToggle(module.id, isOpen)}
                     >
                       <SidebarMenuItem>
                         <CollapsibleTrigger asChild>
@@ -828,4 +769,3 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
-

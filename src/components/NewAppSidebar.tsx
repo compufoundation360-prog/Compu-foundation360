@@ -22,23 +22,39 @@ import { quizzes } from "@/data/quiz-data";
 import { ClipboardCheck } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSidebarStore } from "@/store/useSidebarStore";
 
 export function NewAppSidebar() {
     const location = useLocation();
     const navigate = useNavigate();
     const { setOpenMobile } = useSidebar();
     const isMobile = useIsMobile();
-    // State for expanded module
-    const [expandedModuleId, setExpandedModuleId] = React.useState<number | null>(null);
+    const { openModuleIds, toggleModule, addModule, sidebarScrollTop, setSidebarScrollTop } = useSidebarStore();
+    const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
-    // Derive active module from URL
+    // Auto-expand module based on current path, but strictly ADDITIVE
     React.useEffect(() => {
         const match = location.pathname.match(/\/module\/(\d+)/);
         if (match && match[1]) {
             const id = parseInt(match[1], 10);
-            setExpandedModuleId(id);
+            addModule(id);
         }
-    }, [location.pathname]);
+    }, [location.pathname, addModule]);
+
+    // Restore and save scroll position
+    React.useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.scrollTop = sidebarScrollTop;
+
+            const handleScroll = () => {
+                setSidebarScrollTop(container.scrollTop);
+            };
+
+            container.addEventListener('scroll', handleScroll);
+            return () => container.removeEventListener('scroll', handleScroll);
+        }
+    }, []);
 
     const handleLogout = async () => {
         try {
@@ -63,11 +79,11 @@ export function NewAppSidebar() {
                 </div>
             </SidebarHeader>
 
-            <SidebarContent className="p-0">
+            <SidebarContent ref={scrollContainerRef} className="p-0">
                 <SidebarMenu className="gap-0.5 px-2 py-2">
                     {/* DASHBOARD LINK */}
                     <SidebarMenuItem>
-                        <Link 
+                        <Link
                             to="/dashboard"
                             onClick={() => {
                                 // Close sidebar on mobile when dashboard is clicked
@@ -99,14 +115,14 @@ export function NewAppSidebar() {
 
                     {modules.map((module) => {
                         const isActive = location.pathname.startsWith(module.path);
-                        const isOpen = expandedModuleId === module.id;
+                        const isOpen = openModuleIds.includes(module.id);
                         const moduleNumber = module.id.toString().padStart(2, "0");
 
                         return (
                             <Collapsible
                                 key={module.id}
                                 open={isOpen}
-                                onOpenChange={(open) => setExpandedModuleId(open ? module.id : null)}
+                                onOpenChange={() => toggleModule(module.id)}
                                 className="group/collapsible"
                             >
                                 <SidebarMenuItem className="mb-1">
@@ -164,8 +180,8 @@ export function NewAppSidebar() {
                                                             {/* Horizontal Branch */}
                                                             <div className="absolute left-[23px] top-[16px] h-[1px] w-[12px] bg-border/60" />
 
-                                                            <Link 
-                                                                to={topicPath} 
+                                                            <Link
+                                                                to={topicPath}
                                                                 className="block pl-9"
                                                                 onClick={() => {
                                                                     // Close sidebar on mobile when topic is clicked
@@ -203,8 +219,8 @@ export function NewAppSidebar() {
                                                                 <div className="absolute left-[23px] top-0 h-[16px] w-[1px] bg-border/60" />
                                                                 <div className="absolute left-[23px] top-[16px] h-[1px] w-[12px] bg-border/60" />
 
-                                                                <Link 
-                                                                    to={`/module/${module.id}/quiz`} 
+                                                                <Link
+                                                                    to={`/module/${module.id}/quiz`}
                                                                     className="block pl-9"
                                                                     onClick={() => {
                                                                         // Close sidebar on mobile when quiz is clicked
