@@ -6,7 +6,7 @@ export const CompuLogo = ({ className }: { className?: string }) => {
         <img
             src="/app-logo.png"
             alt="Compu-Foundation 360 Logo"
-            className={cn("object-contain", className)}
+            className={cn("object-contain rounded-2xl", className)}
             style={{
                 imageRendering: "auto",
             }}

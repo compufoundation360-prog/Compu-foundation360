@@ -69,13 +69,16 @@ export function NewAppSidebar() {
 
     return (
         <Sidebar className="border-r border-border bg-sidebar" variant="inset" collapsible="icon">
-            <SidebarHeader className="border-b border-border/50 p-4 bg-sidebar">
-                <div className="flex items-center gap-3 px-1 group py-2 cursor-default select-none">
-                    {/* Logo - visible on desktop only (hidden on mobile where header logo shows) */}
+            <SidebarHeader className="border-b border-border/50 pl-2 pr-0 py-4 bg-sidebar">
+                <div className="flex items-center gap-2 group cursor-default select-none">
+                    {/* Logo - visible on desktop only */}
                     <div className="hidden md:flex shrink-0">
-                        <CompuLogo className="w-14 h-14 transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]" />
+                        <CompuLogo className="w-12 h-12 rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]" />
                     </div>
-                    <span className="font-bold text-sm tracking-tight leading-tight">Compu-Foundation360&deg;</span>
+                    <div className="hidden md:flex flex-col min-w-0">
+                        <span className="font-bold text-[13px] tracking-tight leading-tight text-foreground whitespace-nowrap">Compu-Foundation 360&deg;</span>
+                        <span className="text-[9px] text-muted-foreground leading-tight font-medium">Basic Computer Fundamentals</span>
+                    </div>
                 </div>
             </SidebarHeader>
 

@@ -105,16 +105,6 @@ const ModuleDetail = () => {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
-  // Scroll to top on navigation, but stay put on reload
-  useEffect(() => {
-    // Check if this is a fresh navigation or a reload
-    const navEntries = window.performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
-    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
-
-    if (!isReload) {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    }
-  }, [id, part, topicId, location.pathname]);
 
   // Get simulator for this module/topic
   const simulator = (moduleId === 1 || moduleId === 2 || moduleId === 3) && topicId
@@ -6671,7 +6661,7 @@ const ModuleDetail = () => {
           '--border': 'hsl(var(--module1-border))',
         } as React.CSSProperties : undefined}>
         <header className={`sticky top-0 z-50 w-full border-b ${isModule1Light ? 'bg-white border-[#2C666E]/20' : 'bg-card border-border'} shadow-sm backdrop-blur-sm`}>
-          <div className="w-full px-4 py-4">
+          <div className="w-full px-4 py-2">
             <div className="flex items-center justify-between gap-4 max-w-full">
               <div className="flex items-center gap-4 min-w-0">
                 <SidebarTrigger className="-ml-1 shrink-0" />
@@ -6713,7 +6703,7 @@ const ModuleDetail = () => {
     >
       {/* Header */}
       <header className={`sticky top-0 z-50 w-full border-b ${isModule1Light ? 'bg-white border-[#2C666E]/20' : 'bg-card border-border'} shadow-sm backdrop-blur-sm`}>
-        <div className="w-full px-4 py-4">
+        <div className="w-full px-4 py-2">
           <div className="flex items-center justify-between gap-4 max-w-full">
             <div className="flex items-center gap-4 min-w-0">
               <SidebarTrigger className="-ml-1 shrink-0" />

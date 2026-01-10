@@ -305,17 +305,17 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background hide-scrollbar">
       {/* Header */}
       <header className="bg-card border-b border-border sticky top-0 z-50 shadow-soft">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <SidebarTrigger className="-ml-1 hidden md:flex" />
-              {/* Logo + Text - visible on mobile only (hidden on desktop where sidebar logo shows) */}
+              {/* Logo + Text - visible on mobile only */}
               <div className="md:hidden shrink-0">
-                <CompuLogo className="w-14 h-14" />
+                <CompuLogo className="w-14 h-14 rounded-2xl shadow-md" />
               </div>
-              <div className="md:hidden">
-                <h1 className="text-xl font-bold text-foreground">Compu-Foundation 360°</h1>
-                <p className="text-xs text-muted-foreground">Basic Computer Fundamentals</p>
+              <div className="md:hidden min-w-0">
+                <h1 className="text-base font-bold text-foreground leading-tight truncate sm:whitespace-normal">Compu-Foundation 360°</h1>
+                <p className="text-[10px] text-muted-foreground leading-none font-medium text-muted-foreground/80">Basic Computer Fundamentals</p>
               </div>
             </div>
             <div className="flex items-center gap-2">

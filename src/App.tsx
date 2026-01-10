@@ -25,6 +25,7 @@ import SimulatorModal from "@/components/SimulatorModal";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import GuestRoute from "@/components/GuestRoute";
 import { Loader2 } from "lucide-react"; // Import Loader
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Sonner />
             <SimulatorModal />
             <BrowserRouter>
+              <ScrollToTop />
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   {/* Public Routes (Guest Only - Redirects to Dashboard if Logged In) */}

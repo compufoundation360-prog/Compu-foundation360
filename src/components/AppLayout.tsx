@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { NewAppSidebar } from "@/components/NewAppSidebar";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
@@ -18,6 +18,8 @@ function AppLayoutContent({ children }: AppLayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+
 
   // Function to navigate to next topic
   const navigateToNextTopic = () => {
@@ -99,7 +101,10 @@ function AppLayoutContent({ children }: AppLayoutProps) {
     <>
       <NewAppSidebar />
       <SidebarInset className="flex flex-col overflow-hidden w-full" style={{ overscrollBehavior: 'contain' }}>
-        <div className="flex-1 w-full pb-20 md:pb-0 overflow-y-auto overflow-x-hidden">
+        <div
+          ref={scrollAreaRef}
+          className="flex-1 w-full pb-20 md:pb-0 overflow-y-auto overflow-x-hidden"
+        >
           {children}
         </div>
         <MobileBottomNav />
